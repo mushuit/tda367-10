@@ -79,7 +79,7 @@ public class AnotherSimpleTest implements Game{
     	for(int i = 0; i < 20; i++){
     		if(yBossPos == yPositions[i]){
     			if(xBossPos == xPositions[i]){
-    				play = "You died!";
+    				play = "You died(Enter to restart)";
     				dead = true;
     			}
     		
@@ -88,7 +88,7 @@ public class AnotherSimpleTest implements Game{
     	for(int i = 0; i < 20; i++){
     		if(xBoss2Pos == xPositions[i]){
     			if(yBoss2Pos == yPositions[i]){
-    				play = "You died";
+    				play = "You died(Enter to restart)";
     				dead = true;
     			}
     		
