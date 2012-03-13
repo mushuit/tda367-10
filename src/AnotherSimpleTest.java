@@ -79,6 +79,20 @@ public class AnotherSimpleTest implements Game{
 				xPos = 100;
 				yPos = 100;
 			}
+			if(input.isMouseButtonDown(input.MOUSE_LEFT_BUTTON)){
+				if(input.getMouseX() < xPos){
+					xPos -= movement;			
+				} else {
+					xPos += movement;
+				}
+				
+				if(input.getMouseY() < yPos){
+					yPos -= movement;
+				} else {
+					yPos += movement;
+				}
+				
+			}
 			if(input.isKeyDown(Input.KEY_ENTER)){
 				dead = false;
 				play = "You are still alive";
@@ -95,14 +109,14 @@ public class AnotherSimpleTest implements Game{
 				xBoss2Pos = 0;
 				yBoss2Pos = (int)(Math.random()*yMax);
 			}
-			if(yPos > yMax){
+			if(yPos > yMax-1){
 				yPos = 0;
-			} else if(yPos < 0){
+			} else if(yPos < 1){
 				yPos = yMax;
 			}
-			if(xPos > xMax){
+			if(xPos > xMax-1){
 				xPos = 0;
-			} else if(xPos < 0){
+			} else if(xPos < 1){
 				xPos = xMax;
 			}
 			for(int h = 0; h < 20; h++){
