@@ -9,7 +9,6 @@ import org.newdawn.slick.SlickException;
 
 public class AnotherSimpleTest implements Game{
 
-	AnotherSimpleTestController controller;
 	int yMax = 480;
 	int xMax = 640;
 	int xPos = xMax/2;
@@ -26,7 +25,6 @@ public class AnotherSimpleTest implements Game{
 	boolean dead = false;
 	
 	public AnotherSimpleTest(){
-		controller = new AnotherSimpleTestController(this);
 		yPositions = new int[size*2];
 		xPositions = new int[size*2];
 		play = "You are still alive!";
