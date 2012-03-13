@@ -14,6 +14,7 @@ public class AnotherSimpleTest implements Game{
 	int xPos = xMax/2;
 	int yPos = yMax/2;
 	int movement = 1;
+	int bossMovement = 1;
 	int xBossPos = xMax/2;
 	int yBossPos = yMax;
 	int xBoss2Pos = xMax;
@@ -21,6 +22,10 @@ public class AnotherSimpleTest implements Game{
 	int size = 10;
 	int[] yPositions;
 	int[] xPositions;
+	int[] yBossPositions;
+	int[] xBossPositions;
+	int[] yBoss2Positions;
+	int[] xBoss2Positions;
 	String play;
 	boolean dead = false;
 	double poang = 0;
@@ -29,6 +34,10 @@ public class AnotherSimpleTest implements Game{
 	public AnotherSimpleTest(){
 		yPositions = new int[size*2];
 		xPositions = new int[size*2];
+		yBossPositions = new int[size*2];
+		xBossPositions = new int[size*2];
+		yBoss2Positions = new int[size*2];
+		xBoss2Positions = new int[size*2];
 		play = "You are still alive";
 	}
 
@@ -38,7 +47,7 @@ public class AnotherSimpleTest implements Game{
 
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-			Input input = container.getInput();
+		Input input = container.getInput();
 		if(input.isKeyPressed(input.KEY_P)){
 			pause = !pause;
 		}
@@ -49,6 +58,10 @@ public class AnotherSimpleTest implements Game{
 			for(int i = 0; i < 20; i++){
 				yPositions[i] = yPos+10-i;
 				xPositions[i] = xPos+10-i;
+				yBossPositions[i] = yBossPos+10-i;
+				xBossPositions[i] = xBossPos+10-i;
+				yBoss2Positions[i] = yBossPos+10-i;
+				xBoss2Positions[i] = xBossPos+10-i;
 			}
 			if(input.isKeyDown(Input.KEY_DOWN)){
 				yPos = yPos+movement;
@@ -71,8 +84,8 @@ public class AnotherSimpleTest implements Game{
 				play = "You are still alive";
 				poang = 0;
 			}
-			yBossPos += movement;
-			xBoss2Pos += movement;
+			yBossPos += bossMovement;
+			xBoss2Pos += bossMovement;
 
 			if(yBossPos > yMax){
 				yBossPos = 0;
@@ -92,19 +105,31 @@ public class AnotherSimpleTest implements Game{
 			} else if(xPos < 0){
 				xPos = xMax;
 			}
-			for(int i = 0; i < 20; i++){
-				if(yBossPos == yPositions[i]){
-					if(xBossPos == xPositions[i]){
-						play = "You died(Enter to restart)";
-						dead = true;
+			for(int h = 0; h < 20; h++){
+				for(int i = 0; i < 20; i++){
+					if(yBossPositions[h] == yPositions[i]){
+						for(int j = 0; h < 20; h++){
+							for(int k = 0; i < 20; i++){
+								if(xBossPositions[j] == xPositions[k]){
+									play = "You died(Enter to restart)";
+									dead = true;
+								}
+							}
+						}
 					}
 				}
 			}
-			for(int i = 0; i < 20; i++){
-				if(xBoss2Pos == xPositions[i]){
-					if(yBoss2Pos == yPositions[i]){
-						play = "You died(Enter to restart)";
-						dead = true;
+			for(int h = 0; h < 20; h++){
+				for(int i = 0; i < 20; i++){
+					if(xBoss2Positions[h] == xPositions[i]){
+						for(int j = 0; h < 20; h++){
+							for(int k = 0; i < 20; i++){
+								if(yBoss2Positions[j] == yPositions[k]){
+									play = "You died(Enter to restart)";
+									dead = true;
+								}
+							}
+						}
 					}
 				}
 			}
