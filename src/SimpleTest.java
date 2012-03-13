@@ -8,7 +8,7 @@
 	public class SimpleTest extends BasicGame {
 
 	    public SimpleTest() {
-	        super("SimpleTest");
+	        super("Kamelkaka");
 	    }
 	    
 	    @Override
