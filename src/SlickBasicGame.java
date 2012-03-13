@@ -32,17 +32,17 @@ public class SlickBasicGame extends BasicGame{
     {
         Input input = gc.getInput();
  
-        if(input.isKeyDown(Input.KEY_A))
+        if(input.isKeyDown(Input.KEY_LEFT))
         {
             plane.rotate(-0.2f * delta);
         }
  
-        if(input.isKeyDown(Input.KEY_D))
+        if(input.isKeyDown(Input.KEY_RIGHT))
         {
             plane.rotate(0.2f * delta);
         }
  
-        if(input.isKeyDown(Input.KEY_W))
+        if(input.isKeyDown(Input.KEY_UP))
         {
             float hip = 0.4f * delta;
  
