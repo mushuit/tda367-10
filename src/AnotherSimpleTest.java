@@ -23,11 +23,12 @@ public class AnotherSimpleTest implements Game{
 	int[] xPositions;
 	String play;
 	boolean dead = false;
+	double poang = 0;
 	
 	public AnotherSimpleTest(){
 		yPositions = new int[size*2];
 		xPositions = new int[size*2];
-		play = "You are still alive!";
+		play = "You are still alive";
 	}
 	
     public void init(GameContainer container) throws SlickException {
@@ -37,6 +38,8 @@ public class AnotherSimpleTest implements Game{
     public void update(GameContainer container, int delta)
             throws SlickException {
     	Input input = container.getInput();
+    	if(!dead)
+    	poang += 0.1;
     	
     	for(int i = 0; i < 20; i++){
     		yPositions[i] = yPos+10-i;
@@ -60,7 +63,7 @@ public class AnotherSimpleTest implements Game{
     	}
     	if(input.isKeyDown(Input.KEY_ENTER)){
     		dead = false;
-    		play = "You are still alive!";
+    		play = "You are still alive";
     	}
     	yBossPos += movement;
     	xBoss2Pos += movement;
@@ -85,7 +88,7 @@ public class AnotherSimpleTest implements Game{
     	for(int i = 0; i < 20; i++){
     		if(xBoss2Pos == xPositions[i]){
     			if(yBoss2Pos == yPositions[i]){
-    				play = "You died!";
+    				play = "You died";
     				dead = true;
     			}
     		
@@ -96,7 +99,7 @@ public class AnotherSimpleTest implements Game{
     public void render(GameContainer container, Graphics g)
             throws SlickException {
         g.setColor(Color.green);
-        g.drawString(play, 0, 100);
+        g.drawString(play + ", poŠng: " + (int)poang, 0, 100);
         if(!dead)
         g.drawRect(xPos, yPos, size, size);
         g.setColor(Color.red);
