@@ -51,6 +51,46 @@ public class SlickBasicGame extends BasicGame{
             x+= hip * Math.sin(Math.toRadians(rotation));
             y-= hip * Math.cos(Math.toRadians(rotation));
         }
+       
+        if(input.isKeyDown(Input.KEY_S))
+        {
+            float hip = -0.4f * delta;
+ 
+            float rotation = plane.getRotation();
+ 
+            x+= hip * Math.sin(Math.toRadians(rotation));
+            y-= hip * Math.cos(Math.toRadians(rotation));
+        }
+        
+        if(input.isKeyDown(Input.KEY_LEFT))
+        {
+            plane.rotate(-0.2f * delta);
+        }
+ 
+        if(input.isKeyDown(Input.KEY_RIGHT))
+        {
+            plane.rotate(0.2f * delta);
+        }
+ 
+        if(input.isKeyDown(Input.KEY_UP))
+        {
+            float hip = 0.4f * delta;
+ 
+            float rotation = plane.getRotation();
+ 
+            x+= hip * Math.sin(Math.toRadians(rotation));
+            y-= hip * Math.cos(Math.toRadians(rotation));
+        }
+        
+        if(input.isKeyDown(Input.KEY_DOWN))
+        {
+            float hip = -0.4f * delta;
+ 
+            float rotation = plane.getRotation();
+ 
+            x+= hip * Math.sin(Math.toRadians(rotation));
+            y-= hip * Math.cos(Math.toRadians(rotation));
+        }
  
         if(input.isKeyDown(Input.KEY_2))
         {
