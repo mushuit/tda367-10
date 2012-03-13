@@ -8,11 +8,8 @@
 	public class SimpleTest extends BasicGame {
 
 	    public SimpleTest() {
-<<<<<<< HEAD
 	        super("Kamelkaka");
-=======
-	        super("SsadsaTest");
->>>>>>> test
+
 	    }
 	    
 	    @Override
