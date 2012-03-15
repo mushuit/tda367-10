@@ -125,6 +125,7 @@ public class TestAnimationBlowUp implements Game{
 		try {
 			AppGameContainer app = new AppGameContainer(new TestAnimationBlowUp());
 			app.start();
+			app.setShowFPS(false);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
