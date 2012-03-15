@@ -26,18 +26,23 @@ public class AnotherSimpleTest implements Game{
 	int[] xBossPositions;
 	int[] yBoss2Positions;
 	int[] xBoss2Positions;
+	int[] yShieldPositions;
+	int[] xShieldPositions;
 	String play;
 	boolean dead = false;
 	double poang = 0;
 	boolean pause = false;
+	boolean shield = false;
 
 	public AnotherSimpleTest(){
 		yPositions = new int[size*2];
 		xPositions = new int[size*2];
-		yBossPositions = new int[size*2];
-		xBossPositions = new int[size*2];
-		yBoss2Positions = new int[size*2];
-		xBoss2Positions = new int[size*2];
+		yBossPositions = new int[size*4];
+		xBossPositions = new int[size*4];
+		yBoss2Positions = new int[size*4];
+		xBoss2Positions = new int[size*4];
+		yShieldPositions = new int[size*4];
+		xShieldPositions = new int[size*4];
 		play = "You are still alive";
 	}
 
@@ -58,10 +63,14 @@ public class AnotherSimpleTest implements Game{
 			for(int i = 0; i < 20; i++){
 				yPositions[i] = yPos+10-i;
 				xPositions[i] = xPos+10-i;
-				yBossPositions[i] = yBossPos+10-i;
-				xBossPositions[i] = xBossPos+10-i;
-				yBoss2Positions[i] = yBossPos+10-i;
-				xBoss2Positions[i] = xBossPos+10-i;
+			}
+			for(int i = 0; i < 40; i++){
+				yBossPositions[i] = yBossPos+20-i;
+				xBossPositions[i] = xBossPos+20-i;
+				yBoss2Positions[i] = yBossPos+20-i;
+				xBoss2Positions[i] = xBossPos+20-i;
+				yShieldPositions[i] = yPos+20-i;
+				xShieldPositions[i] = xPos+20-i;
 			}
 			if(input.isKeyDown(Input.KEY_DOWN)){
 				yPos = yPos+movement;
@@ -79,19 +88,22 @@ public class AnotherSimpleTest implements Game{
 				xPos = 100;
 				yPos = 100;
 			}
+			if(input.isKeyDown((Input.KEY_S))){
+				shield = true;
+			}
 			if(input.isMouseButtonDown(input.MOUSE_LEFT_BUTTON)){
 				if(input.getMouseX() < xPos){
 					xPos -= movement;			
 				} else {
 					xPos += movement;
 				}
-				
+
 				if(input.getMouseY() < yPos){
 					yPos -= movement;
 				} else {
 					yPos += movement;
 				}
-				
+
 			}
 			if(input.isKeyDown(Input.KEY_ENTER)){
 				dead = false;
@@ -125,8 +137,10 @@ public class AnotherSimpleTest implements Game{
 						for(int j = 0; h < 20; h++){
 							for(int k = 0; i < 20; i++){
 								if(xBossPositions[j] == xPositions[k]){
-									play = "You died(Enter to restart)";
+									play = "You died(Enter to restart)"; 
+									if(!shield){
 									dead = true;
+									}
 								}
 							}
 						}
@@ -140,7 +154,10 @@ public class AnotherSimpleTest implements Game{
 							for(int k = 0; i < 20; i++){
 								if(yBoss2Positions[j] == yPositions[k]){
 									play = "You died(Enter to restart)";
+									shield = false;
+									if(!shield){
 									dead = true;
+									}
 								}
 							}
 						}
@@ -160,6 +177,9 @@ public class AnotherSimpleTest implements Game{
 		g.drawOval(xBossPos, yBossPos, 20, 20, 20);
 		g.drawOval(xBossPos, yBossPos, 20, 20);
 		g.drawOval(xBoss2Pos, yBoss2Pos, 20, 20);
+		g.setColor(Color.blue);
+		if(shield)
+			g.drawOval(xPos-5, yPos-5, 20, 20);
 
 	}
 
