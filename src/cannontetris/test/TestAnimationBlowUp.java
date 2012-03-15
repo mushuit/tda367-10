@@ -1,4 +1,4 @@
-package Test;
+package cannontetris.test;
 
 import javax.swing.ImageIcon;
 
