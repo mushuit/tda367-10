@@ -1,5 +1,7 @@
 package cannontetris.test;
 
+import javax.swing.text.Position;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -9,7 +11,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class MoveCannonTest extends BasicGame {
-	private Image cannon = null;
+	private Cannon cannon;
 	private float xPos = 10;
 	private float yPos = 500;
 	
@@ -38,7 +40,7 @@ public class MoveCannonTest extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		cannon = new Image("img/cannon.png");
+		cannon = new Cannon (new Position(400,300), "img/canon.png");
 		
 	}
 
