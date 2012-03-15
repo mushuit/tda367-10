@@ -155,7 +155,7 @@ public class AnotherSimpleTest implements Game{
 		g.setColor(Color.green);
 		g.drawString(play + ", poäng: " + (int)poang, 0, 100);
 		if(!dead)
-			g.drawRect(xPos, yPos, size, size);
+			g.fillRect(xPos, yPos, size, size);
 		g.setColor(Color.red);
 		g.drawOval(xBossPos, yBossPos, 20, 20, 20);
 		g.drawOval(xBossPos, yBossPos, 20, 20);
