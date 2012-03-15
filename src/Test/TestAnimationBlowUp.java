@@ -55,6 +55,7 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		g.fillRect(320, 240, 20, 20);
 		Input input = container.getInput();
 		if(input.isKeyPressed(input.KEY_ENTER)){
@@ -65,18 +66,24 @@ public class TestAnimationBlowUp implements Game{
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		if(!start)
 		g.fillRect(xCannon+10, 180, 20, 20);
 		if(start)
 		g.drawAnimation(animation, xCannon-30, 140);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
 		g.setColor(Color.black);
 		if(shoot)
 		g.fillRect(xBullet, yBullet, 6, 6);
+<<<<<<< HEAD
 		
 		g.setColor(Color.red);
 		g.fillRect(xCannon, yCannon, 40, 10);
@@ -94,6 +101,12 @@ public class TestAnimationBlowUp implements Game{
 		g.fillRect(xCannon+15, yCannon-10, 10, 10);
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
+		
+		g.setColor(Color.red);
+		g.fillRect(xCannon, yCannon, 40, 10);
+		g.fillRect(xCannon+15, yCannon-10, 10, 10);
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 	}
 
@@ -102,10 +115,13 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		
 		
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
@@ -128,6 +144,9 @@ public class TestAnimationBlowUp implements Game{
 			start = false;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
@@ -143,12 +162,28 @@ public class TestAnimationBlowUp implements Game{
 		animation.setLooping(false);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
+	}
+	
+	public void mergeImages(){
+		try {
+			images[0] = new Image("img/blowUp0.jpg");
+			images[1] = new Image("img/blowUp1.jpg");
+			images[2] = new Image("img/blowUp2.jpg");
+			images[3] = new Image("img/blowUp3.jpg");
+			images[4] = new Image("img/blowUp4.jpg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+			System.out.println("failed to load image");
+		}
 	}
 	
 	public void mergeImages(){
