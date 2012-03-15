@@ -1,13 +1,23 @@
 package Test;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class TestAnimationBlowUp implements Game{
-
+	Animation animation;
+	Image[] images;
+	
+	public TestAnimationBlowUp(){
+		animation = new Animation();
+		
+		
+	}
 	@Override
 	public boolean closeRequested() {
 		return true;
@@ -26,15 +36,23 @@ public class TestAnimationBlowUp implements Game{
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
+		g.setBackground(Color.white);
+		g.setColor(Color.blue);
+		g.fillRect(320, 240, 20, 20);
 		
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		
+		
 	}
-	private static void main(String[] args){
+	
+	public void animate(){
+		
+	}
+	
+	public static void main(String[] args){
 		try {
 			AppGameContainer app = new AppGameContainer(new TestAnimationBlowUp());
 			app.start();
