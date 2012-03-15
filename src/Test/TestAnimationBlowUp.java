@@ -7,6 +7,7 @@ import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class TestAnimationBlowUp implements Game{
@@ -39,16 +40,21 @@ public class TestAnimationBlowUp implements Game{
 		g.setBackground(Color.white);
 		g.setColor(Color.blue);
 		g.fillRect(320, 240, 20, 20);
-		
+		Input input = container.getInput();
+		if(input.isKeyPressed(input.KEY_ENTER)){
+			g.setColor(Color.black);
+		}
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		
+		
 	}
 	
 	public void animate(){
+		
 		
 	}
 	
