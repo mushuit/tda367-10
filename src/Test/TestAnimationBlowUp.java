@@ -56,12 +56,15 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		g.fillRect(320, 240, 20, 20);
 		Input input = container.getInput();
 		if(input.isKeyPressed(input.KEY_ENTER)){
 			g.setColor(Color.black);
 		}
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
@@ -75,6 +78,9 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
@@ -83,6 +89,7 @@ public class TestAnimationBlowUp implements Game{
 		g.setColor(Color.black);
 		if(shoot)
 		g.fillRect(xBullet, yBullet, 6, 6);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		
 		g.setColor(Color.red);
@@ -103,10 +110,15 @@ public class TestAnimationBlowUp implements Game{
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
 		g.setColor(Color.red);
 		g.fillRect(xCannon, yCannon, 40, 10);
 		g.fillRect(xCannon+15, yCannon-10, 10, 10);
+<<<<<<< HEAD
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 	}
 
@@ -116,10 +128,13 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		
 		
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
@@ -145,6 +160,9 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
@@ -163,6 +181,9 @@ public class TestAnimationBlowUp implements Game{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 =======
@@ -171,6 +192,19 @@ public class TestAnimationBlowUp implements Game{
 =======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
+	}
+	
+	public void mergeImages(){
+		try {
+			images[0] = new Image("img/blowUp0.jpg");
+			images[1] = new Image("img/blowUp1.jpg");
+			images[2] = new Image("img/blowUp2.jpg");
+			images[3] = new Image("img/blowUp3.jpg");
+			images[4] = new Image("img/blowUp4.jpg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+			System.out.println("failed to load image");
+		}
 	}
 	
 	public void mergeImages(){
