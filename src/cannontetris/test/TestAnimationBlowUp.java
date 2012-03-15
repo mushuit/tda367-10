@@ -11,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class TestAnimationBlowUp implements Game{
 	private Animation animation;
@@ -21,6 +22,8 @@ public class TestAnimationBlowUp implements Game{
 	private int yCannon;
 	private boolean shoot;
 	private boolean start;
+	private FadeOutTransition fadeOut;
+	private boolean gameOver;
 	
 	public TestAnimationBlowUp(){
 		animation = new Animation();
@@ -31,6 +34,8 @@ public class TestAnimationBlowUp implements Game{
 		xBullet = 334;
 		shoot = false;
 		start = false;
+		gameOver = false;
+		fadeOut = new FadeOutTransition();
 	}
 	@Override
 	public boolean closeRequested() {
@@ -97,6 +102,10 @@ public class TestAnimationBlowUp implements Game{
 
 		if(animation.isStopped())
 			start = false;
+		
+		if(gameOver){
+			
+		}
 	}
 	
 	public void animate(){
