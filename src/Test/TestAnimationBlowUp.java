@@ -52,13 +52,6 @@ public class TestAnimationBlowUp implements Game{
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setBackground(Color.white);
 		g.setColor(Color.blue);
-
-		g.fillRect(320, 240, 20, 20);
-		Input input = container.getInput();
-		if(input.isKeyPressed(input.KEY_ENTER)){
-			g.setColor(Color.black);
-		}
-
 		if(!start)
 		g.fillRect(xCannon+10, 180, 20, 20);
 		if(start)
