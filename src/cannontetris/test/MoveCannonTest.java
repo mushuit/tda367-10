@@ -23,7 +23,7 @@ public class MoveCannonTest extends BasicGame {
             AppGameContainer app = new AppGameContainer(new MoveCannonTest());
             app.setDisplayMode(500, 600, false);
             app.setShowFPS(true); 
-           // app.setMinimumLogicUpdateInterval(20);
+            //app.setMaximumLogicUpdateInterval(140);
             app.start();
         } catch (SlickException e) {
             e.printStackTrace();
@@ -44,6 +44,12 @@ public class MoveCannonTest extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		
+		Input input = gc.getInput();
+		if(input.isKeyDown(Input.KEY_LEFT)) {
+	        xPos--;
+	    }
+		else if(input.isKeyDown(Input.KEY_RIGHT)) {
+			xPos++;
+		}
 	}
 }
