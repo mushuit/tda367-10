@@ -53,16 +53,30 @@ public class TestAnimationBlowUp implements Game{
 		g.setBackground(Color.white);
 		g.setColor(Color.blue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		g.fillRect(320, 240, 20, 20);
 		Input input = container.getInput();
 		if(input.isKeyPressed(input.KEY_ENTER)){
 			g.setColor(Color.black);
 		}
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		if(!start)
 		g.fillRect(xCannon+10, 180, 20, 20);
 		if(start)
 		g.drawAnimation(animation, xCannon-30, 140);
+<<<<<<< HEAD
+		
+		g.setColor(Color.black);
+		if(shoot)
+		g.fillRect(xBullet, yBullet, 6, 6);
+		
+		g.setColor(Color.red);
+		g.fillRect(xCannon, yCannon, 40, 10);
+		g.fillRect(xCannon+15, yCannon-10, 10, 10);
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
 		
 		g.setColor(Color.black);
 		if(shoot)
@@ -77,10 +91,13 @@ public class TestAnimationBlowUp implements Game{
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		
 		
 =======
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		Input input = container.getInput();
 		if(input.isKeyDown(Input.KEY_SPACE)){
 			shoot = true;
@@ -97,6 +114,9 @@ public class TestAnimationBlowUp implements Game{
 
 		if(animation.isStopped())
 			start = false;
+<<<<<<< HEAD
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
+=======
 >>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 	}
 	
@@ -106,7 +126,10 @@ public class TestAnimationBlowUp implements Game{
 		
 		animation.stopAt(5);
 		animation.setLooping(false);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> ae73a5e5d5354acb252fac1f25f31872085db4c7
 		
 	}
 	
