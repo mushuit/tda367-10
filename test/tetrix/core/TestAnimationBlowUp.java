@@ -99,11 +99,6 @@ public class TestAnimationBlowUp implements GameState, Game{
 
 		if(animation.isStopped())
 			start = false;
-		
-		if(gameOver){
-			fadeOut.init(this, this);
-			fadeOut.update(this, container, delta);
-		}
 	}
 	
 	public void animate(){

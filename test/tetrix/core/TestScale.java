@@ -12,7 +12,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import Test.TestAnimationBlowUp;
+import tetrix.core.TestAnimationBlowUp;
 
 
 
