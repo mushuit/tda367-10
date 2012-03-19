@@ -10,6 +10,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+
+
 public class MoveCannonTest extends BasicGame {
 	private Cannon cannon;
 	private float xPos = 10;
@@ -34,13 +36,13 @@ public class MoveCannonTest extends BasicGame {
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		cannon.draw(xPos, yPos);
+		//cannon.draw(xPos, yPos);
 		
 	}
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		cannon = new Cannon (new Position(400,300), "img/canon.png");
+		//cannon = new Cannon (new Position(400,300), "img/canon.png");
 		
 	}
 
