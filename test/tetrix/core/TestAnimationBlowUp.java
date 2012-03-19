@@ -1,4 +1,4 @@
-package cannontetris.test;
+package tetrix.core;
 
 import javax.swing.ImageIcon;
 

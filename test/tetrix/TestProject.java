@@ -1,6 +1,5 @@
-package cannontetris.test;
+package tetrix;
 
-import cannontetris.model.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
