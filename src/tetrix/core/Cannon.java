@@ -4,15 +4,15 @@ import javax.swing.text.Position;
 
 import org.newdawn.slick.Image;
 
-public class Cannon {
+public class Cannon extends Image {
 	private float xPos;
 	private float yPos;
 	private Image cannonImage;
 	
 	public Cannon(float xPos, float yPos, Image cannonImage) {
+		super(cannonImage);
 		this.xPos = xPos;
 		this.yPos = yPos;
-		this.cannonImage = cannonImage;
 	}
 	
 	public void setImage(Image cannonImage) {
@@ -30,6 +30,11 @@ public class Cannon {
 	public void setPosition(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+	}
+	
+	public void move(float x, float y) {
+		this.xPos += x;
+		this.yPos += y;
 	}
 	
 	public void rotate(int angle) {
