@@ -11,9 +11,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.GameState;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-public class TestAnimationBlowUp implements Game{
+public class TestAnimationBlowUp implements GameState, Game{
 	private Animation animation;
 	private Image[] images;
 	private int xBullet;
@@ -37,25 +39,21 @@ public class TestAnimationBlowUp implements Game{
 		gameOver = false;
 		fadeOut = new FadeOutTransition();
 	}
-	@Override
 	public boolean closeRequested() {
 		return true;
 	}
 
-	@Override
 	public String getTitle() {
 		return "Blow-up animation";
 	}
 
-	@Override
 	public void init(GameContainer container) throws SlickException {
 		mergeImages();
 		animation = new Animation(images, 10);
 	}
 
-	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.setBackground(Color.white);
+		g.setBackground(Color.black);
 		g.setColor(Color.blue);
 		if(!start)
 		g.fillRect(xCannon+10, 180, 20, 20);
@@ -84,7 +82,6 @@ public class TestAnimationBlowUp implements Game{
 		g.fillRect(xCannon+15, yCannon-10, 10, 10);
 	}
 
-	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		if(input.isKeyDown(Input.KEY_SPACE)){
@@ -104,7 +101,8 @@ public class TestAnimationBlowUp implements Game{
 			start = false;
 		
 		if(gameOver){
-			
+			fadeOut.init(this, this);
+			fadeOut.update(this, container, delta);
 		}
 	}
 	
@@ -114,7 +112,7 @@ public class TestAnimationBlowUp implements Game{
 		
 		animation.stopAt(5);
 		animation.setLooping(false);
-		
+		gameOver = true;
 	}
 	
 	public void mergeImages(){
@@ -138,6 +136,151 @@ public class TestAnimationBlowUp implements Game{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public void mouseClicked(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseDragged(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(int arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(int arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseWheelMoved(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void inputEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void inputStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public boolean isAcceptingInput() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void setInput(Input arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(int arg0, char arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyReleased(int arg0, char arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerButtonPressed(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerButtonReleased(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerDownPressed(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerDownReleased(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerLeftPressed(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerLeftReleased(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerRightPressed(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerRightReleased(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerUpPressed(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void controllerUpReleased(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void enter(GameContainer arg0, StateBasedGame arg1)
+			throws SlickException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void init(GameContainer arg0, StateBasedGame arg1)
+			throws SlickException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void leave(GameContainer arg0, StateBasedGame arg1)
+			throws SlickException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+			throws SlickException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+			throws SlickException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

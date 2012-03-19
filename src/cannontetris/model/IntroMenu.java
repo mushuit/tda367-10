@@ -1,5 +1,5 @@
 package cannontetris.model;
 
-public class IntroMenu {
+public class IntroMenu extends GameState{
 
 }
