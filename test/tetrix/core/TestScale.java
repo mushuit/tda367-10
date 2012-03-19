@@ -1,3 +1,4 @@
+package tetrix.core;
 
 import javax.swing.ImageIcon;
 
