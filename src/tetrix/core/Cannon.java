@@ -8,6 +8,7 @@ public class Cannon extends Image {
 	private float xPos;
 	private float yPos;
 	private Image cannonImage;
+	private Track track;
 	
 	public Cannon(float xPos, float yPos, Image cannonImage) {
 		super(cannonImage);
@@ -35,10 +36,6 @@ public class Cannon extends Image {
 	public void move(float x, float y) {
 		this.xPos += x;
 		this.yPos += y;
-	}
-	
-	public void rotate(int angle) {
-		cannonImage.rotate(angle);
 	}
 	
 }
