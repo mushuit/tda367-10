@@ -14,7 +14,6 @@ public class CannonMoveTest extends BasicGame {
 	private Image background;
 	public final static int WINDOW_WIDTH = 500;
 	public final static int WINDOW_HEIGHT = 600;
-	private int value;
 	
 	public CannonMoveTest() {
 		super("Cannon Move Test");
@@ -31,8 +30,7 @@ public class CannonMoveTest extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		background= new Image("img/game-background.png");
-		cannon = new Cannon(250,550, new Image("img/cannon2.png"));	
-		value = 250;
+		cannon = new Cannon(225,525, new Image("img/cannon2.png"));	
 	}
 
 	@Override
