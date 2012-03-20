@@ -31,7 +31,7 @@ public class Cannon extends Image {
 		this.yPos = yPos;
 	}
 	
-	public Position getPosition(float xPos, float yPos) {
+	public Position getPosition() {
 		return new Position(xPos, yPos);
 	}
 	
