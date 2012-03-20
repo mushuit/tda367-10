@@ -25,7 +25,7 @@ public class CannonMoveTest extends BasicGame {
 		background.draw(0,0);
 		
 		// +25 to get the middle
-        cannon.draw(cannon.getX() - cannon.getWidth()/2, cannon.getY() - cannon.getHeight()/2);
+        cannon.draw(cannon.getX(), cannon.getY());
 	}
 
 	@Override
@@ -40,10 +40,11 @@ public class CannonMoveTest extends BasicGame {
 		Input input = gc.getInput();
 		
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
-			cannon.move(1, 0);
+			cannon.move(1,0);
 		}
-		else if(input.isKeyDown(Input.KEY_LEFT)) {
-			cannon.move(-1, 0);
+		
+		if(input.isKeyDown(Input.KEY_LEFT)) {
+			cannon.move(-1,0);
 		}
 	}
 	
