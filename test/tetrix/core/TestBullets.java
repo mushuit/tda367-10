@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -21,6 +22,7 @@ public class TestBullets implements Game{
 	private boolean power;
 	private boolean shot;
 	private int bullets;
+	private Cannon cannon;
 
 	public TestBullets(){
 		power = false;
@@ -32,6 +34,7 @@ public class TestBullets implements Game{
 		try {
 			AppGameContainer app = new AppGameContainer(new TestBullets());
 			app.setDisplayMode(500, 600, false);
+			
 			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -51,10 +54,12 @@ public class TestBullets implements Game{
 	public void init(GameContainer arg0) throws SlickException {
 		pos = new Position(0,300);
 		bulletin = new ArrayList();
+		cannon = new Cannon(250,550, new Image("img/cannon2.png"));	
 	}
 
 	public void update(GameContainer container, int arg1) throws SlickException {
-		pos = new Position((float)Math.random()*500,0);
+		
+		pos = new Position(cannon.getX(), cannon.getY());
 		Input input = container.getInput();
 
 		if(input.isKeyPressed(Input.KEY_SPACE)){
@@ -77,13 +82,23 @@ public class TestBullets implements Game{
 			shot = true;
 			power = true;
 		}
+		
+		if(input.isKeyDown(Input.KEY_RIGHT)){
+			if(cannon.getX() < 450)
+			cannon.move(1,0);
+		}
+		
+		if(input.isKeyDown(Input.KEY_LEFT)){
+			if(cannon.getX() > 0)
+			cannon.move(-1,0);
+		}
 
 		if(shot && power)
 			pBullet.update();
 		for(int i = 0; i < bullets; i++)
 			if(shot && !power)
 				((Bullet) bulletin.get(i)).update();
-
+		
 	}
 
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
@@ -95,5 +110,7 @@ public class TestBullets implements Game{
 		g.setColor(Color.blue);
 		if(power && shot)
 			g.fillRect(pBullet.getPos().getX(), pBullet.getPos().getY(), 10, 10);
+		
+		cannon.draw(cannon.getX(), cannon.getY(), 50, 50);
 	}
 }
