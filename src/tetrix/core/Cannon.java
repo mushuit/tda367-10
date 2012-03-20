@@ -6,8 +6,7 @@ public class Cannon extends Image {
 	private float xPos;
 	private float yPos;
 	private Image cannonImage;
-	private Track track;
-	
+
 	public Cannon(float xPos, float yPos, Image cannonImage) {
 		super(cannonImage);
 		this.xPos = xPos;

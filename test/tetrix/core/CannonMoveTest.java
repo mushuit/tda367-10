@@ -22,8 +22,6 @@ public class CannonMoveTest extends BasicGame {
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		background.draw(0,0);
-		
-		// +25 to get the middle
         cannon.draw(cannon.getX(), cannon.getY());
 	}
 
@@ -33,6 +31,13 @@ public class CannonMoveTest extends BasicGame {
 		cannon = new Cannon(225,525, new Image("img/cannon2.png"));	
 	}
 
+	/*
+	 * Ordning för RIGHT (med start från botten)
+	 * move(1,0)
+	 * move(0,-1)
+	 * move(-1,0)
+	 * move
+	 */
 	@Override
 	public void update(GameContainer gc, int arg) throws SlickException {
 		Input input = gc.getInput();
@@ -42,6 +47,7 @@ public class CannonMoveTest extends BasicGame {
 		}
 		
 		if(input.isKeyDown(Input.KEY_LEFT)) {
+			if(input)
 			cannon.move(-1,0);
 		}
 	}
@@ -55,5 +61,9 @@ public class CannonMoveTest extends BasicGame {
          app.setDisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT, false);
          app.start();
     }
+	
+	private void jumpToTrackRight() {
+		
+	}
 
 }
