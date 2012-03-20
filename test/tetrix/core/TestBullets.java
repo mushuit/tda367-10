@@ -59,7 +59,7 @@ public class TestBullets implements Game{
 
 	public void update(GameContainer container, int arg1) throws SlickException {
 		
-		pos = new Position(cannon.getX(), cannon.getY());
+		pos = new Position(cannon.getPosition());
 		Input input = container.getInput();
 
 		if(input.isKeyPressed(Input.KEY_SPACE)){
