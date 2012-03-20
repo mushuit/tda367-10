@@ -1,6 +1,8 @@
 package tetrix.core;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
@@ -11,16 +13,19 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class TestBullets implements Game{
-	private Bullet[] bullet;
+	private Bullet bullet;
+	private List bulletin;
+	private Iterator<Bullet> itBullets;
 	private PowerBullet pBullet;
 	private Position pos;
 	private boolean power;
 	private boolean shot;
-	int bullets;
+	private int bullets;
 
 	public TestBullets(){
 		power = false;
 		shot = false;
+		bullets = -1;
 	}
 
 	public static void main(String[] args){
@@ -45,9 +50,7 @@ public class TestBullets implements Game{
 
 	public void init(GameContainer arg0) throws SlickException {
 		pos = new Position(0,300);
-		bullet = new Bullet[100];
-		pBullet = new PowerBullet(pos);
-		bullets = 0;
+		bulletin = new ArrayList();
 	}
 
 	public void update(GameContainer container, int arg1) throws SlickException {
@@ -55,10 +58,18 @@ public class TestBullets implements Game{
 		Input input = container.getInput();
 
 		if(input.isKeyPressed(Input.KEY_SPACE)){
-			bullet[bullets] = new Bullet(pos);
+			bullet = new Bullet(pos);
+			bulletin.add(bullet);
 			shot = true;
 			power = false;
 			bullets++;
+		}
+
+		for(int i = 0; i < bullets; i++){
+			if(!(((Bullet) bulletin.iterator().next()).getGoing())){
+				bulletin.remove(i);
+				bullets--;
+			}
 		}
 
 		if(input.isKeyPressed(Input.KEY_ENTER)){
@@ -66,22 +77,21 @@ public class TestBullets implements Game{
 			shot = true;
 			power = true;
 		}
+		System.out.println(bulletin.size()+"    ");
 
 		if(shot && power)
 			pBullet.update();
-		for(int i = 0; i < bullets; i++){
+		for(int i = 0; i < bullets; i++)
 			if(shot && !power)
-				bullet[i].update();
-		}
+				((Bullet) bulletin.get(i)).update();
 
 	}
 
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
 		g.setColor(Color.white);
-		for(int i = 0; i < bullets; i++){
+		for(int i = 0; i < bullets; i++)
 			if(!power && shot)
-				g.fillRect(bullet[i].getPos().getX(), bullet[i].getPos().getY(), 5, 5);
-		}
+				g.fillRect(((Bullet) bulletin.get(i)).getPos().getX(), ((Bullet) bulletin.get(i)).getPos().getY(), 5, 5);
 
 		g.setColor(Color.blue);
 		if(power && shot)

@@ -40,6 +40,9 @@ public class Bullet {
 	public Position getPos(){
 		return pos;
 	}
+	public boolean getGoing(){
+		return going;
+	}
 
 	public void update(){
 		if(going){
