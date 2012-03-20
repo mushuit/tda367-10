@@ -1,8 +1,10 @@
 package tetrix.core;
 
+import org.newdawn.slick.Image;
 
 
-public class Bullet {
+
+public class Bullet extends Image {
 	private Position pos;
 	private int position = 0;
 	private boolean going = false;
@@ -15,9 +17,11 @@ public class Bullet {
 		shoot();
 	}
 
-	public Bullet(Position pos){
+	public Bullet(Position pos, Image img){
+		super(img);
 		this.pos = new Position(pos.getX() ,pos.getY());
 		shoot();
+		setRotation(-90);
 	}
 
 	private void shoot(){
@@ -25,15 +29,15 @@ public class Bullet {
 		System.out.println(pos.getX() + "    " + pos.getY());
 		
 		
-		if(pos.getX() == 0 && pos.getY() >= 0 && pos.getY() <= 600){
+		if(pos.getX() <= 50 && pos.getY() >= 50 && pos.getY() <= 550){
 			position = 1;
 		}
-		else if(pos.getX() >= 500 && pos.getY() >= 0 && pos.getY() == 600){
+		else if(pos.getX() >= 450 && pos.getY() >= 50 && pos.getY() == 550){
 			position = 2;
 		}
-		else if(pos.getY() == 0 && pos.getX() >= 0 && pos.getX() <= 500){
+		else if(pos.getY() <= 50 && pos.getX() >= 50 && pos.getX() <= 450){
 			position = 3;
-		}else if(pos.getY() >= 550 && pos.getX() >= 0 && pos.getX() <= 500){
+		}else if(pos.getY() >= 550 && pos.getX() >= 50 && pos.getX() <= 450){
 			position = 4;
 		}
 
@@ -43,6 +47,7 @@ public class Bullet {
 	public Position getPos(){
 		return pos;
 	}
+	
 	public boolean getGoing(){
 		return going;
 	}
@@ -67,8 +72,8 @@ public class Bullet {
 				going = false;
 			break;
 			
-			case 4:  pos.setY(pos.getY()-1); 
-			if(pos.getY() == 0) 
+			case 4:  pos.setY(pos.getY()-1);
+			if(pos.getY() < -200) 
 				going = false;
 			break;
 			
@@ -77,5 +82,8 @@ public class Bullet {
 
 			}
 		}
+	}
+	public void rotate(float i){
+		this.setRotation(i);
 	}
 }
