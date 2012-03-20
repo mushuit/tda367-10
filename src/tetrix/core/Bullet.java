@@ -17,7 +17,6 @@ public class Bullet {
 
 	public Bullet(Position pos){
 		this.pos = new Position(pos.getX() ,pos.getY());
-		System.out.println("shooting");
 		shoot();
 	}
 
@@ -46,7 +45,6 @@ public class Bullet {
 
 	public void update(){
 		if(going){
-			System.out.println(pos.getX() + "    " + pos.getY());
 			
 			switch (position) {
 			

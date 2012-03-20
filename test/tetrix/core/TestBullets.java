@@ -77,7 +77,6 @@ public class TestBullets implements Game{
 			shot = true;
 			power = true;
 		}
-		System.out.println(bulletin.size()+"    ");
 
 		if(shot && power)
 			pBullet.update();
