@@ -102,6 +102,7 @@ public class TestBullets implements Game{
 	}
 
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
+		
 		g.setColor(Color.white);
 		for(int i = 0; i < bullets; i++)
 			if(!power && shot)
