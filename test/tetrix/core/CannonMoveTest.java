@@ -14,7 +14,7 @@ public class CannonMoveTest extends BasicGame {
 	private Image background;
 	public final static int WINDOW_WIDTH = 500;
 	public final static int WINDOW_HEIGHT = 600;
-	private float x, y;
+	private int value;
 	
 	public CannonMoveTest() {
 		super("Cannon Move Test");
@@ -23,19 +23,28 @@ public class CannonMoveTest extends BasicGame {
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		background.draw(0,0);
-        cannon.draw(cannon.getX(), cannon.getY());
+		
+		// +25 to get the middle
+        cannon.draw(cannon.getX() - cannon.getWidth()/2, cannon.getY() - cannon.getHeight()/2);
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		background= new Image("img/game-background.png");
-		cannon = new Cannon(225,515, new Image("img/cannon2.png"));
+		cannon = new Cannon(250,550, new Image("img/cannon2.png"));	
+		value = 250;
 	}
 
 	@Override
 	public void update(GameContainer gc, int arg) throws SlickException {
 		Input input = gc.getInput();
-
+		
+		if(input.isKeyDown(Input.KEY_RIGHT)) {
+			cannon.move(1, 0);
+		}
+		else if(input.isKeyDown(Input.KEY_LEFT)) {
+			cannon.move(-1, 0);
+		}
 	}
 	
 	public static void main(String[] args) 
