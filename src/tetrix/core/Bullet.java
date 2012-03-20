@@ -21,6 +21,10 @@ public class Bullet {
 	}
 
 	private void shoot(){
+	
+		System.out.println(pos.getX() + "    " + pos.getY());
+		
+		
 		if(pos.getX() == 0 && pos.getY() >= 0 && pos.getY() <= 600){
 			position = 1;
 		}
@@ -29,7 +33,7 @@ public class Bullet {
 		}
 		else if(pos.getY() == 0 && pos.getX() >= 0 && pos.getX() <= 500){
 			position = 3;
-		}else if(pos.getY() == 600 && pos.getX() >= 0 && pos.getX() <= 500){
+		}else if(pos.getY() >= 550 && pos.getX() >= 0 && pos.getX() <= 500){
 			position = 4;
 		}
 
