@@ -1,7 +1,5 @@
 package tetrix.core;
 
-import javax.swing.text.Position;
-
 import org.newdawn.slick.Image;
 
 public class Cannon extends Image {
@@ -31,6 +29,10 @@ public class Cannon extends Image {
 	public void setPosition(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+	}
+	
+	public Position getPosition(float xPos, float yPos) {
+		return new Position(xPos, yPos);
 	}
 	
 	public void move(float x, float y) {
