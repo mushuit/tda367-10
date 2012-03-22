@@ -44,7 +44,8 @@ public class Main extends StateBasedGame {
         this.addState(new SettingsView(States.SETTINGSVIEW.getID()));
         this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
         
-        this.enterState(States.INTROVIEW.getID());
+        // CHANGE TO INTROVIEW WHEN TESTING IS DONE
+        this.enterState(States.GAMEPLAYVIEW.getID());
 	}
 
 	@Override
