@@ -53,7 +53,7 @@ public class TestAnimationBlowUp implements GameState, Game{
 	}
 
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.setBackground(Color.black);
+		g.setBackground(Color.white);
 		g.setColor(Color.blue);
 		if(!start)
 		g.fillRect(xCannon+10, 180, 20, 20);

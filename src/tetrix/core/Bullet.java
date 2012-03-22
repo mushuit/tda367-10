@@ -17,8 +17,9 @@ public class Bullet extends Image {
 		shoot();
 	}
 
-	public Bullet(Position pos, Image img){
+	public Bullet(Position pos, Image img, float rotation){
 		super(img);
+		rotate(rotation);
 		this.pos = new Position(pos.getX() ,pos.getY());
 		shoot();
 		setRotation(-90);
@@ -32,12 +33,16 @@ public class Bullet extends Image {
 		if(pos.getX() <= 50 && pos.getY() >= 50 && pos.getY() <= 550){
 			position = 1;
 		}
+		
 		else if(pos.getX() >= 450 && pos.getY() >= 50 && pos.getY() == 550){
 			position = 2;
 		}
+		
 		else if(pos.getY() <= 50 && pos.getX() >= 50 && pos.getX() <= 450){
 			position = 3;
-		}else if(pos.getY() >= 550 && pos.getX() >= 50 && pos.getX() <= 450){
+		}
+		
+		else if(pos.getY() >= 550 && pos.getX() >= 50 && pos.getX() <= 450){
 			position = 4;
 		}
 
@@ -57,22 +62,22 @@ public class Bullet extends Image {
 			
 			switch (position) {
 			
-			case 1:  pos.setX(pos.getX()+1); 
-			if(pos.getX() == 500) 
+			case 1:  pos.setX(pos.getX()+55); 
+			if(pos.getX() == 800) 
 				going = false;
 			break;
 			
-			case 2:  pos.setX(pos.getX()-1); 
-			if(pos.getX() == 0) 
+			case 2:  pos.setX(pos.getX()-55); 
+			if(pos.getX() == -200) 
 				going = false;
 			break;
 			
-			case 3:  pos.setY(pos.getY()+1); 
-			if(pos.getY() == 600) 
+			case 3:  pos.setY(pos.getY()+50); 
+			if(pos.getY() == 800) 
 				going = false;
 			break;
 			
-			case 4:  pos.setY(pos.getY()-1);
+			case 4:  pos.setY(pos.getY()-50);
 			if(pos.getY() < -200) 
 				going = false;
 			break;

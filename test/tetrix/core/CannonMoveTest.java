@@ -22,8 +22,6 @@ public class CannonMoveTest extends BasicGame {
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		background.draw(0,0);
-		
-		// +25 to get the middle
         cannon.draw(cannon.getX(), cannon.getY());
 	}
 
