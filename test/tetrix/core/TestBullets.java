@@ -38,6 +38,7 @@ public class TestBullets implements Game{
 		try {
 			AppGameContainer app = new AppGameContainer(new TestBullets());
 			app.setDisplayMode(500, 600, false);
+			app.setTargetFrameRate(60);
 			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -126,31 +127,31 @@ public class TestBullets implements Game{
 
 		if(input.isKeyDown(Input.KEY_RIGHT)){
 			if(cannon.getY() < 500 && !down && !up){
-				cannon.move(0,1);
+				cannon.move(0,5);
 			}
 			if(cannon.getX() < 400 && down && !up){
-				cannon.move(1,0);
+				cannon.move(5,0);
 			}
 			if(cannon.getY() < 500 && !down && up){
-				cannon.move(0,1);
+				cannon.move(0,5);
 			}
 			if(cannon.getX() < 400 && down && up){
-				cannon.move(1,0);
+				cannon.move(5,0);
 			}
 		}
 
 		if(input.isKeyDown(Input.KEY_LEFT)){
 			if(cannon.getY() > 50 && !down && !up){
-				cannon.move(0,-1);
+				cannon.move(0,-5);
 			} 
 			if(cannon.getX() > 50 && down && !up){
-				cannon.move(-1,0);
+				cannon.move(-5,0);
 			} 
 			if(cannon.getY() > 50 && !down && up){
-				cannon.move(0,-1);
+				cannon.move(0,-5);
 			} 
 			if(cannon.getX() > 50 && down && up){
-				cannon.move(-1,0);
+				cannon.move(-5,0);
 			} 
 		}
 

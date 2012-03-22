@@ -62,22 +62,22 @@ public class Bullet extends Image {
 			
 			switch (position) {
 			
-			case 1:  pos.setX(pos.getX()+1); 
+			case 1:  pos.setX(pos.getX()+55); 
 			if(pos.getX() == 800) 
 				going = false;
 			break;
 			
-			case 2:  pos.setX(pos.getX()-1); 
+			case 2:  pos.setX(pos.getX()-55); 
 			if(pos.getX() == -200) 
 				going = false;
 			break;
 			
-			case 3:  pos.setY(pos.getY()+1); 
+			case 3:  pos.setY(pos.getY()+50); 
 			if(pos.getY() == 800) 
 				going = false;
 			break;
 			
-			case 4:  pos.setY(pos.getY()-1);
+			case 4:  pos.setY(pos.getY()-50);
 			if(pos.getY() < -200) 
 				going = false;
 			break;
