@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 public class Cannon extends Image {
 	private float xPos;
 	private float yPos;
-	private Image cannonImage;
+	private Image cannon;
 
 	public Cannon(float xPos, float yPos, Image cannonImage) {
 		super(cannonImage);
@@ -14,7 +14,11 @@ public class Cannon extends Image {
 	}
 	
 	public void setImage(Image cannonImage) {
-		this.cannonImage = cannonImage;
+		this.cannon = cannonImage;
+	}
+	
+	public void rotate(int angle) {
+		cannon.rotate(90);
 	}
 	
 	public float getX() {
