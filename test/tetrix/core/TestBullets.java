@@ -23,7 +23,10 @@ public class TestBullets implements Game{
 	private boolean shot;
 	private int bullets;
 	private Cannon cannon;
-	
+	private float bulletRotation;
+	private boolean down;
+	private boolean up;
+
 
 	public TestBullets(){
 		power = false;
@@ -35,7 +38,6 @@ public class TestBullets implements Game{
 		try {
 			AppGameContainer app = new AppGameContainer(new TestBullets());
 			app.setDisplayMode(500, 600, false);
-
 			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -55,20 +57,27 @@ public class TestBullets implements Game{
 	public void init(GameContainer arg0) throws SlickException {
 		pos = new Position(0,300);
 		bulletin = new ArrayList();
-		cannon = new Cannon(250,550, new Image("img/cannon2.png"));	
+		cannon = new Cannon(0,300, new Image("img/cannon2.png"));
+		bulletRotation = 0;
+		cannon.rotate(90);
+		down = false;
+		up = false;
 	}
 
 	public void update(GameContainer container, int arg1) throws SlickException {
 
 		pos = new Position(cannon.getPosition());
 		Input input = container.getInput();
+		
+		
 
 		if(input.isKeyPressed(Input.KEY_SPACE)){
-				bullet = new Bullet(pos, new Image("img/Bullet2.jpg"));
-				bulletin.add(bullet);
-				shot = true;
-				power = false;
-				bullets++;
+			bullet = new Bullet(pos, new Image("img/Bullet2.jpg"), bulletRotation);
+			bullet.setRotation(bulletRotation);
+			bulletin.add(bullet);
+			shot = true;
+			power = false;
+			bullets++;
 		}
 
 		for(int i = 0; i < bullets; i++){
@@ -77,21 +86,72 @@ public class TestBullets implements Game{
 				bullets--;
 			}
 		}
-
+		/*
 		if(input.isKeyPressed(Input.KEY_ENTER)){
 			pBullet = new PowerBullet(pos);
 			shot = true;
 			power = true;
+		}*/
+
+		if(input.isKeyPressed(Input.KEY_ENTER)){
+			if(!down && !up){
+				cannon.setPosition(225, 550);
+				cannon.setRotation(0);
+				down = true;
+				up = false;
+				bulletRotation = -90;
+
+			} else if(down && !up){
+				cannon.setPosition(0, 275);
+				cannon.setRotation(90);
+				down = false;
+				up = true;
+				bulletRotation = 0;
+
+			} else if(!down && up){
+				cannon.setPosition(225, 0);
+				cannon.setRotation(180);
+				down = true;
+				up = true;
+				bulletRotation = 90;
+
+			} else{
+				cannon.setPosition(450, 275);
+				cannon.setRotation(-90);
+				down = false;
+				up = false;
+				bulletRotation = 180;
+			}
 		}
 
 		if(input.isKeyDown(Input.KEY_RIGHT)){
-			if(cannon.getX() < 450)
+			if(cannon.getY() < 500 && !down && !up){
+				cannon.move(0,1);
+			}
+			if(cannon.getX() < 400 && down && !up){
 				cannon.move(1,0);
+			}
+			if(cannon.getY() < 500 && !down && up){
+				cannon.move(0,1);
+			}
+			if(cannon.getX() < 400 && down && up){
+				cannon.move(1,0);
+			}
 		}
 
 		if(input.isKeyDown(Input.KEY_LEFT)){
-			if(cannon.getX() > 0)
+			if(cannon.getY() > 50 && !down && !up){
+				cannon.move(0,-1);
+			} 
+			if(cannon.getX() > 50 && down && !up){
 				cannon.move(-1,0);
+			} 
+			if(cannon.getY() > 50 && !down && up){
+				cannon.move(0,-1);
+			} 
+			if(cannon.getX() > 50 && down && up){
+				cannon.move(-1,0);
+			} 
 		}
 
 		if(shot && power)
@@ -99,19 +159,24 @@ public class TestBullets implements Game{
 		for(int i = 0; i < bullets; i++)
 			if(shot && !power)
 				((Bullet) bulletin.get(i)).update();
-
 	}
 
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
-<<<<<<< HEAD
-		
-=======
 		g.setBackground(Color.white);
->>>>>>> Bullets fönkar
 		g.setColor(Color.white);
-		for(int i = 0; i < bullets; i++)
-			if(!power && shot)
-				bullet.draw((float) (((Bullet) bulletin.get(i)).getPos().getX()-95), ((Bullet) bulletin.get(i)).getPos().getY(), 150, 50);
+		if(!up)
+			for(int i = 0; i < bullets; i++)
+				if(!power && shot){
+					bullet.draw((float) (((Bullet) bulletin.get(i)).getPos().getX()-100), ((Bullet) bulletin.get(i)).getPos().getY(), 150, 50);
+				}
+
+		if(up)
+			for(int i = 0; i < bullets; i++)
+				if(!power && shot){
+					bullet.draw((float) (((Bullet) bulletin.get(i)).getPos().getX()-195), ((Bullet) bulletin.get(i)).getPos().getY(), 150, 50);
+				}
+
+
 
 		g.setColor(Color.blue);
 		if(power && shot)
