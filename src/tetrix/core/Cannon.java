@@ -2,33 +2,18 @@ package tetrix.core;
 
 import org.newdawn.slick.Image;
 
-public class Cannon extends Image {
+public class Cannon{
 	private float xPos;
 	private float yPos;
-<<<<<<< HEAD
-	private Image cannonImage;
-	private Track track;
 	private int value;
 	private int rotation;
-	
-=======
-	private Image cannon;
 
->>>>>>> 68b54fd5b3e8dc1eb10c023284e1796f6f95edee
-	public Cannon(float xPos, float yPos, Image cannonImage) {
-		super(cannonImage);
+	public Cannon(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		rotation = 0;
-		value = 200;
-	}
-	
-	public void setImage(Image cannonImage) {
-		this.cannon = cannonImage;
-	}
-	
-	public void rotate(int angle) {
-		cannon.rotate(90);
+		
+		value = (int) xPos;
 	}
 	
 	public float getX() {
@@ -49,25 +34,31 @@ public class Cannon extends Image {
 	}
 	
 	public void move(float x, float y) {
-		this.xPos += x;
-		this.yPos += y;
-		value += x+(-y);
-		if (x>=0 && x<=400) {
+		// When Y decreases, the cannon actually moves up.
+		value += x + (-y);
+		
+		if (value>=0 && value<=400) {
 			rotation = 0;
+			this.xPos += x;
 		}
-		else if (x>400 && x<=900) {
-			rotation = 90;
+		else if (value>400 && value<=900) {
+			rotation = -90;
+			this.yPos -= y;
 		}
-		else if (x>900 && x<=1400) {
+		else if (value>900 && value<=1400) {
 			rotation = 180;
 		}
-		else { 
-			rotation = 240;
+		else if (value>1400){ 
+			rotation = 270;
 		
+		}
+		
+		if(value >= 1900) {
+			value = 0;
 		}
 	}
 	
-	public float getRotation() {
+	public int getRotation() {
 		return rotation;
 	}
 	
