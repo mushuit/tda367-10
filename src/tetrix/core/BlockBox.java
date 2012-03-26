@@ -3,7 +3,9 @@ package tetrix.core;
 public class BlockBox {
 	private boolean[][] fallingBlocks;
 	private boolean[][] lockedBlocks;
-	private Block block;
+	private Tetromino mino;
+	private boolean[][] bMino;
+	private Position[][] posi;
 
 	public BlockBox(){
 		fallingBlocks = new boolean[10][20];
@@ -26,7 +28,16 @@ public class BlockBox {
 	}
 	
 	public void newBlock(){
-		falling();
+		mino = new Tetromino();
+		bMino = mino.getShape();
+		
+		for(int h = 0; h < 20; h++){
+			for(int i = 0; i < 10; i++){
+				if(i < 4 && h < 3){
+					fallingBlocks[i][h] = bMino[i][h];
+				}
+			}
+		}
 	}
 	
 	public void falling(){

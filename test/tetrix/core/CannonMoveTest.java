@@ -22,13 +22,12 @@ public class CannonMoveTest extends BasicGame {
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		background.draw(0,0);
-        cannon.draw(cannon.getX(), cannon.getY());
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		background= new Image("img/game-background.png");
-		cannon = new Cannon(225,525, new Image("img/cannon2.png"));	
+		cannon = new Cannon(225,525);	
 	}
 
 	@Override
@@ -36,11 +35,11 @@ public class CannonMoveTest extends BasicGame {
 		Input input = gc.getInput();
 		
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
-			cannon.move(1,0);
+			cannon.move(1);
 		}
 		
 		if(input.isKeyDown(Input.KEY_LEFT)) {
-			cannon.move(-1,0);
+			cannon.move(-1);
 		}
 	}
 	

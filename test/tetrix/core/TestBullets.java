@@ -26,6 +26,7 @@ public class TestBullets implements Game{
 	private float bulletRotation;
 	private boolean down;
 	private boolean up;
+	private Image cannonImage;
 
 
 	public TestBullets(){
@@ -58,11 +59,11 @@ public class TestBullets implements Game{
 	public void init(GameContainer arg0) throws SlickException {
 		pos = new Position(0,300);
 		bulletin = new ArrayList();
-		cannon = new Cannon(0,300, new Image("img/cannon2.png"));
+		cannon = new Cannon(0,300);
 		bulletRotation = 0;
-		cannon.rotate(90);
 		down = false;
 		up = false;
+		cannonImage = new Image("img/cannon2.png");
 	}
 
 	public void update(GameContainer container, int arg1) throws SlickException {
@@ -94,65 +95,12 @@ public class TestBullets implements Game{
 			power = true;
 		}*/
 
-		if(input.isKeyPressed(Input.KEY_ENTER)){
-			if(!down && !up){
-				cannon.setPosition(225, 550);
-				cannon.setRotation(0);
-				down = true;
-				up = false;
-				bulletRotation = -90;
-
-			} else if(down && !up){
-				cannon.setPosition(0, 275);
-				cannon.setRotation(90);
-				down = false;
-				up = true;
-				bulletRotation = 0;
-
-			} else if(!down && up){
-				cannon.setPosition(225, 0);
-				cannon.setRotation(180);
-				down = true;
-				up = true;
-				bulletRotation = 90;
-
-			} else{
-				cannon.setPosition(450, 275);
-				cannon.setRotation(-90);
-				down = false;
-				up = false;
-				bulletRotation = 180;
-			}
-		}
-
 		if(input.isKeyDown(Input.KEY_RIGHT)){
-			if(cannon.getY() < 500 && !down && !up){
-				cannon.move(0,5);
-			}
-			if(cannon.getX() < 400 && down && !up){
-				cannon.move(5,0);
-			}
-			if(cannon.getY() < 500 && !down && up){
-				cannon.move(0,5);
-			}
-			if(cannon.getX() < 400 && down && up){
-				cannon.move(5,0);
-			}
+			cannon.move(1);
 		}
 
 		if(input.isKeyDown(Input.KEY_LEFT)){
-			if(cannon.getY() > 50 && !down && !up){
-				cannon.move(0,-5);
-			} 
-			if(cannon.getX() > 50 && down && !up){
-				cannon.move(-5,0);
-			} 
-			if(cannon.getY() > 50 && !down && up){
-				cannon.move(0,-5);
-			} 
-			if(cannon.getX() > 50 && down && up){
-				cannon.move(-5,0);
-			} 
+			cannon.move(-1);
 		}
 
 		if(shot && power)
@@ -163,10 +111,6 @@ public class TestBullets implements Game{
 	}
 
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
-<<<<<<< HEAD
-
-=======
->>>>>>> 68b54fd5b3e8dc1eb10c023284e1796f6f95edee
 		g.setBackground(Color.white);
 		g.setColor(Color.white);
 		if(!up)
@@ -186,7 +130,7 @@ public class TestBullets implements Game{
 		g.setColor(Color.blue);
 		if(power && shot)
 			g.fillRect(pBullet.getPos().getX(), pBullet.getPos().getY(), 10, 10);
-
-		cannon.draw(cannon.getX(), cannon.getY(), 50, 50);
+		
+		cannonImage.draw(cannon.getX(), cannon.getY());
 	}
 }

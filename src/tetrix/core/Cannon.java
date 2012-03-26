@@ -47,12 +47,12 @@ public class Cannon{
 			rotation = 180;
 			this.xPos -= direction;
 		}
-		else if (value>1200 && value<=1650){ 
+		else if (value>1200 && value<=1800){ 
 			rotation = 90;
 			this.yPos += direction;
 		}
 		
-		if(value > 1650) {
+		if(value > 1800) {
 			value = 0;
 		}
 	}
