@@ -35,23 +35,23 @@ public class GameplayView extends BasicGameState {
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
 		background.draw(0,0);
-		cannonImage.draw(cannon.getX(), cannon.getY());	
+		cannonImage.draw(cannon.getX(), cannon.getY());
 	}
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
+		int updateSpeed = 1000 /Util.FPS;
 		
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
-			cannon.move(delta);
+			cannon.move(updateSpeed);
 		}
 		
 		if(input.isKeyDown(Input.KEY_LEFT)) {
-			cannon.move(-delta);
+			cannon.move(-updateSpeed);
 		}
 		cannonImage.setRotation(cannon.getRotation());
-		
 	}
 
 	@Override
