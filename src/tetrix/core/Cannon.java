@@ -5,15 +5,14 @@ import org.newdawn.slick.Image;
 public class Cannon{
 	private float xPos;
 	private float yPos;
-	private int value;
+	private float value;
 	private int rotation;
 
 	public Cannon(float xPos, float yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		rotation = 0;
-		
-		value = (int) xPos;
+		value = xPos;
 	}
 	
 	public float getX() {
@@ -33,27 +32,27 @@ public class Cannon{
 		return new Position(xPos, yPos);
 	}
 	
-	public void move(float x, float y) {
-		// When Y decreases, the cannon actually moves up.
-		value += x + (-y);
+	public void move(float direction) {
+		value += direction;
 		
-		if (value>=0 && value<=400) {
+		if (value>=0 && value<425) {
 			rotation = 0;
-			this.xPos += x;
+			this.xPos += direction;
 		}
-		else if (value>400 && value<=900) {
+		else if (value>=425 && value<900) {
 			rotation = -90;
-			this.yPos -= y;
+			this.yPos -= direction;
 		}
-		else if (value>900 && value<=1400) {
+		else if (value>=900 && value<1200) {
 			rotation = 180;
+			this.xPos -= direction;
 		}
-		else if (value>1400){ 
-			rotation = 270;
-		
+		else if (value>1200 && value<=1650){ 
+			rotation = 90;
+			this.yPos += direction;
 		}
 		
-		if(value >= 1900) {
+		if(value > 1650) {
 			value = 0;
 		}
 	}
