@@ -9,6 +9,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.Cannon;
+import tetrix.core.Util;
 
 public class GameplayView extends BasicGameState {
 
@@ -16,7 +17,6 @@ public class GameplayView extends BasicGameState {
 	
 	private Image background;
 	private Image cannonImage;
-	
 	private Cannon cannon;
 	
 	public GameplayView(int stateID) {
@@ -28,7 +28,7 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background= new Image("img/game-background.png");
 		cannonImage = new Image("img/cannon2.png");
-		cannon = new Cannon(200,500);
+		cannon = new Cannon(225,525);
 	}
 
 	@Override
@@ -37,18 +37,18 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());	
 	}
-
+	
 	@Override
-	public void update(GameContainer gc, StateBasedGame arg1, int arg2)
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
 		
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
-			cannon.move(1,0);
+			cannon.move(delta);
 		}
 		
 		if(input.isKeyDown(Input.KEY_LEFT)) {
-			cannon.move(-1,0);
+			cannon.move(-delta);
 		}
 		cannonImage.setRotation(cannon.getRotation());
 		
