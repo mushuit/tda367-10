@@ -11,6 +11,7 @@ import tetrix.IntroView;
 import tetrix.LevelsView;
 import tetrix.MainMenuView;
 import tetrix.SettingsView;
+import tetrix.core.Util;
 
 
 public class Main extends StateBasedGame {
@@ -44,7 +45,7 @@ public class Main extends StateBasedGame {
         this.addState(new SettingsView(States.SETTINGSVIEW.getID()));
         this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
         
-        // CHANGE TO INTROVIEW WHEN TESTING IS DONE
+        // TODO CHANGE TO INTROVIEW WHEN TESTING IS DONE
         this.enterState(States.GAMEPLAYVIEW.getID());
 	}
 
@@ -56,8 +57,9 @@ public class Main extends StateBasedGame {
 	
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Main());
-		 
-        app.setDisplayMode(500, 600, false);
+		// Set FPS to 60
+		app.setTargetFrameRate(Util.FPS);
+        app.setDisplayMode(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT, false);
         app.start();
 	}	
 }
