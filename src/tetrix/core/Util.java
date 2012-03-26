@@ -18,5 +18,5 @@ public class Util {
 	/**
 	 * The update interval of the game (Frames Per Second)
 	 */
-	public static final int FPS = 60;
+	public static final int FPS = 100;
 }
