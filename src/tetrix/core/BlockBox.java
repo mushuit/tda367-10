@@ -15,17 +15,26 @@ public class BlockBox {
 				lockedBlocks[i][h] = false;
 			}
 		}
-		init();
+		newBlock();
 	}
 
 	public BlockBox(boolean[][] fallingBlocks, boolean[][] lockedBlocks){
 		this.fallingBlocks = fallingBlocks.clone();
 		this.lockedBlocks = lockedBlocks.clone();
 
-		init();
+		newBlock();
 	}
 	
-	public void init(){
-		
+	public void newBlock(){
+		falling();
 	}
+	
+	public void falling(){
+		//TODO send a tell to blocks so they fall one step.
+	}
+	
+	public void freeze(){
+		//TODO put the block to the lockedBlocks matrix.
+	}
+	
 }
