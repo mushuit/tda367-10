@@ -1,51 +1,37 @@
 package tetrix.core;
 
+import java.util.ArrayList;
+
 public class BlockBox {
-	private boolean[][] fallingBlocks;
-	private boolean[][] lockedBlocks;
-	private Tetromino mino;
-	private boolean[][] bMino;
-	private Position[][] posi;
+	
+	private int width;
+	private int height;
+	
+	private int[][] blockBox;
 
-	public BlockBox(){
-		fallingBlocks = new boolean[10][20];
-		lockedBlocks = new boolean[10][20];
-
-		for(int h = 0; h < 20; h++){
-			for(int i = 0; i < 10; i++){
-				fallingBlocks[i][h] = false;
-				lockedBlocks[i][h] = false;
-			}
-		}
-		newBlock();
-	}
-
-	public BlockBox(boolean[][] fallingBlocks, boolean[][] lockedBlocks){
-		this.fallingBlocks = fallingBlocks.clone();
-		this.lockedBlocks = lockedBlocks.clone();
-
-		newBlock();
+	public BlockBox() {
+		new BlockBox(10,20);
 	}
 	
-	public void newBlock(){
-		mino = new Tetromino();
-		bMino = mino.getShape();
+	public BlockBox(int width, int height){
+		this.width = width;
+		this.height = height;
 		
-		for(int h = 0; h < 20; h++){
-			for(int i = 0; i < 10; i++){
-				if(i < 4 && h < 3){
-					fallingBlocks[i][h] = bMino[i][h];
-				}
+		blockBox = new int[width][height];
+		clearBoard();
+	}
+	
+	public void clearBoard() {
+		for(int i = 0; i < blockBox.length; i++) {
+			for(int j = 0; j < blockBox[i].length; j++) {
+				//blockBox[i][j] = Tetromino.EMPTY;
 			}
 		}
 	}
 	
-	public void falling(){
-		//TODO send a tell to blocks so they fall one step.
-	}
 	
-	public void freeze(){
-		//TODO put the block to the lockedBlocks matrix.
-	}
+	
+	
+		
 	
 }
