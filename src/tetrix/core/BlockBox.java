@@ -5,11 +5,12 @@ public class BlockBox {
 	private boolean[][] lockedBlocks;
 	private Tetromino mino;
 	private boolean[][] bMino;
-	private Position[][] posi;
+	private Position[][] pos;
 
 	public BlockBox(){
 		fallingBlocks = new boolean[10][20];
 		lockedBlocks = new boolean[10][20];
+		pos = new Position[10][20];
 
 		for(int h = 0; h < 20; h++){
 			for(int i = 0; i < 10; i++){
