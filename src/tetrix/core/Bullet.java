@@ -26,13 +26,14 @@ public class Bullet extends Image {
 		shoot();
 		setRotation(-90);
 	}
-	
+
 	public Bullet(Position pos, int value){
 		this.value = value;
 		this.pos = new Position(pos.getX() ,pos.getY());
 		shoot();
 		setRotation(-90);
 	}
+
 
 	private void shoot(){
 	
