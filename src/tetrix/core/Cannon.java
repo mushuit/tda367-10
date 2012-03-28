@@ -89,4 +89,8 @@ public class Cannon{
 	public int getRotation() {
 		return rotation;
 	}	
+	
+	public int getValue(){
+		return (int) value;
+	}
 }

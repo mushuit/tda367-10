@@ -8,7 +8,8 @@ public class Bullet extends Image {
 	private Position pos;
 	private int position = 0;
 	private boolean going = false;
-	//xmax = 500; ymax = 600;
+	private int xMax = 500, yMax = 600;
+	private int value;
 
 	public Bullet(float xPos, float yPos){
 		pos = new Position(0,0);
@@ -17,9 +18,17 @@ public class Bullet extends Image {
 		shoot();
 	}
 
-	public Bullet(Position pos, Image img, float rotation){
+	public Bullet(Position pos, Image img, float rotation, int value){
 		super(img);
 		rotate(rotation);
+		this.value = value;
+		this.pos = new Position(pos.getX() ,pos.getY());
+		shoot();
+		setRotation(-90);
+	}
+	
+	public Bullet(Position pos, int value){
+		this.value = value;
 		this.pos = new Position(pos.getX() ,pos.getY());
 		shoot();
 		setRotation(-90);
@@ -30,20 +39,26 @@ public class Bullet extends Image {
 		System.out.println(pos.getX() + "    " + pos.getY());
 		
 		
-		if(pos.getX() <= 50 && pos.getY() >= 50 && pos.getY() <= 550){
+		if(value >= 400 && value <= 900){
 			position = 1;
+			pos.setY((float) (pos.getY()+22.5));
 		}
 		
-		else if(pos.getX() >= 450 && pos.getY() >= 50 && pos.getY() == 550){
+		else if(value >= 0 && value <= 400){
 			position = 2;
+			pos.setX((float) (pos.getX() + 22.5));
 		}
 		
-		else if(pos.getY() <= 50 && pos.getX() >= 50 && pos.getX() <= 450){
+		else if(value >= 900 && value <= 1300){
 			position = 3;
+			pos.setX((float) (pos.getX() + 22.5));
+			pos.setY(pos.getY() + 50);
 		}
 		
-		else if(pos.getY() >= 550 && pos.getX() >= 50 && pos.getX() <= 450){
+		else if(value >= 1300 && value <= 1800){
 			position = 4;
+			pos.setY((float) (pos.getY() + 22.5));
+			pos.setX(pos.getX() + 50);
 		}
 
 		going = true;
@@ -51,6 +66,14 @@ public class Bullet extends Image {
 
 	public Position getPos(){
 		return pos;
+	}
+	
+	public int getX(){
+		return (int)pos.getX();
+	}
+	
+	public int getY(){
+		return (int)pos.getY();
 	}
 	
 	public boolean getGoing(){
@@ -62,23 +85,23 @@ public class Bullet extends Image {
 			
 			switch (position) {
 			
-			case 1:  pos.setX(pos.getX()+55); 
-			if(pos.getX() == 800) 
+			case 1:  pos.setX(pos.getX()-10); 
+			if(pos.getX() < 0) 
 				going = false;
 			break;
 			
-			case 2:  pos.setX(pos.getX()-55); 
-			if(pos.getX() == -200) 
+			case 2:  pos.setY(pos.getY()-10); 
+			if(pos.getY() < 0) 
 				going = false;
 			break;
 			
-			case 3:  pos.setY(pos.getY()+50); 
-			if(pos.getY() == 800) 
+			case 3:  pos.setY(pos.getY()+10); 
+			if(pos.getY() > yMax) 
 				going = false;
 			break;
 			
-			case 4:  pos.setY(pos.getY()-50);
-			if(pos.getY() < -200) 
+			case 4:  pos.setX(pos.getX()+10);
+			if(pos.getX() > xMax) 
 				going = false;
 			break;
 			

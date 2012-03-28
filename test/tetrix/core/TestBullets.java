@@ -74,7 +74,7 @@ public class TestBullets implements Game{
 		
 
 		if(input.isKeyPressed(Input.KEY_SPACE)){
-			bullet = new Bullet(pos, new Image("img/Bullet2.jpg"), bulletRotation);
+			bullet = new Bullet(pos, new Image("img/Bullet2.jpg"),100, 100);
 			bullet.setRotation(bulletRotation);
 			bulletin.add(bullet);
 			shot = true;
