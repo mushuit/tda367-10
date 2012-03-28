@@ -1,21 +1,17 @@
 package tetrix.core;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
->>>>>>> 2a24f4f6cc5ac0eca0617e95684bb28e8020077d
-public class BlockBox {
+public class TestLinus {
 	
 	private int width;
 	private int height;
 	
 	private int[][] blockBox;
 
-	public BlockBox() {
+	public TestLinus() {
 		new BlockBox(10,20);
 	}
 	
-	public BlockBox(int width, int height){
+	public TestLinus(int width, int height){
 		this.width = width;
 		this.height = height;
 		
@@ -30,4 +26,5 @@ public class BlockBox {
 			}
 		}
 	}
+
 }
