@@ -2,6 +2,7 @@ package tetrix.core;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 <<<<<<< HEAD
 import org.newdawn.slick.Graphics;
@@ -19,6 +20,8 @@ public class BlockBox {
 	private int yPos;
 	private int xPos;
 	private boolean falsk;
+	private Tetromino mino;
+	private List minoes;
 
 	private boolean[][] blockBox;
 	private Image[][] blockImg;
@@ -33,6 +36,8 @@ public class BlockBox {
 		this.width = width;
 		this.height = height;
 		falsk = false;
+
+		minoes = new ArrayList();
 
 		img = new Image("img/block.png");
 		blockPos = new Position[width][height];
@@ -55,24 +60,38 @@ public class BlockBox {
 
 	public void paint(int x, int y) {
 		if(!isPainted(x,y)){
-			xPos = x;
-			yPos = y;
-			blockBox[xPos][yPos] = true;
+			blockBox[x][y] = true;
 		}	
 	}
 
 	public void update() throws SlickException {
-		makeEmpty(xPos, yPos);
-		if(yPos < 19)
-			yPos++; 
-		else
-			yPos = 0;
-		paint(xPos, yPos);
+		for(int i = 0; i < blockBox.length; i++) {
+			for(int j = 0; j < blockBox[i].length; j++) {
+				if(blockBox[i][j]){	
+					paint(i, j);
+					blockPos[i][j].setY(move(blockPos[i][j].getY()));
+					if(!isPainted(i,j)){
+						blockBox[i][j+1] = true;
+						blockBox[i][j] = false;
+					}
+					break;
+				}
+			}
+		}
+
 
 	}
 
+	public void newBlock(int i){
+		if(i < 10)
+			blockBox[i][0]  = true;
+	}
+
 	public boolean isPainted(int x, int y) {
-		return blockBox[x][y]; 
+		if(y != 19)
+			return blockBox[x][y+1]; 
+		else
+			return true;
 	} 
 
 	public void makeEmpty(int x, int y) {
@@ -88,7 +107,7 @@ public class BlockBox {
 				blockPos[i][j] = new Position(k,l);
 				blockBox[i][j] = falsk; 
 				blockImg[i][j] = new Image("img/block.png");
-				System.out.println(" "+ blockPos[i][j].getX()+"  "+blockBox[i][j]+"  " + blockImg[i][j].getName() +" j: "+ j + " i: "+i);
+				System.out.println(" "+ blockPos[i][j].getX()+"  "+blockBox[i][j]+"  " + blockImg[i][j].getWidth() +" j: "+ j + " i: "+i);
 				l+=20;
 			}
 			k+=20;
@@ -105,5 +124,9 @@ public class BlockBox {
 
 	public boolean getBox(int x, int y){
 		return blockBox[x][y];
+	}
+
+	public float move(float yPos){
+		return yPos+1;
 	}
 }

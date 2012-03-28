@@ -34,6 +34,7 @@ public class GameplayView extends BasicGameState {
 	private static int boxYPos = 100;
 	private static int boxXPos = 150;
 	private int o = 0;
+	private int p = 0;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -89,17 +90,24 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyDown(Input.KEY_LEFT)) {
 			cannon.move(-updateSpeed);
 		}
+		
+		if(input.isKeyPressed(Input.KEY_ENTER)) {
+			blockBox.newBlock(o);
+			o++;
+			if(o == 10)
+				o = 0;
+		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
-		if(o == 1)
+		if(p == 1)
 			blockBox.update();
-		else if(o > 40)
-			o = 0;
+		else if(p > 30)
+			p = 0;
 		
-		o++;
+		p++;
 		for(int i = 0; i < bulletList.size(); i++){
 			((Bullet) bulletList.get(i)).update();
 
