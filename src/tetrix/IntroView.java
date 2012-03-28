@@ -6,6 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class responsible for the intro sequence where the user is expected to "press start".
+ * @author Linus Karlsson
+ *
+ */
 public class IntroView extends BasicGameState{
 
 	private int stateID;

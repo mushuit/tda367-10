@@ -6,6 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class responsible for viewing different settings for the user to control.
+ * @author Linus Karlsson
+ *
+ */
 public class SettingsView extends BasicGameState {
 
 	private int stateID;

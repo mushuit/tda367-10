@@ -6,6 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class responsible for the view before the game starts where the user has to choose a level.
+ * @author Linus Karlsson
+ *
+ */
 public class LevelsView extends BasicGameState{
 
 	private int stateID;

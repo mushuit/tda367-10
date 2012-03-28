@@ -6,6 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class responsible for viewing the high scores.
+ * @author Linus Karlsson
+ *
+ */
 public class HighscoreView extends BasicGameState {
 
 	private int stateID;

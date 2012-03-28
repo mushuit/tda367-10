@@ -2,6 +2,11 @@ package tetrix.core;
 
 import org.newdawn.slick.Image;
 
+/**
+ * Class representing the cannon moving around the pit in which the tetrominoes are falling down.
+ * @author Linus Karlsson
+ *
+ */
 public class Cannon{
 	private float xPos;
 	private float yPos;

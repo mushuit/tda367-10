@@ -7,6 +7,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class responsible for the view before the game starts where the user has to choose difficulty.
+ * @author Linus Karlsson
+ *
+ */
 public class MainMenuView extends BasicGameState{
 
 	private int stateID;

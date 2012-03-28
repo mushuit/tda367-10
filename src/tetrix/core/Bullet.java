@@ -2,8 +2,11 @@ package tetrix.core;
 
 import org.newdawn.slick.Image;
 
-
-
+/**
+ * Class representing a bullet which is fired by the cannon on user input.
+ * @author Magnus Huttu
+ *
+ */
 public class Bullet extends Image {
 	private Position pos;
 	private int position = 0;
