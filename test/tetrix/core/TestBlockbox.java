@@ -10,7 +10,7 @@ public class TestBlockbox implements Game {
 	private BlockBox bBox;
 	
 	public TestBlockbox(){
-		bBox = new BlockBox();
+		//bBox = new BlockBox();
 	}
 
 	@Override

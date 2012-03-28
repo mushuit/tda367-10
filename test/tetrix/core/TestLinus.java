@@ -8,7 +8,7 @@ public class TestLinus {
 	private int[][] blockBox;
 
 	public TestLinus() {
-		new BlockBox(10,20);
+	//	new BlockBox(10,20);
 	}
 	
 	public TestLinus(int width, int height){

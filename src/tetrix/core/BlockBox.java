@@ -1,37 +1,43 @@
 package tetrix.core;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
->>>>>>> 2a24f4f6cc5ac0eca0617e95684bb28e8020077d
-=======
+
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
->>>>>>> Försöker få blocken att fungera
 public class BlockBox {
 
 	private int width;
 	private int height;
 	private int yPos;
 	private int xPos;
+	private boolean falsk;
 
 	private boolean[][] blockBox;
 	private Image[][] blockImg;
 	private Position[][] blockPos;
+	private Image img;
 
-	public BlockBox() {
+	public BlockBox() throws SlickException {
 		new BlockBox(10,20);
 	}
 
-	public BlockBox(int width, int height){
+	public BlockBox(int width, int height) throws SlickException{
 		this.width = width;
 		this.height = height;
+		falsk = false;
 
+		img = new Image("img/block.png");
+		blockPos = new Position[width][height];
+		blockImg = new Image[width][height];
 		blockBox = new boolean[width][height];
+
+		yPos = 0;
+		xPos = 5;
+		init();
 		clearBoard();
-		initPositions();
 	}
 
 	public void clearBoard() {
@@ -51,18 +57,12 @@ public class BlockBox {
 	}
 
 	public void update() throws SlickException {
-		makeEmpty(yPos, xPos);
-		yPos++;
+		makeEmpty(xPos, yPos);
+		if(yPos < 19)
+			yPos++; 
+		else
+			yPos = 0;
 		paint(xPos, yPos);
-
-		for(int i = 0; i < blockBox.length; i++) {
-			for(int j = 0; j < blockBox[i].length; j++) {
-				if(blockBox[i][j])
-					blockImg[i][j].startUse();
-				else
-					blockImg[i][j].destroy();
-			}
-		}
 
 	}
 
@@ -75,16 +75,30 @@ public class BlockBox {
 
 	}
 
-	private void initPositions(){
-		for(int i = 150; i < 350; i+=20) {
-			for(int j = 100; j < 500; j+=20) {
-				blockPos[i][j].setX(i);
-				blockPos[i][j].setY(j);
+	private void init() throws SlickException{
+		int k = 150;
+		int l = 100;
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
+				blockPos[i][j] = new Position(k,l);
+				blockBox[i][j] = falsk; 
+				blockImg[i][j] = new Image("img/block.png");
+				System.out.println(" "+ blockPos[i][j].getX()+"  "+blockBox[i][j]+"  " + blockImg[i][j].getName() +" j: "+ j + " i: "+i);
+				l+=20;
 			}
+			k+=20;
 		}
 	}
 
 	public Position getPos(int x, int y){
 		return blockPos[x][y];
+	}
+
+	public Image getImg(int x ,int y) {
+		return blockImg[x][y];
+	}
+
+	public boolean getBox(int x, int y){
+		return blockBox[x][y];
 	}
 }

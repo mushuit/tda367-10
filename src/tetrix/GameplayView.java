@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
+import tetrix.core.Position;
 import tetrix.core.Util;
 
 public class GameplayView extends BasicGameState {
@@ -32,7 +33,7 @@ public class GameplayView extends BasicGameState {
 	private Image block;
 	private static int boxYPos = 100;
 	private static int boxXPos = 150;
-	
+	private int o = 0;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -48,22 +49,30 @@ public class GameplayView extends BasicGameState {
 		cannon = new Cannon(225,525);
 		bulletList = new ArrayList();
 		bulletImage = new Image("img/Bullet2.jpg");
-		blockBox = new BlockBox();
+		blockBox = new BlockBox(10,20);
 	}
-	
+
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
-		
-		for(int i = boxXPos; i < 350; i+=20) {
-			block.draw(i,boxYPos);
+
+		int l = 150;
+		int k = 100;
+		for(int j = 0; j < 20; j++) {
+			for(int i = 0; i < 10; i++) {
+				if(blockBox.getBox(i,j))
+					block.draw(l, k);
+				l+=20;
+			}
+			k+=20;
+			l = 150;
 		}
 
-		arg2.setColor(Color.black);
+		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
-			arg2.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
+			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
 		}
 	}
 
@@ -85,11 +94,15 @@ public class GameplayView extends BasicGameState {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
-
-
+		if(o == 1)
+			blockBox.update();
+		else if(o > 40)
+			o = 0;
+		
+		o++;
 		for(int i = 0; i < bulletList.size(); i++){
 			((Bullet) bulletList.get(i)).update();
-			
+
 			if(!((Bullet) bulletList.get(i)).getGoing())
 				bulletList.remove(i);
 
