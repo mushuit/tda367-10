@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.Util;
@@ -26,6 +27,12 @@ public class GameplayView extends BasicGameState {
 	private List bulletList;
 	private Bullet bullet; 
 	private Image bulletImage;
+	private BlockBox blockBox;
+	private int blockSize;
+	private Image block;
+	private static int boxYPos = 100;
+	private static int boxXPos = 150;
+	
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -34,18 +41,25 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
+		blockSize = 20;
 		background= new Image("img/game-background.png");
 		cannonImage = new Image("img/cannon2.png");
+		block = new Image("img/block.png");
 		cannon = new Cannon(225,525);
 		bulletList = new ArrayList();
 		bulletImage = new Image("img/Bullet2.jpg");
+		blockBox = new BlockBox();
 	}
-
+	
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
+		
+		for(int i = boxXPos; i < 350; i+=20) {
+			block.draw(i,boxYPos);
+		}
 
 		arg2.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
@@ -67,7 +81,7 @@ public class GameplayView extends BasicGameState {
 			cannon.move(-updateSpeed);
 		}
 
-		if(input.isKeyDown(Input.KEY_SPACE)) {
+		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
@@ -82,8 +96,7 @@ public class GameplayView extends BasicGameState {
 		}
 
 
-
-
+		//blockBox.update();
 		cannonImage.setRotation(cannon.getRotation());
 	}
 
