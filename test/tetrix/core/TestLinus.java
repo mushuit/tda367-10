@@ -1,17 +1,17 @@
 package tetrix.core;
 
-public class BlockBox {
+public class TestLinus {
 	
 	private int width;
 	private int height;
 	
 	private int[][] blockBox;
 
-	public BlockBox() {
+	public TestLinus() {
 		new BlockBox(10,20);
 	}
 	
-	public BlockBox(int width, int height){
+	public TestLinus(int width, int height){
 		this.width = width;
 		this.height = height;
 		
@@ -26,4 +26,5 @@ public class BlockBox {
 			}
 		}
 	}
+
 }
