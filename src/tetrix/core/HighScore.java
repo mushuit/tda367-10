@@ -11,9 +11,11 @@ import java.util.List;
  */
 public class HighScore{
 	private List<Player> scores;
+	private int maxValue;
 
 	public HighScore(){
 		scores = new ArrayList<Player>();	
+		maxValue = 10;
 	}
 	
 	public void addToHighScore(Player player) {
@@ -29,11 +31,23 @@ public class HighScore{
 		Collections.sort(scores, new ScoreComparator());
 	}
 	
+	public List<Player> getList() {
+		return scores;
+	}
+	
 	public void sortByName() {
 		Collections.sort(scores, new NameComparator());
 	}
 	
 	public int numberOfPlayersInList() {
 		return scores.size();
+	}
+	
+	public void clearList() {
+		scores.clear();
+	}
+	
+	public int getMaxListLength() {
+		return maxValue;
 	}
 }
