@@ -2,17 +2,18 @@ package tetrix.core;
 
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
 
 <<<<<<< HEAD
+=======
+>>>>>>> Testing and implementing high score class
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
-=======
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
->>>>>>> Did some changes in the HighScore class and added a description to the other classes.
+
 public class BlockBox {
 
 	private int width;

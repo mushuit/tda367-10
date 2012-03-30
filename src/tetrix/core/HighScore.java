@@ -1,21 +1,5 @@
 package tetrix.core;
 
-<<<<<<< HEAD
-public class HighScore{
-	private int Score;
-	private String PlayerName;
-
-	public int getScore(){
-		return Score;
-	}
-	public String getName(){
-		return PlayerName;
-	}
-	public HighScore(int Score, String PlayerName){
-		this.Score = Score;
-		this.PlayerName = PlayerName;
-
-=======
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,11 +26,14 @@ public class HighScore{
 	}
 	
 	public void sortByScore() {
-		Collections.sort(scores, new ScoreComparator());		
+		Collections.sort(scores, new ScoreComparator());
 	}
 	
 	public void sortByName() {
 		Collections.sort(scores, new NameComparator());
->>>>>>> Did some changes in the HighScore class and added a description to the other classes.
+	}
+	
+	public int numberOfPlayersInList() {
+		return scores.size();
 	}
 }
