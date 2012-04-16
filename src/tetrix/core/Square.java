@@ -1,15 +1,26 @@
 package tetrix.core;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
-public class Square extends Rectangle {
+public class Square {
+	private Position pos;
 	
-	public Square(float x, float y, float width, float height) {
-		super(x, y, width, height);
-		// TODO Auto-generated constructor stub
+	public Square(Position pos) {
+		this.pos = pos;
+		startUp();
 	}
-
-	private int size;
 	
-
+	private void startUp(){
+		
+	}
+	
+	public Position getPos(){
+		return new Position(pos);
+	}
+	
+	public void setPos(Position pos){
+		this.pos = pos;
+	}
+	
 }

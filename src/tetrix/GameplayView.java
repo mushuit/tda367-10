@@ -30,7 +30,7 @@ public class GameplayView extends BasicGameState {
 	private Image bulletImage;
 	private BlockBox blockBox;
 	private int blockSize;
-	private Image block;
+	private Image[] block;
 	private static int boxYPos = 100;
 	private static int boxXPos = 150;
 	private int o = 0;
@@ -46,11 +46,11 @@ public class GameplayView extends BasicGameState {
 		blockSize = 20;
 		background= new Image("img/game-background.png");
 		cannonImage = new Image("img/cannon2.png");
-		block = new Image("img/block.png");
+		block = new Image[200];
 		cannon = new Cannon(225,525);
 		bulletList = new ArrayList();
 		bulletImage = new Image("img/Bullet2.jpg");
-		blockBox = new BlockBox(10,20);
+		blockBox = new BlockBox();
 	}
 
 	@Override
@@ -59,17 +59,26 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
 
-		int l = 150;
-		int k = 100;
-		for(int j = 0; j < 20; j++) {
-			for(int i = 0; i < 10; i++) {
-				if(blockBox.getBox(i,j))
-					block.draw(l, k);
-				l+=20;
-			}
-			k+=20;
-			l = 150;
+		for(int i = 0; i < blockBox.getSize(); i++){
+			block[i] = new Image("img/block.png");
+			block[i].draw(blockBox.getPos(i).getX(), blockBox.getPos(i).getY());
 		}
+		
+//		for(Position p : blockBox.getPos()){
+//			System.out.println(p.toString());
+//			block.draw(p.getX(), p.getY());
+//		}
+//		int l = 150;
+//		int k = 100;
+//		for(int j = 0; j < 20; j++) {
+//			for(int i = 0; i < 10; i++) {
+//				if(blockBox.getBox(i,j))
+//					block.draw(l, k);
+//				l+=20;
+//			}
+//			k+=20;
+//			l = 150;
+//		}
 
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
@@ -92,10 +101,7 @@ public class GameplayView extends BasicGameState {
 		}
 		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			blockBox.newBlock(o);
-			o++;
-			if(o == 10)
-				o = 0;
+			blockBox.newBlock();
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {

@@ -40,4 +40,10 @@ public class Position {
 		this.y = pos.getY();
 	}
 	
+	@Override
+	public String toString(){
+		return "X-position: " + x + "   Y-position: " + y;
+		
+	}
+	
 }
