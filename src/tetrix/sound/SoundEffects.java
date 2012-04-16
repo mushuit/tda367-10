@@ -12,6 +12,9 @@ public class SoundEffects {
 	private void play(){
 		sfx.play();
 		}
+	private void stop(){
+		sfx.stop();
+	}
 	private void loop(){
 		sfx.loop();
 	}

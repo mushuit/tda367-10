@@ -12,6 +12,9 @@ public class GameMusic {
 	private void play(){
 		music.play();
 	}
+	private void stop(){
+		music.stop();
+	}
 	private void loop() {
 		music.loop();
 	}
