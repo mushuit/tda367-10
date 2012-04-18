@@ -2,12 +2,7 @@ package tetrix.core;
 
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-
-<<<<<<< HEAD
-=======
->>>>>>> Testing and implementing high score class
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
