@@ -90,6 +90,7 @@ public class TestScale implements Game{
 		Input input = container.getInput();
 		if(input.isKeyDown(Input.KEY_SPACE)){
 			shoot = true;
+			
 		}
 		if(shoot){
 			yBullet -= 1;
