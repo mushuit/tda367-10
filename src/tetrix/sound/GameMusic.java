@@ -20,16 +20,12 @@ public class GameMusic {
 	public void gameMusicStop(){
 		gameMusic.stop();
 	}
-	
+
 	public void getGameMusicVolume(){
 		gameMusic.getVolume();
 	}
-	
+
 	public void setGameMusicVolume(){
 		gameMusic.setVolume(1);
 	}
-	
-	public static void main(String[]args) throws SlickException{
-		GameMusic gm= new GameMusic();
-		}
-	}
+}

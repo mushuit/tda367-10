@@ -19,7 +19,6 @@ public class SoundEffects {
 		sfxHighScore = new Sound("Sound/test.wav");	// Sound when you break a new High Score
 		sfxDeath = new Sound("Sound/test.wav");		// Sound when it is Game Over
 	}
-<<<<<<< HEAD
 
 	public void shotPlay(){
 		sfxShot.play();
@@ -39,12 +38,6 @@ public class SoundEffects {
 
 	public void blowUpLoop(){
 		sfxBlowUp.loop();
-=======
-	public void play(){
-		System.out.println("Ljud OK");
-		sfx.play();
-		
->>>>>>> 6bec99df6d9e6a1b58755413cae2c8ca377661aa
 	}
 
 	public void blowUpStop(){
@@ -99,8 +92,4 @@ public class SoundEffects {
 		sfxDeath.stop();
 	}
 
-
-	public static void main(String[]args) throws SlickException{
-		SoundEffects se = new SoundEffects();
-	}
 }
