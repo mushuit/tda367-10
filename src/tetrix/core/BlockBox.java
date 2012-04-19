@@ -3,6 +3,13 @@ package tetrix.core;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -15,114 +22,106 @@ public class BlockBox {
 	private int height;
 	private int yPos;
 	private int xPos;
-	private boolean falsk;
-	private Tetromino mino;
-	private List minoes;
+	private List<Tetromino> minoes;
+	private List<Tetromino> fMinoes;
+	private boolean inUse;
+	private int putIntoFminoes;
 
-	private boolean[][] blockBox;
-	private Image[][] blockImg;
-	private Position[][] blockPos;
 	private Image img;
 
 	public BlockBox() throws SlickException {
-		new BlockBox(10,20);
+		this(10,20);
 	}
 
 	public BlockBox(int width, int height) throws SlickException{
 		this.width = width;
 		this.height = height;
-		falsk = false;
-
+		inUse = false;
 		minoes = new ArrayList();
+		fMinoes = new ArrayList();
+		putIntoFminoes = 0;
 
 		img = new Image("img/block.png");
-		blockPos = new Position[width][height];
-		blockImg = new Image[width][height];
-		blockBox = new boolean[width][height];
 
-		yPos = 0;
-		xPos = 5;
-		init();
 		clearBoard();
 	}
 
 	public void clearBoard() {
-		for(int i = 0; i < blockBox.length; i++) {
-			for(int j = 0; j < blockBox[i].length; j++) {
-				blockBox[i][j] = false;
+		minoes.clear();
+		fMinoes.clear();
+	}
+
+	public void update() throws SlickException{
+		for(Tetromino t : minoes){
+			for(Position p : t.getPos()){
+				if(isPainted(p.getX(), p.getY())){
+					t.stop();
+				}
 			}
+				if(!t.stopped())
+			t.update();
+				else
+					putInFminoes(t);
 		}
+		deleteFromMinoes(putIntoFminoes);
 	}
 
-	public void paint(int x, int y) {
-		if(!isPainted(x,y)){
-			blockBox[x][y] = true;
-		}	
+	public void newBlock() throws SlickException{
+		inUse = true;
+		minoes.add(new Tetromino());
 	}
 
-	public void update() throws SlickException {
-		for(int i = 0; i < blockBox.length; i++) {
-			for(int j = 0; j < blockBox[i].length; j++) {
-				if(blockBox[i][j]){	
-					paint(i, j);
-					blockPos[i][j].setY(move(blockPos[i][j].getY()));
-					if(!isPainted(i,j)){
-						blockBox[i][j+1] = true;
-						blockBox[i][j] = false;
+	public boolean isPainted(float f, float g) {
+		if(g == 480){
+			return true;
+		}
+		for(int i = 0; i < fMinoes.size(); i++){
+			for(Position p : fMinoes.get(i).getPos()){
+				if(p.getX() == f){
+					if(p.getY() == g+1){
+						return true;
 					}
-					break;
 				}
 			}
 		}
+		return false;
+	}  
 
+	public Position[][] getPos(){
+		Position[][] pos = new Position[minoes.size()][4];
 
+		int h = 0;
+			for(Tetromino t : minoes){
+				pos[h] = t.getPos();
+				h++;
+		}
+
+		return pos.clone();
 	}
 
-	public void newBlock(int i){
-		if(i < 10)
-			blockBox[i][0]  = true;
-	}
-
-	public boolean isPainted(int x, int y) {
-		if(y != 19)
-			return blockBox[x][y+1]; 
-		else
-			return true;
-	} 
-
-	public void makeEmpty(int x, int y) {
-		blockBox[x][y] = false;
-
-	}
-
-	private void init() throws SlickException{
-		int k = 150;
-		int l = 100;
-		for(int j = 0; j < height; j++) {
-			for(int i = 0; i < width; i++) {
-				blockPos[i][j] = new Position(k,l);
-				blockBox[i][j] = falsk; 
-				blockImg[i][j] = new Image("img/block.png");
-				System.out.println(" "+ blockPos[i][j].getX()+"  "+blockBox[i][j]+"  " + blockImg[i][j].getWidth() +" j: "+ j + " i: "+i);
-				l+=20;
-			}
-			k+=20;
+	public void move(){
+		for(int i = 0; i < minoes.size(); i++){
+			minoes.get(i).update();
 		}
 	}
 
-	public Position getPos(int x, int y){
-		return blockPos[x][y];
+	public int getSize(){
+		return minoes.size()*4;
+	}
+	
+	public boolean inUse(){
+		return inUse;
 	}
 
-	public Image getImg(int x ,int y) {
-		return blockImg[x][y];
+	public void putInFminoes(Tetromino t){
+		fMinoes.add(t);
+		putIntoFminoes = 0;
 	}
 
-	public boolean getBox(int x, int y){
-		return blockBox[x][y];
+	public void deleteFromMinoes(int i){
+		for(int x = 0; x < i; x++){
+			minoes.remove(x);
+		}
 	}
-
-	public float move(float yPos){
-		return yPos+1;
-	}
+	
 }

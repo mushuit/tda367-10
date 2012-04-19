@@ -35,6 +35,7 @@ public class GameplayView extends BasicGameState {
 	private static int boxXPos = 150;
 	private int o = 0;
 	private int p = 0;
+	private List<Image> blocks;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -50,7 +51,8 @@ public class GameplayView extends BasicGameState {
 		cannon = new Cannon(225,525);
 		bulletList = new ArrayList();
 		bulletImage = new Image("img/Bullet2.jpg");
-		blockBox = new BlockBox(10,20);
+		blockBox = new BlockBox();
+		blocks = new ArrayList();
 	}
 
 	@Override
@@ -59,16 +61,15 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
 
-		int l = 150;
-		int k = 100;
-		for(int j = 0; j < 20; j++) {
-			for(int i = 0; i < 10; i++) {
-				if(blockBox.getBox(i,j))
-					block.draw(l, k);
-				l+=20;
+		if(blockBox.inUse()){
+			int i = 0;
+
+			for(Position[] p : blockBox.getPos()){
+				for(Position pe : p){
+					blocks.get(i).draw(pe.getX(), pe.getY());
+					i++;
+				}
 			}
-			k+=20;
-			l = 150;
 		}
 
 		g.setColor(Color.black);
@@ -90,12 +91,11 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyDown(Input.KEY_LEFT)) {
 			cannon.move(-updateSpeed);
 		}
-		
+
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			blockBox.newBlock(o);
-			o++;
-			if(o == 10)
-				o = 0;
+			for(int i = 0; i < 4; i++)
+				blocks.add(block);
+			blockBox.newBlock();
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
@@ -106,7 +106,7 @@ public class GameplayView extends BasicGameState {
 			blockBox.update();
 		else if(p > 30)
 			p = 0;
-		
+
 		p++;
 		for(int i = 0; i < bulletList.size(); i++){
 			((Bullet) bulletList.get(i)).update();

@@ -11,8 +11,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import tetrix.core.TestAnimationBlowUp;
+import tetrix.sound.SoundEffects;
 
 
 
@@ -27,7 +29,7 @@ public class TestScale implements Game{
 	private boolean start;
 	private int scale = 1;
 	
-	public TestScale(){
+	public TestScale() throws SlickException{
 		animation = new Animation();
 		images = new Image[5];
 		xCannon = 317;
@@ -36,6 +38,8 @@ public class TestScale implements Game{
 		xBullet = 334;
 		shoot = false;
 		start = false;
+		Sound sfx = new Sound("Sound/test.wav");
+		sfx.play();
 	}
 	@Override
 	public boolean closeRequested() {
