@@ -10,19 +10,23 @@ import org.newdawn.slick.SlickException;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 public class BlockBox {
 
 	private int width;
 	private int height;
 	private int yPos;
 	private int xPos;
-	private boolean falsk;
 	private List<Tetromino> minoes;
 	private List<Tetromino> fMinoes;
+	private boolean inUse;
+	private int putIntoFminoes;
 
-	private boolean[][] blockBox;
-	private Image[][] blockImg;
-	private Position[][] blockPos;
 	private Image img;
 
 	public BlockBox() throws SlickException {
@@ -32,15 +36,12 @@ public class BlockBox {
 	public BlockBox(int width, int height) throws SlickException{
 		this.width = width;
 		this.height = height;
-		falsk = false;
-
+		inUse = false;
 		minoes = new ArrayList();
 		fMinoes = new ArrayList();
+		putIntoFminoes = 0;
 
 		img = new Image("img/block.png");
-		blockPos = new Position[width][height];
-		blockImg = new Image[width][height];
-		blockBox = new boolean[width][height];
 
 		clearBoard();
 	}
@@ -50,91 +51,89 @@ public class BlockBox {
 		fMinoes.clear();
 	}
 
-	public void update(){
+	public void update() throws SlickException{
 		for(Tetromino t : minoes){
-			t.update();
+			for(Position p : t.getPos()){
+				if(isPainted(p.getX(), p.getY())){
+					t.stop();
+				}
+			}
+			if(!t.stopped())
+				t.update();
 		}
 	}
-	/*public void update() throws SlickException {
-		for(int i = 0; i < blockBox.length; i++) {
-			for(int j = 0; j < blockBox[i].length; j++) {
-				if(blockBox[i][j]){	
-					paint(i, j);
-					blockPos[i][j].setY((blockPos[i][j].getY()));
-					if(!isPainted(i,j)){
-						blockBox[i][j+1] = true;
-						blockBox[i][j] = false;
-					}
-					break;
-				}
-			}
-		}*/
 
+	public void newBlock(int i) throws SlickException{
+		inUse = true;
 
-	//}
+		switch(i){
 
-	public void newBlock() throws SlickException{
-		minoes.add(new Tetromino());
+		case 1:
+			minoes.add(new L((int)(Math.random()*8)));
+			break;
+
+		case 2:
+			minoes.add(new J((int)(Math.random()*8)));
+			break;
+
+		case 3:
+			minoes.add(new O((int)(Math.random()*9)));
+			break;
+
+		case 4:
+			minoes.add(new I((int)(Math.random()*7)));
+			break;
+
+		case 5:
+			minoes.add(new Z((int)(Math.random()*8)));
+			break;
+
+		case 6:
+			minoes.add(new S((int)(Math.random()*8)));
+			break;
+
+		}
 	}
 
-	public boolean isPainted(int x, int y) {
-		for(int i = 0; i < fMinoes.size(); i++){
-			for(Position p : fMinoes.get(i).getPos()){
-				if(p.getX() == x){
-					if(p.getY() == y+1){
-						return true;
-					}
+	public boolean isPainted(float x, float y) {
+		if(y == 480){
+			return true;
+		}
+		for(Tetromino t : minoes){
+			Position[] p = t.getPos();
+			for(int i = 0; i < 4; i++)
+				if(p[3].getY() == y+40 && p[i].getX() == x){
+					System.out.println(p[i].getY()+40);
+					return true;
 				}
-			}
 		}
 		return false;
 	}  
 
-	public Position[] getPos(){
-		Position[] pos = new Position[minoes.size()*4];
-		Tetromino[] t = new Tetromino[minoes.size()];
-		
+	public Position[][] getPos(){
+		Position[][] pos = new Position[minoes.size()][4];
+
 		int h = 0;
-		for(int k = 0; k < minoes.size(); k++){
-			int j = 0;
-			for(Tetromino te : t){
-				te = minoes.get(h);
-				System.out.println(te.toString());
-				pos[h] = new Position(te.getPos(j));
-				h++;
-				j++;
-			}
+		for(Tetromino t : minoes){
+			pos[h] = t.getPos();
+			h++;
 		}
-		
-		return pos;
-	}
-	
-	public Position getPos(int q){
-		Position[] pos = new Position[minoes.size()*4];
-		Tetromino[] t = new Tetromino[minoes.size()];
-		
-		int h = 0;
-		for(int k = 0; k < minoes.size(); k++){
-			int j = 0;
-			for(Tetromino te : t){
-				te = minoes.get(h);
-				pos[h] = new Position(te.getPos(j));
-				h++;
-				j++;
-			}
-		}
-		
-		return pos[q];
+
+		return pos.clone();
 	}
 
 	public void move(){
 		for(int i = 0; i < minoes.size(); i++){
 			minoes.get(i).update();
 		}
-		
 	}
 
 	public int getSize(){
 		return minoes.size()*4;
 	}
+
+	public boolean inUse(){
+		return inUse;
+	}
+
 }

@@ -23,4 +23,15 @@ public class Square {
 		this.pos = pos;
 	}
 	
+	public void setY(float f){
+		pos.setY(f);
+	}
+
+	public float getY(){
+		return pos.getY();
+	}
+
+	public float getX() {
+		return pos.getX();
+	}
 }
