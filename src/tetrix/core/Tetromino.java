@@ -18,13 +18,14 @@ public class Tetromino {
 	private int x;
 	private boolean[] hasSquare;
 	private int fallspeed;
+	private boolean stop;
 
 	public Tetromino() throws SlickException {
-		this((int)((Math.random()*10)+0.49));
+		this((int)((Math.random()*6)+0.49));
 	}
 
 	public Tetromino(int x) throws SlickException {
-		this(x, 1);
+		this(x, 20);
 
 	}	
 
@@ -34,7 +35,6 @@ public class Tetromino {
 	}	
 
 	public Tetromino(int position, int blockForm, int fallspeed) throws SlickException {
-		squarePos = new Position[size];
 		hasSquare = new boolean[8];
 		this.blockForm = blockForm;
 		this.size = 8;
@@ -43,6 +43,7 @@ public class Tetromino {
 		square = new Square[4];
 		init();
 		build();
+		stop = false;
 
 	}
 
@@ -56,9 +57,8 @@ public class Tetromino {
 	}
 
 	public void update(){
-		for(Position p : squarePos){
-			if(p != null)
-				p.setY(falling(p.getY()));
+		for(Square s : square){
+			s.setY(falling(s.getY()));
 		}
 	}
 
@@ -148,21 +148,20 @@ public class Tetromino {
 			break;
 
 		}
-		//TODO fix logic
-		int i = 0;
+		
 		int o = 0;
-		for(boolean b : hasSquare){
-			if(b && i < 4){
+		for(int i = 0; i < 8; i++){
+			if(hasSquare[i] && i < 4){
 				square[o] = new Square(new Position(150+(20*x)+i*20, 100));
 				System.out.println(square[o].getPos().toString());
 				o++;
 			}
-			else if(b){
-				square[o] = new Square(new Position(150+(20*x)+i*20, 120));
+			else if(hasSquare[i]){
+				square[o] = new Square(new Position(70+(20*x)+i*20, 120));
 				System.out.println(square[o].getPos().toString());
 				o++;
 			}
-			i++;
+
 		}
 	}
 
@@ -172,27 +171,22 @@ public class Tetromino {
 		for(Square s : square){
 			System.out.println(s.getPos().toString());
 			pos[i] = s.getPos();
-					i++;
+			i++;
 		}
-			
-		return pos;
+
+		return pos.clone();
 	}
-	
-	
-	public Position getPos(int h){
-		Position[] pos = new Position[4];
-		int i = 0;
-		for(Square s : square){
-			if(hasSquare[i])
-			pos[i] = s.getPos();
-					i++;
-		}
-			
-		return pos[h];
-	}
-	
+
 	public Square[] getSquares(){
 		return square;
+	}
+	
+	public void stop(){
+		stop = true;
+	}
+	
+	public boolean stopped(){
+		return stop;
 	}
 }
 

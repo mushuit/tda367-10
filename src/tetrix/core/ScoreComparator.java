@@ -10,6 +10,11 @@ public class ScoreComparator implements Comparator<Player> {
 			return p1.getScore();
 		else
 			return p2.getScore();
+	/*	Integer score1 = (Integer) p1.getScore();
+		Integer score2 = (Integer) p2.getScore();
+		
+		
+		return score2.compareTo(score1);*/
 	}
 
 }
