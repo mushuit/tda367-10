@@ -3,6 +3,13 @@ package tetrix.sound;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+/**
+ * A class that provides sound effects. 
+ * 
+ * @author Andreas Karlberg
+ *
+ */
+
 public class SoundEffects {
 	private static Sound sfxShot;
 	private static Sound sfxBlowUp;

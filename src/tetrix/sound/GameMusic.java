@@ -3,6 +3,12 @@ package tetrix.sound;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
+/**
+ * A class that provides game music
+ * @author Andreas Karlberg
+ *
+ */
+
 public class GameMusic {
 	private static Music gameMusic;
 
