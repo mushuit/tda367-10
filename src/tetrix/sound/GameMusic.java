@@ -3,25 +3,35 @@ package tetrix.sound;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
+/**
+ * A class that provides game music
+ * @author Andreas Karlberg
+ *
+ */
+
 public class GameMusic {
-	public static Music music;
+	private static Music gameMusic;
 
 	public GameMusic() throws SlickException{
-		music = new Music("Sound/test.wav");
+		gameMusic = new Music("Sound/music.wav");	// The game music
 	}
-	private void play(){
-		music.play();
+	public void gameMusicPlay(){
+		gameMusic.play();
 	}
-	private void stop(){
-		music.stop();
+	
+	public void gameMusicLoop() {
+		gameMusic.loop();
 	}
-	private void loop() {
-		music.loop();
+	
+	public void gameMusicStop(){
+		gameMusic.stop();
 	}
-	public static void main(String[]args){
-		music.play();
-		if (true) {
-			music.loop();
-		}
+
+	public void getGameMusicVolume(){
+		gameMusic.getVolume();
+	}
+
+	public void setGameMusicVolume(){
+		gameMusic.setVolume(1);
 	}
 }

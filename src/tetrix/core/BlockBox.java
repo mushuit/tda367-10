@@ -105,9 +105,12 @@ public class BlockBox {
 				if(p[0].getY() == y+20 && p[i].getX() == x){
 					return true;
 				}
+			if(!t.isMoving())
+				t.update();
+
 		}
 		return false;
-	}  
+	}
 
 	public Position[][] getPos(){
 		Position[][] pos = new Position[minoes.size()][4];
@@ -121,8 +124,20 @@ public class BlockBox {
 		return pos.clone();
 	}
 
+	public void move(){
+		for(int i = 0; i < minoes.size(); i++){
+			minoes.get(i).update();
+		}
+	}
+
 	public boolean inUse(){
 		return inUse;
 	}
+
+	public void putInFminoes(Tetromino t){
+		fMinoes.add(t);
+		putIntoFminoes = 0;
+	}
+
 
 }

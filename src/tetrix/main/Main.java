@@ -46,11 +46,12 @@ public class Main extends StateBasedGame {
         this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
         
         // TODO CHANGE TO INTROVIEW WHEN TESTING IS DONE
-        this.enterState(States.GAMEPLAYVIEW.getID());
+        this.enterState(States.INTROVIEW.getID());
 	}
 
 	@Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+		this.getState(States.INTROVIEW.getID()).init(gameContainer, this);
         this.getState(States.MAINMENUVIEW.getID()).init(gameContainer, this);
         this.getState(States.GAMEPLAYVIEW.getID()).init(gameContainer, this);
     }

@@ -2,7 +2,6 @@ package tetrix.core;
 
 public abstract class Tetromino {
 	private Square[] square;
-	private int blockForm;
 	private int startX;
 	private boolean[] hasSquare;
 	private int fallspeed;
@@ -17,8 +16,9 @@ public abstract class Tetromino {
 	public Tetromino(int startX, int leftIn){
 		this(startX, leftIn, 20);
 	}
-	
-	public Tetromino(int startX, int leftIn, int fallspeed){
+
+	public Tetromino(int startX, int leftIn, int fallspeed) {
+		hasSquare = new boolean[8];
 		this.startX = startX;
 		this.fallspeed = fallspeed;
 		square = new Square[4];
@@ -27,6 +27,26 @@ public abstract class Tetromino {
 		stop = false;
 	}
 	
+
+	public void init(){
+		for(boolean b : hasSquare)
+			b = false;
+	}
+	
+	public void build(){
+		
+	}
+
+	public float falling(float f){
+		return f+fallspeed;
+	}
+
+	public void update(){
+		for(Square s : square){
+			s.setY(falling(s.getY()));
+		}
+	}
+
 	public Position[] getPos(){
 		Position[] pos = new Position[4];
 		int i = 0;
@@ -36,22 +56,6 @@ public abstract class Tetromino {
 		}
 
 		return pos.clone();
-		
-	}
-	
-	public void build(){
-		
-	}
-	
-	public float falling(float f){
-		return f + fallspeed;
-		
-	}
-	
-	public void update(){
-		for(Square s : square){
-			s.setY(falling(s.getY()));
-		}
 		
 	}
 	
