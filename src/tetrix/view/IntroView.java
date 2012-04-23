@@ -10,7 +10,6 @@ import org.newdawn.slick.Image;
 
 import tetrix.Main.States;
 
-
 /**
  * Class responsible for the intro sequence where the user is expected to "press start".
  * @author Linus Karlsson
@@ -21,14 +20,13 @@ public class IntroView extends BasicGameState{
 	private int stateID;
 	
 	private Image background;
-	private Image pressStart;
-	private Image pressStartMouseOver;
-	
-	
-	private int pressStartXpos = 82;
-	private int pressStartYpos = 300;
+	private Image clickHere;
+	private Image clickHereMouseOver;
+
+	private int clickHereXpos;
+	private int clickHereYpos;
 	 
-	private boolean inPressStartArea = false;
+	private boolean inClickHereArea = false;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
@@ -38,19 +36,21 @@ public class IntroView extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background = new Image("img/introbackg.png");
-		pressStart = new Image("img/startGame.png");
-		pressStartMouseOver = new Image("img/startGameMouseOver.png");
+		clickHere = new Image("img/clickHere.png");
+		clickHereMouseOver = new Image("img/clickHereMouseOver.png");
+		clickHereXpos = 200-(clickHere.getWidth()/2);
+		clickHereYpos = 414;
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics arg2)
 			throws SlickException {
-		background.draw(0, 0);
-		pressStart.draw(pressStartXpos, pressStartYpos);
-		if(inPressStartArea){
-			pressStartMouseOver.draw(pressStartXpos, pressStartYpos);
+		background.draw(0,0);
+		clickHere.draw(clickHereXpos, clickHereYpos);
+		if(inClickHereArea){
+			clickHereMouseOver.draw(clickHereXpos, clickHereYpos);
 		} else {
-			pressStart.draw(pressStartXpos, pressStartYpos);
+			clickHere.draw(clickHereXpos, clickHereYpos);
 		}
 	}
 
@@ -63,16 +63,15 @@ public class IntroView extends BasicGameState{
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
 		 
-		if( ( mouseX >= pressStartXpos && mouseX <= pressStartXpos + pressStart.getWidth()) &&
-		    ( mouseY >= pressStartYpos && mouseY <= pressStartYpos + pressStart.getHeight()) ){
-			inPressStartArea = true;
+		if( ( mouseX >= clickHereXpos && mouseX <= clickHereXpos + clickHere.getWidth()) &&
+			( mouseY >= clickHereYpos && mouseY <= clickHereYpos + clickHere.getHeight()) ){
+			inClickHereArea = true;
 		} else{
-			inPressStartArea = false;
+			inClickHereArea = false;
 		}
-		
-		if(inPressStartArea){
+		if(inClickHereArea){
 			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
-				sbg.enterState(States.GAMEPLAYVIEW.getID());
+				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
 		}
 	}
