@@ -60,6 +60,7 @@ public class Main extends StateBasedGame {
 		AppGameContainer app = new AppGameContainer(new Main());
 		// Set FPS to 60
 		app.setTargetFrameRate(Util.FPS);
+		app.setShowFPS(false);
         app.setDisplayMode(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT, false);
         app.start();
 	}	

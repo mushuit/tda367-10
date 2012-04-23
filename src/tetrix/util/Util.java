@@ -13,7 +13,7 @@ public class Util {
 	/**
 	 * The width of the window
 	 */
-	public static final int WINDOW_WIDTH = 500;
+	public static final int WINDOW_WIDTH = 400;
 	
 	/**
 	 * The update interval of the game (Frames Per Second)

@@ -6,8 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 
-import tetrix.HighscoreView;
-import tetrix.core.Util;
+import tetrix.util.Util;
+import tetrix.view.HighscoreView;
 
 
 public class TestLinus extends StateBasedGame {

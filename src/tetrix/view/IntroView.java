@@ -20,19 +20,15 @@ public class IntroView extends BasicGameState{
 
 	private int stateID;
 	
-	private Image background = null;
-	private Image pressStart = null;
-	private Image pressStartMouseOver = null;
-	private Image exitGame = null;
-	private Image exitGameMouseOver = null;
+	private Image background;
+	private Image pressStart;
+	private Image pressStartMouseOver;
+	
 	
 	private int pressStartXpos = 82;
 	private int pressStartYpos = 300;
-	private int exitGameXpos = 193;
-	private int exitGameYpos = 375;
 	 
 	private boolean inPressStartArea = false;
-	private boolean inExitGameArea = false;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
@@ -44,8 +40,6 @@ public class IntroView extends BasicGameState{
 		background = new Image("img/introbackg.png");
 		pressStart = new Image("img/startGame.png");
 		pressStartMouseOver = new Image("img/startGameMouseOver.png");
-		exitGame = new Image("img/exit.png");
-		exitGameMouseOver = new Image("img/exitMouseOver.png");
 	}
 
 	@Override
@@ -53,17 +47,10 @@ public class IntroView extends BasicGameState{
 			throws SlickException {
 		background.draw(0, 0);
 		pressStart.draw(pressStartXpos, pressStartYpos);
-		exitGame.draw(exitGameXpos, exitGameYpos);
 		if(inPressStartArea){
 			pressStartMouseOver.draw(pressStartXpos, pressStartYpos);
 		} else {
 			pressStart.draw(pressStartXpos, pressStartYpos);
-		}
-
-		if(inExitGameArea){
-			exitGameMouseOver.draw(exitGameXpos, exitGameYpos);
-		} else {
-			exitGame.draw(exitGameXpos, exitGameYpos);
 		}
 	}
 
@@ -82,20 +69,10 @@ public class IntroView extends BasicGameState{
 		} else{
 			inPressStartArea = false;
 		}
-		if ( (mouseX >= exitGameXpos && mouseX <= exitGameXpos + exitGame.getWidth()) &&
-			    ( mouseY >= exitGameYpos && mouseY <= exitGameYpos + exitGame.getHeight())){
-					inExitGameArea = true;
-		} else {
-			inExitGameArea = false;
-		}
 		
 		if(inPressStartArea){
 			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.MAINMENUVIEW.getID());
-			}
-		} else if (inExitGameArea){
-			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
-				gc.exit();
 			}
 		}
 	}
