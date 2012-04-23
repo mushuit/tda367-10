@@ -3,18 +3,24 @@ package tetrix.core;
 public class S extends Tetromino{
 
 	public S(int startX){
-		this(startX, 20);
+		this(startX, 150, 20);
 	}
-	public S(int startX, int fallspeed){
-		super(startX, fallspeed);
+
+	public S(int startX, int leftIn){
+		this(startX, leftIn, 20);
 	}
+	
+	public S(int startX, int leftIn, int fallspeed){
+		super(startX, leftIn, fallspeed);
+	}
+
 
 	public void build() {	
 		Square[] s = super.getSquares();
 		for(int i = 0; i < 4; i++){
-			s[i] = new Square(new Position(170+(20*super.getStartX())+i*20, 100));
+			s[i] = new Square(new Position(super.getLeftIn(20)+(20*super.getStartX())+i*20, 100));
 			if(i > 1)
-				s[i] = new Square(new Position(110+(20*super.getStartX())+i*20, 120));
+				s[i] = new Square(new Position(super.getLeftIn(40)+(20*super.getStartX())+i*20, 120));
 		}
 	}
 

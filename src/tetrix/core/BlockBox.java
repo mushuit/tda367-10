@@ -58,7 +58,7 @@ public class BlockBox {
 					t.stop();
 				}
 			}
-			if(!t.stopped())
+			if(!t.isMoving())
 				t.update();
 		}
 	}
@@ -102,8 +102,7 @@ public class BlockBox {
 		for(Tetromino t : minoes){
 			Position[] p = t.getPos();
 			for(int i = 0; i < 4; i++)
-				if(p[3].getY() == y+40 && p[i].getX() == x){
-					System.out.println(p[i].getY()+40);
+				if(p[0].getY() == y+20 && p[i].getX() == x){
 					return true;
 				}
 		}
@@ -120,16 +119,6 @@ public class BlockBox {
 		}
 
 		return pos.clone();
-	}
-
-	public void move(){
-		for(int i = 0; i < minoes.size(); i++){
-			minoes.get(i).update();
-		}
-	}
-
-	public int getSize(){
-		return minoes.size()*4;
 	}
 
 	public boolean inUse(){
