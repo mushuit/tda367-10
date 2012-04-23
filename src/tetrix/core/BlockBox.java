@@ -16,6 +16,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import tetrix.util.Util;
+
 public class BlockBox {
 
 	private int width;
@@ -69,40 +71,40 @@ public class BlockBox {
 		switch(i){
 
 		case 1:
-			minoes.add(new L((int)(Math.random()*8)));
+			minoes.add(new L((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		case 2:
-			minoes.add(new J((int)(Math.random()*8)));
+			minoes.add(new J((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		case 3:
-			minoes.add(new O((int)(Math.random()*9)));
+			minoes.add(new O((int)(Math.random()*9), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		case 4:
-			minoes.add(new I((int)(Math.random()*7)));
+			minoes.add(new I((int)(Math.random()*7), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		case 5:
-			minoes.add(new Z((int)(Math.random()*8)));
+			minoes.add(new Z((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		case 6:
-			minoes.add(new S((int)(Math.random()*8)));
+			minoes.add(new S((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
 			break;
 
 		}
 	}
 
 	public boolean isPainted(float x, float y) {
-		if(y == 480){
+		if(y == 440){
 			return true;
 		}
 		for(Tetromino t : minoes){
 			Position[] p = t.getPos();
 			for(int i = 0; i < 4; i++)
-				if(p[0].getY() == y+20 && p[i].getX() == x){
+				if(p[0].getY() == y+Util.squareSize && p[i].getX() == x){
 					return true;
 				}
 			if(!t.isMoving())
@@ -124,20 +126,8 @@ public class BlockBox {
 		return pos.clone();
 	}
 
-	public void move(){
-		for(int i = 0; i < minoes.size(); i++){
-			minoes.get(i).update();
-		}
-	}
 
 	public boolean inUse(){
 		return inUse;
 	}
-
-	public void putInFminoes(Tetromino t){
-		fMinoes.add(t);
-		putIntoFminoes = 0;
-	}
-
-
 }

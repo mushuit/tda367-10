@@ -1,5 +1,10 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
 public class T extends Tetromino{
 
 	public T(int startX){

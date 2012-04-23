@@ -2,6 +2,8 @@ package tetrix.core;
 
 import org.newdawn.slick.Image;
 
+import tetrix.util.Util;
+
 /**
  * Class representing a bullet which is fired by the cannon on user input.
  * @author Magnus Huttu
@@ -11,7 +13,6 @@ public class Bullet extends Image {
 	private Position pos;
 	private int position = 0;
 	private boolean going = false;
-	private int xMax = 500, yMax = 600;
 	private int value;
 
 	public Bullet(float xPos, float yPos){
@@ -43,23 +44,23 @@ public class Bullet extends Image {
 		System.out.println(pos.getX() + "    " + pos.getY());
 
 
-		if(value >= 400 && value <= 900){
+		if(value >= 300 && value <= 800){
 			position = 1;
 			pos.setY((float) (pos.getY()+22.5));
 		}
 
-		else if(value >= 0 && value <= 400){
+		else if(value >= 0 && value <= 300){
 			position = 2;
 			pos.setX((float) (pos.getX() + 22.5));
 		}
 
-		else if(value >= 900 && value <= 1300){
+		else if(value >= 800 && value <= 1100){
 			position = 3;
 			pos.setX((float) (pos.getX() + 22.5));
 			pos.setY(pos.getY() + 50);
 		}
 
-		else if(value >= 1300 && value <= 1800){
+		else if(value >= 1100 && value <= 1600){
 			position = 4;
 			pos.setY((float) (pos.getY() + 22.5));
 			pos.setX(pos.getX() + 50);
@@ -100,12 +101,12 @@ public class Bullet extends Image {
 			break;
 
 			case 3:  pos.setY(pos.getY()+10); 
-			if(pos.getY() > yMax) 
+			if(pos.getY() > Util.WINDOW_HEIGHT) 
 				going = false;
 			break;
 
 			case 4:  pos.setX(pos.getX()+10);
-			if(pos.getX() > xMax) 
+			if(pos.getX() > Util.WINDOW_WIDTH) 
 				going = false;
 			break;
 

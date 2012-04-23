@@ -16,7 +16,25 @@ public class Util {
 	public static final int WINDOW_WIDTH = 400;
 	
 	/**
+	 * The width of the tetromino box
+	 */
+	public static final int BOX_WIDTH = 220;
+	
+	/**
+	 * The height of the tetromino box
+	 */
+	public static final int BOX_HEIGHT = 440;
+	
+	
+	
+	/**
 	 * The update interval of the game (Frames Per Second)
 	 */
 	public static final int FPS = 100;
+	
+	/**
+	 * The size of a square
+	 */
+	public static final int squareSize = 22;
+	
 }

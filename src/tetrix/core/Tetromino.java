@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import tetrix.util.Util;
+
 public abstract class Tetromino {
 	private Square[] square;
 	private int startX;
@@ -10,13 +12,13 @@ public abstract class Tetromino {
 	
 	
 	public Tetromino(int startX){
-		this(startX, 150, 20);
+		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize);
 	}
 
 	public Tetromino(int startX, int leftIn){
-		this(startX, leftIn, 20);
+		this(startX, leftIn, Util.squareSize);
 	}
-
+	
 	public Tetromino(int startX, int leftIn, int fallspeed) {
 		hasSquare = new boolean[8];
 		this.startX = startX;

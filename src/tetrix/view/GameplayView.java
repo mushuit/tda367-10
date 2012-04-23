@@ -31,9 +31,6 @@ public class GameplayView extends BasicGameState {
 	private BlockBox blockBox;
 	private int blockSize;
 	private Image block;
-	private static int boxYPos = 100;
-	private static int boxXPos = 150;
-	private int o = 0;
 	private int p = 0;
 	private List<Image> blocks;
 
@@ -44,8 +41,8 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		blockSize = 20;
-		background= new Image("img/game-background.png");
+		blockSize = Util.squareSize;
+		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
 		block = new Image("img/block.png");
 		cannon = new Cannon(225,525);

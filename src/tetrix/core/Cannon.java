@@ -40,53 +40,53 @@ public class Cannon{
 	public void move(float direction) {
 		value += direction;
 		if(direction > 0){
-			if (value>=0 && value<=400) {
+			if (value>=0 && value<=300) {
 				rotation = 0;
 				this.xPos += direction;
 			}
-			else if (value>400 && value<=900) {
+			else if (value>300 && value<=800) {
 				rotation = -90;
 				this.yPos -= direction;
 			}
-			else if (value>900 && value<=1300) {
+			else if (value>800 && value<=1100) {
 				rotation = 180;
 				this.xPos -= direction;
 			}
-			else if (value>1300 && value<=1800){ 
+			else if (value>1100 && value<=1600){ 
 				rotation = 90;
 				this.yPos += direction;
 			}
 
-			if(value > 1800) {
+			if(value > 1600) {
 				value = 0;
 			}
 			if(value < 0) {
-				value = 1800;
+				value = 1600;
 			}
 		}
 		else{
-			if (value>=0 && value<400) {
+			if (value>=0 && value<300) {
 				rotation = 0;
 				this.xPos += direction;
 			}
-			else if (value>=400 && value<900) {
+			else if (value>=300 && value<800) {
 				rotation = -90;
 				this.yPos -= direction;
 			}
-			else if (value>=900 && value<1300) {
+			else if (value>=800 && value<1100) {
 				rotation = 180;
 				this.xPos -= direction;
 			}
-			else if (value>=1300 && value<=1800){ 
+			else if (value>=1100 && value<=1600){ 
 				rotation = 90;
 				this.yPos += direction;
 			}
 
-			if(value >= 1800) {
+			if(value >= 1600) {
 				value = 0;
 			}
 			if(value <= 0) {
-				value = 1800;
+				value = 1600;
 			}
 		}
 	}
