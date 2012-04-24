@@ -20,19 +20,12 @@ public abstract class Tetromino {
 	}
 	
 	public Tetromino(int startX, int leftIn, int fallspeed) {
-		hasSquare = new boolean[8];
 		this.startX = startX;
 		this.fallspeed = fallspeed;
 		square = new Square[4];
 		this.leftIn = leftIn;
 		build();
 		isMoving = true;
-	}
-	
-
-	public void init(){
-		for(boolean b : hasSquare)
-			b = false;
 	}
 	
 	public void build(){
@@ -70,6 +63,7 @@ public abstract class Tetromino {
 	}
 	
 	public boolean isMoving(){
+		
 		return isMoving;
 	}
 	
