@@ -15,8 +15,6 @@ public class BlockBox {
 	private List<Tetromino> minoes;
 	private boolean isInUse;
 
-	private Image img;
-
 	public BlockBox() throws SlickException {
 		this(10,20);
 	}
