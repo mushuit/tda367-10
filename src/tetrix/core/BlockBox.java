@@ -15,6 +15,8 @@ public class BlockBox {
 	private List<Tetromino> minoes;
 	private boolean isInUse;
 
+	private Image img;
+
 	public BlockBox() throws SlickException {
 		this(10,20);
 	}
@@ -24,9 +26,9 @@ public class BlockBox {
 		this.nbrOfRows = nbrOfRows;
 		isInUse = false;
 		minoes = new ArrayList<Tetromino>();
-
 		clearBoard();
 	}
+
 
 	public void clearBoard() {
 		minoes.clear();
