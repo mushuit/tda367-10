@@ -1,8 +1,5 @@
 package tetrix.core;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Rectangle;
-
 public class Square {
 	private Position pos;
 	

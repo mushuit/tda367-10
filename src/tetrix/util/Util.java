@@ -25,8 +25,11 @@ public class Util {
 	 */
 	public static final int BOX_HEIGHT = 440;
 	
-	
-	
+	/**
+	 * Size of the cannon
+	 */
+	public static final int CANNON_SIZE = 50;
+
 	/**
 	 * The update interval of the game (Frames Per Second)
 	 */
@@ -35,6 +38,6 @@ public class Util {
 	/**
 	 * The size of a square
 	 */
-	public static final int squareSize = 22;
+	public static final int SQUARE_SIZE = 22;
 	
 }

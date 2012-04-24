@@ -25,11 +25,9 @@ public class GameplayView extends BasicGameState {
 	private Image background;
 	private Image cannonImage;
 	private Cannon cannon;
-	private List bulletList;
+	private List<Bullet> bulletList;
 	private Bullet bullet; 
-	private Image bulletImage;
 	private BlockBox blockBox;
-	private int blockSize;
 	private Image block;
 	private int p = 0;
 	private List<Image> blocks;
@@ -41,15 +39,13 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		blockSize = Util.squareSize;
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
 		block = new Image("img/block.png");
-		cannon = new Cannon(225,525);
-		bulletList = new ArrayList();
-		bulletImage = new Image("img/Bullet2.jpg");
+		cannon = new Cannon();
+		bulletList = new ArrayList<Bullet>();
 		blockBox = new BlockBox();
-		blocks = new ArrayList();
+		blocks = new ArrayList<Image>();
 	}
 
 	@Override
@@ -58,7 +54,7 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
 
-		if(blockBox.inUse()){
+		if(blockBox.isInUse()){
 			int i = 0;
 
 			for(Position[] p : blockBox.getPos()){
@@ -99,7 +95,7 @@ public class GameplayView extends BasicGameState {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
-		if(p == 1)
+		if(blockBox.isInUse())
 			blockBox.update();
 		else if(p > 30)
 			p = 0;

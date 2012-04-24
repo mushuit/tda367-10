@@ -4,53 +4,32 @@ package tetrix.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import tetrix.util.Util;
 
 public class BlockBox {
 
-	private int width;
-	private int height;
-	private int yPos;
-	private int xPos;
+	private int nbrOfColumns;
+	private int nbrOfRows;
 	private List<Tetromino> minoes;
-	private List<Tetromino> fMinoes;
-	private boolean inUse;
-	private int putIntoFminoes;
-
-	private Image img;
+	private boolean isInUse;
 
 	public BlockBox() throws SlickException {
 		this(10,20);
 	}
 
-	public BlockBox(int width, int height) throws SlickException{
-		this.width = width;
-		this.height = height;
-		inUse = false;
-		minoes = new ArrayList();
-		fMinoes = new ArrayList();
-		putIntoFminoes = 0;
-
-		img = new Image("img/block.png");
+	public BlockBox(int nbrOfColumns, int nbrOfRows) throws SlickException{
+		this.nbrOfColumns = nbrOfColumns;
+		this.nbrOfRows = nbrOfRows;
+		isInUse = false;
+		minoes = new ArrayList<Tetromino>();
 
 		clearBoard();
 	}
 
 	public void clearBoard() {
 		minoes.clear();
-		fMinoes.clear();
 	}
 
 	public void update() throws SlickException{
@@ -66,45 +45,45 @@ public class BlockBox {
 	}
 
 	public void newBlock(int i) throws SlickException{
-		inUse = true;
+		isInUse = true;
 
 		switch(i){
 
 		case 1:
-			minoes.add(new L((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new L((int)(Math.random()*8)));
 			break;
 
 		case 2:
-			minoes.add(new J((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new J((int)(Math.random()*8)));
 			break;
 
 		case 3:
-			minoes.add(new O((int)(Math.random()*9), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new O((int)(Math.random()*9)));
 			break;
 
 		case 4:
-			minoes.add(new I((int)(Math.random()*7), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new I((int)(Math.random()*7)));
 			break;
 
 		case 5:
-			minoes.add(new Z((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new Z((int)(Math.random()*8)));
 			break;
 
 		case 6:
-			minoes.add(new S((int)(Math.random()*8), (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize));
+			minoes.add(new S((int)(Math.random()*8)));
 			break;
 
 		}
 	}
 
 	public boolean isPainted(float x, float y) {
-		if(y == 440){
+		if(y == 520){
 			return true;
 		}
 		for(Tetromino t : minoes){
 			Position[] p = t.getPos();
 			for(int i = 0; i < 4; i++)
-				if(p[0].getY() == y+Util.squareSize && p[i].getX() == x){
+				if(p[0].getY() == y+Util.SQUARE_SIZE && p[i].getX() == x){
 					return true;
 				}
 			if(!t.isMoving())
@@ -126,8 +105,21 @@ public class BlockBox {
 		return pos.clone();
 	}
 
+	public void move(){
+		for(int i = 0; i < minoes.size(); i++){
+			minoes.get(i).update();
+		}
+	}
 
-	public boolean inUse(){
-		return inUse;
+	public boolean isInUse(){
+		return isInUse;
+	}
+	
+	public int getColumns() {
+		return nbrOfColumns;
+	}
+	
+	public int getRows() {
+		return nbrOfRows;
 	}
 }

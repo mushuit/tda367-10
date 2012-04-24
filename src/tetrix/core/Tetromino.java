@@ -7,16 +7,16 @@ public abstract class Tetromino {
 	private int startX;
 	private boolean[] hasSquare;
 	private int fallspeed;
-	private boolean stop;
+	private boolean isMoving;
 	private int leftIn;
 	
 	
 	public Tetromino(int startX){
-		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.squareSize);
+		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.SQUARE_SIZE);
 	}
 
 	public Tetromino(int startX, int leftIn){
-		this(startX, leftIn, Util.squareSize);
+		this(startX, leftIn, Util.SQUARE_SIZE);
 	}
 	
 	public Tetromino(int startX, int leftIn, int fallspeed) {
@@ -26,7 +26,7 @@ public abstract class Tetromino {
 		square = new Square[4];
 		this.leftIn = leftIn;
 		build();
-		stop = false;
+		isMoving = true;
 	}
 	
 
@@ -66,19 +66,19 @@ public abstract class Tetromino {
 	}
 	
 	public void stop(){
-		stop = true;
+		isMoving = false;
 	}
 	
 	public boolean isMoving(){
-		return stop;
+		return isMoving;
 	}
 	
 	public int getStartX(){
 		return startX;
 	}
 	
-	public int getLeftIn(int addera){
-		return (leftIn+addera);
+	public int getLeftIn(int xValue){
+		return (leftIn + xValue);
 	}
 	
 	public boolean isPainted(float y, float x){
