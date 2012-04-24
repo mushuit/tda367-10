@@ -37,7 +37,7 @@ public class GameplayView extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1)
+	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
@@ -49,7 +49,7 @@ public class GameplayView extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
