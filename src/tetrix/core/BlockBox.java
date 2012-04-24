@@ -15,8 +15,6 @@ public class BlockBox {
 	private List<Tetromino> minoes;
 	private boolean isInUse;
 
-	private Image img;
-
 	public BlockBox() throws SlickException {
 		this(10,20);
 	}
@@ -38,10 +36,11 @@ public class BlockBox {
 		for(Tetromino t : minoes){
 			for(Position p : t.getPos()){
 				if(isPainted(p.getX(), p.getY())){
+					System.out.println("stop");
 					t.stop();
 				}
 			}
-			if(!t.isMoving())
+			if(t.isMoving())
 				t.update();
 		}
 	}
@@ -79,7 +78,8 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(float x, float y) {
-		if(y == 520){
+		
+		if(y == 476){
 			return true;
 		}
 		for(Tetromino t : minoes){
@@ -90,7 +90,6 @@ public class BlockBox {
 				}
 			if(!t.isMoving())
 				t.update();
-
 		}
 		return false;
 	}
@@ -103,7 +102,7 @@ public class BlockBox {
 			pos[h] = t.getPos();
 			h++;
 		}
-
+		
 		return pos.clone();
 	}
 
