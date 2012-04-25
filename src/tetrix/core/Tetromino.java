@@ -42,23 +42,23 @@ public abstract class Tetromino {
 	}
 
 	public void update(){
-		for(Square s : squares){
-			if(s.destroyed()){
-			
-			}
-		}
 		for(Square s : square){
 			s.setY(falling(s.getY()));
 		}
 	}
 
 	public Position[] getPos(){
-		Position[] pos = new Position[4];
+		int o = 0;
+		for(Square s : square){
+			if(!s.destroyed())
+			o++;
+		}
+		Position[] pos = new Position[o];
 		int i = 0;
 		for(Square s : square){
-			
+			if(!s.destroyed()){
 			pos[i] = s.getPos();
-			i++;
+			i++;}
 		}
 
 		return pos.clone();

@@ -21,7 +21,7 @@ public class Bullet extends Image {
 		pos.setX(xPos);
 		pos.setY(yPos);
 		shoot();
-		stop();
+		stop = false;
 	}
 
 	public Bullet(Position pos, int value){
