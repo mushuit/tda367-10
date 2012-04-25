@@ -92,7 +92,7 @@ public class SettingsView extends BasicGameState {
 		fxSliderYpos = effectsYpos;
 		
 		fxSliderPin = new Image("img/slidePin.png");
-		fxSliderPinHover = new Image ("img/slidePinMouseOver.pin");
+		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
 		fxSliderPinXpos = 250;
 		fxSliderPinYpos = effectsYpos;
 		
@@ -101,7 +101,7 @@ public class SettingsView extends BasicGameState {
 		musicSliderYpos = musicYpos;
 		
 		musicSliderPin = new Image("img/slidePin.png");
-		fxSliderPinHover = new Image ("img/slidePinMouseOver.pin");
+		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
 		musicSliderPinXpos = 250;
 		musicSliderPinYpos = musicYpos;
 		
