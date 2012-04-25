@@ -22,8 +22,9 @@ public class CollisionHandler {
 			for(Square s : t.getSquares()){
 				if(bullet.getPos().getY() >= s.getY() && bullet.getPos().getY() <= s.getY()+22){
 					if(bullet.getPos().getX() >= s.getX() && bullet.getPos().getX() <= s.getX()+22){
-						s.destroy();
-						return true;
+						if(!s.destroyed()){
+							s.destroy();
+							return true;}
 					}
 				}
 			}
