@@ -88,7 +88,7 @@ public class BlockBox {
 		}
 		for(Tetromino t : minoes){
 			Position[] p = t.getPos();
-			for(int i = 0; i < 4; i++)
+			for(int i = 0; i < p.length; i++)
 				if(p[0].getY() == y+Util.SQUARE_SIZE && p[i].getX() == x){
 					return true;
 				}
@@ -125,4 +125,5 @@ public class BlockBox {
 	public int getRows() {
 		return nbrOfRows;
 	}
+	
 }

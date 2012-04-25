@@ -137,13 +137,6 @@ public class GameplayView extends BasicGameState {
 				System.out.println("hit");
 				size--;
 			}
-
-		}
-		for(int i = 0; i < size; i++){
-			if(!((Bullet) bulletList.get(i)).getGoing())
-				bulletList.remove(i);
-			
-			i++;
 		}
 
 		cannonImage.setRotation(cannon.getRotation());
