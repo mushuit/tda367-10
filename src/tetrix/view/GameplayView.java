@@ -94,10 +94,13 @@ public class GameplayView extends BasicGameState {
 
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
-
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
+<<<<<<< HEAD
 
 		}	
+=======
+		}
+>>>>>>> Lite framtida logik implementerat
 	}
 
 	@Override
@@ -120,10 +123,24 @@ public class GameplayView extends BasicGameState {
 			cannon.move(-updateSpeed);
 		}
 
+		if(input.isKeyDown(Input.KEY_D)) {
+			cannon.move(updateSpeed);
+		}
+
+		if(input.isKeyDown(Input.KEY_A)) {
+			cannon.move(-updateSpeed);
+		}
+
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			for(int i = 0; i < 4; i++)
 				blocks.add(block);
-			blockBox.newBlock(3);
+			blockBox.newBlock((int)(Math.random()*7+0.5));
+		}
+
+		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			for(int i = 0; i < 4; i++)
+				blocks.add(block);
+			blockBox.newBlock((int)(Math.random()*7+0.5));
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
@@ -135,9 +152,10 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_P)) {
 			blockBox.clearBoard();
 		}
-
+		
 		if(blockBox.isInUse())
 			blockBox.update();
+
 		else if(p > 30)
 			p = 0;
 
@@ -148,7 +166,6 @@ public class GameplayView extends BasicGameState {
 				bulletList.get(i).update();
 			} else{
 				bulletList.remove(i);
-				System.out.println("hit");
 				size--;
 			}
 		}
