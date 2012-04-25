@@ -48,15 +48,15 @@ public class MainMenuView extends BasicGameState{
 		startGame = new Image("img/startGame.png");
 		startGameMouseOver = new Image("img/startGameMouseOver.png");
 		startGameXpos = 200-(startGame.getWidth()/2);
-		startGameYpos = 225;
-		settings = new Image("img/startGame.png");
-		settingsMouseOver = new Image("img/startGameMouseOver.png");
-		settingsXpos = 200-(startGame.getWidth()/2);
-		settingsYpos = 300;
+		startGameYpos = 300;
+		settings = new Image("img/settings.png");
+		settingsMouseOver = new Image("img/settingsMouseOver.png");
+		settingsXpos = 200-(settings.getWidth()/2);
+		settingsYpos = 350;
 		exitGame = new Image("img/exit.png");
 		exitGameMouseOver = new Image("img/exitMouseOver.png");
 		exitGameXpos = 200-(exitGame.getWidth()/2);
-		exitGameYpos = 375;
+		exitGameYpos = 425;
 		
 	}
 
