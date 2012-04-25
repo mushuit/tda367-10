@@ -127,6 +127,9 @@ public class MainMenuView extends BasicGameState{
 				gc.exit();
 			}
 		}
+		if (input.isKeyPressed(Input.KEY_ENTER) ){
+			sbg.enterState(States.GAMEPLAYVIEW.getID());
+		}
 	}
 
 	@Override

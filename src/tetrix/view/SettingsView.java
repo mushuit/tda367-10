@@ -1,5 +1,9 @@
 package tetrix.view;
-
+/*todo: boschbild, 
+ * 		enter startar spel
+ * 		sliders 
+*
+*/
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -21,11 +25,38 @@ public class SettingsView extends BasicGameState {
 	private Image background;
 	private Image back;
 	private Image backMouseOver;
+	private Image sound;
+	private Image effects;
+	private Image music;
+	
+	private Image fxSlider;
+	private Image fxSliderPin;
+	private Image musicSlider;
+	private Image musicSliderPin;
 
 	private int backXpos;
 	private int backYpos;
-	 
+	private int soundXpos;
+	private int soundYpos;
+	private int effectsXpos;
+	private int effectsYpos;
+	private int musicXpos;
+	private int musicYpos;
+	
+	private int fxSliderXpos;
+	private int fxSliderYpos;
+	private int fxSliderPinXpos;
+	private int fxSliderPinYpos;
+	
+	private int musicSliderXpos;
+	private int musicSliderYpos;
+	private int musicSliderPinXpos;
+	private int musicSliderPinYpos;
+	
+	
 	private boolean inBackArea = false;
+	private boolean inFxPinArea = false;
+	private boolean inMusicPinArea = false;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -39,7 +70,35 @@ public class SettingsView extends BasicGameState {
 		back = new Image("img/backButton.png");
 		backMouseOver = new Image("img/backButtonMouseOver.png");
 		backXpos = 200-(back.getWidth()/2);
-		backYpos = 414;
+		backYpos = 475;												//längst ner
+		
+		sound = new Image("img/sound.png");
+		soundXpos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
+		soundYpos = 300;											//uppe
+		
+		effects = new Image("img/effects.png");
+		effectsXpos = 240-(effects.getWidth());
+		effectsYpos = 350;											//Mitten
+		
+		music = new Image("img/music.png");
+		musicXpos = 240-(music.getWidth());		//var högersidan ska sitta
+		musicYpos = 390;											//nere
+		
+		fxSlider = new Image("img/slider.png");
+		fxSliderXpos = 250;
+		fxSliderYpos = effectsYpos;
+		
+		fxSliderPin = new Image("img/slidePin.png");
+		fxSliderPinXpos = 250;
+		fxSliderPinYpos = effectsYpos;
+		
+		musicSlider = new Image("img/slider.png");
+		musicSliderXpos = 250;
+		musicSliderYpos = musicYpos;
+		
+		musicSliderPin = new Image("img/slidePin.png");
+		musicSliderPinXpos = 250;
+		musicSliderPinYpos = musicYpos;
 	}
 
 	@Override
@@ -47,12 +106,22 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background.draw(0,0);
+		sound.draw(soundXpos, soundYpos);
+		effects.draw(effectsXpos, effectsYpos);
+		music.draw(musicXpos, musicYpos);
+		
+		fxSlider.draw(fxSliderXpos, fxSliderYpos);
+		fxSliderPin.draw(fxSliderPinXpos, fxSliderPinYpos);
+		musicSlider.draw(musicSliderXpos, musicSliderYpos);
+		musicSliderPin.draw(musicSliderPinXpos, musicSliderPinYpos);
+		
 		back.draw(backXpos, backYpos);
 		if(inBackArea){
 			backMouseOver.draw(backXpos, backYpos);
 		} else {
 			back.draw(backXpos, backYpos);
 		}
+		
 	}
 
 	@Override
@@ -63,9 +132,9 @@ public class SettingsView extends BasicGameState {
 		 
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-		 
-		if( ( mouseX >= backXpos && mouseX <= backXpos + back.getWidth()) &&
-			( mouseY >= backYpos && mouseY <= backYpos + back.getHeight()) ){
+		
+		if( ( mouseX >= backXpos && mouseX <= backXpos+back.getWidth()) &&
+			( mouseY >= backYpos && mouseY <= backYpos+back.getHeight()) ){
 			inBackArea = true;
 		} else{
 			inBackArea = false;
