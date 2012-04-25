@@ -39,7 +39,7 @@ public class GameplayView extends BasicGameState {
 	private int p = 0;
 	private List<Image> blocks;
 	private CollisionHandler ch;
-	
+
 	private UnicodeFont scoreDisplay;
 	private Player player;
 	private HighScore highScore;
@@ -60,17 +60,17 @@ public class GameplayView extends BasicGameState {
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
-		
+
 		Font font = new Font("Verdana", Font.PLAIN,55);
-		
+
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
 		scoreDisplay.addAsciiGlyphs();
 		scoreDisplay.addGlyphs(400, 600);
 		scoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
 		try {
-		    scoreDisplay.loadGlyphs();
+			scoreDisplay.loadGlyphs();
 		} catch (SlickException e1) {
-		    e1.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 
@@ -80,7 +80,7 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
 		scoreDisplay.drawString(5, 0, player.getScore() + "");
-		
+
 		if(blockBox.isInUse()){
 			int i = 0;
 
@@ -95,12 +95,9 @@ public class GameplayView extends BasicGameState {
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
-<<<<<<< HEAD
 
-		}	
-=======
 		}
->>>>>>> Lite framtida logik implementerat
+
 	}
 
 	@Override
@@ -114,7 +111,7 @@ public class GameplayView extends BasicGameState {
 			highScore.addToHighScore(player);
 			//sbg.enterState(States.HIGHSCOREVIEW.getID());
 		}
-		
+
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
@@ -152,7 +149,7 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_P)) {
 			blockBox.clearBoard();
 		}
-		
+
 		if(blockBox.isInUse())
 			blockBox.update();
 
