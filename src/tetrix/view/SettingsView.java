@@ -1,6 +1,6 @@
 package tetrix.view;
 /*todo: boschbild, 
- * 		enter startar spel
+ * 		
  * 		sliders 
 *
 */
@@ -33,6 +33,9 @@ public class SettingsView extends BasicGameState {
 	private Image fxSliderPin;
 	private Image musicSlider;
 	private Image musicSliderPin;
+	
+	private Image fxSliderPinHover;
+	private Image musicSliderPinHover;
 
 	private int backXpos;
 	private int backYpos;
@@ -89,6 +92,7 @@ public class SettingsView extends BasicGameState {
 		fxSliderYpos = effectsYpos;
 		
 		fxSliderPin = new Image("img/slidePin.png");
+		fxSliderPinHover = new Image ("img/slidePinMouseOver.pin");
 		fxSliderPinXpos = 250;
 		fxSliderPinYpos = effectsYpos;
 		
@@ -97,8 +101,11 @@ public class SettingsView extends BasicGameState {
 		musicSliderYpos = musicYpos;
 		
 		musicSliderPin = new Image("img/slidePin.png");
+		fxSliderPinHover = new Image ("img/slidePinMouseOver.pin");
 		musicSliderPinXpos = 250;
 		musicSliderPinYpos = musicYpos;
+		
+		
 	}
 
 	@Override
@@ -121,7 +128,16 @@ public class SettingsView extends BasicGameState {
 		} else {
 			back.draw(backXpos, backYpos);
 		}
-		
+		if(inFxPinArea){
+			fxSliderPinHover.draw(fxSliderXpos, fxSliderYpos);
+		} else {
+			fxSlider.draw(fxSliderXpos, fxSliderYpos);
+		}
+		if(inMusicPinArea){
+			musicSliderPinHover.draw(musicSliderPinXpos, musicSliderPinYpos);
+		} else {
+			musicSliderPin.draw(musicSliderPinXpos, musicSliderPinYpos);
+		}
 	}
 
 	@Override
@@ -139,7 +155,28 @@ public class SettingsView extends BasicGameState {
 		} else{
 			inBackArea = false;
 		}
+		if ( (mouseX >= fxSliderPinXpos && mouseX <= fxSliderPinXpos + fxSliderPin.getWidth()) &&
+			    ( mouseY >= fxSliderPinYpos && mouseY <= fxSliderPinYpos + fxSliderPin.getHeight())){
+			inFxPinArea = true;
+		} else {
+			inFxPinArea = false;
+		}
+		if ( (mouseX >= musicSliderPinXpos && mouseX <= musicSliderPinXpos + musicSliderPin.getWidth()) &&
+			    ( mouseY >= musicSliderPinYpos && mouseY <= musicSliderPinYpos + musicSliderPin.getHeight())){
+			inMusicPinArea = true;
+		} else {
+			inMusicPinArea = false;
+		}
+		
 		if(inBackArea){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
+				sbg.enterState(States.MAINMENUVIEW.getID());
+			}
+		} else if(inFxPinArea){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
+				sbg.enterState(States.MAINMENUVIEW.getID());
+			}
+		} else if(inMusicPinArea){
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
