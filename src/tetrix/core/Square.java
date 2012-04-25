@@ -2,14 +2,10 @@ package tetrix.core;
 
 public class Square {
 	private Position pos;
+	private boolean destroyed;
 	
 	public Square(Position pos) {
 		this.pos = pos;
-		startUp();
-	}
-	
-	private void startUp(){
-		
 	}
 	
 	public Position getPos(){
@@ -30,5 +26,13 @@ public class Square {
 
 	public float getX() {
 		return pos.getX();
+	}
+	
+	public boolean destroyed(){
+		return destroyed;
+	}
+	
+	public void destroy(){
+		destroyed = true;
 	}
 }

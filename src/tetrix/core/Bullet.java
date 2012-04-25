@@ -14,12 +14,22 @@ public class Bullet extends Image {
 	private int position = 0;
 	private boolean going = false;
 	private int value;
+	private boolean stop;
 
 	public Bullet(float xPos, float yPos){
 		pos = new Position(0,0);
 		pos.setX(xPos);
 		pos.setY(yPos);
 		shoot();
+		stop();
+	}
+
+	public Bullet(Position pos, int value){
+		this.value = value;
+		this.pos = new Position(pos.getX() ,pos.getY());
+		shoot();
+		setRotation(-90);
+		stop = false;
 	}
 
 	public Bullet(Position pos, Image img, float rotation, int value){
@@ -29,14 +39,9 @@ public class Bullet extends Image {
 		this.pos = new Position(pos.getX() ,pos.getY());
 		shoot();
 		setRotation(-90);
+		stop = false;
 	}
 
-	public Bullet(Position pos, int value){
-		this.value = value;
-		this.pos = new Position(pos.getX() ,pos.getY());
-		shoot();
-		setRotation(-90);
-	}
 
 
 	private void shoot(){
@@ -68,7 +73,10 @@ public class Bullet extends Image {
 
 		going = true;
 	}
-
+	
+	public void stop(){
+		stop = true;
+	}
 	public Position getPos(){
 		return pos;
 	}
@@ -83,6 +91,10 @@ public class Bullet extends Image {
 
 	public boolean getGoing(){
 		return going;
+	}
+	
+	public boolean isMoving(){
+		return !stop;
 	}
 
 	public void update(){

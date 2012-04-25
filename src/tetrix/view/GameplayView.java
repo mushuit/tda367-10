@@ -70,9 +70,9 @@ public class GameplayView extends BasicGameState {
 
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
-			
+
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
-			
+
 		}
 	}
 
@@ -100,19 +100,33 @@ public class GameplayView extends BasicGameState {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
+
+		if(input.isKeyPressed(Input.KEY_P)) {
+			blockBox.clearBoard();
+		}
+
 		if(blockBox.isInUse())
 			blockBox.update();
 		else if(p > 30)
 			p = 0;
 
 		p++;
-		for(int i = 0; i < bulletList.size(); i++){
-			((Bullet) bulletList.get(i)).update();
-			ch.checkCollision(bulletList.get(i), blockBox.getTetroList());
+		int size = bulletList.size();
+		for(int i = 0; i < size; i++){
+			if(!ch.checkCollision(bulletList.get(i))){
+				bulletList.get(i).update();
+			} else{
+				bulletList.remove(i);
+				System.out.println("hit");
+				size--;
+			}
 
+		}
+		for(int i = 0; i < size; i++){
 			if(!((Bullet) bulletList.get(i)).getGoing())
 				bulletList.remove(i);
-
+			
+			i++;
 		}
 
 		cannonImage.setRotation(cannon.getRotation());
