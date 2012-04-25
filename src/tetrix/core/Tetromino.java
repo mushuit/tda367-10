@@ -5,18 +5,17 @@ import tetrix.util.Util;
 public abstract class Tetromino {
 	private Square[] square;
 	private int startX;
-	private boolean[] hasSquare;
 	private int fallspeed;
 	private boolean isMoving;
 	private int leftIn;
 	
 	
 	public Tetromino(int startX){
-		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, Util.SQUARE_SIZE);
+		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2);
 	}
 
 	public Tetromino(int startX, int leftIn){
-		this(startX, leftIn, Util.SQUARE_SIZE);
+		this(startX, leftIn, 5);
 	}
 	
 	public Tetromino(int startX, int leftIn, int fallspeed) {
@@ -63,7 +62,6 @@ public abstract class Tetromino {
 	}
 	
 	public boolean isMoving(){
-		
 		return isMoving;
 	}
 	
@@ -78,6 +76,4 @@ public abstract class Tetromino {
 	public boolean isPainted(float y, float x){
 		return false;
 	}
-	
-	
 }

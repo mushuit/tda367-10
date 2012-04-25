@@ -36,7 +36,6 @@ public class BlockBox {
 		for(Tetromino t : minoes){
 			for(Position p : t.getPos()){
 				if(isPainted(p.getX(), p.getY())){
-					System.out.println("stop");
 					t.stop();
 				}
 			}
