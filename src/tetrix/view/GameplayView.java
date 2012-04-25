@@ -39,7 +39,7 @@ public class GameplayView extends BasicGameState {
 	private int p = 0;
 	private List<Image> blocks;
 	private CollisionHandler ch;
-	
+
 	private UnicodeFont scoreDisplay;
 	private Player player;
 	private HighScore highScore;
@@ -60,17 +60,17 @@ public class GameplayView extends BasicGameState {
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
-		
+
 		Font font = new Font("Verdana", Font.PLAIN,55);
-		
+
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
 		scoreDisplay.addAsciiGlyphs();
 		scoreDisplay.addGlyphs(400, 600);
 		scoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
 		try {
-		    scoreDisplay.loadGlyphs();
+			scoreDisplay.loadGlyphs();
 		} catch (SlickException e1) {
-		    e1.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 
@@ -80,7 +80,7 @@ public class GameplayView extends BasicGameState {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
 		scoreDisplay.drawString(5, 0, player.getScore() + "");
-		
+
 		if(blockBox.isInUse()){
 			int i = 0;
 
@@ -94,10 +94,10 @@ public class GameplayView extends BasicGameState {
 
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
-
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
 
-		}	
+		}
+
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class GameplayView extends BasicGameState {
 			highScore.addToHighScore(player);
 			//sbg.enterState(States.HIGHSCOREVIEW.getID());
 		}
-		
+
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
@@ -120,10 +120,24 @@ public class GameplayView extends BasicGameState {
 			cannon.move(-updateSpeed);
 		}
 
+		if(input.isKeyDown(Input.KEY_D)) {
+			cannon.move(updateSpeed);
+		}
+
+		if(input.isKeyDown(Input.KEY_A)) {
+			cannon.move(-updateSpeed);
+		}
+
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			for(int i = 0; i < 4; i++)
 				blocks.add(block);
-			blockBox.newBlock(3);
+			blockBox.newBlock((int)(Math.random()*7+0.5));
+		}
+
+		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			for(int i = 0; i < 4; i++)
+				blocks.add(block);
+			blockBox.newBlock((int)(Math.random()*7+0.5));
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
@@ -138,6 +152,7 @@ public class GameplayView extends BasicGameState {
 
 		if(blockBox.isInUse())
 			blockBox.update();
+
 		else if(p > 30)
 			p = 0;
 
@@ -148,7 +163,6 @@ public class GameplayView extends BasicGameState {
 				bulletList.get(i).update();
 			} else{
 				bulletList.remove(i);
-				System.out.println("hit");
 				size--;
 			}
 		}

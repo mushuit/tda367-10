@@ -34,16 +34,33 @@ public class BlockBox {
 
 	public void update() throws SlickException{
 		for(Tetromino t : minoes){
-			for(Position p : t.getPos()){
-				if(isPainted(p.getX(), p.getY())){
+			if(t.isMoving())
+				t.update();
+			for(Square s : t.getSquares()){
+				if(t.isPainted(s.getX(), s.getY())){
 					t.stop();
 				}
 			}
-			if(t.isMoving())
-				t.update();
 		}
 	}
-	
+
+	public boolean isPainted(float x, float y) {
+		if(y > 460){
+			return true;
+		}
+		for(Tetromino t : minoes){
+			int i = 0;
+			for(Square s : t.getSquares()){
+				int h = i;
+				if(s.getY() == y+Util.SQUARE_SIZE && s.getX() == x){
+					return true;
+				}
+				i++;
+			}
+		}
+		return false;
+	}
+
 	public List<Tetromino> getTetroList() {
 		List<Tetromino> temp = new ArrayList<Tetromino>();
 		temp.addAll(minoes);
@@ -82,20 +99,6 @@ public class BlockBox {
 		}
 	}
 
-	public boolean isPainted(float x, float y) {
-		if(y > 480){
-			return true;
-		}
-		for(Tetromino t : minoes){
-			Position[] p = t.getPos();
-			for(int i = 0; i < p.length; i++)
-				if(p[0].getY() == y+Util.SQUARE_SIZE && p[i].getX() == x){
-					return true;
-				}
-		}
-		return false;
-	}
-
 	public Position[][] getPos(){
 		Position[][] pos = new Position[minoes.size()][4];
 
@@ -108,7 +111,7 @@ public class BlockBox {
 		return pos.clone();
 	}
 
-	public void move(){
+	public void move() throws InterruptedException{
 		for(int i = 0; i < minoes.size(); i++){
 			minoes.get(i).update();
 		}
@@ -125,5 +128,5 @@ public class BlockBox {
 	public int getRows() {
 		return nbrOfRows;
 	}
-	
+
 }

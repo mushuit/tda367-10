@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import java.awt.event.ActionEvent;
+
 import tetrix.util.Util;
 
 public class O extends Tetromino{

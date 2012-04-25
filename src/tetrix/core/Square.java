@@ -1,11 +1,22 @@
 package tetrix.core;
 
-public class Square {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+import tetrix.util.Util;
+
+public class Square implements ActionListener{
 	private Position pos;
 	private boolean destroyed;
+	private boolean isMoving;
+	private Timer timer;
 	
 	public Square(Position pos) {
 		this.pos = pos;
+		isMoving = true;
+		timer = new Timer(250, this);
 	}
 	
 	public Position getPos(){
@@ -34,5 +45,26 @@ public class Square {
 	
 	public void destroy(){
 		destroyed = true;
+	}
+	
+	public void stop(){
+		isMoving = false;
+	}
+	
+	public boolean isMoving(){
+		return isMoving;
+	}
+	
+	public void update(){
+		timer.start();
+	}
+
+	public void falling(){
+		setY(pos.getY()+Util.SQUARE_SIZE);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		falling();
+		timer.stop();
 	}
 }

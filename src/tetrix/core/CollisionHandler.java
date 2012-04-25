@@ -19,15 +19,17 @@ public class CollisionHandler {
 		else if(bullet.getPos().getX() < 0 || bullet.getPos().getX() > Util.WINDOW_WIDTH)
 			return true;
 		for(Tetromino t : bB.getTetroList()) {
-			for(Square s : t.getSquares()){
-				if(bullet.getPos().getY() >= s.getY() && bullet.getPos().getY() <= s.getY()+22){
-					if(bullet.getPos().getX() >= s.getX() && bullet.getPos().getX() <= s.getX()+22){
-						if(!s.destroyed()){
-							s.destroy();
-							return true;}
+			if(t.isMoving())
+				for(Square s : t.getSquares()){
+					if(bullet.getPos().getY() >= s.getY() && bullet.getPos().getY() <= s.getY()+22){
+						if(bullet.getPos().getX() >= s.getX() && bullet.getPos().getX() <= s.getX()+22){
+							if(!s.destroyed()){
+								s.destroy();
+								return true;
+							}
+						}
 					}
 				}
-			}
 		}
 		return false;
 	}
