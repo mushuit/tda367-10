@@ -36,7 +36,6 @@ public class BlockBox {
 		for(Tetromino t : minoes){
 			for(Position p : t.getPos()){
 				if(isPainted(p.getX(), p.getY())){
-					System.out.println("stop");
 					t.stop();
 				}
 			}
@@ -78,8 +77,7 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(float x, float y) {
-		
-		if(y == 476){
+		if(y > 480){
 			return true;
 		}
 		for(Tetromino t : minoes){
@@ -88,8 +86,6 @@ public class BlockBox {
 				if(p[0].getY() == y+Util.SQUARE_SIZE && p[i].getX() == x){
 					return true;
 				}
-			if(!t.isMoving())
-				t.update();
 		}
 		return false;
 	}
@@ -102,7 +98,7 @@ public class BlockBox {
 			pos[h] = t.getPos();
 			h++;
 		}
-		
+
 		return pos.clone();
 	}
 
@@ -115,11 +111,11 @@ public class BlockBox {
 	public boolean isInUse(){
 		return isInUse;
 	}
-	
+
 	public int getColumns() {
 		return nbrOfColumns;
 	}
-	
+
 	public int getRows() {
 		return nbrOfRows;
 	}

@@ -88,7 +88,7 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			for(int i = 0; i < 4; i++)
 				blocks.add(block);
-			blockBox.newBlock((int)(Math.random()*6));
+			blockBox.newBlock(3);
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
