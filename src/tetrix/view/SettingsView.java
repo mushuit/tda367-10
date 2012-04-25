@@ -2,6 +2,7 @@ package tetrix.view;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class SettingsView extends BasicGameState {
 
 	private int stateID;
+	private Image background;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -23,6 +25,7 @@ public class SettingsView extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		background = new Image("img/settingsbackg.png");
 		
 	}
 
@@ -30,6 +33,7 @@ public class SettingsView extends BasicGameState {
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		background.draw(0,0);
 		
 	}
 
