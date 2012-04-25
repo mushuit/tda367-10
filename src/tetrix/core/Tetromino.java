@@ -62,6 +62,7 @@ public abstract class Tetromino {
 	}
 	
 	public boolean isMoving(){
+		System.out.println(isMoving);
 		return isMoving;
 	}
 	
