@@ -39,10 +39,7 @@ public class HighscoreView extends BasicGameState {
 			throws SlickException {
 		Font font = new Font("Verdana", Font.BOLD, 20);
 		highScoreFont = new UnicodeFont(font);
-		
-		// background = new Image("img/highscore-background.png");
-		// backToMenu = new Image("img/back.png");
-		
+
 		highScore = new HighScore();
 		
 		Player p1 = new Player(1000, "Erik");
@@ -53,7 +50,6 @@ public class HighscoreView extends BasicGameState {
 		Player p6 = new Player(6436, "Jesper");
 		Player p7 = new Player(1231, "Marcus");
 		Player p8 = new Player(2356, "Tobbe");
-		Player p9 = new Player(2342, "Bernard");
 		
 		highScore.addToHighScore(p1);
 		highScore.addToHighScore(p2);
@@ -63,7 +59,6 @@ public class HighscoreView extends BasicGameState {
 		highScore.addToHighScore(p6);
 		highScore.addToHighScore(p7);
 		highScore.addToHighScore(p8);
-		highScore.addToHighScore(p9);
 	}
 
 	@Override

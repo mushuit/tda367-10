@@ -54,6 +54,7 @@ public class Main extends StateBasedGame {
 		this.getState(States.INTROVIEW.getID()).init(gameContainer, this);
         this.getState(States.MAINMENUVIEW.getID()).init(gameContainer, this);
         this.getState(States.GAMEPLAYVIEW.getID()).init(gameContainer, this);
+        this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
     }
 	
 	public static void main(String[] args) throws SlickException {

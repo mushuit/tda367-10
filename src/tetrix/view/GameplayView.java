@@ -15,10 +15,12 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.Main.States;
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
+import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.util.Util;
@@ -36,10 +38,11 @@ public class GameplayView extends BasicGameState {
 	private Image block;
 	private int p = 0;
 	private List<Image> blocks;
-	CollisionHandler ch;
+	private CollisionHandler ch;
 	
-	UnicodeFont scoreText;
-	Player player;
+	private UnicodeFont scoreDisplay;
+	private Player player;
+	private HighScore highScore;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -58,11 +61,17 @@ public class GameplayView extends BasicGameState {
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
 		
-		scoreText = new UnicodeFont(player.getScore() + "" , 20, true, false); 
-		scoreText.addAsciiGlyphs(); 
-		scoreText.addGlyphs(400, 600);
-		scoreText.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
-		scoreText.loadGlyphs();
+		Font font = new Font("Verdana", Font.PLAIN,55);
+		
+		scoreDisplay = new UnicodeFont(font , 15, true, false);
+		scoreDisplay.addAsciiGlyphs();
+		scoreDisplay.addGlyphs(400, 600);
+		scoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
+		try {
+		    scoreDisplay.loadGlyphs();
+		} catch (SlickException e1) {
+		    e1.printStackTrace();
+		}
 	}
 
 	@Override
@@ -70,9 +79,8 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
-		scoreText.drawString(400, 200, player.getScore() + ""); 
+		scoreDisplay.drawString(5, 0, player.getScore() + "");
 		
-
 		if(blockBox.isInUse()){
 			int i = 0;
 
@@ -98,6 +106,12 @@ public class GameplayView extends BasicGameState {
 		Input input = gc.getInput();
 		int updateSpeed = 1000 /Util.FPS;
 
+		if(input.isKeyDown(Input.KEY_M)) {
+			player.setName("Mushu");
+			highScore.addToHighScore(player);
+			//sbg.enterState(States.HIGHSCOREVIEW.getID());
+		}
+		
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}

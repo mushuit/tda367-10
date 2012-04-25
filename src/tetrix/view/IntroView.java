@@ -57,7 +57,6 @@ public class IntroView extends BasicGameState{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
 		Input input = gc.getInput();
 		 
 		int mouseX = input.getMouseX();
