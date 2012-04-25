@@ -1,5 +1,8 @@
 package tetrix.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tetrix.util.Util;
 
 public abstract class Tetromino {
@@ -8,6 +11,7 @@ public abstract class Tetromino {
 	private int fallspeed;
 	private boolean isMoving;
 	private int leftIn;
+	private List<Square> squares;
 	
 	
 	public Tetromino(int startX){
@@ -22,9 +26,11 @@ public abstract class Tetromino {
 		this.startX = startX;
 		this.fallspeed = fallspeed;
 		square = new Square[4];
+		squares = new ArrayList();
 		this.leftIn = leftIn;
-		build();
 		isMoving = true;
+		build();
+		
 	}
 	
 	public void build(){
@@ -36,6 +42,11 @@ public abstract class Tetromino {
 	}
 
 	public void update(){
+		for(Square s : squares){
+			if(s.destroyed()){
+			
+			}
+		}
 		for(Square s : square){
 			s.setY(falling(s.getY()));
 		}
@@ -45,6 +56,7 @@ public abstract class Tetromino {
 		Position[] pos = new Position[4];
 		int i = 0;
 		for(Square s : square){
+			
 			pos[i] = s.getPos();
 			i++;
 		}
@@ -61,7 +73,6 @@ public abstract class Tetromino {
 	}
 	
 	public boolean isMoving(){
-		System.out.println(isMoving);
 		return isMoving;
 	}
 	
@@ -71,9 +82,5 @@ public abstract class Tetromino {
 	
 	public int getLeftIn(int xValue){
 		return (leftIn + xValue);
-	}
-	
-	public boolean isPainted(float y, float x){
-		return false;
 	}
 }

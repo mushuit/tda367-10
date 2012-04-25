@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import java.util.ArrayList;
+
 import tetrix.util.Util;
 
 public class I extends Tetromino{
