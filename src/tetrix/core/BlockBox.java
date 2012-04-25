@@ -43,6 +43,12 @@ public class BlockBox {
 				t.update();
 		}
 	}
+	
+	public List<Tetromino> getTetroList() {
+		List<Tetromino> temp = new ArrayList<Tetromino>();
+		temp.addAll(minoes);
+		return temp;
+	}
 
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;

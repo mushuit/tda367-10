@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
+import tetrix.core.CollisionHandler;
 import tetrix.core.Position;
 import tetrix.util.Util;
 
@@ -31,6 +32,7 @@ public class GameplayView extends BasicGameState {
 	private Image block;
 	private int p = 0;
 	private List<Image> blocks;
+	CollisionHandler ch;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -46,6 +48,7 @@ public class GameplayView extends BasicGameState {
 		bulletList = new ArrayList<Bullet>();
 		blockBox = new BlockBox();
 		blocks = new ArrayList<Image>();
+		ch = new CollisionHandler(blockBox);
 	}
 
 	@Override
@@ -67,7 +70,9 @@ public class GameplayView extends BasicGameState {
 
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
+			
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
+			
 		}
 	}
 
@@ -103,6 +108,7 @@ public class GameplayView extends BasicGameState {
 		p++;
 		for(int i = 0; i < bulletList.size(); i++){
 			((Bullet) bulletList.get(i)).update();
+			ch.checkCollision(bulletList.get(i), blockBox.getTetroList());
 
 			if(!((Bullet) bulletList.get(i)).getGoing())
 				bulletList.remove(i);

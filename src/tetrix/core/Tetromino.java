@@ -15,7 +15,7 @@ public abstract class Tetromino {
 	}
 
 	public Tetromino(int startX, int leftIn){
-		this(startX, leftIn, 5);
+		this(startX, leftIn, Util.SQUARE_SIZE);
 	}
 	
 	public Tetromino(int startX, int leftIn, int fallspeed) {
@@ -50,7 +50,6 @@ public abstract class Tetromino {
 		}
 
 		return pos.clone();
-		
 	}
 	
 	public Square[] getSquares(){
