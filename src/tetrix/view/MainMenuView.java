@@ -25,6 +25,8 @@ public class MainMenuView extends BasicGameState{
 	private Image exitGameMouseOver;
 	private Image settings;
 	private Image settingsMouseOver;
+	private Image highScore; 			//mouseover too
+	
 	
 	private int startGameXpos;
 	private int startGameYpos;
@@ -32,10 +34,13 @@ public class MainMenuView extends BasicGameState{
 	private int exitGameYpos;
 	private int settingsXpos;
 	private int settingsYpos;
+	private int highScoreXpos;
+	private int highScoreYpos;
 	 
 	private boolean inStartGameArea = false;
 	private boolean inExitGameArea = false;
 	private boolean inSettingsArea = false;
+	private boolean inHighScoreArea = false;
 	
 	public MainMenuView(int stateID) {
         this.stateID = stateID;
@@ -58,6 +63,10 @@ public class MainMenuView extends BasicGameState{
 		exitGameXpos = 200-(exitGame.getWidth()/2);
 		exitGameYpos = 425;
 		
+		highScore = new Image("img/highScore.png");
+		
+		highScoreXpos = 200-(highScore.getWidth()/2);
+		highScoreYpos = 390;
 	}
 
 	@Override
@@ -67,6 +76,7 @@ public class MainMenuView extends BasicGameState{
 		startGame.draw(startGameXpos, startGameYpos);
 		exitGame.draw(exitGameXpos, exitGameYpos);
 		settings.draw(settingsXpos, settingsYpos);
+		highScore.draw(highScoreXpos, highScoreYpos);
 		if(inStartGameArea){
 			startGameMouseOver.draw(startGameXpos, startGameYpos);
 		} else {
@@ -84,6 +94,11 @@ public class MainMenuView extends BasicGameState{
 		} else {
 			settings.draw(settingsXpos, settingsYpos);
 		}
+//		if(inHighScoreArea){
+//			highScoreMouseOver.draw(highScoreXpos, highScoreYpos);
+//		} else {
+//			highScore.draw(highScoreXpos, highScoreYpos);
+//		}
 	}
 
 	@Override
@@ -111,9 +126,16 @@ public class MainMenuView extends BasicGameState{
 		if( ( mouseX >= settingsXpos && mouseX <= settingsXpos + settings.getWidth()) &&
 			    ( mouseY >= settingsYpos && mouseY <= settingsYpos + settings.getHeight()) ){
 				inSettingsArea = true;
-			} else{
+		} else{
 				inSettingsArea = false;
-			}
+		}
+		if( ( mouseX >= highScoreXpos && mouseX <= highScoreXpos + highScore.getWidth()) &&
+			    ( mouseY >= highScoreYpos && mouseY <= highScoreYpos + highScore.getHeight()) ){
+				inHighScoreArea = true;
+		} else{
+				inHighScoreArea = false;
+		}
+		
 		if(inStartGameArea){
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.GAMEPLAYVIEW.getID());
@@ -126,6 +148,10 @@ public class MainMenuView extends BasicGameState{
 				if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				gc.exit();
 			}
+		} else if(inHighScoreArea){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
+				sbg.enterState(States.HIGHSCOREVIEW.getID());
+			} 
 		}
 		if (input.isKeyPressed(Input.KEY_ENTER) ){
 			sbg.enterState(States.GAMEPLAYVIEW.getID());
