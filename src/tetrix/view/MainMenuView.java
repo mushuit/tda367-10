@@ -115,15 +115,15 @@ public class MainMenuView extends BasicGameState{
 				inSettingsArea = false;
 			}
 		if(inStartGameArea){
-			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.GAMEPLAYVIEW.getID());
 			}
 		} else if(inSettingsArea){
-			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.SETTINGSVIEW.getID());
 			} 
 		} else if (inExitGameArea){
-				if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+				if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				gc.exit();
 			}
 		}

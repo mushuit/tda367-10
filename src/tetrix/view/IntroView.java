@@ -70,9 +70,12 @@ public class IntroView extends BasicGameState{
 			inClickHereArea = false;
 		}
 		if(inClickHereArea){
-			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
+		}
+		if (input.isKeyPressed(Input.KEY_ENTER) ){
+			sbg.enterState(States.MAINMENUVIEW.getID());
 		}
 	}
 
