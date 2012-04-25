@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -26,9 +27,8 @@ public class HighscoreView extends BasicGameState {
 	private int stateID;
 	
 	private HighScore highScore;
-	private UnicodeFont highScoreFont;
+	private UnicodeFont highScoreDisplay;
 	private Image background;
-	private Image backToMenu;
 	
 	public HighscoreView(int stateID) {
 		this.stateID = stateID;
@@ -37,10 +37,20 @@ public class HighscoreView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		Font font = new Font("Verdana", Font.BOLD, 20);
-		highScoreFont = new UnicodeFont(font);
-
+		background= new Image("img/game_background.png");
 		highScore = new HighScore();
+		
+		Font font = new Font("Verdana", Font.BOLD, 20);
+		highScoreDisplay = new UnicodeFont(font);
+		highScoreDisplay = new UnicodeFont(font , 15, true, false);
+		highScoreDisplay.addAsciiGlyphs();
+		highScoreDisplay.addGlyphs(400, 600);
+		highScoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.MAGENTA));
+		try {
+			highScoreDisplay.loadGlyphs();
+		} catch (SlickException e1) {
+			e1.printStackTrace();
+		}
 		
 		Player p1 = new Player(1000, "Erik");
 		Player p2 = new Player(434, "Johan");
@@ -49,7 +59,6 @@ public class HighscoreView extends BasicGameState {
 		Player p5 = new Player(2342, "Tomas");
 		Player p6 = new Player(6436, "Jesper");
 		Player p7 = new Player(1231, "Marcus");
-		Player p8 = new Player(2356, "Tobbe");
 		
 		highScore.addToHighScore(p1);
 		highScore.addToHighScore(p2);
@@ -58,22 +67,18 @@ public class HighscoreView extends BasicGameState {
 		highScore.addToHighScore(p5);
 		highScore.addToHighScore(p6);
 		highScore.addToHighScore(p7);
-		highScore.addToHighScore(p8);
 	}
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		
-		// TODO Väntar på att Kara ska göra design.
-		// background.draw(0,0);
-		// backToMenu.draw(200,400);
-		
+		background.draw(0, 0);
+
 		int yPos = 200;
 		int index = 1;
 		for(Player p : highScore.getList()) {
-			highScoreFont.drawString(20, yPos, index + ". " + p.getName() + "\t" 
-					+ p.getScore(), Color.magenta);
+			highScoreDisplay.drawString(100, yPos, index + ". " + p.getName() + "     " 
+					+ p.getScore());
 			index++;
 			yPos += 20;
 		}
@@ -84,7 +89,6 @@ public class HighscoreView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 	}		 
-	
 	
 	@Override
 	public int getID() {

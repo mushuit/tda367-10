@@ -60,6 +60,7 @@ public class GameplayView extends BasicGameState {
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
+		highScore = new HighScore();
 
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
@@ -109,7 +110,7 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyDown(Input.KEY_M)) {
 			player.setName("Mushu");
 			highScore.addToHighScore(player);
-			//sbg.enterState(States.HIGHSCOREVIEW.getID());
+			sbg.enterState(States.HIGHSCOREVIEW.getID());
 		}
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
@@ -121,7 +122,7 @@ public class GameplayView extends BasicGameState {
 		}
 
 		if(input.isKeyDown(Input.KEY_D)) {
-			cannon.move(updateSpeed);
+			 cannon.move(updateSpeed);
 		}
 
 		if(input.isKeyDown(Input.KEY_A)) {
