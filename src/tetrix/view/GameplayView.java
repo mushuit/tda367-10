@@ -1,5 +1,6 @@
 package tetrix.view;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -16,6 +19,7 @@ import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
+import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.util.Util;
 
@@ -33,6 +37,9 @@ public class GameplayView extends BasicGameState {
 	private int p = 0;
 	private List<Image> blocks;
 	CollisionHandler ch;
+	
+	UnicodeFont scoreText;
+	Player player;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -49,6 +56,13 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox();
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
+		player = new Player();
+		
+		scoreText = new UnicodeFont(player.getScore() + "" , 20, true, false); 
+		scoreText.addAsciiGlyphs(); 
+		scoreText.addGlyphs(400, 600);
+		scoreText.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
+		scoreText.loadGlyphs();
 	}
 
 	@Override
@@ -56,6 +70,8 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background.draw(0,0);
 		cannonImage.draw(cannon.getX(), cannon.getY());
+		scoreText.drawString(400, 200, player.getScore() + ""); 
+		
 
 		if(blockBox.isInUse()){
 			int i = 0;
@@ -73,7 +89,7 @@ public class GameplayView extends BasicGameState {
 
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
 
-		}
+		}	
 	}
 
 	@Override
@@ -99,6 +115,7 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
+			player.setScore(10);
 		}
 
 		if(input.isKeyPressed(Input.KEY_P)) {
