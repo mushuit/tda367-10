@@ -10,9 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.view.StateHandler.States;
 
-
 /**
- * Class responsible for the view before the game starts where the user has to choose difficulty.
+ * Class responsible for the main menu view.
  * @author Linus Karlsson
  *
  */

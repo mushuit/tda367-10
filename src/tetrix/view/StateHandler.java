@@ -4,7 +4,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-
+/**
+ * Class managing the loading of the different states
+ * @author Linus Karlsson
+ *
+ */
 public class StateHandler extends StateBasedGame {
 	
 	public enum States {

@@ -25,6 +25,11 @@ import tetrix.core.Position;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
+/**
+ * Class responsible for updating and rendering of the gameplay view.
+ * @author Magnus Huttu, Linus Karlsson
+ *
+ */
 public class GameplayView extends BasicGameState {
 
 	private int stateID;

@@ -10,7 +10,6 @@ import org.newdawn.slick.Image;
 
 import tetrix.view.StateHandler.States;
 
-
 /**
  * Class responsible for the intro sequence where the user is expected to "press start".
  * @author Linus Karlsson
