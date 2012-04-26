@@ -12,6 +12,7 @@ import org.newdawn.slick.SavedState;
  * @author Linus Karlsson, Andreas Karlberg
  *
  */
+
 public class HighScore{
 	private static HighScore instance = null;
 	private static List<Player> players;
@@ -59,9 +60,11 @@ public class HighScore{
 	public int getMaxListLength() {
 		return maxPlayers;
 	}
+	
 	public void save() {
 
 	}
+	
 	public void load() {
 		
 	}

@@ -26,7 +26,8 @@ public class I extends Tetromino{
 		}
 	}
 
-	public boolean isPainted(float y, float x){
+	public boolean isPainted(int y, int x){
+
 		Square[] s = super.getSquares();
 		if(s[0].getY() == y+Util.SQUARE_SIZE && s[0].getX() == x)
 			return true;
@@ -39,6 +40,7 @@ public class I extends Tetromino{
 
 		return false;
 	}
+	
 
 	
 

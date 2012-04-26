@@ -15,7 +15,6 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tetrix.Main.States;
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
@@ -24,7 +23,13 @@ import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.util.Util;
+import tetrix.view.StateHandler.States;
 
+/**
+ * Class responsible for updating and rendering of the gameplay view.
+ * @author Magnus Huttu, Linus Karlsson
+ *
+ */
 public class GameplayView extends BasicGameState {
 
 	private int stateID;
@@ -151,13 +156,8 @@ public class GameplayView extends BasicGameState {
 			blockBox.clearBoard();
 		}
 
-		if(blockBox.isInUse())
 			blockBox.update();
 
-		else if(p > 30)
-			p = 0;
-
-		p++;
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){
 			if(!ch.checkCollision(bulletList.get(i))){
