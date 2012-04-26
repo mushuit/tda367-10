@@ -15,6 +15,7 @@ public abstract class Tetromino implements ActionListener{
 	private boolean isMoving;
 	private int leftIn;
 	private Timer timer;
+	
 
 
 	public Tetromino(int startX){
@@ -82,16 +83,17 @@ public abstract class Tetromino implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		for(Square s : square){
-			s.falling();
+			if(isMoving)
+				s.falling();
 		}
 		timer.stop();
 
 	}
-	
+
 	public boolean isPainted(int x, int y){
 		return false;
-		
+
 	}
-	
+
 
 }

@@ -25,6 +25,10 @@ public class Util {
 	 */
 	public static final int BOX_HEIGHT = 440;
 	
+	public static final int B4_BOX_WIDTH = 46;
+	
+	public static final int B4_BOX_HEIGHT = 80;
+	
 	/**
 	 * Size of the cannon
 	 */
