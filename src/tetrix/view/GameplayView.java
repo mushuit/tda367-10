@@ -151,13 +151,8 @@ public class GameplayView extends BasicGameState {
 			blockBox.clearBoard();
 		}
 
-		if(blockBox.isInUse())
 			blockBox.update();
 
-		else if(p > 30)
-			p = 0;
-
-		p++;
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){
 			if(!ch.checkCollision(bulletList.get(i))){

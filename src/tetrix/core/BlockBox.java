@@ -34,28 +34,26 @@ public class BlockBox {
 
 	public void update() throws SlickException{
 		for(Tetromino t : minoes){
-			if(t.isMoving())
-				t.update();
 			for(Square s : t.getSquares()){
-				if(t.isPainted(s.getX(), s.getY())){
+				if(t.isPainted(s.getX(), s.getY()) || s.getY() > Util.BOX_HEIGHT+50){
 					t.stop();
 				}
 			}
+			if(t.isMoving())
+				t.update();
 		}
 	}
 
-	public boolean isPainted(float x, float y) {
+	public boolean isPainted(int x, int y) {
+		System.out.println(y);
 		if(y > 460){
 			return true;
 		}
 		for(Tetromino t : minoes){
-			int i = 0;
 			for(Square s : t.getSquares()){
-				int h = i;
 				if(s.getY() == y+Util.SQUARE_SIZE && s.getX() == x){
 					return true;
 				}
-				i++;
 			}
 		}
 		return false;

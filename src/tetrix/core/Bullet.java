@@ -16,7 +16,7 @@ public class Bullet extends Image {
 	private int value;
 	private boolean stop;
 
-	public Bullet(float xPos, float yPos){
+	public Bullet(int xPos, int yPos){
 		pos = new Position(0,0);
 		pos.setX(xPos);
 		pos.setY(yPos);
@@ -51,23 +51,23 @@ public class Bullet extends Image {
 
 		if(value >= 300 && value <= 800){
 			position = 1;
-			pos.setY((float) (pos.getY()+22.5));
+			pos.setY((int) (pos.getY()+22.5));
 		}
 
 		else if(value >= 0 && value <= 300){
 			position = 2;
-			pos.setX((float) (pos.getX() + 22.5));
+			pos.setX((int) (pos.getX() + 22.5));
 		}
 
 		else if(value >= 800 && value <= 1100){
 			position = 3;
-			pos.setX((float) (pos.getX() + 22.5));
+			pos.setX((int) (pos.getX() + 22.5));
 			pos.setY(pos.getY() + 50);
 		}
 
 		else if(value >= 1100 && value <= 1600){
 			position = 4;
-			pos.setY((float) (pos.getY() + 22.5));
+			pos.setY((int) (pos.getY() + 22.5));
 			pos.setX(pos.getX() + 50);
 		}
 

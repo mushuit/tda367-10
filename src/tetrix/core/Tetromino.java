@@ -85,13 +85,12 @@ public abstract class Tetromino implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		for(Square s : square){
 			s.falling();
-			System.out.println(s.getY());
 		}
 		timer.stop();
 
 	}
 	
-	public boolean isPainted(float x, float y){
+	public boolean isPainted(int x, int y){
 		return false;
 		
 	}
