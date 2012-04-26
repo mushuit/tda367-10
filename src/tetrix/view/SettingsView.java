@@ -1,9 +1,5 @@
 package tetrix.view;
-/*todo: boschbild, 
- * 		
- * 		sliders 
-*
-*/
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,7 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tetrix.Main.States;
+import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing different settings for the user to control.

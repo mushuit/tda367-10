@@ -8,7 +8,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 
-import tetrix.Main.States;
+import tetrix.view.StateHandler.States;
+
 
 /**
  * Class responsible for the intro sequence where the user is expected to "press start".

@@ -15,7 +15,6 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tetrix.Main.States;
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
@@ -24,6 +23,7 @@ import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.util.Util;
+import tetrix.view.StateHandler.States;
 
 public class GameplayView extends BasicGameState {
 
