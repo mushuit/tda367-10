@@ -11,6 +11,7 @@ import org.newdawn.slick.SavedState;
  * @author Linus Karlsson, Andreas Karlberg
  *
  */
+
 public class HighScore{
 	private List<Player> scores;
 	private int maxValue;
@@ -52,9 +53,11 @@ public class HighScore{
 	public int getMaxListLength() {
 		return maxValue;
 	}
+	
 	public void save() {
 
 	}
+	
 	public void load() {
 		
 	}

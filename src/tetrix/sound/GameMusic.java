@@ -18,6 +18,9 @@ public class GameMusic {
 	public void gameMusicPlay(){
 		gameMusic.play();
 	}
+	public void gameMusicPause(){
+		gameMusic.pause();
+	}
 	
 	public void gameMusicLoop() {
 		gameMusic.loop();
