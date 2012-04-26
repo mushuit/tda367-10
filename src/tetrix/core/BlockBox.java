@@ -35,9 +35,10 @@ public class BlockBox {
 	public void update() throws SlickException{
 		for(Tetromino t : minoes){
 			for(Square s : t.getSquares()){
-				if(t.isPainted(s.getX(), s.getY()) || s.getY() > Util.BOX_HEIGHT+50){
-					t.stop();
-				}
+				if(!s.destroyed())
+					if(isPainted(s.getX(), s.getY()) || s.getY() > Util.BOX_HEIGHT+50){
+						t.stop();
+					}
 			}
 			if(t.isMoving())
 				t.update();
@@ -45,15 +46,18 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(int x, int y) {
-		System.out.println(y);
-		if(y > 460){
+		if(y > Util.BOX_HEIGHT+50){
 			return true;
 		}
 		for(Tetromino t : minoes){
 			for(Square s : t.getSquares()){
-				if(s.getY() == y+Util.SQUARE_SIZE && s.getX() == x){
-					return true;
-				}
+				if(!s.destroyed())
+					if(s.getX() == x){
+						if(s.getY() == y+Util.SQUARE_SIZE){
+							if(!t.isMoving())
+								return true;
+						}
+					}
 			}
 		}
 		return false;

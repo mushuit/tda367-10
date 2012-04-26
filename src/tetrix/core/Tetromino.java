@@ -36,9 +36,7 @@ public abstract class Tetromino implements ActionListener{
 
 	}
 
-	public void build(){
-
-	}
+	public abstract void build();
 
 	public void update(){
 		timer.start();
@@ -94,5 +92,6 @@ public abstract class Tetromino implements ActionListener{
 		return false;
 		
 	}
+	
 
 }

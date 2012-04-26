@@ -36,4 +36,5 @@ public class O extends Tetromino{
 
 		return false;
 	}
+
 }
