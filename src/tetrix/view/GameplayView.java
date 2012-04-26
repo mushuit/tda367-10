@@ -60,7 +60,7 @@ public class GameplayView extends BasicGameState {
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
-		highScore = new HighScore();
+		highScore = HighScore.instance();
 
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
