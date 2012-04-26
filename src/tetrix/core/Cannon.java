@@ -8,16 +8,16 @@ import tetrix.util.Util;
  *
  */
 public class Cannon{
-	private float xPos;
-	private float yPos;
-	private float value;
+	private int xPos;
+	private int yPos;
+	private int value;
 	private int rotation;
 	
 	public Cannon() {
 		this(Util.WINDOW_WIDTH/2 - Util.CANNON_SIZE/2, 525);
 	}
 
-	public Cannon(float xPos, float yPos) {
+	public Cannon(int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		rotation = 0;
@@ -32,7 +32,7 @@ public class Cannon{
 		return yPos;
 	}
 	
-	public void setPosition(float xPos, float yPos) {
+	public void setPosition(int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}

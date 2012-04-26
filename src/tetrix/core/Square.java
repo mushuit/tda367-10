@@ -27,15 +27,15 @@ public class Square implements ActionListener{
 		this.pos = pos;
 	}
 	
-	public void setY(float f){
+	public void setY(int f){
 		pos.setY(f);
 	}
 
-	public float getY(){
+	public int getY(){
 		return pos.getY();
 	}
 
-	public float getX() {
+	public int getX() {
 		return pos.getX();
 	}
 	

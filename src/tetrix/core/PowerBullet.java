@@ -4,7 +4,8 @@ public class PowerBullet {
 	private Position pos;
 	int position = 0;
 
-	public PowerBullet(float xPos, float yPos){
+	public PowerBullet(int xPos, int yPos){
+		pos = new Position(0,0);
 		pos.setX(xPos);
 		pos.setY(yPos);
 		shoot();
