@@ -1,7 +1,12 @@
 package tetrix.sound;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+
+import tetrix.core.HighScore;
+import tetrix.core.Player;
 
 /**
  * A class that provides sound effects. 
@@ -11,20 +16,21 @@ import org.newdawn.slick.Sound;
  */
 
 public class SoundEffects {
+	
 	private static Sound sfxShot;
 	private static Sound sfxBlowUp;
 	private static Sound sfxMenuClick;
 	private static Sound sfxHighScore;
 	private static Sound sfxRowCleared;
 	private static Sound sfxExplode;
-
-	public SoundEffects() throws SlickException{
-		sfxShot = new Sound("Sound/shot.wav");		// Sound of the bullet when you shoot
-		sfxBlowUp = new Sound("Sound/hit.wav");	// Sound of a block blown up
-		sfxMenuClick = new Sound("Sound/button.wav");	// Sound of a menu click
-		sfxHighScore = new Sound("Sound/powerup.wav");	// Sound when you break a new High Score
-		sfxRowCleared = new Sound("Sound/rowcleared.wav");		// Sound when it is Game Over
-		sfxExplode = new Sound("Sound/explode.wav");		// Sound when the game pauses
+	
+	public SoundEffects() throws SlickException {
+		sfxShot = new Sound("sound/shot.wav");		// Sound of the bullet when you shoot
+		sfxBlowUp = new Sound("sound/hit.wav");	// Sound of a block blown up
+		sfxMenuClick = new Sound("sound/button.wav");	// Sound of a menu click
+		sfxHighScore = new Sound("sound/powerup.wav");	// Sound when you break a new High Score
+		sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when it is Game Over
+		sfxExplode = new Sound("sound/explode.wav");		// Sound when the game pauses
 	}
 
 	public static void shotPlay(){
@@ -79,7 +85,7 @@ public class SoundEffects {
 		sfxRowCleared.play();
 	}
 
-	public static void deathLoop(){
+	public static void rowClearedLoop(){
 		sfxRowCleared.loop();
 	}
 

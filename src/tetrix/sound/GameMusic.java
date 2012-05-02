@@ -13,7 +13,7 @@ public class GameMusic {
 	private static Music gameMusic;
 
 	public GameMusic() throws SlickException{
-		gameMusic = new Music("Sound/music.wav");	// The game music
+		gameMusic = new Music("Sound/background-music.wav");	// The game music
 	}
 	public void gameMusicPlay(){
 		gameMusic.play();
@@ -34,7 +34,7 @@ public class GameMusic {
 		gameMusic.getVolume();
 	}
 
-	public void setGameMusicVolume(){
-		gameMusic.setVolume(1);
+	public void setGameMusicVolume(int value){
+		gameMusic.setVolume(value);
 	}
 }

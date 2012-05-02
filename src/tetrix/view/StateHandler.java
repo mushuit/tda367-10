@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.sound.GameMusic;
+
 /**
  * Class managing the loading of the different states
  * @author Linus Karlsson
@@ -32,7 +34,6 @@ public class StateHandler extends StateBasedGame {
 	
 	public StateHandler() {
 		super("Tetrix");
-		
 		this.addState(new IntroView(States.INTROVIEW.getID()));
 		this.addState(new MainMenuView(States.MAINMENUVIEW.getID()));
 		this.addState(new LevelsView(States.LEVELSVIEW.getID()));
@@ -46,9 +47,9 @@ public class StateHandler extends StateBasedGame {
 	@Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
 		this.getState(States.INTROVIEW.getID()).init(gameContainer, this);
-        this.getState(States.MAINMENUVIEW.getID()).init(gameContainer, this);
-        this.getState(States.GAMEPLAYVIEW.getID()).init(gameContainer, this);
-        this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
+		
+		//GameMusic gm = new GameMusic();
+		//gm.gameMusicPlay();
     }
 }
 	

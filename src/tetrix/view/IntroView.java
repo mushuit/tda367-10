@@ -17,6 +17,7 @@ import org.newdawn.slick.Image;
 
 import tetrix.core.Bullet;
 import tetrix.core.ThemeHandler;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
@@ -87,6 +88,7 @@ public class IntroView extends BasicGameState{
 		}
 		if (input.isKeyPressed(Input.KEY_ENTER) ){
 			sbg.enterState(States.MAINMENUVIEW.getID());
+			SoundEffects.menuClickPlay();
 		}
 	}
 
