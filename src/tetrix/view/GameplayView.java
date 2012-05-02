@@ -117,6 +117,10 @@ public class GameplayView extends BasicGameState {
 			highScore.addToHighScore(player);
 			sbg.enterState(States.HIGHSCOREVIEW.getID());
 		}
+		
+		if(blockBox.isRowFilled()) {
+			player.setScore(20);
+		}
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
@@ -149,7 +153,6 @@ public class GameplayView extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
-			player.setScore(10);
 		}
 
 		if(input.isKeyPressed(Input.KEY_P)) {

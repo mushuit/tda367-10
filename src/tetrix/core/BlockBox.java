@@ -155,5 +155,9 @@ public class BlockBox {
 	public int getRows() {
 		return nbrOfRows;
 	}
+	
+	public boolean isRowFilled() {
+		return rowFilled;
+	}
 
 }

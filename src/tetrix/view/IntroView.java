@@ -1,13 +1,23 @@
 package tetrix.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 
+import tetrix.core.Bullet;
+import tetrix.core.ThemeHandler;
+import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -19,6 +29,11 @@ public class IntroView extends BasicGameState{
 
 	private int stateID;
 	
+	private List<Rectangle> pixelBlocks;
+	private int pixelX;
+	private int pixelY;
+	private Timer timer;
+	
 	private Image background;
 	private Image clickHere;
 	private Image clickHereMouseOver;
@@ -27,23 +42,27 @@ public class IntroView extends BasicGameState{
 	private int clickHereYpos;
 	 
 	private boolean inClickHereArea = false;
+	private String themeFolder;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
+		timer.schedule(new FallingPixels(), 1 * 1000);
 	}
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/introbackg.png");
-		clickHere = new Image("img/clickHere.png");
-		clickHereMouseOver = new Image("img/clickHereMouseOver.png");
+		themeFolder = ThemeHandler.getTheme();
+		background = new Image(themeFolder + "introbackg.png");
+		clickHere = new Image(themeFolder + "clickHere.png");
+		clickHereMouseOver = new Image(themeFolder + "clickHereMouseOver.png");
 		clickHereXpos = 200-(clickHere.getWidth()/2);
 		clickHereYpos = 414;
+		pixelBlocks = new ArrayList<Rectangle>();
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics arg2)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
 		clickHere.draw(clickHereXpos, clickHereYpos);
@@ -51,6 +70,12 @@ public class IntroView extends BasicGameState{
 			clickHereMouseOver.draw(clickHereXpos, clickHereYpos);
 		} else {
 			clickHere.draw(clickHereXpos, clickHereYpos);
+		}
+		
+		g.setColor(Color.black);
+		for(int i = 0; i < pixelBlocks.size(); i++){
+			g.fillRect(((Bullet) pixelBlocks.get(i)).getX(), ((Bullet) pixelBlocks.get(i)).getY(), 5, 5);
+
 		}
 	}
 
@@ -82,5 +107,18 @@ public class IntroView extends BasicGameState{
 	public int getID() {
 		return stateID;
 	}
+	
+	public void addPixelBlock() {
+		int xPos = 0 + (int)(Math.random() * ((Util.WINDOW_WIDTH - 0) + 1));
+		pixelBlocks.add(new Rectangle(xPos,0,5,5));
+	}
 
 }
+
+class FallingPixels extends TimerTask {
+	@Override
+	public void run() {
+		
+	}	
+}
+
