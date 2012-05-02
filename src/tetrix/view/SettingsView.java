@@ -54,7 +54,9 @@ public class SettingsView extends BasicGameState {
 	
 	
 	private boolean inBackArea = false;
+	private boolean inFxSliderArea = false;
 	private boolean inFxPinArea = false;
+	private boolean inMusicSliderArea = false;
 	private boolean inMusicPinArea = false;
 	
 	public SettingsView(int stateID) {
@@ -97,7 +99,7 @@ public class SettingsView extends BasicGameState {
 		musicSliderYpos = musicYpos;
 		
 		musicSliderPin = new Image("img/slidePin.png");
-		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
+		musicSliderPinHover = new Image ("img/slidePinMouseOver.png");
 		musicSliderPinXpos = 250;
 		musicSliderPinYpos = musicYpos;
 		
@@ -114,9 +116,7 @@ public class SettingsView extends BasicGameState {
 		music.draw(musicXpos, musicYpos);
 		
 		fxSlider.draw(fxSliderXpos, fxSliderYpos);
-		fxSliderPin.draw(fxSliderPinXpos, fxSliderPinYpos);
 		musicSlider.draw(musicSliderXpos, musicSliderYpos);
-		musicSliderPin.draw(musicSliderPinXpos, musicSliderPinYpos);
 		
 		back.draw(backXpos, backYpos);
 		if(inBackArea){
@@ -125,9 +125,10 @@ public class SettingsView extends BasicGameState {
 			back.draw(backXpos, backYpos);
 		}
 		if(inFxPinArea){
-			fxSliderPinHover.draw(fxSliderXpos, fxSliderYpos);
+			
+			fxSliderPinHover.draw(fxSliderPinXpos, fxSliderPinYpos);
 		} else {
-			fxSlider.draw(fxSliderXpos, fxSliderYpos);
+			fxSliderPin.draw(fxSliderPinXpos, fxSliderPinYpos);
 		}
 		if(inMusicPinArea){
 			musicSliderPinHover.draw(musicSliderPinXpos, musicSliderPinYpos);
@@ -163,18 +164,32 @@ public class SettingsView extends BasicGameState {
 		} else {
 			inMusicPinArea = false;
 		}
+		if ( (mouseX >= fxSliderXpos && mouseX <= fxSliderXpos + fxSlider.getWidth()) &&
+			    ( mouseY >= fxSliderYpos && mouseY <= fxSliderYpos + fxSlider.getHeight())){
+			inFxSliderArea = true;
+		} else {
+			inFxSliderArea = false;
+		}
+		if ( (mouseX >= musicSliderXpos && mouseX <= musicSliderXpos + musicSlider.getWidth()) &&
+			    ( mouseY >= musicSliderYpos && mouseY <= musicSliderYpos + musicSlider.getHeight())){
+			inMusicSliderArea = true;
+		} else {
+			inMusicSliderArea = false;
+		}
 		
 		if(inBackArea){
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
-		} else if(inFxPinArea){
+		} else if(inFxSliderArea){
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
-				sbg.enterState(States.MAINMENUVIEW.getID());
+				while (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && (mouseX >= fxSliderXpos) && (mouseX <= fxSliderXpos+fxSlider.getWidth())){
+					fxSliderPinXpos = mouseX -(fxSliderPin.getWidth()/2);
+				}
 			}
-		} else if(inMusicPinArea){
-			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
-				sbg.enterState(States.MAINMENUVIEW.getID());
+		} else if(inMusicSliderArea){
+			while (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) && (mouseX >= musicSliderXpos) && (mouseX <= musicSliderXpos+musicSlider.getWidth())){
+				musicSliderPinXpos = mouseX -(musicSliderPin.getWidth()/2);
 			}
 		}
 	}

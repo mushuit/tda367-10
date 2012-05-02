@@ -25,8 +25,8 @@ public class MainMenuView extends BasicGameState{
 	private Image exitGameMouseOver;
 	private Image settings;
 	private Image settingsMouseOver;
-	private Image highScore; 			//mouseover too
-	
+	private Image highScore;
+	private Image highScoreMouseOver;
 	
 	private int startGameXpos;
 	private int startGameYpos;
@@ -61,12 +61,12 @@ public class MainMenuView extends BasicGameState{
 		exitGame = new Image("img/exit.png");
 		exitGameMouseOver = new Image("img/exitMouseOver.png");
 		exitGameXpos = 200-(exitGame.getWidth()/2);
-		exitGameYpos = 425;
+		exitGameYpos = 475;
 		
 		highScore = new Image("img/highScore.png");
-		
+		highScoreMouseOver = new Image("img/highScoreMouseOver.png");
 		highScoreXpos = 200-(highScore.getWidth()/2);
-		highScoreYpos = 390;
+		highScoreYpos = 400;
 	}
 
 	@Override
@@ -94,11 +94,11 @@ public class MainMenuView extends BasicGameState{
 		} else {
 			settings.draw(settingsXpos, settingsYpos);
 		}
-//		if(inHighScoreArea){
-//			highScoreMouseOver.draw(highScoreXpos, highScoreYpos);
-//		} else {
-//			highScore.draw(highScoreXpos, highScoreYpos);
-//		}
+		if(inHighScoreArea){
+			highScoreMouseOver.draw(highScoreXpos, highScoreYpos);
+		} else {
+			highScore.draw(highScoreXpos, highScoreYpos);
+		}
 	}
 
 	@Override
