@@ -13,20 +13,18 @@ import org.newdawn.slick.Sound;
 public class SoundEffects {
 	private static Sound sfxShot;
 	private static Sound sfxBlowUp;
-	private static Sound sfxStartGame;
 	private static Sound sfxMenuClick;
 	private static Sound sfxHighScore;
-	private static Sound sfxDeath;
-	private static Sound sfxPause;
+	private static Sound sfxRowCleared;
+	private static Sound sfxExplode;
 
 	public SoundEffects() throws SlickException{
-		sfxShot = new Sound("Sound/music.wav");		// Sound of the bullet when you shoot
-		sfxBlowUp = new Sound("Sound/test.wav");	// Sound of a block blown up
-		sfxStartGame = new Sound("Sound/test.wav");	// Sound when you start the game 
-		sfxMenuClick = new Sound("Sound/test.wav");	// Sound of a menu click
-		sfxHighScore = new Sound("Sound/test.wav");	// Sound when you break a new High Score
-		sfxDeath = new Sound("Sound/test.wav");		// Sound when it is Game Over
-		sfxPause = new Sound("Sound/test.wav");		// Sound when the game pauses
+		sfxShot = new Sound("Sound/shot.wav");		// Sound of the bullet when you shoot
+		sfxBlowUp = new Sound("Sound/hit.wav");	// Sound of a block blown up
+		sfxMenuClick = new Sound("Sound/button.wav");	// Sound of a menu click
+		sfxHighScore = new Sound("Sound/powerup.wav");	// Sound when you break a new High Score
+		sfxRowCleared = new Sound("Sound/rowcleared.wav");		// Sound when it is Game Over
+		sfxExplode = new Sound("Sound/explode.wav");		// Sound when the game pauses
 	}
 
 	public void shotPlay(){
@@ -53,18 +51,6 @@ public class SoundEffects {
 		sfxBlowUp.stop();
 	}
 
-	public void startGamePlay(){
-		sfxStartGame.play();
-	}
-
-	public void startGameLoop(){
-		sfxStartGame.loop();
-	}
-
-	public void startGameStop(){
-		sfxStartGame.stop();
-	}
-
 	public void menuClickPlay(){
 		sfxMenuClick.play();
 	}
@@ -89,28 +75,28 @@ public class SoundEffects {
 		sfxHighScore.stop();
 	}
 
-	public void deathPlay(){
-		sfxDeath.play();
+	public void rowClearedPlay(){
+		sfxRowCleared.play();
 	}
 
 	public void deathLoop(){
-		sfxDeath.loop();
+		sfxRowCleared.loop();
 	}
 
-	public void deathStop(){
-		sfxDeath.stop();
+	public void rowClearedStop(){
+		sfxRowCleared.stop();
 	}
 
-	public void pausePlay(){
-		sfxPause.play();
+	public void explodePlay(){
+		sfxExplode.play();
 	}
 	
-	public void pauseLoop(){
-		sfxPause.loop();
+	public void explodeLoop(){
+		sfxExplode.loop();
 	}
 
-	public void pauseStop(){
-		sfxPause.stop();
+	public void explodeStop(){
+		sfxExplode.stop();
 	}
 
 
