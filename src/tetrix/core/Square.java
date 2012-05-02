@@ -12,11 +12,27 @@ public class Square implements ActionListener{
 	private boolean destroyed;
 	private boolean isMoving;
 	private Timer timer;
-	
+	private Tetromino t;
+	private int whichSqr;
+
 	public Square(Position pos) {
 		this.pos = pos;
 		isMoving = true;
 		timer = new Timer(250, this);
+	}
+
+	public Square(Position pos, Tetromino t) {
+		this.pos = pos;
+		isMoving = true;
+		timer = new Timer(250, this);
+	}
+
+	public Square(Position pos, Tetromino t, int whichSqr) {
+		this.pos = pos;
+		isMoving = true;
+		timer = new Timer(250, this);
+		this.t = t;
+		this.whichSqr = whichSqr;
 	}
 	
 	public Position getPos(){
@@ -45,6 +61,7 @@ public class Square implements ActionListener{
 	
 	public void destroy(){
 		destroyed = true;
+		t.pcs.firePropertyChange(""+whichSqr, false, destroyed);
 	}
 	
 	public void stop(){
@@ -53,6 +70,10 @@ public class Square implements ActionListener{
 	
 	public boolean isMoving(){
 		return isMoving;
+	}
+	
+	public void startMoving(){
+		isMoving = true;
 	}
 	
 	public void update(){

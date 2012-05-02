@@ -51,12 +51,12 @@ public class Bullet extends Image {
 
 		if(value >= 300 && value <= 800){
 			position = 1;
-			pos.setY((int) (pos.getY()+22.5));
+			pos.setY(pos.getY()+22.5);
 		}
 
 		else if(value >= 0 && value <= 300){
 			position = 2;
-			pos.setX((int) (pos.getX() + 22.5));
+			pos.setX(pos.getX() + 22.5);
 		}
 
 		else if(value >= 800 && value <= 1100){
