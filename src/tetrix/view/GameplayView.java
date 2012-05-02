@@ -122,6 +122,10 @@ public class GameplayView extends BasicGameState {
 			player.setScore(20);
 		}
 
+		if(input.isKeyDown(Input.KEY_0)) {
+			blockBox.clearRow(445);
+		}
+
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
