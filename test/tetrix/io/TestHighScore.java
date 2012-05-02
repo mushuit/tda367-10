@@ -20,6 +20,9 @@ public class TestHighScore {
 		Entry first = es.get(0);
 		String name = first.getName();
 		assertTrue(name.equals("Pelle"));
+		//Entry second = es.get(1);
+		//Integer points = second.getPoints();
+		// assertTrue(points.equals(26));
 	}
 
 }

@@ -27,75 +27,75 @@ public class SoundEffects {
 		sfxExplode = new Sound("Sound/explode.wav");		// Sound when the game pauses
 	}
 
-	public void shotPlay(){
+	public static void shotPlay(){
 		sfxShot.play();
 	}
 
-	public void shotLoop(){
+	public static void shotLoop(){
 		sfxShot.loop();
 	}
 
-	public void shotStop(){
+	public static void shotStop(){
 		sfxShot.stop();
 	}
 
-	public void blowUpPlay(){
+	public static void blowUpPlay(){
 		sfxBlowUp.play();
 	}
 
-	public void blowUpLoop(){
+	public static void blowUpLoop(){
 		sfxBlowUp.loop();
 	}
 
-	public void blowUpStop(){
+	public static void blowUpStop(){
 		sfxBlowUp.stop();
 	}
 
-	public void menuClickPlay(){
+	public static void menuClickPlay(){
 		sfxMenuClick.play();
 	}
 
-	public void menuClickLoop(){
+	public static void menuClickLoop(){
 		sfxMenuClick.loop();
 	}
 
-	public void menuClickStop(){
+	public static void menuClickStop(){
 		sfxMenuClick.stop();
 	}
 
-	public void highScorePlay(){
+	public static void highScorePlay(){
 		sfxHighScore.play();
 	}
 
-	public void highScoreLoop(){
+	public static void highScoreLoop(){
 		sfxHighScore.loop();
 	}
 
-	public void highScoreStop(){
+	public static void highScoreStop(){
 		sfxHighScore.stop();
 	}
 
-	public void rowClearedPlay(){
+	public static void rowClearedPlay(){
 		sfxRowCleared.play();
 	}
 
-	public void deathLoop(){
+	public static void deathLoop(){
 		sfxRowCleared.loop();
 	}
 
-	public void rowClearedStop(){
+	public static void rowClearedStop(){
 		sfxRowCleared.stop();
 	}
 
-	public void explodePlay(){
+	public static void explodePlay(){
 		sfxExplode.play();
 	}
 	
-	public void explodeLoop(){
+	public static void explodeLoop(){
 		sfxExplode.loop();
 	}
 
-	public void explodeStop(){
+	public static void explodeStop(){
 		sfxExplode.stop();
 	}
 
