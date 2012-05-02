@@ -29,11 +29,6 @@ public class IntroView extends BasicGameState{
 
 	private int stateID;
 	
-	private List<Rectangle> pixelBlocks;
-	private int pixelX;
-	private int pixelY;
-	private Timer timer;
-	
 	private Image background;
 	private Image clickHere;
 	private Image clickHereMouseOver;
@@ -46,7 +41,6 @@ public class IntroView extends BasicGameState{
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
-		timer.schedule(new FallingPixels(), 1 * 1000);
 	}
 	
 	@Override
@@ -58,7 +52,6 @@ public class IntroView extends BasicGameState{
 		clickHereMouseOver = new Image(themeFolder + "clickHereMouseOver.png");
 		clickHereXpos = 200-(clickHere.getWidth()/2);
 		clickHereYpos = 414;
-		pixelBlocks = new ArrayList<Rectangle>();
 	}
 
 	@Override
@@ -70,12 +63,6 @@ public class IntroView extends BasicGameState{
 			clickHereMouseOver.draw(clickHereXpos, clickHereYpos);
 		} else {
 			clickHere.draw(clickHereXpos, clickHereYpos);
-		}
-		
-		g.setColor(Color.black);
-		for(int i = 0; i < pixelBlocks.size(); i++){
-			g.fillRect(((Bullet) pixelBlocks.get(i)).getX(), ((Bullet) pixelBlocks.get(i)).getY(), 5, 5);
-
 		}
 	}
 
@@ -107,18 +94,6 @@ public class IntroView extends BasicGameState{
 	public int getID() {
 		return stateID;
 	}
-	
-	public void addPixelBlock() {
-		int xPos = 0 + (int)(Math.random() * ((Util.WINDOW_WIDTH - 0) + 1));
-		pixelBlocks.add(new Rectangle(xPos,0,5,5));
-	}
 
-}
-
-class FallingPixels extends TimerTask {
-	@Override
-	public void run() {
-		
-	}	
 }
 
