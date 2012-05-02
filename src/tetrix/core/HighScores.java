@@ -1,13 +1,12 @@
 package tetrix.core;
 
-import java.awt.List;
+import java.util.List;
 
 /**
  * 
  * @author Andreas Karlberg
  *
  */
-
 
 public interface HighScores {
 	List<Entry> getHighScore(String fileName);

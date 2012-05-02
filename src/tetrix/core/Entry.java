@@ -7,11 +7,19 @@ package tetrix.core;
  */
 
 public class Entry {
-	String name;
-	int points;
+	private String name;
+	private int points;
 	
 	public Entry (String name, int points){
 		this.name = name;
 		this.points = points;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPoints() {
+		return points;
 	}
 }
