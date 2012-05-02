@@ -16,7 +16,6 @@ public class HighScore2 {
 	FileReader f;
 	public HighScore2() throws FileNotFoundException {
 	   f = new FileReader("highscore/highscore.dat");
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<Entry> getHighScore(){

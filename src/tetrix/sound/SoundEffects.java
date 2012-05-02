@@ -17,6 +17,7 @@ public class SoundEffects {
 	private static Sound sfxMenuClick;
 	private static Sound sfxHighScore;
 	private static Sound sfxDeath;
+	private static Sound sfxPause;
 
 	public SoundEffects() throws SlickException{
 		sfxShot = new Sound("Sound/music.wav");		// Sound of the bullet when you shoot
@@ -25,6 +26,7 @@ public class SoundEffects {
 		sfxMenuClick = new Sound("Sound/test.wav");	// Sound of a menu click
 		sfxHighScore = new Sound("Sound/test.wav");	// Sound when you break a new High Score
 		sfxDeath = new Sound("Sound/test.wav");		// Sound when it is Game Over
+		sfxPause = new Sound("Sound/test.wav");		// Sound when the game pauses
 	}
 
 	public void shotPlay(){
@@ -99,4 +101,18 @@ public class SoundEffects {
 		sfxDeath.stop();
 	}
 
+	public void pausePlay(){
+		sfxPause.play();
+	}
+	
+	public void pauseLoop(){
+		sfxPause.loop();
+	}
+
+	public void pauseStop(){
+		sfxPause.stop();
+	}
+
+
+	
 }
