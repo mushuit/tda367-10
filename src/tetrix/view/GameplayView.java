@@ -110,7 +110,7 @@ public class GameplayView extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
-		int updateSpeed = 1000 /Util.FPS;
+		int updateSpeed = 500 /Util.FPS;
 
 		if(input.isKeyDown(Input.KEY_M)) {
 			player.setName("Mushu");
