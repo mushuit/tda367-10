@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.Test;
 
 import tetrix.core.Entry;
-import tetrix.core.FileReader;
 import tetrix.core.HighScore2;
 
 public class TestHighScore {
@@ -18,11 +17,20 @@ public class TestHighScore {
 		HighScore2 h = new HighScore2();
 		List<Entry> es = h.getHighScore();
 		Entry first = es.get(0);
+		Entry second = es.get(1);
+		Entry third = es.get(2);
 		String name = first.getName();
+		String name2 = second.getName(); 
+		String name3 = third.getName();
+		Integer points = first.getPoints();
+		Integer points2 = second.getPoints();
+		Integer points3 = third.getPoints();
 		assertTrue(name.equals("Pelle"));
-		//Entry second = es.get(1);
-		//Integer points = second.getPoints();
-		// assertTrue(points.equals(26));
+		assertTrue(name2.equals("Olle"));
+		assertTrue(name3.equals("Kalle"));
+		assertTrue(points.equals(26));
+		assertTrue(points2.equals(23));
+		assertTrue(points3.equals(12));
 	}
 
 }
