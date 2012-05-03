@@ -1,11 +1,9 @@
 package tetrix.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -15,9 +13,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 
-import tetrix.core.Bullet;
-import tetrix.core.ThemeHandler;
-import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
@@ -32,13 +27,22 @@ public class IntroView extends BasicGameState{
 	
 	private Image background;
 	private Image clickHere;
-	private Image clickHereMouseOver;
 
 	private int clickHereXpos;
 	private int clickHereYpos;
-	 
-	private boolean inClickHereArea = false;
-	private String themeFolder;
+	private int alphaValue;
+	
+	private List<Rectangle> pixelStorm;
+	
+	/**
+	 * Making the "Press Any Key" text blink at a given rate
+	 */
+	private Timer blinkTimer;
+	
+	/**
+	 * Making the pixel blocks fall down at a given rate
+	 */
+	private Timer pixelStormTimer;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
@@ -47,12 +51,29 @@ public class IntroView extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		themeFolder = ThemeHandler.getTheme();
-		background = new Image(themeFolder + "introbackg.png");
-		clickHere = new Image(themeFolder + "clickHere.png");
-		clickHereMouseOver = new Image(themeFolder + "clickHereMouseOver.png");
-		clickHereXpos = 200-(clickHere.getWidth()/2);
-		clickHereYpos = 414;
+		background = new Image("img/introbackg.png");
+		clickHere = new Image("img/press_any_key.png");
+		clickHereXpos = Util.WINDOW_WIDTH/2 - clickHere.getWidth()/2;
+		clickHereYpos = 310;
+		alphaValue = 100;
+		
+		blinkTimer = new Timer();
+	    blinkTimer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	            try {
+					blink();
+				} catch (SlickException e) {
+					e.printStackTrace();
+				} 
+	          }
+	        }, 1000, 1000);
+	    
+	    pixelStormTimer = new Timer();
+	    pixelStormTimer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+					System.out.print("Hej");
+	          }
+	        }, 500, 500);
 	}
 
 	@Override
@@ -60,35 +81,15 @@ public class IntroView extends BasicGameState{
 			throws SlickException {
 		background.draw(0,0);
 		clickHere.draw(clickHereXpos, clickHereYpos);
-		if(inClickHereArea){
-			clickHereMouseOver.draw(clickHereXpos, clickHereYpos);
-		} else {
-			clickHere.draw(clickHereXpos, clickHereYpos);
-		}
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
-		 
-		int mouseX = input.getMouseX();
-		int mouseY = input.getMouseY();
-		 
-		if( ( mouseX >= clickHereXpos && mouseX <= clickHereXpos + clickHere.getWidth()) &&
-			( mouseY >= clickHereYpos && mouseY <= clickHereYpos + clickHere.getHeight()) ){
-			inClickHereArea = true;
-		} else{
-			inClickHereArea = false;
-		}
-		if(inClickHereArea){
-			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
-				sbg.enterState(States.MAINMENUVIEW.getID());
-			}
-		}
+
 		if (input.isKeyPressed(Input.KEY_ENTER) ){
 			sbg.enterState(States.MAINMENUVIEW.getID());
-			SoundEffects.menuClickPlay();
 		}
 	}
 
@@ -96,6 +97,16 @@ public class IntroView extends BasicGameState{
 	public int getID() {
 		return stateID;
 	}
-
+	
+	public void blink() throws SlickException {
+		if(alphaValue == 100) {
+			clickHere.setAlpha(0);
+			alphaValue = 0;
+		} else {
+			clickHere.setAlpha(100);
+			alphaValue = 100;
+		}
+		
+	}
 }
 
