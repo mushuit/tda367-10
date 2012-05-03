@@ -1,5 +1,11 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 public class PowerBullet {
 	private Position pos;
 	int position = 0;

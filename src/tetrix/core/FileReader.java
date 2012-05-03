@@ -20,21 +20,13 @@ public class FileReader {
 
 		public String getRow(){
 			return scanner.nextLine();
-			/**   log("Reading from file.");
-			    StringBuilder text = new StringBuilder();
-			    String NL = System.getProperty("line.separator");
-			    try {
-			      while (scanner.hasNextLine()){
-			        text.append(scanner.nextLine() + NL);
-			      }
-			    }
-			    finally{
-			      scanner.close();
-			    }
-			   log("Text read in: " + text);
-			   */
+
 		}
 		public boolean hasRow(){
 			return scanner.hasNext();
+		}
+		
+		public void writeRow(String row) {
+			
 		}
 }
