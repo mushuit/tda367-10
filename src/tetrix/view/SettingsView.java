@@ -61,8 +61,8 @@ public class SettingsView extends BasicGameState {
 	private boolean inMusicSliderArea = false;
 	private boolean inMusicPinArea = false;
 	
-	private int fxVolume;
-	private int musicVolume;
+	private double fxVolume;
+	private double musicVolume;
 	
 	
 	public SettingsView(int stateID) {
@@ -170,7 +170,7 @@ public class SettingsView extends BasicGameState {
 		} else {
 			inMusicPinArea = false;
 		}
-		if ( (mouseX >= fxSliderXpos + (fxSliderPin.getWidth()/2) && mouseX <= (fxSliderXpos + fxSlider.getWidth() - musicSliderPin.getWidth()/2)) &&
+		if ( (mouseX >= fxSliderXpos + (fxSliderPin.getWidth()/2) && mouseX <= (fxSliderXpos + fxSlider.getWidth() - fxSliderPin.getWidth()/2)) &&
 			    ( mouseY >= fxSliderYpos && mouseY <= fxSliderYpos + fxSlider.getHeight())){
 			inFxSliderArea = true;
 		} else {
@@ -199,10 +199,10 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		
-		fxVolume = fxSliderPinXpos - fxSliderXpos;
-		musicVolume = musicSliderPinXpos - musicSliderXpos;
-		System.out.println(""+ fxVolume);
-		System.out.println(""+ musicVolume);
+		fxVolume = 100*(Double.parseDouble(Integer.toString(fxSliderPinXpos - fxSliderXpos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth())));
+		musicVolume = 100*(Double.parseDouble(Integer.toString(musicSliderPinXpos - musicSliderXpos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth())));
+//		System.out.println(""+ fxVolume);
+//		System.out.println(""+ musicVolume);
 	}
 
 	@Override
