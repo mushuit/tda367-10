@@ -90,6 +90,12 @@ public class GameplayView extends BasicGameState {
 		if(blockBox.isInUse()){
 			int i = 0;
 
+			blocks.clear();
+
+			for(int o = 0; o < blockBox.getTetroList().size()*4; o++)
+				blocks.add(block);
+			blockBox.update();
+
 			for(Position[] p : blockBox.getPos()){
 				for(Position pe : p){
 					blocks.get(i).draw(pe.getX(), pe.getY());
@@ -112,12 +118,14 @@ public class GameplayView extends BasicGameState {
 		Input input = gc.getInput();
 		int updateSpeed = 500 /Util.FPS;
 
+
+
 		if(input.isKeyDown(Input.KEY_M)) {
 			player.setName("Mushu");
 			highScore.addToHighScore(player);
 			sbg.enterState(States.HIGHSCOREVIEW.getID());
 		}
-		
+
 		if(blockBox.isRowFilled()) {
 			player.setScore(20);
 		}
@@ -135,7 +143,7 @@ public class GameplayView extends BasicGameState {
 		}
 
 		if(input.isKeyDown(Input.KEY_D)) {
-			 cannon.move(updateSpeed);
+			cannon.move(updateSpeed);
 		}
 
 		if(input.isKeyDown(Input.KEY_A)) {
@@ -143,14 +151,10 @@ public class GameplayView extends BasicGameState {
 		}
 
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			for(int i = 0; i < 4; i++)
-				blocks.add(block);
 			blockBox.newBlock((int)(Math.random()*7+0.5));
 		}
 
 		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			for(int i = 0; i < 4; i++)
-				blocks.add(block);
 			blockBox.newBlock((int)(Math.random()*7+0.5));
 		}
 
@@ -163,7 +167,6 @@ public class GameplayView extends BasicGameState {
 			blockBox.clearBoard();
 		}
 
-			blockBox.update();
 
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){

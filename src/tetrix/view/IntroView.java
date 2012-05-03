@@ -90,6 +90,7 @@ public class IntroView extends BasicGameState implements KeyListener{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
+<<<<<<< HEAD
 		
 		g.setColor(Color.white);
 		for(int i = 0; i< pixelStorm.size();i++) {
@@ -98,6 +99,10 @@ public class IntroView extends BasicGameState implements KeyListener{
 		
 		tetrixLogo.draw(0, 200);
 		pressAnyKey.draw(Util.WINDOW_WIDTH/2 - pressAnyKey.getWidth()/2, 310);
+=======
+		clickHere.draw(clickHereXpos, clickHereYpos);
+		
+>>>>>>> Struktur förändrad lite
 	}
 
 	@Override
