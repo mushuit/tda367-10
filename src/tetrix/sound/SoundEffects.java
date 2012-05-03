@@ -1,12 +1,8 @@
 package tetrix.sound;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-import tetrix.core.HighScore;
-import tetrix.core.Player;
 
 /**
  * A class that provides sound effects. 

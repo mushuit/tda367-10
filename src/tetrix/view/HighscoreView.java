@@ -2,9 +2,6 @@ package tetrix.view;
 
 import java.awt.Font;
 
-import javax.swing.JTable;
-
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -37,15 +34,15 @@ public class HighscoreView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		background= new Image("img/game_background.png");
+		background= new Image("img/background.png");
 		highScore = HighScore.instance();
 		
-		Font font = new Font("Verdana", Font.BOLD, 20);
+		Font font = new Font("Verdana", Font.BOLD, 0);
 		highScoreDisplay = new UnicodeFont(font);
-		highScoreDisplay = new UnicodeFont(font , 15, true, false);
+		highScoreDisplay = new UnicodeFont(font , 20, true, false);
 		highScoreDisplay.addAsciiGlyphs();
 		highScoreDisplay.addGlyphs(400, 600);
-		highScoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.MAGENTA));
+		highScoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
 		try {
 			highScoreDisplay.loadGlyphs();
 		} catch (SlickException e1) {
@@ -74,7 +71,7 @@ public class HighscoreView extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
 		background.draw(0, 0);
 
@@ -89,9 +86,9 @@ public class HighscoreView extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+	public void update(GameContainer arg0, StateBasedGame arg1, int rate)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		
 	}		 
 	
 	@Override

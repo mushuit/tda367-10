@@ -1,7 +1,5 @@
 package tetrix.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,11 +11,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.core.PixelRain;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
@@ -35,20 +33,14 @@ public class IntroView extends BasicGameState implements KeyListener{
 	private Image tetrixLogo;
 	
 	private int alphaValue;
-	private List<Shape> pixelStorm;
 	private Random rand;
-	private int pixelSize;
 	private boolean isKeyPressed;
+	private PixelRain pixelRain;
 	
 	/**
 	 * Making the "Press Any Key" text blink at a given rate
 	 */
 	private Timer blinkTimer;
-	
-	/**
-	 * Making the pixel blocks fall down at a given rate
-	 */
-	private Timer pixelStormTimer;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
@@ -60,12 +52,10 @@ public class IntroView extends BasicGameState implements KeyListener{
 		background = new Image("img/background.png");
 		tetrixLogo = new Image("img/tetrix_logo.png");
 		pressAnyKey = new Image("img/press_any_key.png");
-		
 		alphaValue = 100;
-		pixelStorm = new ArrayList<Shape>();
-		pixelSize = 5;
 		rand = new Random();
 		isKeyPressed = false;
+		pixelRain = new PixelRain(5);
 		
 		blinkTimer = new Timer();
 	    blinkTimer.scheduleAtFixedRate(new TimerTask() {
@@ -77,13 +67,6 @@ public class IntroView extends BasicGameState implements KeyListener{
 				} 
 	          }
 	        }, 1000, 1000);
-	    
-		pixelStormTimer = new Timer();
-	    pixelStormTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	        	pixelStorm.add(new Rectangle(rand.nextInt(395) + 1, 0, pixelSize, pixelSize));
-	          }
-	        }, 200, 200);
 	}
 
 	@Override
@@ -92,8 +75,8 @@ public class IntroView extends BasicGameState implements KeyListener{
 		background.draw(0,0);
 		
 		g.setColor(Color.white);
-		for(int i = 0; i< pixelStorm.size();i++) {
-			g.fill(pixelStorm.get(i));
+		for(int i = 0; i< pixelRain.getList().size();i++) {
+			g.fill(pixelRain.getList().get(i));
 		}
 		
 		tetrixLogo.draw(0, 200);
@@ -109,17 +92,12 @@ public class IntroView extends BasicGameState implements KeyListener{
 		input.clearKeyPressedRecord();
 		
 		if (isKeyPressed){
+			Sound fx = new Sound("sound/button.wav");
+			fx.play();
 			sbg.enterState(States.MAINMENUVIEW.getID());
 		}
-	
-		for(int i = 0; i < pixelStorm.size(); i++) {
-			Shape currentPixel = pixelStorm.get(i);
-			
-			currentPixel.setY(currentPixel.getY() + rate);
-			if(currentPixel.getY() <= 0) {
-				pixelStorm.remove(currentPixel);
-			}
-		}
+		
+		pixelRain.move(rate);
 	}
 
 	@Override
