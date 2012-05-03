@@ -1,4 +1,4 @@
-package tetrix.core;
+package tetrix.core.tetrominos;
 
 /**
  * 
@@ -6,6 +6,8 @@ package tetrix.core;
  *
  */
 
+import tetrix.core.BlockBox;
+import tetrix.core.Position;
 import tetrix.util.Util;
 
 public class J extends Tetromino{
@@ -30,6 +32,12 @@ public class J extends Tetromino{
 			if(i > 2)
 				s[i] = new Square(new Position((super.getLeftIn(-Util.SQUARE_SIZE))+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 102));
 		}
+	}
+
+	@Override
+	public void notWhole() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

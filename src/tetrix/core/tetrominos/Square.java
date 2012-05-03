@@ -1,4 +1,4 @@
-package tetrix.core;
+package tetrix.core.tetrominos;
 
 /**
  * 
@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import tetrix.core.Position;
 import tetrix.util.Util;
 
 public class Square implements ActionListener{
@@ -20,6 +21,8 @@ public class Square implements ActionListener{
 	private Timer timer;
 	private Tetromino t;
 	private int whichSqr;
+	private boolean isSplit;
+	private boolean used;
 
 	public Square(Position pos) {
 		this.pos = pos;
@@ -40,6 +43,8 @@ public class Square implements ActionListener{
 		timer = new Timer(250, this);
 		this.t = t;
 		this.whichSqr = whichSqr;
+		isSplit = false;
+		used = false;
 	}
 	
 	public Position getPos(){
@@ -49,9 +54,13 @@ public class Square implements ActionListener{
 	public void setPos(Position pos){
 		this.pos = pos;
 	}
-	
+
 	public void setY(int f){
 		pos.setY(f);
+	}
+
+	public void setX(int f){
+		pos.setX(f);
 	}
 
 	public int getY(){
@@ -63,12 +72,17 @@ public class Square implements ActionListener{
 	}
 	
 	public boolean destroyed(){
+		used = true;
 		return destroyed;
 	}
 	
 	public void destroy(){
 		destroyed = true;
 		
+	}
+
+	public boolean notUsed(){
+		return used;
 	}
 	
 	public void stop(){
@@ -94,5 +108,9 @@ public class Square implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		falling();
 		timer.stop();
+	}
+	
+	public int getNbr(){
+		return whichSqr;
 	}
 }

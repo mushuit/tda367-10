@@ -81,6 +81,8 @@ public class IntroView extends BasicGameState implements KeyListener{
 		
 		tetrixLogo.draw(0, 200);
 		pressAnyKey.draw(Util.WINDOW_WIDTH/2 - pressAnyKey.getWidth()/2, 310);
+		
+
 	}
 
 	@Override

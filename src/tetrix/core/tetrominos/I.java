@@ -1,4 +1,4 @@
-package tetrix.core;
+package tetrix.core.tetrominos;
 
 /**
  * 
@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
+import org.newdawn.slick.SlickException;
+
+import tetrix.core.BlockBox;
+import tetrix.core.Position;
 import tetrix.util.Util;
 
 public class I extends Tetromino{
@@ -34,8 +38,23 @@ public class I extends Tetromino{
 		}
 	}
 	
-
-
-	
-
+	public void notWhole() throws SlickException{
+	//	System.out.println("notWhole()");
+		Square[] sq = super.getSquares();
+		Square[] sq2 = super.getSquares();
+		for(Square s : super.getSquares()){
+			if(s.destroyed()){
+				if(s.getNbr() == 1){
+					sq2[0].destroy();
+					super.bBox.newBlock(4);
+					sq = bBox.getTetroList().get(bBox.getTetroList().size()-1).getSquares();
+					sq[0].setY(sq2[2].getY());
+					sq[0].setX(sq2[0].getX());
+					sq[1].destroy();
+					sq[2].destroy();
+					sq[3].destroy();
+				}
+			}
+		}
+	}
 }
