@@ -1,4 +1,6 @@
 package tetrix.view;
+//TODO
+//intervall på slider. Button down.
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -59,6 +61,10 @@ public class SettingsView extends BasicGameState {
 	private boolean inMusicSliderArea = false;
 	private boolean inMusicPinArea = false;
 	
+	private int fxVolume;
+	private int musicVolume;
+	
+	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
 	}
@@ -91,7 +97,7 @@ public class SettingsView extends BasicGameState {
 		
 		fxSliderPin = new Image("img/slidePin.png");
 		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		fxSliderPinXpos = 250;
+		fxSliderPinXpos = fxSliderXpos;//-fxSliderPin.getWidth();
 		fxSliderPinYpos = effectsYpos;
 		
 		musicSlider = new Image("img/slider.png");
@@ -100,7 +106,7 @@ public class SettingsView extends BasicGameState {
 		
 		musicSliderPin = new Image("img/slidePin.png");
 		musicSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		musicSliderPinXpos = 250;
+		musicSliderPinXpos = musicSliderXpos-musicSliderPin.getWidth();
 		musicSliderPinYpos = musicYpos;
 		
 		
@@ -182,16 +188,21 @@ public class SettingsView extends BasicGameState {
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
 		} else if(inFxSliderArea){
-			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
-				while (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && (mouseX >= fxSliderXpos) && (mouseX <= fxSliderXpos+fxSlider.getWidth())){
+			//if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
+				if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)/* && (mouseX >= fxSliderXpos) && (mouseX <= fxSliderXpos+fxSlider.getWidth())*/){
 					fxSliderPinXpos = mouseX -(fxSliderPin.getWidth()/2);
 				}
-			}
+			//}
 		} else if(inMusicSliderArea){
-			while (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) && (mouseX >= musicSliderXpos) && (mouseX <= musicSliderXpos+musicSlider.getWidth())){
+			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) /*&& (mouseX >= musicSliderXpos) && (mouseX <= musicSliderXpos+musicSlider.getWidth())*/){
 				musicSliderPinXpos = mouseX -(musicSliderPin.getWidth()/2);
 			}
 		}
+		
+		fxVolume = fxSliderPinXpos - fxSliderXpos + musicSliderPin.getWidth()/2;
+		musicVolume = musicSliderPinXpos - musicSliderXpos + musicSliderPin.getWidth()/2;
+		System.out.println(""+ fxVolume);
+		System.out.println(""+ musicVolume);
 	}
 
 	@Override
