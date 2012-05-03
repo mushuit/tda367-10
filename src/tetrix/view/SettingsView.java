@@ -97,7 +97,7 @@ public class SettingsView extends BasicGameState {
 		
 		fxSliderPin = new Image("img/slidePin.png");
 		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		fxSliderPinXpos = fxSliderXpos;//-fxSliderPin.getWidth();
+		fxSliderPinXpos = fxSliderXpos;
 		fxSliderPinYpos = effectsYpos;
 		
 		musicSlider = new Image("img/slider.png");
@@ -106,7 +106,7 @@ public class SettingsView extends BasicGameState {
 		
 		musicSliderPin = new Image("img/slidePin.png");
 		musicSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		musicSliderPinXpos = musicSliderXpos-musicSliderPin.getWidth();
+		musicSliderPinXpos = musicSliderXpos;
 		musicSliderPinYpos = musicYpos;
 		
 		
@@ -170,14 +170,14 @@ public class SettingsView extends BasicGameState {
 		} else {
 			inMusicPinArea = false;
 		}
-		if ( (mouseX >= fxSliderXpos && mouseX <= fxSliderXpos + fxSlider.getWidth()) &&
+		if ( (mouseX >= fxSliderXpos + (fxSliderPin.getWidth()/2) && mouseX <= (fxSliderXpos + fxSlider.getWidth() - musicSliderPin.getWidth()/2)) &&
 			    ( mouseY >= fxSliderYpos && mouseY <= fxSliderYpos + fxSlider.getHeight())){
 			inFxSliderArea = true;
 		} else {
 			inFxSliderArea = false;
 		}
-		if ( (mouseX >= musicSliderXpos && mouseX <= musicSliderXpos + musicSlider.getWidth()) &&
-			    ( mouseY >= musicSliderYpos && mouseY <= musicSliderYpos + musicSlider.getHeight())){
+		if ( (mouseX >= musicSliderXpos + (musicSliderPin.getWidth()/2) && mouseX <= (musicSliderXpos + musicSlider.getWidth() - musicSliderPin.getWidth()/2) &&
+			    ( mouseY >= musicSliderYpos && mouseY <= musicSliderYpos + musicSlider.getHeight()))){
 			inMusicSliderArea = true;
 		} else {
 			inMusicSliderArea = false;
@@ -199,8 +199,8 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		
-		fxVolume = fxSliderPinXpos - fxSliderXpos + musicSliderPin.getWidth()/2;
-		musicVolume = musicSliderPinXpos - musicSliderXpos + musicSliderPin.getWidth()/2;
+		fxVolume = fxSliderPinXpos - fxSliderXpos;
+		musicVolume = musicSliderPinXpos - musicSliderXpos;
 		System.out.println(""+ fxVolume);
 		System.out.println(""+ musicVolume);
 	}
