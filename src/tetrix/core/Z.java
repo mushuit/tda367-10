@@ -1,20 +1,27 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 import tetrix.util.Util;
 
 public class Z extends Tetromino{
 
-	public Z(int startX){
-		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2);
+	public Z(int startX, BlockBox bBox){
+		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2, bBox);
 	}
 
-	public Z(int startX, int leftIn){
-		this(startX, leftIn, Util.SQUARE_SIZE);
+	public Z(int startX, int leftIn, BlockBox bBox){
+		this(startX, leftIn, Util.SQUARE_SIZE, bBox);
+	}
+	
+	public Z(int startX, int leftIn, int fallspeed, BlockBox bBox){
+		super(startX, leftIn,fallspeed, bBox);
 	}
 
-	public Z(int startX, int leftIn, int fallspeed){
-		super(startX, leftIn, fallspeed);
-	}
 
 	public void build() {	
 		Square[] s = super.getSquares();
@@ -27,16 +34,5 @@ public class Z extends Tetromino{
 		}
 	}
 
-	public boolean isPainted(int y, int x){
-		Square[] s = super.getSquares();
-		if(s[0].getY() == y + Util.SQUARE_SIZE && s[0].getX() == x)
-			return true;
-		else if(s[2].getY() == y + Util.SQUARE_SIZE && s[2].getX() == x)
-			return true;
-		else if(s[3].getY() == y + Util.SQUARE_SIZE && s[3].getX() == x)
-			return true;
-
-		return false;
-	}
 
 }

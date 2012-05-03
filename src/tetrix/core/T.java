@@ -1,24 +1,25 @@
 package tetrix.core;
 
-import tetrix.util.Util;
-
 /**
  * 
  * @author Magnus Huttu
  *
  */
-public class T extends Tetromino{
 
-	public T(int startX){
-		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2);
+import tetrix.util.Util;
+
+public class T extends Tetromino{
+	
+	public T(int startX, BlockBox bBox){
+		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2, bBox);
 	}
 
-	public T(int startX, int leftIn){
-		this(startX, leftIn, Util.SQUARE_SIZE);
+	public T(int startX, int leftIn, BlockBox bBox){
+		this(startX, leftIn, Util.SQUARE_SIZE, bBox);
 	}
 	
-	public T(int startX, int leftIn, int fallspeed){
-		super(startX, leftIn, fallspeed);
+	public T(int startX, int leftIn, int fallspeed, BlockBox bBox){
+		super(startX, leftIn,fallspeed, bBox);
 	}
 
 	public void build() {		
@@ -30,16 +31,5 @@ public class T extends Tetromino{
 		}
 	}
 
-	public boolean isPainted(int y, int x){
-		Square[] s = super.getSquares();
-		if(s[1].getY() == y+Util.SQUARE_SIZE && s[1].getX() == x)
-			return true;
-		else if(s[2].getY() == y+Util.SQUARE_SIZE && s[2].getX() == x)
-			return true;
-		else if(s[3].getY() == y+Util.SQUARE_SIZE && s[3].getX() == x)
-			return true;
-
-		return false;
-	}
 
 }
