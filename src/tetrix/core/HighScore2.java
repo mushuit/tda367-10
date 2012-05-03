@@ -45,7 +45,7 @@ public class HighScore2 implements IHighScore {
 		}
 		Collections.sort(ls);
 		
-		f.writeRow(row);
+		//f.writeRow(row);
 	}
 
 }
