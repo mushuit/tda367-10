@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 
-public interface HighScores {
-	List<Entry> getHighScore(String fileName);
+public interface IHighScore {
+	List<Entry> getHighScore();
 	void setHighScore(String playerName, int score); 
 }

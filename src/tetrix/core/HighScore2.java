@@ -2,6 +2,7 @@ package tetrix.core;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -12,12 +13,12 @@ import java.util.List;
   *
   */
 
-public class HighScore2 {
+public class HighScore2 implements IHighScore {
 	FileReader f;
 	public HighScore2() throws FileNotFoundException {
 		f = new FileReader("highscore/highscore.dat");
 	}
-
+	@Override
 	public List<Entry> getHighScore(){
 
 		List<Entry> l = new ArrayList<Entry>();
@@ -31,6 +32,20 @@ public class HighScore2 {
 		}
 		return l;
 
+	}
+
+
+	@Override
+	public void setHighScore(String playerName, int score) {
+		List<Entry> ls = this.getHighScore();
+		Entry e = ls.get(ls.size());
+		if (e.getPoints()< score){
+			ls.remove(e);
+			ls.add(new Entry(playerName, score));
+		}
+		Collections.sort(ls);
+		
+		f.writeRow(row);
 	}
 
 }
