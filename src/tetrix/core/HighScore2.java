@@ -15,21 +15,22 @@ import java.util.List;
 public class HighScore2 {
 	FileReader f;
 	public HighScore2() throws FileNotFoundException {
-	   f = new FileReader("highscore/highscore.dat");
-		// TODO Auto-generated constructor stub
+		f = new FileReader("highscore/highscore.dat");
 	}
 
 	public List<Entry> getHighScore(){
-		
+
 		List<Entry> l = new ArrayList<Entry>();
-												// gšra en loop
-		String row = f.getRow();
-		String[] np = row.split(":");
-		String name = np[0];
-		String points = np[1];
-		Entry e = new Entry(name, Integer.valueOf(points));
-		l.add(e);
+		while (f.hasRow()){
+			String row = f.getRow();
+			String[] np = row.split(":");
+			String name = np[0];
+			String points = np[1];
+			Entry e = new Entry(name, Integer.valueOf(points));
+			l.add(e);
+		}
 		return l;
+
 	}
 
 }

@@ -58,7 +58,7 @@ public class BlockBox {
 			for(Square s : t.getSquares()){
 				if(!s.destroyed())
 					if(isPainted(s.getX(), s.getY()) || s.getY() > Util.BOX_HEIGHT+50){
-						t.stop();
+						s.stop();
 					}
 			}
 			if(t.isMoving())
@@ -103,7 +103,7 @@ public class BlockBox {
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;
 
-		switch(i){
+		switch(4){
 
 		case 1:
 			minoes.add(new L((int)(Math.random()*8)));
@@ -154,6 +154,10 @@ public class BlockBox {
 
 	public int getRows() {
 		return nbrOfRows;
+	}
+	
+	public boolean isRowFilled() {
+		return rowFilled;
 	}
 
 }

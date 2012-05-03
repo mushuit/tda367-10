@@ -18,7 +18,7 @@ public class TestFileReader {
 		
 	}
 	@Test
-	public void testhasNext() throws FileNotFoundException {
+	public void testhasRow() throws FileNotFoundException {
 		FileReader f = new FileReader("highscore/highscore.dat");
 		boolean b =f.hasRow();
 		assertTrue(b == true);

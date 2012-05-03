@@ -1,13 +1,24 @@
 package tetrix.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 
+import tetrix.core.Bullet;
+import tetrix.core.ThemeHandler;
+import tetrix.sound.SoundEffects;
+import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -27,6 +38,7 @@ public class IntroView extends BasicGameState{
 	private int clickHereYpos;
 	 
 	private boolean inClickHereArea = false;
+	private String themeFolder;
 	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
@@ -35,15 +47,16 @@ public class IntroView extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/introbackg.png");
-		clickHere = new Image("img/clickHere.png");
-		clickHereMouseOver = new Image("img/clickHereMouseOver.png");
+		themeFolder = ThemeHandler.getTheme();
+		background = new Image(themeFolder + "introbackg.png");
+		clickHere = new Image(themeFolder + "clickHere.png");
+		clickHereMouseOver = new Image(themeFolder + "clickHereMouseOver.png");
 		clickHereXpos = 200-(clickHere.getWidth()/2);
 		clickHereYpos = 414;
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics arg2)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
 		clickHere.draw(clickHereXpos, clickHereYpos);
@@ -75,6 +88,7 @@ public class IntroView extends BasicGameState{
 		}
 		if (input.isKeyPressed(Input.KEY_ENTER) ){
 			sbg.enterState(States.MAINMENUVIEW.getID());
+			SoundEffects.menuClickPlay();
 		}
 	}
 
@@ -84,3 +98,4 @@ public class IntroView extends BasicGameState{
 	}
 
 }
+

@@ -1,7 +1,12 @@
 package tetrix.sound;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+
+import tetrix.core.HighScore;
+import tetrix.core.Player;
 
 /**
  * A class that provides sound effects. 
@@ -11,92 +16,95 @@ import org.newdawn.slick.Sound;
  */
 
 public class SoundEffects {
+	
 	private static Sound sfxShot;
 	private static Sound sfxBlowUp;
-	private static Sound sfxStartGame;
 	private static Sound sfxMenuClick;
 	private static Sound sfxHighScore;
-	private static Sound sfxDeath;
-
-	public SoundEffects() throws SlickException{
-		sfxShot = new Sound("Sound/music.wav");		// Sound of the bullet when you shoot
-		sfxBlowUp = new Sound("Sound/test.wav");	// Sound of a block blown up
-		sfxStartGame = new Sound("Sound/test.wav");	// Sound when you start the game 
-		sfxMenuClick = new Sound("Sound/test.wav");	// Sound of a menu click
-		sfxHighScore = new Sound("Sound/test.wav");	// Sound when you break a new High Score
-		sfxDeath = new Sound("Sound/test.wav");		// Sound when it is Game Over
+	private static Sound sfxRowCleared;
+	private static Sound sfxExplode;
+	
+	public SoundEffects() throws SlickException {
+		sfxShot = new Sound("sound/shot.wav");		// Sound of the bullet when you shoot
+		sfxBlowUp = new Sound("sound/hit.wav");	// Sound of a block blown up
+		sfxMenuClick = new Sound("sound/button.wav");	// Sound of a menu click
+		sfxHighScore = new Sound("sound/powerup.wav");	// Sound when you break a new High Score
+		sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when it is Game Over
+		sfxExplode = new Sound("sound/explode.wav");		// Sound when the game pauses
 	}
 
-	public void shotPlay(){
+	public static void shotPlay(){
 		sfxShot.play();
 	}
 
-	public void shotLoop(){
+	public static void shotLoop(){
 		sfxShot.loop();
 	}
 
-	public void shotStop(){
+	public static void shotStop(){
 		sfxShot.stop();
 	}
 
-	public void blowUpPlay(){
+	public static void blowUpPlay(){
 		sfxBlowUp.play();
 	}
 
-	public void blowUpLoop(){
+	public static void blowUpLoop(){
 		sfxBlowUp.loop();
 	}
 
-	public void blowUpStop(){
+	public static void blowUpStop(){
 		sfxBlowUp.stop();
 	}
 
-	public void startGamePlay(){
-		sfxStartGame.play();
-	}
-
-	public void startGameLoop(){
-		sfxStartGame.loop();
-	}
-
-	public void startGameStop(){
-		sfxStartGame.stop();
-	}
-
-	public void menuClickPlay(){
+	public static void menuClickPlay(){
 		sfxMenuClick.play();
 	}
 
-	public void menuClickLoop(){
+	public static void menuClickLoop(){
 		sfxMenuClick.loop();
 	}
 
-	public void menuClickStop(){
+	public static void menuClickStop(){
 		sfxMenuClick.stop();
 	}
 
-	public void highScorePlay(){
+	public static void highScorePlay(){
 		sfxHighScore.play();
 	}
 
-	public void highScoreLoop(){
+	public static void highScoreLoop(){
 		sfxHighScore.loop();
 	}
 
-	public void highScoreStop(){
+	public static void highScoreStop(){
 		sfxHighScore.stop();
 	}
 
-	public void deathPlay(){
-		sfxDeath.play();
+	public static void rowClearedPlay(){
+		sfxRowCleared.play();
 	}
 
-	public void deathLoop(){
-		sfxDeath.loop();
+	public static void rowClearedLoop(){
+		sfxRowCleared.loop();
 	}
 
-	public void deathStop(){
-		sfxDeath.stop();
+	public static void rowClearedStop(){
+		sfxRowCleared.stop();
 	}
 
+	public static void explodePlay(){
+		sfxExplode.play();
+	}
+	
+	public static void explodeLoop(){
+		sfxExplode.loop();
+	}
+
+	public static void explodeStop(){
+		sfxExplode.stop();
+	}
+
+
+	
 }

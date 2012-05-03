@@ -1,6 +1,7 @@
 package tetrix.core;
 
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
 import tetrix.util.Util;
@@ -22,7 +23,7 @@ public class I extends Tetromino{
 	public void build() {	
 		Square[] s = super.getSquares();
 		for(int i = 0; i < 4; i++){
-			s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80));
+			s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80), this, i);
 		}
 	}
 
@@ -39,6 +40,14 @@ public class I extends Tetromino{
 			return true;
 
 		return false;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		int o = Integer.parseInt(e.getPropertyName());
+		if(o == 1 || o == 2){
+			super.notWhole();
+		}
 	}
 	
 
