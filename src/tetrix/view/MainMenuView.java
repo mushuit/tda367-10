@@ -49,7 +49,7 @@ public class MainMenuView extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/menubackg.png");
+		background = new Image("img/background.png");
 		startGame = new Image("img/startGame.png");
 		startGameMouseOver = new Image("img/startGameMouseOver.png");
 		startGameXpos = 200-(startGame.getWidth()/2);

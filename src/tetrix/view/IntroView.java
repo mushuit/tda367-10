@@ -1,17 +1,22 @@
 package tetrix.view;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.Image;
 
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -21,18 +26,19 @@ import tetrix.view.StateHandler.States;
  * @author Linus Karlsson
  *
  */
-public class IntroView extends BasicGameState{
+public class IntroView extends BasicGameState implements KeyListener{
 
 	private int stateID;
 	
 	private Image background;
-	private Image clickHere;
-
-	private int clickHereXpos;
-	private int clickHereYpos;
-	private int alphaValue;
+	private Image pressAnyKey;
+	private Image tetrixLogo;
 	
-	private List<Rectangle> pixelStorm;
+	private int alphaValue;
+	private List<Shape> pixelStorm;
+	private Random rand;
+	private int pixelSize;
+	private boolean isKeyPressed;
 	
 	/**
 	 * Making the "Press Any Key" text blink at a given rate
@@ -51,11 +57,15 @@ public class IntroView extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/introbackg.png");
-		clickHere = new Image("img/press_any_key.png");
-		clickHereXpos = Util.WINDOW_WIDTH/2 - clickHere.getWidth()/2;
-		clickHereYpos = 310;
+		background = new Image("img/background.png");
+		tetrixLogo = new Image("img/tetrix_logo.png");
+		pressAnyKey = new Image("img/press_any_key.png");
+		
 		alphaValue = 100;
+		pixelStorm = new ArrayList<Shape>();
+		pixelSize = 5;
+		rand = new Random();
+		isKeyPressed = false;
 		
 		blinkTimer = new Timer();
 	    blinkTimer.scheduleAtFixedRate(new TimerTask() {
@@ -68,28 +78,47 @@ public class IntroView extends BasicGameState{
 	          }
 	        }, 1000, 1000);
 	    
-	    pixelStormTimer = new Timer();
+		pixelStormTimer = new Timer();
 	    pixelStormTimer.scheduleAtFixedRate(new TimerTask() {
 	        public void run() {
-					System.out.print("Hej");
+	        	pixelStorm.add(new Rectangle(rand.nextInt(395) + 1, 0, pixelSize, pixelSize));
 	          }
-	        }, 500, 500);
+	        }, 200, 200);
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
-		clickHere.draw(clickHereXpos, clickHereYpos);
+		
+		g.setColor(Color.white);
+		for(int i = 0; i< pixelStorm.size();i++) {
+			g.fill(pixelStorm.get(i));
+		}
+		
+		tetrixLogo.draw(0, 200);
+		pressAnyKey.draw(Util.WINDOW_WIDTH/2 - pressAnyKey.getWidth()/2, 310);
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
+	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
+		
+		// Remove all keypresses to prevent errors in other states
 		Input input = gc.getInput();
-
-		if (input.isKeyPressed(Input.KEY_ENTER) ){
+		input.clearKeyPressedRecord();
+		
+		if (isKeyPressed){
 			sbg.enterState(States.MAINMENUVIEW.getID());
+		}
+	
+		for(int i = 0; i < pixelStorm.size(); i++) {
+			Shape currentPixel = pixelStorm.get(i);
+			
+			currentPixel.setY(currentPixel.getY() + rate);
+			if(currentPixel.getY() <= 0) {
+				pixelStorm.remove(currentPixel);
+			}
 		}
 	}
 
@@ -100,13 +129,21 @@ public class IntroView extends BasicGameState{
 	
 	public void blink() throws SlickException {
 		if(alphaValue == 100) {
-			clickHere.setAlpha(0);
+			pressAnyKey.setAlpha(0);
 			alphaValue = 0;
 		} else {
-			clickHere.setAlpha(100);
+			pressAnyKey.setAlpha(100);
 			alphaValue = 100;
 		}
-		
+	}
+	
+	public Color randomColor() {
+		return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+	}
+	
+	@Override
+	public void keyPressed(int key, char c){
+		isKeyPressed = true;
 	}
 }
 
