@@ -1,5 +1,11 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 import java.awt.event.ActionEvent;
 
 import tetrix.util.Util;

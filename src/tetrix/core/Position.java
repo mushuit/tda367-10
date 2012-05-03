@@ -1,5 +1,11 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 public class Position {
 	private int x = 0;
 	private int y = 0;

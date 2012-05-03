@@ -1,5 +1,11 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 import tetrix.util.Util;
 
 public class J extends Tetromino{

@@ -1,5 +1,11 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 
 import java.util.ArrayList;
 import java.util.List;

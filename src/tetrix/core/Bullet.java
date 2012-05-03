@@ -1,5 +1,12 @@
 package tetrix.core;
 
+/**
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
+
 import org.newdawn.slick.Image;
 
 import tetrix.util.Util;

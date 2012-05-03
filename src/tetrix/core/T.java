@@ -1,12 +1,13 @@
 package tetrix.core;
 
-import tetrix.util.Util;
-
 /**
  * 
  * @author Magnus Huttu
  *
  */
+
+import tetrix.util.Util;
+
 public class T extends Tetromino{
 	
 	public T(int startX, BlockBox bBox){
