@@ -6,6 +6,8 @@ package tetrix.core;
  *
  */
 
+import tetrix.core.tetrominos.Square;
+import tetrix.core.tetrominos.Tetromino;
 import tetrix.util.Util;
 
 public class CollisionHandler {

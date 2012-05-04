@@ -1,4 +1,4 @@
-package tetrix.core;
+package tetrix.core.tetrominos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,8 @@ import javax.swing.Timer;
 
 import org.newdawn.slick.SlickException;
 
+import tetrix.core.BlockBox;
+import tetrix.core.Position;
 import tetrix.util.Util;
 
 public abstract class Tetromino implements ActionListener{
@@ -20,8 +22,9 @@ public abstract class Tetromino implements ActionListener{
 	private boolean isMoving;
 	private int leftIn;
 	private Timer timer;
-	private boolean whole;
+	protected boolean newBlock;
 	protected BlockBox bBox;
+
 
 
 
@@ -34,7 +37,7 @@ public abstract class Tetromino implements ActionListener{
 	}
 
 	public Tetromino(int startX, int leftIn, int fallspeed, BlockBox bBox) {
-		whole = true;
+		newBlock = false;
 		this.startX = startX;
 		this.fallspeed = fallspeed;
 		square = new Square[4];
@@ -43,7 +46,6 @@ public abstract class Tetromino implements ActionListener{
 		timer = new Timer(250, this);
 		this.bBox = bBox;
 		build();
-
 	}
 
 	public abstract void build();
@@ -96,37 +98,74 @@ public abstract class Tetromino implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		for(Square s : square){
-			if(whole && (bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
-				s.stop();
-				System.out.println(bBox.isPainted(s.getX(), s.getY()) + " Tetromino " + s.getY());
+		//easy level has the int 0
+		if(bBox.level() == 0){
+			for(Square s : square){
+				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+					s.stop();
+					System.out.println(bBox.isPainted(s.getX(), s.getY()) + " Tetromino " + s.getY());
+
+				}
+				if(s.isMoving())
+					s.falling();
 
 			}
-			if(s.isMoving())
-				s.falling();
 
+			int i = 0;
+			for(Square s : square){
+				if(!s.isMoving())
+					i++;
+			}
+			if(i == 4){
+				stop();
+			}
+			timer.stop();
 		}
 
-		int i = 0;
-		for(Square s : square){
-			if(!s.isMoving())
-				i++;
+		//harder level has bigger int
+		if(bBox.level() == 1){
+			for(Square s : square){
+				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+					stop();
+
+				}
+				if(isMoving())
+					s.falling();
+
+			}
+
+			int i = 0;
+			for(Square s : square){
+				if(!s.isMoving()){
+					i++;
+				}
+				else if(s.destroyed() && s.notUsed()){
+					try {
+						notWhole();
+					} catch (SlickException e1) {
+						System.out.println("Exception in Tetromino");
+						e1.printStackTrace();
+					}
+				}
+
+			}
+			if(i == 4){
+				stop();
+			}
+			timer.stop();
 		}
-		if(i == 4){
-			stop();
-		}
-		timer.stop();
 
 	}
 
-	public boolean isWhole(){
-		return whole;
+
+	public abstract void notWhole() throws SlickException;
+
+	public boolean newBlock(int i){
+		return newBlock;
 	}
 
-	public void notWhole(){
-		whole = false; 
-		System.out.println("It broke!");
+	public void usedBlock(){
+		newBlock = false;
 	}
-
-
 }
+

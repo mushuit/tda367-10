@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import tetrix.core.tetrominos.Tetromino;
+
 public class TetrominoFactory {
 	public Tetromino createRandomTetromino() {		
 //		switch((int) (Math.random()*6)) {

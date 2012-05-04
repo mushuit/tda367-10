@@ -51,6 +51,7 @@ public class StateHandler extends StateBasedGame {
 		
 		GameMusic gm = new GameMusic();
 		gm.gameMusicLoop();
+		gm.setGameMusicVolume(0.6f);
 		
     }
 }

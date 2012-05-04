@@ -12,6 +12,14 @@ import java.util.List;
 
 import org.newdawn.slick.SlickException;
 
+import tetrix.core.tetrominos.I;
+import tetrix.core.tetrominos.J;
+import tetrix.core.tetrominos.L;
+import tetrix.core.tetrominos.O;
+import tetrix.core.tetrominos.S;
+import tetrix.core.tetrominos.Square;
+import tetrix.core.tetrominos.Tetromino;
+import tetrix.core.tetrominos.Z;
 import tetrix.util.Util;
 
 public class BlockBox {
@@ -63,8 +71,16 @@ public class BlockBox {
 		for(Tetromino t : minoes){
 			if(t.isMoving())
 				t.update();
+
+		}
+		for(int i = 0; i < minoes.size(); i++){
+			if(minoes.get(i).newBlock(0)){
+				minoes.get(i).notWhole();
+				minoes.get(i).usedBlock();
+			}
 		}
 
+		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
 			int amountFilled = 0;
 			for(int x = Util.B4_BOX_WIDTH; x < Util.WINDOW_WIDTH-Util.B4_BOX_WIDTH; x+=Util.SQUARE_SIZE){
@@ -86,7 +102,7 @@ public class BlockBox {
 					if(s.getX() == x){
 						if(s.getY() == y + Util.SQUARE_SIZE){
 							//if(!t.isMoving())
-								return true;
+							return true;
 						}
 					}
 			}
@@ -103,33 +119,35 @@ public class BlockBox {
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;
 
+
 		switch(4){
 
-		//		case 1:
-		//			minoes.add(new L((int)(Math.random()*8), this));
-		//			break;
-		//
-		//		case 2:
-		//			minoes.add(new J((int)(Math.random()*8), this));
-		//			break;
-		//
-		//		case 3:
-		//			minoes.add(new O((int)(Math.random()*9), this));
-		//			break;
-		//
+		case 1:
+			minoes.add(new L((int)(Math.random()*8), this));
+			break;
+
+		case 2:
+			minoes.add(new J((int)(Math.random()*8), this));
+			break;
+
+		case 3:
+			minoes.add(new O((int)(Math.random()*9), this));
+			break;
+
 		case 4:
 			minoes.add(new I((int)(Math.random()*7), this));
 			break;
 
-			//		case 5:
-			//			minoes.add(new Z((int)(Math.random()*8), this));
-			//			break;
-			//
-			//		case 6:
-			//			minoes.add(new S((int)(Math.random()*8), this));
-			//			break;
+		case 5:
+			minoes.add(new Z((int)(Math.random()*8), this));
+			break;
+
+		case 6:
+			minoes.add(new S((int)(Math.random()*8), this));
+			break;
 
 		}
+
 	}
 
 	public Position[][] getPos(){
@@ -158,6 +176,10 @@ public class BlockBox {
 
 	public boolean isRowFilled() {
 		return rowFilled;
+	}
+
+	public int level(){
+		return 1;
 	}
 
 }
