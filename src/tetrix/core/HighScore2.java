@@ -20,7 +20,6 @@ public class HighScore2 implements IHighScore {
 	}
 	@Override
 	public List<Entry> getHighScore(){
-
 		List<Entry> l = new ArrayList<Entry>();
 		while (f.hasRow()){
 			String row = f.getRow();
@@ -45,7 +44,17 @@ public class HighScore2 implements IHighScore {
 		}
 		Collections.sort(ls);
 		
+<<<<<<< HEAD
+		String row = f.getRow();
+		
+		for (int i=0; i<10; i++) {
+		f.writeRow(row);
+		
+		}
+		
+=======
 		//f.writeRow(row);
+>>>>>>> 64ae216cdc783f9458f1d98286de7a382a07c213
 	}
 
 }
