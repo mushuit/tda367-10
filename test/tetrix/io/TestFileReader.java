@@ -3,6 +3,9 @@ package tetrix.io;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -13,17 +16,20 @@ public class TestFileReader {
 	@Test
 	public void test() throws FileNotFoundException {
 		FileReader f = new FileReader("highscore/highscore.dat");
-		String s =f.getRow();
-		assertTrue(s.equals("Pelle:26"));
-		
+		List<String> s =f.getRows();
+		assertTrue(s.size()==3);
+
 	}
+
 	@Test
-	public void testhasRow() throws FileNotFoundException {
-		FileReader f = new FileReader("highscore/highscore.dat");
-		boolean b =f.hasRow();
-		assertTrue(b == true);
-		
+	public void testWrite() throws IOException{
+		FileReader f = new FileReader("highscore/highscore2.dat");
+		List<String> ls = new ArrayList<String>();
+		ls.add("xxx");
+		ls.add("yyy");
+		ls.add("zzz");
+		f.writeRows(ls);
 	}
-	
+
 }
 

@@ -33,4 +33,10 @@ public class Entry implements Comparable<Entry> {
 			return 0;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Entry [name=" + name + ", points=" + points + "]";
+	}
+	
 }
