@@ -139,8 +139,10 @@ public abstract class Tetromino implements ActionListener{
 				if(!s.isMoving()){
 					i++;
 				}
-				else if(s.destroyed() && s.notUsed()){
+				System.out.println(s.destroyed() + "  " + !s.used());
+				if(s.destroyed() && !s.used()){
 					try {
+						System.out.println("notWhole() anropas");
 						notWhole();
 					} catch (SlickException e1) {
 						System.out.println("Exception in Tetromino");

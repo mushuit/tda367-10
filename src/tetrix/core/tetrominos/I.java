@@ -18,6 +18,7 @@ import tetrix.core.Position;
 import tetrix.util.Util;
 
 public class I extends Tetromino{
+	private int i = 0;
 	
 	public I(int startX, BlockBox bBox){
 		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2, bBox);
@@ -40,6 +41,8 @@ public class I extends Tetromino{
 	
 	public void notWhole() throws SlickException{
 	//	System.out.println("notWhole()");
+		i++;
+		System.out.println(i);
 		Square[] sq = super.getSquares();
 		Square[] sq2 = super.getSquares();
 		for(Square s : super.getSquares()){
@@ -53,6 +56,9 @@ public class I extends Tetromino{
 					sq[1].destroy();
 					sq[2].destroy();
 					sq[3].destroy();
+					sq[1].use();
+					sq[2].use();
+					sq[3].use();
 				}
 			}
 		}

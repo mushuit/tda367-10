@@ -57,6 +57,7 @@ public class Square implements ActionListener{
 
 	public void setY(int f){
 		pos.setY(f);
+		System.out.println("Square: " + whichSqr + " pos: " + f);
 	}
 
 	public void setX(int f){
@@ -72,7 +73,7 @@ public class Square implements ActionListener{
 	}
 	
 	public boolean destroyed(){
-		used = true;
+		use();
 		return destroyed;
 	}
 	
@@ -80,8 +81,12 @@ public class Square implements ActionListener{
 		destroyed = true;
 		
 	}
+	
+	public void use(){
+		used = true;
+	}
 
-	public boolean notUsed(){
+	public boolean used(){
 		return used;
 	}
 	
