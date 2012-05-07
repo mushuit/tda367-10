@@ -52,7 +52,9 @@ public class HighScore2 implements IHighScore {
 			ss.add(row);
 		}
 		FileReader f = new FileReader("highscore/highscore2.dat");
+		for (int i = 0; i<5; i++){
 		f.writeRows(ss);
+		}
 	}
 }
 
