@@ -1,4 +1,4 @@
- package tetrix;
+package tetrix;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
