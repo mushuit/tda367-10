@@ -5,6 +5,7 @@ import java.awt.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -13,6 +14,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.HighScore;
 import tetrix.core.Player;
+import tetrix.util.Util;
+import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing the high scores.
@@ -26,6 +29,8 @@ public class HighscoreView extends BasicGameState {
 	private HighScore highScore;
 	private UnicodeFont highScoreDisplay;
 	private Image background;
+	private Image backButton;
+	private Image backHover;
 	
 	public HighscoreView(int stateID) {
 		this.stateID = stateID;
@@ -35,6 +40,8 @@ public class HighscoreView extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		background= new Image("img/background.png");
+		backButton = new Image("img/back.png");
+		backHover = new Image("img/menu_hover.png");
 		highScore = HighScore.instance();
 		
 		Font font = new Font("Verdana", Font.BOLD, 0);
@@ -71,9 +78,13 @@ public class HighscoreView extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		Input input = gc.getInput();
 		background.draw(0, 0);
+		int buttonXPos = Util.WINDOW_WIDTH/2 - backButton.getWidth()/2;
+		backHover.draw(buttonXPos, 450);
+		backButton.draw(buttonXPos, 450);
 
 		int yPos = 200;
 		int index = 1;
@@ -83,12 +94,16 @@ public class HighscoreView extends BasicGameState {
 			index++;
 			yPos += 20;
 		}
+		
+		if(input.isKeyPressed(Input.KEY_ENTER)) {
+			sbg.enterState(States.MAINMENUVIEW.getID());
+		}
 	}
 
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int rate)
 			throws SlickException {
-		
+		// Nothing to do here
 	}		 
 	
 	@Override

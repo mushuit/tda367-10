@@ -73,8 +73,8 @@ public class SettingsView extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		// TODO Auto-generated method stub
-		background = new Image("img/settingsbackg.png");
-		back = new Image("img/backButton.png");
+		background = new Image("img/background.png");
+		back = new Image("img/back.png");
 		backMouseOver = new Image("img/backButtonMouseOver.png");
 		backXpos = 200-(back.getWidth()/2);
 		backYpos = 475;												//längst ner
