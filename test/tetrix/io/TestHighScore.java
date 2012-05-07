@@ -41,8 +41,8 @@ public class TestHighScore {
 		Entry first = es.get(0);
 		String name = first.getName();
 		Integer points = first.getPoints();
-		assertTrue(name.equals("kalle"));
-		assertTrue(points.equals(250));
+		assertTrue(name.equals("Pelle"));
+		assertTrue(points.equals(26));
 		
 	}
 
