@@ -24,6 +24,7 @@ public abstract class Tetromino implements ActionListener{
 	private Timer timer;
 	protected boolean newBlock;
 	protected BlockBox bBox;
+	private int l;
 
 
 
@@ -45,6 +46,8 @@ public abstract class Tetromino implements ActionListener{
 		isMoving = true;
 		timer = new Timer(250, this);
 		this.bBox = bBox;
+		newBlock = true;
+		l = 0;
 		build();
 	}
 
@@ -140,7 +143,8 @@ public abstract class Tetromino implements ActionListener{
 					i++;
 				}
 				System.out.println(s.destroyed() + "  " + !s.used());
-				if(s.destroyed() && !s.used()){
+				if(s.destroyed() && !newBlock()){
+					usedBlock();
 					try {
 						System.out.println("notWhole() anropas");
 						notWhole();
@@ -156,18 +160,23 @@ public abstract class Tetromino implements ActionListener{
 			}
 			timer.stop();
 		}
-
 	}
-
 
 	public abstract void notWhole() throws SlickException;
 
-	public boolean newBlock(int i){
+	public boolean newBlock(){
 		return newBlock;
 	}
 
 	public void usedBlock(){
-		newBlock = false;
+		System.out.println("used");
+		if(l == 0){
+			newBlock = false;
+			l++;
+		}
+		else
+			newBlock = true;
+		
 	}
 }
 
