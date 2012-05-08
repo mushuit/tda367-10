@@ -1,7 +1,8 @@
 package tetrix.core;
 
 /**
- * 
+ * @Javadoc
+ * This class makes an Entry of the player name and the players points. 
  * @author Andreas Karlberg
  *
  */
@@ -9,7 +10,7 @@ package tetrix.core;
 public class Entry implements Comparable<Entry> {
 	private String name;
 	private int points;
-	
+
 	public Entry (String name, int points){
 		this.name = name;
 		this.points = points;
@@ -38,5 +39,5 @@ public class Entry implements Comparable<Entry> {
 	public String toString() {
 		return "Entry [name=" + name + ", points=" + points + "]";
 	}
-	
+
 }

@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The File reader reads and writes to the specific highscore file.
+ * @Javadoc
+ * The File reader reads and writes strings to the specific highscore file.
  * @author Andreas Karlberg
  *
  */
 
 public class FileReader {
 	public FileReader(String fileName) throws FileNotFoundException{
-
 
 	}
 
