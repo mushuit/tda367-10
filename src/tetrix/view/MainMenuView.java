@@ -8,6 +8,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -108,13 +110,13 @@ public class MainMenuView extends BasicGameState{
 		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			if(hoverValue == 0) {
-				sbg.enterState(States.GAMEPLAYVIEW.getID());
+				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 1) {
-				sbg.enterState(States.SETTINGSVIEW.getID());
+				sbg.enterState(States.SETTINGSVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 2) {
-				sbg.enterState(States.HIGHSCOREVIEW.getID());
+				sbg.enterState(States.HIGHSCOREVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 3) {
 				gc.exit();

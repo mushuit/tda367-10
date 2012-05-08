@@ -14,6 +14,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.PixelRain;
 import tetrix.util.Util;
@@ -96,7 +98,7 @@ public class IntroView extends BasicGameState implements KeyListener{
 		if (isKeyPressed){
 			Sound fx = new Sound("sound/button.wav");
 			fx.play();
-			sbg.enterState(States.MAINMENUVIEW.getID());
+			sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 		}
 		
 		pixelRain.move(rate);
