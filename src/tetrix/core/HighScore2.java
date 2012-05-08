@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class HighScore2 implements IHighScore {
-	private static int maxPlayers = 4;
+	private static int maxPlayers = 10;
 
 	public HighScore2() throws FileNotFoundException {
 	}
