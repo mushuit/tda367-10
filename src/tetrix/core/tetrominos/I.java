@@ -51,8 +51,8 @@ public class I extends Tetromino{
 					super.bBox.newBlock(0, 1, sq2[0].getPos());
 				}
 				else if(s.getNbr() == 2){
-					sq2[0].destroy();
-					super.bBox.newBlock(0, 1, sq2[0].getPos());
+					sq2[3].destroy();
+					super.bBox.newBlock(0, 2, sq2[3].getPos());
 				}
 			}
 		}

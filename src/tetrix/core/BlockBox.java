@@ -99,6 +99,25 @@ public class BlockBox {
 			}
 		}
 	}
+	
+	public boolean isPainted(Tetromino t){ 
+		for(Tetromino thisT : minoes){
+			for(Square thisS : thisT.getSquares()){
+				for(Square s : t.getSquares()){
+					if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
+						return true;
+					}
+					if(!s.destroyed() && !thisS.destroyed()){
+						if(s.getX() == thisS.getX()){
+							if(thisS.getY() == s.getY()+Util.SQUARE_SIZE)
+								return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	public boolean isPainted(int x, int y) {
 		for(Tetromino t : minoes){
@@ -106,7 +125,7 @@ public class BlockBox {
 				if(!s.destroyed())
 					if(s.getX() == x){
 						if(s.getY() == y + Util.SQUARE_SIZE){
-							//if(!t.isMoving())
+							if(!t.isMoving())
 							return true;
 						}
 					}
