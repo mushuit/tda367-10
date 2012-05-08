@@ -25,6 +25,7 @@ public abstract class Tetromino implements ActionListener{
 	protected boolean newBlock;
 	protected BlockBox bBox;
 	private int l;
+	private boolean stop;
 
 
 
@@ -47,6 +48,7 @@ public abstract class Tetromino implements ActionListener{
 		timer = new Timer(250, this);
 		this.bBox = bBox;
 		newBlock = true;
+		stop = false;
 		l = 0;
 		build();
 	}
@@ -82,6 +84,9 @@ public abstract class Tetromino implements ActionListener{
 
 	public void stop(){
 		isMoving = false;
+		for(Square s : this.getSquares()){
+			s.stop();
+		}
 	}
 
 	public boolean isMoving(){
@@ -106,7 +111,7 @@ public abstract class Tetromino implements ActionListener{
 			for(Square s : square){
 				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
 					s.stop();
-					System.out.println(bBox.isPainted(s.getX(), s.getY()) + " Tetromino " + s.getY());
+					System.out.println(bBox.isPainted(this) + " Tetromino " + s.getY());
 
 				}
 				if(s.isMoving())
@@ -128,13 +133,17 @@ public abstract class Tetromino implements ActionListener{
 		//harder level has bigger int
 		if(bBox.level() == 1){
 			for(Square s : square){
-				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
-					stop();
+				//				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+				if(bBox.isPainted(this)){
+					stop = true;
 
 				}
 				if(isMoving())
 					s.falling();
 
+			}
+			if(stop){
+				stop();
 			}
 
 			int i = 0;
@@ -142,7 +151,6 @@ public abstract class Tetromino implements ActionListener{
 				if(!s.isMoving()){
 					i++;
 				}
-				System.out.println(s.destroyed() + "  " + !s.used());
 				if(s.destroyed() && !newBlock()){
 					usedBlock();
 					try {
@@ -176,7 +184,7 @@ public abstract class Tetromino implements ActionListener{
 		}
 		else
 			newBlock = true;
-		
+
 	}
 }
 

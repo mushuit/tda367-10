@@ -59,6 +59,8 @@ public class TetrominoFactory {
 				s[3].use();
 			}
 			if(sqrDestroyed == 2){
+				s[3].setY(pos.getY());
+				s[3].setX(pos.getX());
 				s[0].destroy();
 				s[0].use();
 				s[1].destroy();

@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 
+ * @Javadoc
+ * The File reader reads and writes strings to the specific highscore file.
  * @author Andreas Karlberg
  *
  */
 
 public class FileReader {
 	public FileReader(String fileName) throws FileNotFoundException{
-
 
 	}
 
@@ -34,7 +34,7 @@ public class FileReader {
 	}
 
 	public void writeRows(List<String> rows) throws IOException {
-		Writer output = new BufferedWriter(new FileWriter("highscore/highscore2.dat"));
+		Writer output = new BufferedWriter(new FileWriter("highscore/highscore.dat"));
 
 		try {
 			for(String s:rows){

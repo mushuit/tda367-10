@@ -58,7 +58,7 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
-		block = new Image("img/block.png");
+		block = new Image("img/block/purple.png");
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blockBox = new BlockBox();
