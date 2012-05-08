@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- * 
+ * A High Score class with a list of maximum 10 players. 
  * @author Andreas Karlberg
  *
  */
@@ -67,7 +67,7 @@ public class HighScore2 implements IHighScore {
 			}
 
 		}
-		FileReader f = new FileReader("highscore/highscore2.dat");
+		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
 
 	

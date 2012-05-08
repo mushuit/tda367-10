@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 
+ * The File reader reads and writes to the specific highscore file.
  * @author Andreas Karlberg
  *
  */
@@ -34,7 +34,7 @@ public class FileReader {
 	}
 
 	public void writeRows(List<String> rows) throws IOException {
-		Writer output = new BufferedWriter(new FileWriter("highscore/highscore2.dat"));
+		Writer output = new BufferedWriter(new FileWriter("highscore/highscore.dat"));
 
 		try {
 			for(String s:rows){
