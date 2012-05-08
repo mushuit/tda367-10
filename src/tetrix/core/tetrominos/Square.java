@@ -57,7 +57,7 @@ public class Square implements ActionListener{
 
 	public void setY(int f){
 		pos.setY(f);
-		System.out.println("Square: " + whichSqr + " pos: " + f);
+	//	System.out.println("Square: " + whichSqr + " pos: " + f);
 	}
 
 	public void setX(int f){
@@ -73,16 +73,18 @@ public class Square implements ActionListener{
 	}
 	
 	public boolean destroyed(){
-		use();
 		return destroyed;
 	}
 	
 	public void destroy(){
+		if(whichSqr == 2 || whichSqr == 1)
+			t.usedBlock();
 		destroyed = true;
 		
 	}
 	
 	public void use(){
+		System.out.println("being used");
 		used = true;
 	}
 

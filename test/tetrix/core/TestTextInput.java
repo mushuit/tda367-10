@@ -7,53 +7,82 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.gui.AbstractComponent;
+import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 
 public class TestTextInput extends BasicGame {
 
 	private TextField textField;
-	private UnicodeFont inputFont;
+	private TrueTypeFont inputFont;
+	private TrueTypeFont inputDescFont;
+	private String message;
+	private static final int windowHeight = 600;
+	private static final int windowWidth = 400;
+	private Shape messageDialog;
 	
-	public TestTextInput(String title) {
+	private int dialogWidth = 210;
+	private int dialogHeight = 100;
+	private String input;
+	
+	/**
+	 * 63
+	 */
+
+	public TestTextInput() {
 		super("TestTextInput");
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
+		g.setColor(Color.blue);
+		g.fill(messageDialog);
+		inputDescFont.drawString((windowWidth/2 - dialogWidth/2) + 10, (windowHeight/2 - dialogHeight/2) + 10, "Congratz! Enter your name", Color.green);
 		textField.render(gc, g);
-		textField.setFocus(true);		
+		textField.setFocus(true);
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		Font font = new Font("Verdana", Font.BOLD, 0);
-		inputFont = new UnicodeFont(font);
-		inputFont = new UnicodeFont(font , 20, true, false);
-		inputFont.addAsciiGlyphs();
-		inputFont.addGlyphs(400, 600);
-		inputFont.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
+		Font font = new Font("Verdana", Font.BOLD, 20);
+		Font descriptionFont = new Font("Verdana", Font.BOLD, 12);
+		inputFont = new TrueTypeFont(font, true);
+		inputDescFont = new TrueTypeFont(descriptionFont, true);
 		
-		 textField = new TextField(gc, inputFont, 100, 100, 100, 100);
-	     textField.setBackgroundColor(Color.blue);
-	     textField.setBorderColor(Color.yellow);
-	     textField.setTextColor(Color.white);
+		messageDialog = new Rectangle(windowWidth / 2
+				- dialogWidth / 2, windowHeight / 2 - dialogHeight / 2,
+				dialogWidth, dialogHeight);
 		
+		int textFieldWidth = 200;
+		int textFieldHeight = 30;
+		textField = new TextField(gc, inputFont, windowWidth / 2
+				- textFieldWidth / 2, (windowHeight / 2 - textFieldHeight / 2),
+				textFieldWidth, textFieldHeight);
+		textField.setBackgroundColor(Color.white);
+		textField.setBorderColor(Color.pink);
+		textField.setTextColor(Color.black);
 	}
 
 	@Override
-	public void update(GameContainer arg0, int arg1) throws SlickException {
-		// TODO Auto-generated method stub
+	public void update(GameContainer gc, int rate) throws SlickException {
+		Input input = gc.getInput();
 		
+		if(input.isKeyPressed(Input.KEY_ENTER)) {
+			message = textField.getText();
+			System.out.println(message);
+		}
 	}
-	
-	public static void main(String[] args) {
-		AppGameContainer app = new AppGameContainer( new SlickBasicGame() );
-	 
-	         app.setDisplayMode(800, 600, false);
-	         app.start();
+
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new TestTextInput());
+		app.setDisplayMode(windowWidth, windowHeight, false);
+		app.start();
 	}
 
 }

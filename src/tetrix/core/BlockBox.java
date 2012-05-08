@@ -29,6 +29,8 @@ public class BlockBox {
 	private List<Tetromino> minoes;
 	private boolean isInUse;
 	private boolean rowFilled;
+	private TetrominoFactory tF;
+	private int level;
 
 	public BlockBox() throws SlickException {
 		this(10,20);
@@ -40,6 +42,8 @@ public class BlockBox {
 		isInUse = false;
 		minoes = new ArrayList<Tetromino>();
 		rowFilled = false;
+		tF = new TetrominoFactory();
+		level = 1;
 		clearBoard();
 	}
 
@@ -73,12 +77,13 @@ public class BlockBox {
 				t.update();
 
 		}
-		for(int i = 0; i < minoes.size(); i++){
-			if(minoes.get(i).newBlock(0)){
-				minoes.get(i).notWhole();
-				minoes.get(i).usedBlock();
-			}
-		}
+//		for(int i = 0; i < minoes.size(); i++){
+//			if(!minoes.get(i).newBlock()){
+//				System.out.println("notWhole()");
+//				minoes.get(i).notWhole();
+//				minoes.get(i).usedBlock();
+//			}
+//		}
 
 		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
@@ -116,38 +121,31 @@ public class BlockBox {
 		return temp;
 	}
 
+	public void newBlock() throws SlickException{	
+		isInUse = true;
+		tF.createRandomTetromino(this);
+	}
+
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;
+		tF.createTetromino(this, 0);
+	}
 
+	/**
+	 * Create a new block with more data.
+	 *
+	 * @param i represents which type of block that is supposed to be created
+	 * @param sqrDestroyed represens which square that has been destroyed
+	 * @param pos represents where the block should start
+	 * @throws SlickException
+	 */
+	public void newBlock(int i, int sqrDestroyed, Position pos) throws SlickException{
+		isInUse = true;
+		tF.createBrokenTetromino(this, i, sqrDestroyed, pos);
+	}
 
-		switch(4){
-
-		case 1:
-			minoes.add(new L((int)(Math.random()*8), this));
-			break;
-
-		case 2:
-			minoes.add(new J((int)(Math.random()*8), this));
-			break;
-
-		case 3:
-			minoes.add(new O((int)(Math.random()*9), this));
-			break;
-
-		case 4:
-			minoes.add(new I((int)(Math.random()*7), this));
-			break;
-
-		case 5:
-			minoes.add(new Z((int)(Math.random()*8), this));
-			break;
-
-		case 6:
-			minoes.add(new S((int)(Math.random()*8), this));
-			break;
-
-		}
-
+	public void addMino(Tetromino t){
+		minoes.add(t);
 	}
 
 	public Position[][] getPos(){
@@ -177,9 +175,17 @@ public class BlockBox {
 	public boolean isRowFilled() {
 		return rowFilled;
 	}
+	
+	/**
+	 * There are 2 levels at the moment, level 0 and level 1, 0 represents easy-mode and 1 represents hard-mode.
+	 * @param i sets which level that is supposed to be played
+	 */
+	public void setLevel(int i){
+		level = i;
+	}
 
 	public int level(){
-		return 1;
+		return level;
 	}
 
 }

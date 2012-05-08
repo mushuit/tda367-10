@@ -19,7 +19,7 @@ import tetrix.util.Util;
 
 public class I extends Tetromino{
 	private int i = 0;
-	
+
 	public I(int startX, BlockBox bBox){
 		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH)/2, bBox);
 	}
@@ -27,7 +27,7 @@ public class I extends Tetromino{
 	public I(int startX, int leftIn, BlockBox bBox){
 		this(startX, leftIn, Util.SQUARE_SIZE, bBox);
 	}
-	
+
 	public I(int startX, int leftIn, int fallspeed, BlockBox bBox){
 		super(startX, leftIn,fallspeed, bBox);
 	}
@@ -38,27 +38,21 @@ public class I extends Tetromino{
 			s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80), this, i);
 		}
 	}
-	
+
 	public void notWhole() throws SlickException{
-	//	System.out.println("notWhole()");
+		//	System.out.println("notWhole()");
 		i++;
-		System.out.println(i);
-		Square[] sq = super.getSquares();
+		System.out.println(i); 
 		Square[] sq2 = super.getSquares();
 		for(Square s : super.getSquares()){
 			if(s.destroyed()){
 				if(s.getNbr() == 1){
 					sq2[0].destroy();
-					super.bBox.newBlock(4);
-					sq = bBox.getTetroList().get(bBox.getTetroList().size()-1).getSquares();
-					sq[0].setY(sq2[2].getY());
-					sq[0].setX(sq2[0].getX());
-					sq[1].destroy();
-					sq[2].destroy();
-					sq[3].destroy();
-					sq[1].use();
-					sq[2].use();
-					sq[3].use();
+					super.bBox.newBlock(0, 1, sq2[0].getPos());
+				}
+				else if(s.getNbr() == 2){
+					sq2[0].destroy();
+					super.bBox.newBlock(0, 1, sq2[0].getPos());
 				}
 			}
 		}

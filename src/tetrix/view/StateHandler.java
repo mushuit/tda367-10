@@ -46,7 +46,6 @@ public class StateHandler extends StateBasedGame {
 
 	@Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-		this.getState(States.INTROVIEW.getID()).init(gameContainer, this);
 		
 		
 		GameMusic gm = new GameMusic();
