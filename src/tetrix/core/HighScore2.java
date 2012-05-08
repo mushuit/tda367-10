@@ -22,6 +22,9 @@ public class HighScore2 implements IHighScore {
 	public List<Entry> getHighScore() throws FileNotFoundException{
 		FileReader f = new FileReader("highscore/highscore.dat");
 		List<String> rows = f.getRows();
+		
+		
+		
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows){
 			String[] np = row.split(":");
@@ -29,6 +32,7 @@ public class HighScore2 implements IHighScore {
 			String points = np[1];
 			Entry e = new Entry(name, Integer.valueOf(points));
 			l.add(e);
+		
 		}
 		return l;
 
@@ -50,9 +54,12 @@ public class HighScore2 implements IHighScore {
 		for(Entry e1:ls){
 			String row = e1.getName() + ":" + e1.getPoints();
 			ss.add(row);
+		
 		}
 		FileReader f = new FileReader("highscore/highscore2.dat");
 		f.writeRows(ss);
+		
+		
 	}
 }
 

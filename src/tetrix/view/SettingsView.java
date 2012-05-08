@@ -7,22 +7,24 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing different settings for the user to control.
- * @author Linus Karlsson
+ * @author Linus Karlsson & Jonathan Kara
  *
  */
 public class SettingsView extends BasicGameState {
 
 	private int stateID;
+	private Image tetrixLogo;
 	private Image background;
 	private Image back;
-	private Image backMouseOver;
 	private Image sound;
 	private Image effects;
 	private Image music;
@@ -34,36 +36,35 @@ public class SettingsView extends BasicGameState {
 	
 	private Image fxSliderPinHover;
 	private Image musicSliderPinHover;
+	
+	private Image menuHover;
 
-	private int backXpos;
-	private int backYpos;
-	private int soundXpos;
-	private int soundYpos;
-	private int effectsXpos;
-	private int effectsYpos;
-	private int musicXpos;
-	private int musicYpos;
+	private int backXPos;
+	private int backYPos;
+	private int soundXPos;
+	private int soundYPos;
+	private int effectsXPos;
+	private int effectsYPos;
+	private int musicXPos;
+	private int musicYPos;
 	
-	private int fxSliderXpos;
-	private int fxSliderYpos;
-	private int fxSliderPinXpos;
-	private int fxSliderPinYpos;
+	private int fxSliderXPos;
+	private int fxSliderYPos;
+	private int fxSliderPinXPos;
+	private int fxSliderPinYPos;
 	
-	private int musicSliderXpos;
-	private int musicSliderYpos;
-	private int musicSliderPinXpos;
-	private int musicSliderPinYpos;
+	private int musicSliderXPos;
+	private int musicSliderYPos;
+	private int musicSliderPinXPos;
+	private int musicSliderPinYPos;
 	
-	
-	private boolean inBackArea = false;
-	private boolean inFxSliderArea = false;
-	private boolean inFxPinArea = false;
-	private boolean inMusicSliderArea = false;
-	private boolean inMusicPinArea = false;
-	
-	private double fxVolume;
+	private double fxVolume;						//to the getters later
 	private double musicVolume;
 	
+	private Sound fx;
+	private int hoverValue;
+	private int hoverYPos;
+	private int menuXPos;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -74,42 +75,46 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background = new Image("img/background.png");
+		tetrixLogo = new Image("img/tetrix_logo.png");
 		back = new Image("img/back.png");
-		backMouseOver = new Image("img/backButtonMouseOver.png");
-		backXpos = 200-(back.getWidth()/2);
-		backYpos = 475;												//längst ner
+		backXPos = 200-(back.getWidth()/2);
+		backYPos = 460;												//längst ner
 		
 		sound = new Image("img/sound.png");
-		soundXpos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
-		soundYpos = 300;											//uppe
+		soundXPos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
+		soundYPos = 200;											//uppe
 		
 		effects = new Image("img/effects.png");
-		effectsXpos = 240-(effects.getWidth());
-		effectsYpos = 350;											//Mitten
+		effectsXPos = 240-(effects.getWidth());
+		effectsYPos = 250;											//Mitten
 		
 		music = new Image("img/music.png");
-		musicXpos = 240-(music.getWidth());		//var högersidan ska sitta
-		musicYpos = 390;											//nere
+		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
+		musicYPos = 320;											//nere
 		
 		fxSlider = new Image("img/slider.png");
-		fxSliderXpos = 250;
-		fxSliderYpos = effectsYpos;
+		fxSliderXPos = 250;
+		fxSliderYPos = effectsYPos;
 		
 		fxSliderPin = new Image("img/slidePin.png");
 		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		fxSliderPinXpos = fxSliderXpos;
-		fxSliderPinYpos = effectsYpos;
+		fxSliderPinXPos = fxSliderXPos;
+		fxSliderPinYPos = effectsYPos;
 		
 		musicSlider = new Image("img/slider.png");
-		musicSliderXpos = 250;
-		musicSliderYpos = musicYpos;
+		musicSliderXPos = 250;
+		musicSliderYPos = musicYPos;
 		
 		musicSliderPin = new Image("img/slidePin.png");
 		musicSliderPinHover = new Image ("img/slidePinMouseOver.png");
-		musicSliderPinXpos = musicSliderXpos;
-		musicSliderPinYpos = musicYpos;
+		musicSliderPinXPos = musicSliderXPos;
+		musicSliderPinYPos = musicYPos;
 		
-		
+		fx = new Sound("sound/button.wav");
+		hoverValue = 0;
+		hoverYPos = effectsYPos;
+		menuHover = new Image("img/menu_hover.png");
+		menuXPos = /*(Util.WINDOW_WIDTH/2) - (effects.getWidth()/2)*/ backXPos;					//Change
 	}
 
 	@Override
@@ -117,29 +122,28 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background.draw(0,0);
-		sound.draw(soundXpos, soundYpos);
-		effects.draw(effectsXpos, effectsYpos);
-		music.draw(musicXpos, musicYpos);
 		
-		fxSlider.draw(fxSliderXpos, fxSliderYpos);
-		musicSlider.draw(musicSliderXpos, musicSliderYpos);
+		menuHover.draw(menuXPos, hoverYPos);
+		tetrixLogo.draw(Util.WINDOW_WIDTH/2-(tetrixLogo.getWidth()/2), 100);
+		sound.draw(soundXPos, soundYPos);
+		effects.draw(effectsXPos, effectsYPos);
+		music.draw(musicXPos, musicYPos);
 		
-		back.draw(backXpos, backYpos);
-		if(inBackArea){
-			backMouseOver.draw(backXpos, backYpos);
+		fxSlider.draw(fxSliderXPos, fxSliderYPos);
+		musicSlider.draw(musicSliderXPos, musicSliderYPos);
+		fxSliderPin.draw(fxSliderPinXPos, fxSliderPinYPos);
+		musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
+		
+		back.draw(backXPos, backYPos);
+		if(hoverValue == 0) {
+			fxSliderPinHover.draw(fxSliderPinXPos, fxSliderPinYPos);
 		} else {
-			back.draw(backXpos, backYpos);
+			fxSliderPin.draw(fxSliderPinXPos, fxSliderPinYPos);
 		}
-		if(inFxPinArea){
-			
-			fxSliderPinHover.draw(fxSliderPinXpos, fxSliderPinYpos);
-		} else {
-			fxSliderPin.draw(fxSliderPinXpos, fxSliderPinYpos);
-		}
-		if(inMusicPinArea){
-			musicSliderPinHover.draw(musicSliderPinXpos, musicSliderPinYpos);
-		} else {
-			musicSliderPin.draw(musicSliderPinXpos, musicSliderPinYpos);
+		if(hoverValue == 1) {
+			musicSliderPinHover.draw(musicSliderPinXPos, musicSliderPinYPos);
+		} else{
+			musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
 		}
 	}
 
@@ -148,61 +152,86 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
-		 
-		int mouseX = input.getMouseX();
-		int mouseY = input.getMouseY();
 		
-		if( ( mouseX >= backXpos && mouseX <= backXpos+back.getWidth()) &&
-			( mouseY >= backYpos && mouseY <= backYpos+back.getHeight()) ){
-			inBackArea = true;
-		} else{
-			inBackArea = false;
+		if (input.isKeyPressed(Input.KEY_DOWN)){
+			hoverValue = (hoverValue + 1) % 4;
+			fx.play();
 		}
-		if ( (mouseX >= fxSliderPinXpos && mouseX <= fxSliderPinXpos + fxSliderPin.getWidth()) &&
-			    ( mouseY >= fxSliderPinYpos && mouseY <= fxSliderPinYpos + fxSliderPin.getHeight())){
-			inFxPinArea = true;
-		} else {
-			inFxPinArea = false;
+		else if(input.isKeyPressed(Input.KEY_UP)) {
+			hoverValue--;
+			if(hoverValue < 0) {
+				hoverValue = 3;
+			}
+			fx.play();
 		}
-		if ( (mouseX >= musicSliderPinXpos && mouseX <= musicSliderPinXpos + musicSliderPin.getWidth()) &&
-			    ( mouseY >= musicSliderPinYpos && mouseY <= musicSliderPinYpos + musicSliderPin.getHeight())){
-			inMusicPinArea = true;
-		} else {
-			inMusicPinArea = false;
-		}
-		if ( (mouseX >= fxSliderXpos + (fxSliderPin.getWidth()/2) && mouseX <= (fxSliderXpos + fxSlider.getWidth() - fxSliderPin.getWidth()/2)) &&
-			    ( mouseY >= fxSliderYpos && mouseY <= fxSliderYpos + fxSlider.getHeight())){
-			inFxSliderArea = true;
-		} else {
-			inFxSliderArea = false;
-		}
-		if ( (mouseX >= musicSliderXpos + (musicSliderPin.getWidth()/2) && mouseX <= (musicSliderXpos + musicSlider.getWidth() - musicSliderPin.getWidth()/2) &&
-			    ( mouseY >= musicSliderYpos && mouseY <= musicSliderYpos + musicSlider.getHeight()))){
-			inMusicSliderArea = true;
-		} else {
-			inMusicSliderArea = false;
-		}
+		moveMenuFocus();
 		
-		if(inBackArea){
-			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
+		if(hoverValue == 0) {
+			if(input.isKeyDown(Input.KEY_LEFT)) {
+				if(fxSliderPinXPos > fxSliderXPos){
+					fxSliderPinXPos = fxSliderPinXPos - 1;
+				}
+			}
+			if(fxSliderPinXPos < fxSliderXPos + fxSlider.getWidth() - fxSliderPin.getWidth()){
+				if(input.isKeyDown(Input.KEY_RIGHT)) {
+					fxSliderPinXPos = fxSliderPinXPos + 1;
+				}
+			}
+		}
+		else if(hoverValue == 1) {
+			if(input.isKeyDown(Input.KEY_LEFT)) {
+				if(musicSliderPinXPos > musicSliderXPos){
+					musicSliderPinXPos = musicSliderPinXPos - 1;
+				}
+			}
+			if(musicSliderPinXPos < musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth()){
+				if(input.isKeyDown(Input.KEY_RIGHT)) {
+					musicSliderPinXPos = musicSliderPinXPos + 1;
+				}
+			}
+		}
+		else if(hoverValue == 2) {
+			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change theme
+				
+			}
+			if(input.isKeyPressed(Input.KEY_LEFT)) {
+				
+			}
+		}
+		else if(hoverValue == 3) {
+			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
-		} else if(inFxSliderArea){
-			//if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) ){
-				if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)/* && (mouseX >= fxSliderXpos) && (mouseX <= fxSliderXpos+fxSlider.getWidth())*/){
-					fxSliderPinXpos = mouseX -(fxSliderPin.getWidth()/2);
-				}
-			//}
-		} else if(inMusicSliderArea){
-			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) /*&& (mouseX >= musicSliderXpos) && (mouseX <= musicSliderXpos+musicSlider.getWidth())*/){
-				musicSliderPinXpos = mouseX -(musicSliderPin.getWidth()/2);
-			}
 		}
-		
-		fxVolume = 100*(Double.parseDouble(Integer.toString(fxSliderPinXpos - fxSliderXpos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth())));
-		musicVolume = 100*(Double.parseDouble(Integer.toString(musicSliderPinXpos - musicSliderXpos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth())));
-//		System.out.println(""+ fxVolume);
-//		System.out.println(""+ musicVolume);
+		 
+		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));
+		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
+	}
+	
+	
+	public void moveMenuFocus() {
+		switch(hoverValue) {
+		case 0:
+			hoverYPos = effectsYPos;
+			break;
+		case 1:
+			hoverYPos = musicYPos;
+			break;
+		case 2:
+			hoverYPos = /*themeYPos*/390;      //THEME
+			break;
+		case 3:
+			hoverYPos = backYPos;
+			break;
+		}
+	}
+	//the getters return a value between 0 and 1
+	public double getFxVolume(){
+		return fxVolume;
+	}
+	
+	public double getMusicVolume(){
+		return musicVolume;
 	}
 
 	@Override

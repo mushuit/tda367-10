@@ -36,13 +36,14 @@ public class TestHighScore {
 	@Test
 	public void testUpdate() throws IOException{
 		HighScore2 h = new HighScore2();
-		h.setHighScore("kalle", 250);
+		h.setHighScore("kalle", 9);
 		List<Entry> es = h.getHighScore();
 		Entry first = es.get(0);
 		String name = first.getName();
 		Integer points = first.getPoints();
-		assertTrue(name.equals("kalle"));
-		assertTrue(points.equals(250));
+		assertTrue(name.equals("Pelle"));
+		assertTrue(points.equals(26));
+		
 	}
 
 }
