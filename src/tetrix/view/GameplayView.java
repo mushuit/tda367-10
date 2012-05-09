@@ -73,9 +73,9 @@ public class GameplayView extends BasicGameState {
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
-		ch = new CollisionHandler(blockBox);
 		player = new Player();
 		blockBox = new BlockBox(player);
+		ch = new CollisionHandler(blockBox);
 
 		isPaused = false;
 		timerInterval = 2000;
