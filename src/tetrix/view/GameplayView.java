@@ -14,6 +14,9 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
@@ -48,6 +51,9 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private Player player;
 	private HighScore highScore;
+	
+	private boolean isPaused;
+	private static Image pausedScreen;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -59,6 +65,7 @@ public class GameplayView extends BasicGameState {
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
 		block = new Image("img/block.png");
+		pausedScreen = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blockBox = new BlockBox();
@@ -66,6 +73,7 @@ public class GameplayView extends BasicGameState {
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
 		highScore = HighScore.instance();
+		isPaused = false;
 
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
@@ -109,7 +117,10 @@ public class GameplayView extends BasicGameState {
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
 
 		}
-
+		
+		if(isPaused) {
+			g.copyArea(pausedScreen, 0, 0);
+		}
 	}
 
 	@Override
@@ -117,14 +128,6 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		int updateSpeed = 500 /Util.FPS;
-
-
-
-		if(input.isKeyDown(Input.KEY_M)) {
-			player.setName("Mushu");
-			highScore.addToHighScore(player);
-			sbg.enterState(States.HIGHSCOREVIEW.getID());
-		}
 
 		if(blockBox.isRowFilled()) {
 			player.setScore(20);
@@ -179,11 +182,28 @@ public class GameplayView extends BasicGameState {
 		}
 
 		cannonImage.setRotation(cannon.getRotation());
+		
+		if(input.isKeyPressed(Input.KEY_J)) {
+			pause();
+			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
+		}
 	}
 
 	@Override
 	public int getID() {
 		return stateID;
+	}
+	
+	public void pause() {
+		isPaused = true;
+	}
+	
+	public Image getPausedScreen() {
+		return pausedScreen;
+	}
+	
+	public void newGame() {
+		cannon.setPosition(0, 0);
 	}
 
 }

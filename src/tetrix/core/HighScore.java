@@ -3,7 +3,6 @@ package tetrix.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.newdawn.slick.SavedState;
 
 
 /**
@@ -59,21 +58,5 @@ public class HighScore{
 	
 	public int getMaxListLength() {
 		return maxPlayers;
-	}
-	
-	public void save() {
-
-	}
-	
-	public void load() {
-		
-	}
-	
-	public void getString(){
-		
-	}
-	
-	public void getNumber(){
-		
 	}
 }

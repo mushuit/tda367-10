@@ -10,13 +10,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 
+@SuppressWarnings("deprecation")
 public class TestTextInput extends BasicGame {
 
 	private TextField textField;
@@ -29,7 +27,6 @@ public class TestTextInput extends BasicGame {
 	
 	private int dialogWidth = 210;
 	private int dialogHeight = 100;
-	private String input;
 	
 	/**
 	 * 63
