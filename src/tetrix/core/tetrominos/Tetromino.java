@@ -2,11 +2,6 @@ package tetrix.core.tetrominos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.Timer;
 
 import org.newdawn.slick.SlickException;
@@ -26,6 +21,7 @@ public abstract class Tetromino implements ActionListener{
 	protected BlockBox bBox;
 	private int l;
 	private boolean stop;
+	private int anInt;
 
 
 
@@ -50,6 +46,7 @@ public abstract class Tetromino implements ActionListener{
 		newBlock = true;
 		stop = false;
 		l = 0;
+		anInt = 0;
 		build();
 	}
 
@@ -132,25 +129,23 @@ public abstract class Tetromino implements ActionListener{
 
 		//harder level has bigger int
 		if(bBox.level() == 1){
-			for(Square s : square){
-				//				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+
+
+			int i = 0;
+			for(Square s : square){				
 				if(bBox.isPainted(this)){
+					System.out.println(bBox.isPainted(this) + " Tetromino " + s.getY());
 					stop = true;
+
 
 				}
 				if(isMoving())
 					s.falling();
 
-			}
-			if(stop){
-				stop();
-			}
-
-			int i = 0;
-			for(Square s : square){
 				if(!s.isMoving()){
 					i++;
 				}
+
 				if(s.destroyed() && !newBlock()){
 					usedBlock();
 					try {
@@ -163,28 +158,50 @@ public abstract class Tetromino implements ActionListener{
 				}
 
 			}
+			if(stop)
+				stop();
+
 			if(i == 4){
 				stop();
 			}
+
 			timer.stop();
 		}
 	}
 
-	public abstract void notWhole() throws SlickException;
+	public void notWhole() throws SlickException{
+		Square[] sq2 = getSquares();
+		for(Square s : getSquares()){
+			if(s.destroyed()){
+				if(s.getNbr() == 1){
+					sq2[0].destroy();
+					bBox.newBrokenBlock(this, 1, sq2[0].getPos(), getX());
+				}
+				else if(s.getNbr() == 2){
+					sq2[3].destroy();
+					bBox.newBrokenBlock(this, 2, sq2[3].getPos(), getX());
+				}
+			}
+		}
+	}
 
 	public boolean newBlock(){
 		return newBlock;
 	}
 
 	public void usedBlock(){
-		System.out.println("used");
 		if(l == 0){
 			newBlock = false;
+			System.out.println("used");
 			l++;
 		}
 		else
 			newBlock = true;
 
+	}
+	
+	public int getX(){
+		return startX;
 	}
 }
 

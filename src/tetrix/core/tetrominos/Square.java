@@ -109,7 +109,9 @@ public class Square implements ActionListener{
 	}
 
 	public void falling(){
-		setY(pos.getY()+Util.SQUARE_SIZE);
+		System.out.println(isMoving + " :isMoving " + this.getY() + "  " + (Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE) );
+		if(isMoving() && this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !t.bBox.isPainted(this))
+			setY(pos.getY()+Util.SQUARE_SIZE);
 	}
 
 	public void actionPerformed(ActionEvent e) {
