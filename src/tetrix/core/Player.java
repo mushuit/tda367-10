@@ -21,6 +21,10 @@ public class Player{
 		this.score += score;
 	}
 	
+	public void resetScore() {
+		score = 0;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}

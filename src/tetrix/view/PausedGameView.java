@@ -54,7 +54,7 @@ public class PausedGameView extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = GameplayView.getPausedScreen();
+		background = ((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).getPausedScreen();
 		hover = new Image("img/hover_small.png");
 		pauseBox = new Image("img/popup.png");
 		resume = new Image("img/resume.png");
@@ -102,17 +102,19 @@ public class PausedGameView extends BasicGameState {
 		}
 		
 		moveMenuFocus();
-		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			if(hoverValue == 0) {
+				input.clearKeyPressedRecord();
 				sbg.enterState(States.GAMEPLAYVIEW.getID());
 			}
 			else if(hoverValue == 1) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc, sbg);
+				input.clearKeyPressedRecord();
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc,sbg);
 				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 2) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc, sbg);
+				input.clearKeyPressedRecord();
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc,sbg);
 				sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 3) {

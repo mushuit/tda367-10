@@ -3,6 +3,8 @@ package tetrix.view;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -16,13 +18,11 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
-import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.util.Util;
@@ -44,21 +44,23 @@ public class GameplayView extends BasicGameState {
 	private Bullet bullet; 
 	private BlockBox blockBox;
 	private Image block;
-	private int p = 0;
 	private List<Image> blocks;
 	private CollisionHandler ch;
 
 	private UnicodeFont scoreDisplay;
 	private Player player;
-	private HighScore highScore;
 	
 	private boolean isPaused;
-	private static Image pausedScreen;
+	private Image pausedScreen;
+	private Timer blockTimer;
+	
+	private long timerInterval;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -74,9 +76,8 @@ public class GameplayView extends BasicGameState {
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
-		highScore = HighScore.instance();
 		isPaused = false;
-
+		timerInterval = 2000;
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -88,6 +89,17 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
+		
+		blockTimer = new Timer();
+	    blockTimer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	            try {
+	            	blockBox.newBlock((int)(Math.random()*7+0.5));
+				} catch (SlickException e) {
+					e.printStackTrace();
+				} 
+	          }
+	        }, timerInterval, timerInterval);
 	}
 
 	@Override
@@ -129,7 +141,7 @@ public class GameplayView extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
-		int updateSpeed = 500 /Util.FPS;
+		int updateSpeed = 500/Util.FPS;
 
 		if(blockBox.isRowFilled()) {
 			player.setScore(20);
@@ -155,14 +167,6 @@ public class GameplayView extends BasicGameState {
 			cannon.move(-updateSpeed);
 		}
 
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			blockBox.newBlock((int)(Math.random()*7+0.5));
-		}
-
-		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			blockBox.newBlock((int)(Math.random()*7+0.5));
-		}
-
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
@@ -185,8 +189,8 @@ public class GameplayView extends BasicGameState {
 
 		cannonImage.setRotation(cannon.getRotation());
 		
-		if(input.isKeyPressed(Input.KEY_J)) {
-			pause();
+		if(input.isKeyPressed(Input.KEY_ENTER)) {
+			isPaused = true;
 			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
 		}
 	}
@@ -196,16 +200,11 @@ public class GameplayView extends BasicGameState {
 		return stateID;
 	}
 	
-	public void pause() {
-		isPaused = true;
-	}
-	
-	public static Image getPausedScreen() {
+	public Image getPausedScreen() {
 		return pausedScreen;
 	}
 	
-	public void newGame() {
-		cannon.setPosition(0, 0);
+	public void makeHarder() {
+		timerInterval -= 500;
 	}
-
 }
