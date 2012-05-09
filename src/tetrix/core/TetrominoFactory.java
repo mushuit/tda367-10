@@ -40,7 +40,7 @@ public class TetrominoFactory {
 	
 	public void createTetromino(BlockBox bB, int whichBlock) {		
 		System.out.println(whichBlock);
-		switch(0) {
+		switch(whichBlock) {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
@@ -68,14 +68,14 @@ public class TetrominoFactory {
 
 
 
-	public Tetromino createBrokenTetromino(BlockBox bB, Tetromino t, int sqrDestroyed, Position pos, int x) {	
+	public void createBrokenTetromino(BlockBox bB, int sqrDestroyed, Position pos, int x) {	
 		System.out.println("Creating broken tetromino" + sqrDestroyed + "    x: " + pos.getX() + "    y: " + pos.getY());
 
 			
 			
-			
-		switch(0) {
-		case 0:
+//			
+//		switch(0) {
+//		case 0:
 				t = new I(x, bB);
 				Square[] s = t.getSquares();
 				s[1].destroy();
@@ -94,21 +94,21 @@ public class TetrominoFactory {
 			
 			bB.addMino(t);
 
-		case 1:
-			return new J((int)(Math.random()*8), bB);
-		case 2:
-			return new L((int)(Math.random()*8), bB);
-		case 3:
-			return new O((int)(Math.random()*9), bB);
-		case 4:
-			return new S((int)(Math.random()*8), bB);
-		case 5:
-			return new T((int)(Math.random()*8), bB);
-		case 6:
-			return new Z((int)(Math.random()*8), bB);
-		}
-
-		return null;
+//		case 1:
+//			return new J((int)(Math.random()*8), bB);
+//		case 2:
+//			return new L((int)(Math.random()*8), bB);
+//		case 3:
+//			return new O((int)(Math.random()*9), bB);
+//		case 4:
+//			return new S((int)(Math.random()*8), bB);
+//		case 5:
+//			return new T((int)(Math.random()*8), bB);
+//		case 6:
+//			return new Z((int)(Math.random()*8), bB);
+//		}
+//
+//		return null;
 	}
 }
 

@@ -14,9 +14,7 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tetrix.core.Entry;
 import tetrix.core.HighScore;
-import tetrix.core.HighScore2;
 import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
