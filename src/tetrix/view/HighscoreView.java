@@ -14,14 +14,16 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.core.Entry;
 import tetrix.core.HighScore;
+import tetrix.core.HighScore2;
 import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing the high scores.
- * @author Linus Karlsson
+ * @author Linus Karlsson and Andreas Karlberg
  *
  */
 public class HighscoreView extends BasicGameState {
@@ -30,6 +32,9 @@ public class HighscoreView extends BasicGameState {
 
 	private HighScore highScore;
 	private UnicodeFont highScoreDisplay;
+	private UnicodeFont numberOnHighScoreDisplay;
+	private UnicodeFont nameOnHighScoreDisplay; 
+	private UnicodeFont pointsOnHighScoreDisplay;
 	private Image background;
 	private Image backButton;
 	private Image backHover;
@@ -57,18 +62,43 @@ public class HighscoreView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-
-	
-		Player p1 = new Player(1000, "Erik");
-		Player p2 = new Player(434, "Johan");
-		Player p3 = new Player(4563, "Albin");
-		Player p4 = new Player(6745, "Oskar");
-		Player p5 = new Player(2342, "Tomas");
-		Player p6 = new Player(6436, "Jesper");
-		Player p7 = new Player(1231, "Marcus");
-		Player p8 = new Player(2342, "Tomas");
-		Player p9 = new Player(6436, "Jesper");
-
+		
+		numberOnHighScoreDisplay = highScoreDisplay;
+		nameOnHighScoreDisplay = highScoreDisplay;
+		pointsOnHighScoreDisplay = highScoreDisplay;
+		
+		HighScore2 h;
+		List<Entry> es = null;
+		try {
+			h = new HighScore2();
+			es = h.getHighScore();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Entry first = es.get(0);
+		Entry second = es.get(1);
+		Entry third = es.get(2);
+		Entry fourth = es.get(3);
+		Entry fifth = es.get(4);
+		Entry sixth = es.get(5);
+		Entry seventh = es.get(6);
+		Entry eight = es.get(7);
+		Entry ninth = es.get(8);
+		Entry tenth = es.get(9);
+		
+		Player p1 = new Player(first.getPoints(), first.getName());
+		Player p2 = new Player(second.getPoints(), second.getName());
+		Player p3 = new Player(third.getPoints(), third.getName());
+		Player p4 = new Player(fourth.getPoints(), fourth.getName());
+		Player p5 = new Player(fifth.getPoints(), fifth.getName());
+		Player p6 = new Player(sixth.getPoints(), sixth.getName());
+		Player p7 = new Player(seventh.getPoints(), seventh.getName());
+		Player p8 = new Player(eight.getPoints(), eight.getName());
+		Player p9 = new Player(ninth.getPoints(), ninth.getName());
+		Player p10 = new Player(tenth.getPoints(), tenth.getName());
+		
 		highScore.addToHighScore(p1);
 		highScore.addToHighScore(p2);
 		highScore.addToHighScore(p3);
@@ -78,6 +108,7 @@ public class HighscoreView extends BasicGameState {
 		highScore.addToHighScore(p7);
 		highScore.addToHighScore(p8);
 		highScore.addToHighScore(p9);
+		highScore.addToHighScore(p10);
 	}
 
 	@Override
@@ -92,8 +123,9 @@ public class HighscoreView extends BasicGameState {
 		int yPos = 200;
 		int index = 1;
 		for(Player p : highScore.getList()) {
-			highScoreDisplay.drawString(100, yPos, index + ". " + p.getName() + "     " 
-					+ p.getScore());
+			numberOnHighScoreDisplay.drawString(100, yPos, index + ". ");
+			nameOnHighScoreDisplay.drawString(125, yPos,"   " +  p.getName() + "  ");
+			pointsOnHighScoreDisplay.drawString(240, yPos, "  " + p.getScore());
 			index++;
 			yPos += 20;
 		}

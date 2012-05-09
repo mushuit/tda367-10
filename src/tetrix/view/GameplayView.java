@@ -90,17 +90,6 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-		
-		blockTimer = new Timer();
-	    blockTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            try {
-	            	blockBox.newBlock((int)(Math.random()*7+0.5));
-				} catch (SlickException e) {
-					e.printStackTrace();
-				} 
-	          }
-	        }, 0, timerInterval);
 	}
 
 	@Override
@@ -201,6 +190,19 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public int getID() {
 		return stateID;
+	}
+	
+	public void startTimer(){
+		blockTimer = new Timer();
+	    blockTimer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	            try {
+	            	blockBox.newBlock((int)(Math.random()*7+0.5));
+				} catch (SlickException e) {
+					e.printStackTrace();
+				} 
+	          }
+	        }, 0, timerInterval);
 	}
 	
 	public Image getPausedScreen() {
