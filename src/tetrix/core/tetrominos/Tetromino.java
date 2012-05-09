@@ -188,7 +188,7 @@ public abstract class Tetromino implements ActionListener{
 	public boolean newBlock(){
 		return newBlock;
 	}
-
+//hej
 	public void usedBlock(){
 		if(l == 0){
 			newBlock = false;
