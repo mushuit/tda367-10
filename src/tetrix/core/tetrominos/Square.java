@@ -46,18 +46,17 @@ public class Square implements ActionListener{
 		isSplit = false;
 		used = false;
 	}
-	
+
 	public Position getPos(){
 		return new Position(pos);
 	}
-	
+
 	public void setPos(Position pos){
 		this.pos = pos;
 	}
 
 	public void setY(int f){
 		pos.setY(f);
-	//	System.out.println("Square: " + whichSqr + " pos: " + f);
 	}
 
 	public void setX(int f){
@@ -71,46 +70,49 @@ public class Square implements ActionListener{
 	public int getX() {
 		return pos.getX();
 	}
-	
+
 	public boolean destroyed(){
 		return destroyed;
 	}
-	
+
 	public void destroy(){
 		if(whichSqr == 2 || whichSqr == 1)
 			t.usedBlock();
 		destroyed = true;
-		
+
 	}
-	
+
 	public void use(){
-		System.out.println("being used");
 		used = true;
 	}
 
 	public boolean used(){
 		return used;
 	}
-	
+
 	public void stop(){
 		isMoving = false;
 	}
-	
+
 	public boolean isMoving(){
 		return isMoving;
 	}
-	
+
 	public void startMoving(){
 		isMoving = true;
 	}
-	
+
 	public void update(){
 		timer.start();
 	}
 
 	public void falling(){
-		System.out.println(isMoving + " :isMoving " + this.getY() + "  " + (Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE) );
-		if(isMoving() && this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !t.bBox.isPainted(this))
+		if(isMoving() && this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE)
+			setY(pos.getY()+Util.SQUARE_SIZE);
+	}
+	
+	public void rowFall(){
+		if(this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE)
 			setY(pos.getY()+Util.SQUARE_SIZE);
 	}
 
@@ -118,7 +120,7 @@ public class Square implements ActionListener{
 		falling();
 		timer.stop();
 	}
-	
+
 	public int getNbr(){
 		return whichSqr;
 	}

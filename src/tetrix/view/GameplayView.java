@@ -70,10 +70,10 @@ public class GameplayView extends BasicGameState {
 		block = new Image("img/block/purple.png");
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
-		blockBox = new BlockBox();
 		blocks = new ArrayList<Image>();
 		ch = new CollisionHandler(blockBox);
 		player = new Player();
+		blockBox = new BlockBox(player);
 		highScore = HighScore.instance();
 		isPaused = false;
 
