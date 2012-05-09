@@ -96,6 +96,12 @@ public class IntroView extends BasicGameState implements KeyListener{
 		input.clearKeyPressedRecord();
 		
 		if (isKeyPressed){
+			sbg.addState(new MainMenuView(States.MAINMENUVIEW.getID()));
+			sbg.addState(new LevelsView(States.LEVELSVIEW.getID()));
+			sbg.addState(new GameplayView(States.GAMEPLAYVIEW.getID()));
+			sbg.addState(new SettingsView(States.SETTINGSVIEW.getID()));
+			sbg.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
+			sbg.addState(new PausedGameView(States.PAUSEDGAMEVIEW.getID()));
 			Sound fx = new Sound("sound/button.wav");
 			fx.play();
 			sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());

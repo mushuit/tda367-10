@@ -108,8 +108,8 @@ public class PausedGameView extends BasicGameState {
 				sbg.enterState(States.GAMEPLAYVIEW.getID());
 			}
 			else if(hoverValue == 1) {
-				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc, sbg);
+				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 2) {
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc, sbg);
