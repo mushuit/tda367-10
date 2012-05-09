@@ -1,6 +1,8 @@
 package tetrix.view;
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,7 +14,9 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.core.Entry;
 import tetrix.core.HighScore;
+import tetrix.core.HighScore2;
 import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -25,17 +29,17 @@ import tetrix.view.StateHandler.States;
 public class HighscoreView extends BasicGameState {
 
 	private int stateID;
-	
+
 	private HighScore highScore;
 	private UnicodeFont highScoreDisplay;
 	private Image background;
 	private Image backButton;
 	private Image backHover;
-	
+
 	public HighscoreView(int stateID) {
 		this.stateID = stateID;
 	}
-	
+
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
@@ -43,7 +47,7 @@ public class HighscoreView extends BasicGameState {
 		backButton = new Image("img/back.png");
 		backHover = new Image("img/menu_hover.png");
 		highScore = HighScore.instance();
-		
+
 		Font font = new Font("Verdana", Font.BOLD, 0);
 		highScoreDisplay = new UnicodeFont(font);
 		highScoreDisplay = new UnicodeFont(font , 20, true, false);
@@ -55,7 +59,8 @@ public class HighscoreView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-		
+
+	
 		Player p1 = new Player(1000, "Erik");
 		Player p2 = new Player(434, "Johan");
 		Player p3 = new Player(4563, "Albin");
@@ -65,7 +70,7 @@ public class HighscoreView extends BasicGameState {
 		Player p7 = new Player(1231, "Marcus");
 		Player p8 = new Player(2342, "Tomas");
 		Player p9 = new Player(6436, "Jesper");
-		
+
 		highScore.addToHighScore(p1);
 		highScore.addToHighScore(p2);
 		highScore.addToHighScore(p3);
@@ -94,7 +99,7 @@ public class HighscoreView extends BasicGameState {
 			index++;
 			yPos += 20;
 		}
-		
+
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			sbg.enterState(States.MAINMENUVIEW.getID());
 		}
@@ -105,7 +110,7 @@ public class HighscoreView extends BasicGameState {
 			throws SlickException {
 		// Nothing to do here
 	}		 
-	
+
 	@Override
 	public int getID() {
 		return stateID;
