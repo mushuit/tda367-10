@@ -66,6 +66,8 @@ public class GameplayView extends BasicGameState {
 		cannonImage = new Image("img/cannon2.png");
 		block = new Image("img/block.png");
 		pausedScreen = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
+
+		block = new Image("img/block/purple.png");
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blockBox = new BlockBox();
