@@ -100,7 +100,7 @@ public class GameplayView extends BasicGameState {
 					e.printStackTrace();
 				} 
 	          }
-	        }, timerInterval, timerInterval);
+	        }, 0, timerInterval);
 	}
 
 	@Override
@@ -144,6 +144,8 @@ public class GameplayView extends BasicGameState {
 		Input input = gc.getInput();
 		int updateSpeed = 500/Util.FPS;
 
+		player.increaseScore(1);
+		
 		if(blockBox.isRowFilled()) {
 			player.setScore(20);
 		}
@@ -206,6 +208,6 @@ public class GameplayView extends BasicGameState {
 	}
 	
 	public void makeHarder() {
-		timerInterval -= 500;
+		timerInterval -= 500; 
 	}
 }
