@@ -200,7 +200,7 @@ public class GameplayView extends BasicGameState {
 		isPaused = true;
 	}
 	
-	public Image getPausedScreen() {
+	public static Image getPausedScreen() {
 		return pausedScreen;
 	}
 	

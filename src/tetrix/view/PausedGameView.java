@@ -54,7 +54,7 @@ public class PausedGameView extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = ((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).getPausedScreen();
+		background = GameplayView.getPausedScreen();
 		hover = new Image("img/hover_small.png");
 		pauseBox = new Image("img/popup.png");
 		resume = new Image("img/resume.png");
