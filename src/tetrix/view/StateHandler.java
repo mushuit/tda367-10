@@ -41,6 +41,12 @@ public class StateHandler extends StateBasedGame {
 	@Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
 		this.addState(new IntroView(States.INTROVIEW.getID()));
+		this.addState(new MainMenuView(States.MAINMENUVIEW.getID()));
+		this.addState(new LevelsView(States.LEVELSVIEW.getID()));
+        this.addState(new GameplayView(States.GAMEPLAYVIEW.getID()));
+        this.addState(new SettingsView(States.SETTINGSVIEW.getID()));
+        this.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
+        this.addState(new PausedGameView(States.PAUSEDGAMEVIEW.getID()));
     }
 }
 	
