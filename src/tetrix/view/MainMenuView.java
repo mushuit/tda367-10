@@ -111,6 +111,7 @@ public class MainMenuView extends BasicGameState{
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			if(hoverValue == 0) {
 				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer();
 			}
 			else if(hoverValue == 1) {
 				sbg.enterState(States.SETTINGSVIEW.getID(), new FadeOutTransition(), new FadeInTransition());

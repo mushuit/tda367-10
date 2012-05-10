@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -65,6 +66,9 @@ public class SettingsView extends BasicGameState {
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
+	
+	private String message;
+	private TextField textField;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -145,6 +149,7 @@ public class SettingsView extends BasicGameState {
 		} else{
 			musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
 		}
+		
 	}
 
 	@Override
@@ -152,6 +157,7 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
+
 		if (input.isKeyPressed(Input.KEY_DOWN)){
 			hoverValue = (hoverValue + 1) % 4;
 			fx.play();

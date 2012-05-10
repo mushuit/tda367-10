@@ -9,12 +9,32 @@ import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.T;
 import tetrix.core.tetrominos.Tetromino;
 import tetrix.core.tetrominos.Z;
+import tetrix.util.Util;
 
 public class TetrominoFactory {
 	Tetromino t;
+	Tetromino I;
+	Tetromino J;
+	Tetromino L;
+	Tetromino O;
+	Tetromino T;
+	Tetromino S;
+	Tetromino Z;
+	
+	
+	
+	public TetrominoFactory(){
+		Tetromino I = new I(0, null);
+		Tetromino J = new J(0, null);
+		Tetromino L = new L(0, null);
+		Tetromino O = new O(0, null);
+		Tetromino T = new T(0, null);
+		Tetromino S = new S(0, null);
+		Tetromino Z = new Z(0, null);
+	}
 
 	public void createRandomTetromino(BlockBox bB) {		
-		createTetromino(bB, (int) (Math.random()*6 + 0.5));
+		createTetromino(bB, (int) (Math.random()*6));
 		
 	}
 	
@@ -24,8 +44,58 @@ public class TetrominoFactory {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
+		case 1:
+			bB.addMino(new J((int)(Math.random()*8), bB));
+			break;
+		case 2:
+			bB.addMino(new L((int)(Math.random()*8), bB));
+			break;
+		case 3:
+			bB.addMino(new O((int)(Math.random()*9), bB));
+			break;
+		case 4:
+			bB.addMino(new S((int)(Math.random()*8), bB));
+			break;
+		case 5:
+			bB.addMino(new T((int)(Math.random()*8), bB));
+			break;
+		case 6:
+			bB.addMino(new Z((int)(Math.random()*8), bB));
+			break;
+		}
+
+	}
+
+
+
+	public void createBrokenTetromino(BlockBox bB, int sqrDestroyed, Position pos, int x) {	
+		System.out.println("Creating broken tetromino" + sqrDestroyed + "    x: " + pos.getX() + "    y: " + pos.getY());
+
+			
+			
+//			
+//		switch(0) {
+//		case 0:
+				t = new I(x, bB);
+				Square[] s = t.getSquares();
+				s[1].destroy();
+				s[1].use();
+				s[2].destroy();
+				s[2].use();
+			if(sqrDestroyed == 1){
+				s[0].setY(pos.getY());
+				s[3].destroy();
+				s[3].use();
+			} else if(sqrDestroyed == 2){
+				s[3].setY(pos.getY()+Util.SQUARE_SIZE);
+				s[0].destroy();
+				s[0].use();
+			}
+			
+			bB.addMino(t);
+
 //		case 1:
-//			bB.addMino(new J((int)(Math.random()*8), bB));
+//			return new J((int)(Math.random()*8), bB);
 //		case 2:
 //			return new L((int)(Math.random()*8), bB);
 //		case 3:
@@ -36,56 +106,9 @@ public class TetrominoFactory {
 //			return new T((int)(Math.random()*8), bB);
 //		case 6:
 //			return new Z((int)(Math.random()*8), bB);
-		}
-
-	}
-
-
-
-	public Tetromino createBrokenTetromino(BlockBox bB, int whichBlock, int sqrDestroyed, Position pos) {	
-		System.out.println("Creating broken tetromino" + sqrDestroyed + "    x: " + pos.getX() + "    y: " + pos.getY());
-		switch(whichBlock) {
-		case 0:
-				t = new I((int)(Math.random()*7), bB);
-				Square[] s = t.getSquares();
-			if(sqrDestroyed == 1){
-				s[0].setY(pos.getY());
-				s[0].setX(pos.getX());
-				s[1].destroy();
-				s[1].use();
-				s[2].destroy();
-				s[2].use();
-				s[3].destroy();
-				s[3].use();
-			}
-			if(sqrDestroyed == 2){
-				s[3].setY(pos.getY());
-				s[3].setX(pos.getX());
-				s[0].destroy();
-				s[0].use();
-				s[1].destroy();
-				s[1].use();
-				s[2].destroy();
-				s[2].use();
-			}
-			
-			bB.addMino(t);
-
-		case 1:
-			return new J((int)(Math.random()*8), bB);
-		case 2:
-			return new L((int)(Math.random()*8), bB);
-		case 3:
-			return new O((int)(Math.random()*9), bB);
-		case 4:
-			return new S((int)(Math.random()*8), bB);
-		case 5:
-			return new T((int)(Math.random()*8), bB);
-		case 6:
-			return new Z((int)(Math.random()*8), bB);
-		}
-
-		return null;
+//		}
+//
+//		return null;
 	}
 }
 

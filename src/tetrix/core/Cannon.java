@@ -99,6 +99,12 @@ public class Cannon{
 		return rotation;
 	}	
 	
+	public void reset() {
+		setPosition(Util.WINDOW_WIDTH/2 - Util.CANNON_SIZE/2, 525);
+		value = xPos - Util.CANNON_SIZE/2;
+		rotation = 0;
+	}
+	
 	public int getValue(){
 		return (int) value;
 	}

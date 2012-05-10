@@ -31,19 +31,21 @@ public class BlockBox {
 	private boolean rowFilled;
 	private TetrominoFactory tF;
 	private int level;
+	private Player player;
 
-	public BlockBox() throws SlickException {
-		this(10,20);
+	public BlockBox(Player player) throws SlickException {
+		this(10, 20, player);
 	}
 
-	public BlockBox(int nbrOfColumns, int nbrOfRows) throws SlickException{
+	public BlockBox(int nbrOfColumns, int nbrOfRows, Player player) throws SlickException{
 		this.nbrOfColumns = nbrOfColumns;
 		this.nbrOfRows = nbrOfRows;
 		isInUse = false;
 		minoes = new ArrayList<Tetromino>();
 		rowFilled = false;
 		tF = new TetrominoFactory();
-		level = 1;
+		level = 0;
+		this.player = player;
 		clearBoard();
 	}
 
@@ -58,16 +60,12 @@ public class BlockBox {
 				if(s.getY() == y+Util.SQUARE_SIZE){
 					s.destroy();
 				}
+				System.out.println(s.destroyed());
+				if(!s.destroyed())
+					s.rowFall();
 			}
 		}
-
-		for(Tetromino t : minoes){
-			for(Square s : t.getSquares()){
-				if(s.getY() < y)
-					if(!s.destroyed())
-						s.falling();
-			}
-		}
+		player.increaseScore();
 	}
 
 
@@ -77,14 +75,7 @@ public class BlockBox {
 				t.update();
 
 		}
-//		for(int i = 0; i < minoes.size(); i++){
-//			if(!minoes.get(i).newBlock()){
-//				System.out.println("notWhole()");
-//				minoes.get(i).notWhole();
-//				minoes.get(i).usedBlock();
-//			}
-//		}
-
+		
 		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
 			int amountFilled = 0;
@@ -99,23 +90,19 @@ public class BlockBox {
 			}
 		}
 	}
-	
+
 	public boolean isPainted(Tetromino t){ 
-		for(Tetromino thisT : minoes){
-			for(Square thisS : thisT.getSquares()){
-				for(Square s : t.getSquares()){
-					if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
-						return true;
-					}
-					if(!s.destroyed() && !thisS.destroyed()){
-						if(s.getX() == thisS.getX()){
-							if(thisS.getY() == s.getY()+Util.SQUARE_SIZE)
-								return true;
-						}
-					}
-				}
+		for(Square s : t.getSquares()){
+			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
+				return true;
+			}
+			if(isPainted(s.getX(), s.getY())){
+				System.out.println(isPainted(s.getX(), s.getY()) + "   tetromino: " + t.toString());
+				if(!s.destroyed())
+				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -125,8 +112,8 @@ public class BlockBox {
 				if(!s.destroyed())
 					if(s.getX() == x){
 						if(s.getY() == y + Util.SQUARE_SIZE){
-							if(!t.isMoving())
-							return true;
+							if(!t.isMoving() && !s.isMoving())
+								return true;
 						}
 					}
 			}
@@ -147,7 +134,7 @@ public class BlockBox {
 
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;
-		tF.createTetromino(this, 0);
+		tF.createRandomTetromino(this);
 	}
 
 	/**
@@ -158,9 +145,10 @@ public class BlockBox {
 	 * @param pos represents where the block should start
 	 * @throws SlickException
 	 */
-	public void newBlock(int i, int sqrDestroyed, Position pos) throws SlickException{
+	public void newBrokenBlock(int sqrDestroyed, Position pos, int x) throws SlickException{
 		isInUse = true;
-		tF.createBrokenTetromino(this, i, sqrDestroyed, pos);
+
+		tF.createBrokenTetromino(this, sqrDestroyed, pos, x);
 	}
 
 	public void addMino(Tetromino t){
@@ -194,7 +182,7 @@ public class BlockBox {
 	public boolean isRowFilled() {
 		return rowFilled;
 	}
-	
+
 	/**
 	 * There are 2 levels at the moment, level 0 and level 1, 0 represents easy-mode and 1 represents hard-mode.
 	 * @param i sets which level that is supposed to be played

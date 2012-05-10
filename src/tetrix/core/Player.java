@@ -18,7 +18,19 @@ public class Player{
 	}
 	
 	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void increaseScore() {
+		increaseScore(100);
+	}
+	
+	public void increaseScore(int score) {
 		this.score += score;
+	}
+	
+	public void resetScore() {
+		score = 0;
 	}
 	
 	public void setName(String name) {
