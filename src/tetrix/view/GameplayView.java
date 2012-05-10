@@ -221,6 +221,10 @@ public class GameplayView extends BasicGameState {
 		timerInterval -= value; 
 	}
 	
+	public void setLevel(int i){
+		blockBox.setLevel(i);
+	}
+	
 	@Override
 	public int getID() {
 		return stateID;

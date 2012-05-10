@@ -44,7 +44,7 @@ public class BlockBox {
 		minoes = new ArrayList<Tetromino>();
 		rowFilled = false;
 		tF = new TetrominoFactory();
-		level = 0;
+		level = 1;
 		this.player = player;
 		clearBoard();
 	}
@@ -93,9 +93,10 @@ public class BlockBox {
 
 	public boolean isPainted(Tetromino t){ 
 		for(Square s : t.getSquares()){
-			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
+			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !s.destroyed()){
 				return true;
 			}
+			
 			if(isPainted(s.getX(), s.getY())){
 				System.out.println(isPainted(s.getX(), s.getY()) + "   tetromino: " + t.toString());
 				if(!s.destroyed())

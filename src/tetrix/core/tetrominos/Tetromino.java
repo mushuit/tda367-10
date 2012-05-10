@@ -10,6 +10,12 @@ import tetrix.core.BlockBox;
 import tetrix.core.Position;
 import tetrix.util.Util;
 
+/**
+ * 
+ * @author magnus huttu junghard
+ *
+ */
+
 public abstract class Tetromino implements ActionListener{
 	private Square[] square;
 	private int startX;
@@ -131,22 +137,19 @@ public abstract class Tetromino implements ActionListener{
 		//harder level has bigger int
 		if(bBox.level() == 1){
 
-
 			int i = 0;
-			for(Square s : square){				
+			for(int j = 3; j > -1; j--){
 				if(bBox.isPainted(this)){
 					stop = true;
-
-
 				}
-				if(isMoving())
-					s.falling();
 
-				if(!s.isMoving()){
+				if(isMoving()){
+					square[j].falling();
+				}else{
 					i++;
 				}
 
-				if(s.destroyed() && !newBlock()){
+				if(square[j].destroyed() && !newBlock()){
 					usedBlock();
 					try {
 						System.out.println("notWhole() anropas");
@@ -168,6 +171,7 @@ public abstract class Tetromino implements ActionListener{
 			timer.stop();
 		}
 	}
+
 
 	public void notWhole() throws SlickException{
 		Square[] sq2 = getSquares();
