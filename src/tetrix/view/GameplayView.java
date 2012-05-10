@@ -45,6 +45,7 @@ public class GameplayView extends BasicGameState {
 	private Image tBlock;
 	private Image sBlock;
 	private Image zBlock;
+	private Image lockedBlock;
 	private Image screenCapture;
 
 	private Cannon cannon;
@@ -79,6 +80,7 @@ public class GameplayView extends BasicGameState {
 		tBlock = new Image("img/block/green.png");
 		sBlock = new Image("img/block/red.png");
 		zBlock = new Image("img/block/turquoise.png");
+		lockedBlock = new Image("img/block/locked.png");
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
@@ -229,6 +231,8 @@ public class GameplayView extends BasicGameState {
 			}
 
 			for(Square s : blockBox.getTetroList().get(i).getSquares()){
+				if(!s.isMoving())
+					block = lockedBlock;
 				if(!s.destroyed())
 					blocks.add(block);
 

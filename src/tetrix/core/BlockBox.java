@@ -44,7 +44,7 @@ public class BlockBox {
 		minoes = new ArrayList<Tetromino>();
 		rowFilled = false;
 		tF = new TetrominoFactory();
-		level = 1;
+		level = 0;
 		this.player = player;
 		clearBoard();
 	}
