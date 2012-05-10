@@ -24,6 +24,7 @@ import tetrix.core.CollisionHandler;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
+import tetrix.core.tetrominos.Tetromino;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
@@ -213,29 +214,50 @@ public class GameplayView extends BasicGameState {
 	public void putImage() throws SlickException{
 		Image block = null;
 		blocks.clear();
-		for(int i = 0; i < blockBox.getTetroList().size(); i++){
-			if(blockBox.getTetroList().get(i).toString().equals("I")){
-				block = iBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("J")){
-				block = jBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("L")){
-				block = lBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("O")){
-				block = oBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("T")){
-				block = tBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("S")){
-				block = sBlock;
-			}else if(blockBox.getTetroList().get(i).toString().equals("Z")){
-				block = zBlock;
-			}
-
-			for(Square s : blockBox.getTetroList().get(i).getSquares()){
-				if(!s.isMoving())
+		for(Tetromino t : blockBox.getTetroList()){
+			for(Square s : t.getSquares()){
+				if(!s.isMoving()){
 					block = lockedBlock;
-				if(!s.destroyed())
-					blocks.add(block);
+				} else{
 
+
+					if(t.toString().equals("I")){
+						block = iBlock;
+					}else if(t.toString().equals("J")){
+						block = jBlock;
+					}else if(t.toString().equals("L")){
+						block = lBlock;
+					}else if(t.toString().equals("O")){
+						block = oBlock;
+					}else if(t.toString().equals("T")){
+						block = tBlock;
+					}else if(t.toString().equals("S")){
+						block = sBlock;
+					}else if(t.toString().equals("Z")){
+						block = zBlock;
+					}
+				}
+
+				//		for(int i = 0; i < blockBox.getTetroList().size(); i++){
+				//			if(blockBox.getTetroList().get(i).toString().equals("I")){
+				//				block = iBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("J")){
+				//				block = jBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("L")){
+				//				block = lBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("O")){
+				//				block = oBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("T")){
+				//				block = tBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("S")){
+				//				block = sBlock;
+				//			}else if(blockBox.getTetroList().get(i).toString().equals("Z")){
+				//				block = zBlock;
+				//			}
+
+				if(!s.destroyed()){
+					blocks.add(block);
+				}
 			}
 		}
 	}

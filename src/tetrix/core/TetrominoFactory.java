@@ -73,19 +73,15 @@ public class TetrominoFactory {
 
 		t = new I(x, bB);
 		Square[] s = t.getSquares();
+		s[newSqr].setY(pos.getY());
+		s[0].destroy();
+		s[0].use();
 		s[1].destroy();
 		s[1].use();
 		s[2].destroy();
 		s[2].use(); 
-		if(newSqr == 0){
-			s[0].setY(pos.getY());
-			s[3].destroy();
-			s[3].use();
-		} else if(newSqr == 3){
-			s[3].setY(pos.getY()+Util.SQUARE_SIZE);
-			s[0].destroy();
-			s[0].use();
-		}
+		s[3].destroy();
+		s[3].use();
 
 		bB.addMino(t);
 	}
