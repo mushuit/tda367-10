@@ -1,6 +1,6 @@
 package tetrix.view;
 //TODO
-//intervall på slider. Button down.
+//NYA BILDER
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,7 +8,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -23,6 +22,7 @@ import tetrix.view.StateHandler.States;
 public class SettingsView extends BasicGameState {
 
 	private int stateID;
+	
 	private Image tetrixLogo;
 	private Image background;
 	private Image back;
@@ -59,16 +59,15 @@ public class SettingsView extends BasicGameState {
 	private int musicSliderPinXPos;
 	private int musicSliderPinYPos;
 	
-	private double fxVolume;						//to the getters later
+	private double fxVolume;						
 	private double musicVolume;
+	
+	private int themeYPos;
 	
 	private Sound fx;
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
-	
-	private String message;
-	private TextField textField;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -100,8 +99,8 @@ public class SettingsView extends BasicGameState {
 		fxSliderXPos = 250;
 		fxSliderYPos = effectsYPos;
 		
-		fxSliderPin = new Image("img/slidePin.png");
-		fxSliderPinHover = new Image ("img/slidePinMouseOver.png");
+		fxSliderPin = new Image("img/slide_pin.png");
+		fxSliderPinHover = new Image ("img/slide_pin_hover.png");
 		fxSliderPinXPos = fxSliderXPos;
 		fxSliderPinYPos = effectsYPos;
 		
@@ -109,10 +108,12 @@ public class SettingsView extends BasicGameState {
 		musicSliderXPos = 250;
 		musicSliderYPos = musicYPos;
 		
-		musicSliderPin = new Image("img/slidePin.png");
-		musicSliderPinHover = new Image ("img/slidePinMouseOver.png");
+		musicSliderPin = new Image("img/slide_pin.png");
+		musicSliderPinHover = new Image ("img/slide_pin_hover.png");
 		musicSliderPinXPos = musicSliderXPos;
 		musicSliderPinYPos = musicYPos;
+		
+		themeYPos = 390;
 		
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
@@ -149,7 +150,6 @@ public class SettingsView extends BasicGameState {
 		} else{
 			musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
 		}
-		
 	}
 
 	@Override
@@ -224,14 +224,14 @@ public class SettingsView extends BasicGameState {
 			hoverYPos = musicYPos;
 			break;
 		case 2:
-			hoverYPos = /*themeYPos*/390;      //THEME
+			hoverYPos = themeYPos;      //THEME, still needs to be fixed
 			break;
 		case 3:
 			hoverYPos = backYPos;
 			break;
 		}
 	}
-	//the getters return a value between 0 and 1
+	//these getters return a value between 0 and 1
 	public double getFxVolume(){
 		return fxVolume;
 	}
