@@ -135,7 +135,7 @@ public class BlockBox {
 				if(!s.destroyed())
 					if(s.getX() == x){
 						if(s.getY() == y + Util.SQUARE_SIZE){
-							if(!t.isMoving())
+							if(t.isMoving())
 								return true;
 						}
 					}
