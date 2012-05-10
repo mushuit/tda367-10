@@ -42,6 +42,10 @@ public class O extends Tetromino{
 		
 	}
 
+	@Override
+	public String toString() {
+		return "O";
+	}
 
 
 }

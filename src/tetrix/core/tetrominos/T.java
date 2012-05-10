@@ -39,5 +39,9 @@ public class T extends Tetromino{
 		
 	}
 
+	@Override
+	public String toString() {
+		return "T";
+	}
 
 }
