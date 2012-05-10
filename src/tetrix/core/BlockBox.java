@@ -159,10 +159,10 @@ public class BlockBox {
 	 * @param pos represents where the block should start
 	 * @throws SlickException
 	 */
-	public void newBrokenBlock(int sqrDestroyed, Position pos, int x) throws SlickException{
+	public void newBrokenBlock(int sqrDestroyed, Tetromino t, Position pos, int x) throws SlickException{
 		isInUse = true;
 
-		tF.createBrokenTetromino(this, sqrDestroyed, pos, x);
+		tF.createBrokenTetromino(this, t, sqrDestroyed, pos, x);
 	}
 
 	public void addMino(Tetromino t){

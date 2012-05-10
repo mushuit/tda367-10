@@ -76,14 +76,21 @@ public class Square implements ActionListener{
 	}
 
 	public void destroy(){
-		if(whichSqr == 2 || whichSqr == 1)
 			t.usedBlock();
 		destroyed = true;
+
+	}
+	public void unDestroy(){
+		destroyed = false;
 
 	}
 
 	public void use(){
 		used = true;
+	}
+	
+	public void unUse(){
+		used = false;
 	}
 
 	public boolean used(){

@@ -184,11 +184,11 @@ public abstract class Tetromino implements ActionListener{
 			if(s.destroyed()){
 				if(s.getNbr() == 1){
 					sq2[0].destroy();
-					bBox.newBrokenBlock(0, sq2[0].getPos(), getX());
+					bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
 				}
 				else if(s.getNbr() == 2){
 					sq2[3].destroy();
-					bBox.newBrokenBlock(3, sq2[3].getPos(), getX());
+					bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
 				}
 			}
 		}
