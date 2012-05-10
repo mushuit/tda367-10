@@ -47,8 +47,8 @@ public class LevelsView extends BasicGameState{
 		hardButton = new Image("img/hard.png");
 		
 		hoverValue = 0;
-		easyYPos = 300;
-		hardYPos = 400;
+		easyYPos = 230;
+		hardYPos = 330;
 		hoverYPos = easyYPos;
 		xPos = Util.WINDOW_WIDTH/2 - hover.getWidth()/2;
 	}
@@ -82,15 +82,15 @@ public class LevelsView extends BasicGameState{
 		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			if(hoverValue == 0) {
-			
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_EASY);
 			}
 			else if(hoverValue == 1) {
-				
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_HARD);
 			}
+			
+			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
+			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
 		}
-		
-		sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-		((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
 	}
 		
 	public void moveMenuFocus() {
