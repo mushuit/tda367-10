@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -76,40 +77,39 @@ public class SettingsView extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		// TODO Auto-generated method stub
-		background = new Image("img/background.png");
-		tetrixLogo = new Image("img/tetrix_logo.png");
-		back = new Image("img/back.png");
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
+		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
+		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backXPos = 200-(back.getWidth()/2);
 		backYPos = 460;												//längst ner
 		
-		sound = new Image("img/sound.png");
+		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
 		soundXPos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
 		soundYPos = 200;											//uppe
 		
-		effects = new Image("img/effects.png");
+		effects = ThemeHandler.get(ThemeHandler.EFFECTS_IMG);
 		effectsXPos = 240-(effects.getWidth());
 		effectsYPos = 250;											//Mitten
 		
-		music = new Image("img/music.png");
+		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
 		musicYPos = 320;											//nere
 		
-		fxSlider = new Image("img/slider.png");
+		fxSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		fxSliderXPos = 250;
 		fxSliderYPos = effectsYPos;
 		
-		fxSliderPin = new Image("img/slide_pin.png");
-		fxSliderPinHover = new Image ("img/slide_pin_hover.png");
+		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
+		fxSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
 		fxSliderPinXPos = fxSliderXPos;
 		fxSliderPinYPos = effectsYPos;
 		
-		musicSlider = new Image("img/slider.png");
+		musicSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		musicSliderXPos = 250;
 		musicSliderYPos = musicYPos;
 		
-		musicSliderPin = new Image("img/slide_pin.png");
-		musicSliderPinHover = new Image ("img/slide_pin_hover.png");
+		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
+		musicSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
 		musicSliderPinXPos = musicSliderXPos;
 		musicSliderPinYPos = musicYPos;
 		
@@ -118,16 +118,14 @@ public class SettingsView extends BasicGameState {
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
 		hoverYPos = effectsYPos;
-		menuHover = new Image("img/menu_hover.png");
+		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		menuXPos = /*(Util.WINDOW_WIDTH/2) - (effects.getWidth()/2)*/ backXPos;					//Change
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
 		background.draw(0,0);
-		
 		menuHover.draw(menuXPos, hoverYPos);
 		tetrixLogo.draw(Util.WINDOW_WIDTH/2-(tetrixLogo.getWidth()/2), 100);
 		sound.draw(soundXPos, soundYPos);
@@ -157,7 +155,9 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
-
+//		if (input.isKeyPressed(Input.KEY_T)){
+//			ThemeHandler.setOverworldTheme();
+//		}
 		if (input.isKeyPressed(Input.KEY_DOWN)){
 			hoverValue = (hoverValue + 1) % 4;
 			fx.play();
@@ -246,24 +246,3 @@ public class SettingsView extends BasicGameState {
 	}
 
 }
-//if(input.isKeyPressed(Input.KEY_UP)) {
-//	if(input.isKeyPressed(Input.KEY_UP)){
-//		if(input.isKeyPressed(Input.KEY_DOWN)) {
-//			if(input.isKeyPressed(Input.KEY_DOWN)) {
-//				if(input.isKeyPressed(Input.KEY_LEFT)) {
-//					if(input.isKeyPressed(Input.KEY_RIGHT)){
-//						if(input.isKeyPressed(Input.KEY_LEFT)) {
-//							if(input.isKeyPressed(Input.KEY_RIGHT)) {
-//								if(input.isKeyPressed(Input.KEY_B)) {
-//									if(input.isKeyPressed(Input.KEY_A)) {
-//										System.out.println("KONAMIIIII!");
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
-//}

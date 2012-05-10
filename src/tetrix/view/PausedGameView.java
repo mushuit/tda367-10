@@ -11,6 +11,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -55,12 +56,12 @@ public class PausedGameView extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background = ((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).getPausedScreen();
-		hover = new Image("img/hover_small.png");
-		pauseBox = new Image("img/popup.png");
-		resume = new Image("img/resume.png");
-		newGame = new Image("img/new_game.png");
-		mainMenu = new Image("img/main_menu.png");
-		quit = new Image("img/quit.png");
+		hover = ThemeHandler.get(ThemeHandler.HOVER_SMALL_IMG);	
+		pauseBox = ThemeHandler.get(ThemeHandler.POPUP_IMG);	
+		resume = ThemeHandler.get(ThemeHandler.RESUME_IMG);	
+		newGame = ThemeHandler.get(ThemeHandler.NEW_GAME_IMG);	
+		mainMenu = ThemeHandler.get(ThemeHandler.MAIN_MENU_IMG);	
+		quit = ThemeHandler.get(ThemeHandler.QUIT_IMG);	
 		
 		resumeYPos = 205;
 		newGameYPos = 255;

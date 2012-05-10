@@ -11,6 +11,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -41,10 +42,10 @@ public class LevelsView extends BasicGameState{
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		background = new Image("img/background.png");
-		hover = new Image("img/menu_hover.png");
-		easyButton = new Image("img/easy.png");
-		hardButton = new Image("img/hard.png");
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);		
+		hover = ThemeHandler.get(ThemeHandler.HOVER_IMG);	
+		easyButton = ThemeHandler.get(ThemeHandler.EASY_IMG);	
+		hardButton = ThemeHandler.get(ThemeHandler.HARD_IMG);	
 		
 		hoverValue = 0;
 		easyYPos = 230;

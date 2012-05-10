@@ -12,6 +12,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -57,13 +58,13 @@ public class MainMenuView extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/background.png");
-		tetrixLogo = new Image("img/tetrix_logo.png");
-		startGame = new Image("img/start_game.png");
-		settings = new Image("img/settings.png");
-		exit = new Image("img/exit.png");
-		highscore = new Image("img/highscore.png");
-		menuHover = new Image("img/menu_hover.png");
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
+		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
+		startGame = ThemeHandler.get(ThemeHandler.START_GAME_IMG);
+		settings = ThemeHandler.get(ThemeHandler.SETTINGS_IMG);
+		exit = ThemeHandler.get(ThemeHandler.EXIT_IMG);
+		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
+		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		
 		fx = new Sound("sound/button.wav");
 		

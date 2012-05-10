@@ -16,6 +16,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.PixelRain;
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -43,9 +44,9 @@ public class IntroView extends BasicGameState implements KeyListener{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = new Image("img/background.png");
-		tetrixLogo = new Image("img/tetrix_logo.png");
-		pressAnyKey = new Image("img/press_any_key.png");
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
+		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
+		pressAnyKey = ThemeHandler.get(ThemeHandler.PRESS_ANY_KEY_IMG);
 		alphaValue = 100;
 		rand = new Random();
 		isKeyPressed = false;
@@ -71,7 +72,7 @@ public class IntroView extends BasicGameState implements KeyListener{
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
 		
-		// Remove all keypresses to prevent errors in other states
+		// Remove all key presses to prevent errors in other states
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 		

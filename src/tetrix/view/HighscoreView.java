@@ -19,6 +19,7 @@ import tetrix.core.HighScore;
 import tetrix.core.HighScore2;
 import tetrix.core.Player;
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -46,9 +47,9 @@ public class HighscoreView extends BasicGameState {
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		background= new Image("img/background.png");
-		backButton = new Image("img/back.png");
-		backHover = new Image("img/menu_hover.png");
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
+		backButton = ThemeHandler.get(ThemeHandler.BACK_IMG);
+		backHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		highScore = HighScore.instance();
 
 		Font font = new Font("Verdana", Font.BOLD, 0);

@@ -25,6 +25,7 @@ import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
 import tetrix.util.Util;
+import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
@@ -69,18 +70,18 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background= new Image("img/game_background.png");
-		cannonImage = new Image("img/cannon2.png");
+		background = ThemeHandler.get(ThemeHandler.GAME_BACKGROUND_IMG);
+		cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
 		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
 
-		iBlock = new Image("img/block/purple.png");
-		jBlock = new Image("img/block/blue.png");
-		lBlock = new Image("img/block/orange.png");
-		oBlock = new Image("img/block/yellow.png");
-		tBlock = new Image("img/block/green.png");
-		sBlock = new Image("img/block/red.png");
-		zBlock = new Image("img/block/turquoise.png");
-		lockedBlock = new Image("img/block/locked.png");
+		iBlock = ThemeHandler.get(ThemeHandler.PURPLE_BLOCK_IMG);
+		jBlock = ThemeHandler.get(ThemeHandler.BLUE_BLOCK_IMG);
+		lBlock = ThemeHandler.get(ThemeHandler.ORANGE_BLOCK_IMG);
+		oBlock = ThemeHandler.get(ThemeHandler.YELLOW_BLOCK_IMG);
+		tBlock = ThemeHandler.get(ThemeHandler.GREEN_BLOCK_IMG);
+		sBlock = ThemeHandler.get(ThemeHandler.RED_BLOCK_IMG);
+		zBlock = ThemeHandler.get(ThemeHandler.TURQUOISE_BLOCK_IMG);
+		lockedBlock = ThemeHandler.get(ThemeHandler.LOCKED_BLOCK_IMG);
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
