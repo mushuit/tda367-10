@@ -105,13 +105,13 @@ public abstract class Tetromino implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//easy level has the int 0
 		if(bBox.level() == 0){
-			for(Square s : square){
-				if((bBox.isPainted(s.getX(), s.getY()) || s.getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
-					s.stop();
+			for(int i = 3; i > -1; i--){
+				if((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i].getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+					square[i].stop();
 
 				}
-				if(s.isMoving())
-					s.falling();
+				if(square[i].isMoving())
+					square[i].falling();
 
 			}
 

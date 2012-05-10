@@ -75,14 +75,7 @@ public class BlockBox {
 				t.update();
 
 		}
-		//		for(int i = 0; i < minoes.size(); i++){
-		//			if(!minoes.get(i).newBlock()){
-		//				System.out.println("notWhole()");
-		//				minoes.get(i).notWhole();
-		//				minoes.get(i).usedBlock();
-		//			}
-		//		}
-
+		
 		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
 			int amountFilled = 0;
@@ -110,22 +103,6 @@ public class BlockBox {
 			}
 		}
 
-		//		for(Tetromino thisT : minoes){
-		//			for(Square thisS : thisT.getSquares()){
-		//				for(Square s : t.getSquares()){
-		//					if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
-		//						return true;
-		//					}
-		//					if(!s.destroyed() && !thisS.destroyed()){
-		//						if(s.getX() == thisS.getX()){
-		//							if(thisS.getY() == s.getY()+Util.SQUARE_SIZE)
-		//								if(!thisT.isMoving())
-		//								return true;
-		//						}
-		//					}
-		//				}
-		//			}
-		//		}
 		return false;
 	}
 
@@ -135,7 +112,7 @@ public class BlockBox {
 				if(!s.destroyed())
 					if(s.getX() == x){
 						if(s.getY() == y + Util.SQUARE_SIZE){
-							if(t.isMoving())
+							if(!t.isMoving() && !s.isMoving())
 								return true;
 						}
 					}
