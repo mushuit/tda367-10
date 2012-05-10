@@ -108,19 +108,21 @@ public abstract class Tetromino implements ActionListener{
 			for(int i = 3; i > -1; i--){
 				if((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i].getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
 					square[i].stop();
-
 				}
-				if(square[i].isMoving())
+				System.out.println("Square number: " + square[i].getNbr() + " moving: " + square[i].isMoving());
+
+			}
+
+			int o = 0;
+			for(int i = 3; i > -1; i--){
+				if(square[i].isMoving()){
 					square[i].falling();
-
+				}
+				else{
+					o++;
+				}
 			}
-
-			int i = 0;
-			for(Square s : square){
-				if(!s.isMoving())
-					i++;
-			}
-			if(i == 4){
+			if(o == 4){
 				stop();
 			}
 			timer.stop();
@@ -186,7 +188,7 @@ public abstract class Tetromino implements ActionListener{
 	public boolean newBlock(){
 		return newBlock;
 	}
-	
+
 	public void usedBlock(){
 		if(l == 0){
 			newBlock = false;
@@ -197,7 +199,7 @@ public abstract class Tetromino implements ActionListener{
 			newBlock = true;
 
 	}
-	
+
 	public int getX(){
 		return startX;
 	}

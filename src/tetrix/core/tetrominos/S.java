@@ -28,9 +28,9 @@ public class S extends Tetromino{
 	public void build() {	
 		Square[] s = super.getSquares();
 		for(int i = 0; i < 4; i++){
-			s[i] = new Square(new Position(super.getLeftIn(Util.SQUARE_SIZE)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80));
+			s[i] = new Square(new Position(super.getLeftIn(Util.SQUARE_SIZE)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80), this, i);
 			if(i > 1)
-				s[i] = new Square(new Position(super.getLeftIn(-2*Util.SQUARE_SIZE)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 102));
+				s[i] = new Square(new Position(super.getLeftIn(-2*Util.SQUARE_SIZE)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 102), this, i);
 		}
 	}
 
