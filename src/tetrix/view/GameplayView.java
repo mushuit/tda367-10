@@ -37,15 +37,21 @@ public class GameplayView extends BasicGameState {
 
 	private Image background;
 	private Image cannonImage;
-	private Image block;
+	private Image iBlock;
+	private Image jBlock;
+	private Image lBlock;
+	private Image oBlock;
+	private Image tBlock;
+	private Image sBlock;
+	private Image zBlock;
 	private Image screenCapture;
-	
+
 	private Cannon cannon;
 	private Player player;
 	private Bullet bullet; 
 	private BlockBox blockBox;
 	private CollisionHandler ch;
-	
+
 	private List<Bullet> bulletList;
 	private List<Image> blocks;
 
@@ -63,10 +69,15 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
-		block = new Image("img/block.png");
 		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
 
-		block = new Image("img/block/purple.png");
+		iBlock = new Image("img/block/purple.png");
+		jBlock = new Image("img/block/blue.png");
+		lBlock = new Image("img/block/orange.png");
+		oBlock = new Image("img/block/yellow.png");
+		tBlock = new Image("img/block/green.png");
+		sBlock = new Image("img/block/red.png");
+		zBlock = new Image("img/block/turquoise.png");
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
@@ -98,12 +109,10 @@ public class GameplayView extends BasicGameState {
 		if(blockBox.isInUse()){
 			int i = 0;
 
-			blocks.clear();
 
-			for(int o = 0; o < blockBox.getTetroList().size()*4; o++)
-				blocks.add(block);
 			blockBox.update();
-
+			putImage();
+			
 			for(Position[] p : blockBox.getPos()){
 				for(Position pe : p){
 					blocks.get(i).draw(pe.getX(), pe.getY());
@@ -117,12 +126,12 @@ public class GameplayView extends BasicGameState {
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
 
 		}
-		
+
 		if(isPaused) {
 			g.copyArea(screenCapture, 0, 0);
 		}
 	}
-	
+
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		isPaused = false;
 	}
@@ -145,10 +154,10 @@ public class GameplayView extends BasicGameState {
 
 		cannonImage.setRotation(cannon.getRotation());
 	}
-	
+
 	public void checkInput(Input input, StateBasedGame sbg) {
 		int updateSpeed = 500/Util.FPS;
-		
+
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
@@ -169,13 +178,13 @@ public class GameplayView extends BasicGameState {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
-		
+
 		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			isPaused = true;
 			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
 		}
 	}
-	
+
 	/**
 	 * Repeatedly create a new block at a given speed
 	 */
@@ -186,10 +195,11 @@ public class GameplayView extends BasicGameState {
 				try {
 					if(!isPaused){
 						blockBox.newBlock((int)(Math.random()*7+0.5));
+						putImage();
 					}
 					Thread.sleep(timerInterval);
-	            	startTimer();
-	            } catch (SlickException e) {
+					startTimer();
+				} catch (SlickException e) {
 					e.printStackTrace();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -197,15 +207,42 @@ public class GameplayView extends BasicGameState {
 			}
 		}).start();
 	}
-	
+
+	public void putImage() throws SlickException{
+		Image block = null;
+		blocks.clear();
+		for(int i = 0; i < blockBox.getTetroList().size(); i++){
+			if(blockBox.getTetroList().get(i).toString().equals("I")){
+				block = iBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("J")){
+				block = jBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("L")){
+				block = lBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("O")){
+				block = oBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("T")){
+				block = tBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("S")){
+				block = sBlock;
+			}else if(blockBox.getTetroList().get(i).toString().equals("Z")){
+				block = zBlock;
+			}
+
+			for(int h = 0; h < 4; h++){
+				blocks.add(block);
+			}
+		}
+	}
+
+
 	public Image getPausedScreen() {
 		return screenCapture;
 	}
-	
+
 	public void pause() {
 		isPaused = true;
 	}
-	
+
 	/**
 	 * Resets the values
 	 */
@@ -216,11 +253,15 @@ public class GameplayView extends BasicGameState {
 		bulletList.clear();
 		cannon.reset();
 	}
-	
+
 	public void increaseSpeed(int value) {
 		timerInterval -= value; 
 	}
-	
+
+	public void setLevel(int i){
+		blockBox.setLevel(i);
+	}
+
 	@Override
 	public int getID() {
 		return stateID;

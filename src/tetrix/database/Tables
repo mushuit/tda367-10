@@ -1,5 +1,0 @@
-CREATE TABLE Highscore (
-name VARCHAR(50),
-score INT,
-ORDER BY score
-);
