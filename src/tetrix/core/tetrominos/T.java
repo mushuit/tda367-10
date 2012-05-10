@@ -6,6 +6,8 @@ package tetrix.core.tetrominos;
  *
  */
 
+import org.newdawn.slick.SlickException;
+
 import tetrix.core.BlockBox;
 import tetrix.core.Position;
 import tetrix.util.Util;
@@ -40,4 +42,17 @@ public class T extends Tetromino{
 		return "T";
 	}
 
+	public void notWhole() throws SlickException{
+		Square[] sq2 = getSquares();
+		for(Square s : getSquares()){
+			if(s.destroyed()){
+				if(s.getNbr() == 1){
+					sq2[0].destroy();
+					sq2[2].destroy();
+					bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
+					bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
+				}
+			}
+		}
+	}
 }

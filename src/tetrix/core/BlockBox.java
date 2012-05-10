@@ -71,7 +71,7 @@ public class BlockBox {
 						}
 					}
 					player.increaseScore();
-					Thread.sleep(250);
+					Thread.sleep(150);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -148,7 +148,7 @@ public class BlockBox {
 
 	public void newBlock(int i) throws SlickException{
 		isInUse = true;
-		tF.createRandomTetromino(this);
+		tF.createTetromino(this, i);
 	}
 
 	/**
@@ -159,10 +159,10 @@ public class BlockBox {
 	 * @param pos represents where the block should start
 	 * @throws SlickException
 	 */
-	public void newBrokenBlock(int sqrDestroyed, Tetromino t, Position pos, int x) throws SlickException{
+	public void newBrokenBlock(int newSqr, Tetromino t, Position pos, int x) throws SlickException{
 		isInUse = true;
 
-		tF.createBrokenTetromino(this, t, sqrDestroyed, pos, x);
+		tF.createBrokenTetromino(this, t, newSqr, pos, x);
 	}
 
 	public void addMino(Tetromino t){
