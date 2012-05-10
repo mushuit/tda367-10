@@ -54,18 +54,27 @@ public class BlockBox {
 		minoes.clear();
 	}
 
-	public void clearRow(int y){
-		for(Tetromino t : minoes){
-			for(Square s : t.getSquares()){
-				if(s.getY() == y+Util.SQUARE_SIZE){
-					s.destroy();
+	public void clearRow(final int y){		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					for(Tetromino t : minoes){
+						for(Square s : t.getSquares()){
+							if(s.getY() == y+Util.SQUARE_SIZE){
+								s.destroy();
+							}
+							if(!s.destroyed() && !s.isMoving())
+								s.rowFall();
+						}
+					}
+					player.increaseScore();
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				System.out.println(s.destroyed());
-				if(!s.destroyed())
-					s.rowFall();
 			}
-		}
-		player.increaseScore();
+		}).start();
 	}
 
 
@@ -75,7 +84,7 @@ public class BlockBox {
 				t.update();
 
 		}
-		
+
 		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
 			int amountFilled = 0;
@@ -93,13 +102,14 @@ public class BlockBox {
 
 	public boolean isPainted(Tetromino t){ 
 		for(Square s : t.getSquares()){
-			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE){
+			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !s.destroyed()){
 				return true;
 			}
+
 			if(isPainted(s.getX(), s.getY())){
 				System.out.println(isPainted(s.getX(), s.getY()) + "   tetromino: " + t.toString());
 				if(!s.destroyed())
-				return true;
+					return true;
 			}
 		}
 
@@ -107,15 +117,17 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(int x, int y) {
-		for(Tetromino t : minoes){
-			for(Square s : t.getSquares()){
-				if(!s.destroyed())
-					if(s.getX() == x){
-						if(s.getY() == y + Util.SQUARE_SIZE){
-							if(!t.isMoving() && !s.isMoving())
+		for(int i = 0; i < minoes.size(); i++){
+			Square[] s = minoes.get(i).getSquares();
+			for(int h = 3; h > -1; h--){
+				if(!s[h].destroyed()){
+					if(s[h].getX() == x){
+						if(s[h].getY() == y + Util.SQUARE_SIZE){
+							if(!s[h].isMoving())
 								return true;
 						}
 					}
+				}
 			}
 		}
 		return false;

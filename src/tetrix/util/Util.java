@@ -44,4 +44,8 @@ public class Util {
 	 */
 	public static final int SQUARE_SIZE = 22;
 	
+	public static final int LEVEL_EASY = 0;
+	
+	public static final int LEVEL_HARD = 1;
+	
 }

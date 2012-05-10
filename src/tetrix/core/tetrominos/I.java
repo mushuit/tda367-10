@@ -34,4 +34,10 @@ public class I extends Tetromino{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "I";
+	}
+	
+
 }

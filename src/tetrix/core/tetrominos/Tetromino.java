@@ -10,6 +10,12 @@ import tetrix.core.BlockBox;
 import tetrix.core.Position;
 import tetrix.util.Util;
 
+/**
+ * 
+ * @author magnus huttu junghard
+ *
+ */
+
 public abstract class Tetromino implements ActionListener{
 	private Square[] square;
 	private int startX;
@@ -108,19 +114,21 @@ public abstract class Tetromino implements ActionListener{
 			for(int i = 3; i > -1; i--){
 				if((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i].getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
 					square[i].stop();
-
 				}
-				if(square[i].isMoving())
+				System.out.println("Square number: " + square[i].getNbr() + " moving: " + square[i].isMoving());
+
+			}
+
+			int o = 0;
+			for(int i = 3; i > -1; i--){
+				if(square[i].isMoving()){
 					square[i].falling();
-
+				}
+				else{
+					o++;
+				}
 			}
-
-			int i = 0;
-			for(Square s : square){
-				if(!s.isMoving())
-					i++;
-			}
-			if(i == 4){
+			if(o == 4){
 				stop();
 			}
 			timer.stop();
@@ -129,22 +137,19 @@ public abstract class Tetromino implements ActionListener{
 		//harder level has bigger int
 		if(bBox.level() == 1){
 
-
 			int i = 0;
-			for(Square s : square){				
+			for(int j = 3; j > -1; j--){
 				if(bBox.isPainted(this)){
 					stop = true;
-
-
 				}
-				if(isMoving())
-					s.falling();
 
-				if(!s.isMoving()){
+				if(isMoving()){
+					square[j].falling();
+				}else{
 					i++;
 				}
 
-				if(s.destroyed() && !newBlock()){
+				if(square[j].destroyed() && !newBlock()){
 					usedBlock();
 					try {
 						System.out.println("notWhole() anropas");
@@ -167,6 +172,7 @@ public abstract class Tetromino implements ActionListener{
 		}
 	}
 
+
 	public void notWhole() throws SlickException{
 		Square[] sq2 = getSquares();
 		for(Square s : getSquares()){
@@ -186,7 +192,7 @@ public abstract class Tetromino implements ActionListener{
 	public boolean newBlock(){
 		return newBlock;
 	}
-	
+
 	public void usedBlock(){
 		if(l == 0){
 			newBlock = false;
@@ -197,9 +203,11 @@ public abstract class Tetromino implements ActionListener{
 			newBlock = true;
 
 	}
-	
+
 	public int getX(){
 		return startX;
 	}
+
+	public abstract String toString();
 }
 
