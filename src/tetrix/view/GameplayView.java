@@ -3,8 +3,6 @@ package tetrix.view;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -39,21 +37,20 @@ public class GameplayView extends BasicGameState {
 
 	private Image background;
 	private Image cannonImage;
+	private Image block;
+	private Image screenCapture;
+	
 	private Cannon cannon;
-	private List<Bullet> bulletList;
+	private Player player;
 	private Bullet bullet; 
 	private BlockBox blockBox;
-	private Image block;
-	private List<Image> blocks;
 	private CollisionHandler ch;
+	
+	private List<Bullet> bulletList;
+	private List<Image> blocks;
 
 	private UnicodeFont scoreDisplay;
-	private Player player;
-	
 	private boolean isPaused;
-	private Image pausedScreen;
-	private Timer blockTimer;
-	
 	private long timerInterval;
 
 	public GameplayView(int stateID) {
@@ -67,7 +64,7 @@ public class GameplayView extends BasicGameState {
 		background= new Image("img/game_background.png");
 		cannonImage = new Image("img/cannon2.png");
 		block = new Image("img/block.png");
-		pausedScreen = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
+		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
 
 		block = new Image("img/block/purple.png");
 		cannon = new Cannon();
@@ -77,7 +74,6 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 
-		isPaused = false;
 		timerInterval = 2000;
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
@@ -123,26 +119,36 @@ public class GameplayView extends BasicGameState {
 		}
 		
 		if(isPaused) {
-			g.copyArea(pausedScreen, 0, 0);
+			g.copyArea(screenCapture, 0, 0);
 		}
+	}
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		isPaused = false;
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
+		checkInput(input, sbg);
+
+		int size = bulletList.size();
+		for(int i = 0; i < size; i++){
+			if(!ch.checkCollision(bulletList.get(i))){
+				bulletList.get(i).update();
+			} else{
+				bulletList.remove(i);
+				size--;
+			}
+		}
+
+		cannonImage.setRotation(cannon.getRotation());
+	}
+	
+	public void checkInput(Input input, StateBasedGame sbg) {
 		int updateSpeed = 500/Util.FPS;
-
-		player.increaseScore(1);
 		
-		if(blockBox.isRowFilled()) {
-			player.setScore(20);
-		}
-
-		if(input.isKeyDown(Input.KEY_0)) {
-			blockBox.clearRow(445);
-		}
-
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
@@ -163,53 +169,60 @@ public class GameplayView extends BasicGameState {
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
-
-		if(input.isKeyPressed(Input.KEY_P)) {
-			blockBox.clearBoard();
-		}
-
-
-		int size = bulletList.size();
-		for(int i = 0; i < size; i++){
-			if(!ch.checkCollision(bulletList.get(i))){
-				bulletList.get(i).update();
-			} else{
-				bulletList.remove(i);
-				size--;
-			}
-		}
-
-		cannonImage.setRotation(cannon.getRotation());
 		
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
+		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			isPaused = true;
 			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
 		}
 	}
-
-	@Override
-	public int getID() {
-		return stateID;
-	}
 	
+	/**
+	 * Repeatedly create a new block at a given speed
+	 */
 	public void startTimer(){
-		blockTimer = new Timer();
-	    blockTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            try {
-	            	blockBox.newBlock((int)(Math.random()*7+0.5));
-				} catch (SlickException e) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					if(!isPaused){
+						blockBox.newBlock((int)(Math.random()*7+0.5));
+					}
+					Thread.sleep(timerInterval);
+	            	startTimer();
+	            } catch (SlickException e) {
 					e.printStackTrace();
-				} 
-	          }
-	        }, 0, timerInterval);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 	
 	public Image getPausedScreen() {
-		return pausedScreen;
+		return screenCapture;
 	}
 	
-	public void makeHarder() {
-		timerInterval -= 500; 
+	public void pause() {
+		isPaused = true;
+	}
+	
+	/**
+	 * Resets the values
+	 */
+	public void newGame() {
+		timerInterval = 2000;
+		blockBox.clearBoard();
+		blocks.clear();
+		bulletList.clear();
+		cannon.reset();
+	}
+	
+	public void increaseSpeed(int value) {
+		timerInterval -= value; 
+	}
+	
+	@Override
+	public int getID() {
+		return stateID;
 	}
 }

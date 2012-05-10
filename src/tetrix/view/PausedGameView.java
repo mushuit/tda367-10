@@ -102,6 +102,7 @@ public class PausedGameView extends BasicGameState {
 		}
 		
 		moveMenuFocus();
+		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			if(hoverValue == 0) {
 				input.clearKeyPressedRecord();
@@ -109,17 +110,23 @@ public class PausedGameView extends BasicGameState {
 			}
 			else if(hoverValue == 1) {
 				input.clearKeyPressedRecord();
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc,sbg);
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 2) {
 				input.clearKeyPressedRecord();
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).init(gc,sbg);
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
+				sbg.getState(States.MAINMENUVIEW.getID()).leave(gc, sbg);
 				sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 3) {
 				gc.exit();
 			}
+		}
+		
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			input.clearKeyPressedRecord();
+			sbg.enterState(States.GAMEPLAYVIEW.getID());
 		}
 	}
 	

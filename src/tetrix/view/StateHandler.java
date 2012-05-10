@@ -1,14 +1,11 @@
 package tetrix.view;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import tetrix.sound.GameMusic;
-
 /**
- * Class managing the loading of the different states
+ * Class managing the loading of the different states.
  * @author Linus Karlsson
  *
  */

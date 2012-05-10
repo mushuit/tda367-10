@@ -1,8 +1,6 @@
 package tetrix.view;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -11,7 +9,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -39,11 +36,6 @@ public class IntroView extends BasicGameState implements KeyListener{
 	private boolean isKeyPressed;
 	private PixelRain pixelRain;
 	
-	/**
-	 * Making the "Press Any Key" text blink at a given rate
-	 */
-	private Timer blinkTimer;
-	
 	public IntroView(int stateID) {
 		this.stateID = stateID;
 	}
@@ -57,18 +49,8 @@ public class IntroView extends BasicGameState implements KeyListener{
 		alphaValue = 100;
 		rand = new Random();
 		isKeyPressed = false;
-		pixelRain = new PixelRain(5);
-		
-		blinkTimer = new Timer();
-	    blinkTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            try {
-					blink();
-				} catch (SlickException e) {
-					e.printStackTrace();
-				} 
-	          }
-	        }, 1000, 1000);
+		pixelRain = new PixelRain();
+		repeatBlink();
 	}
 
 	@Override
@@ -83,8 +65,6 @@ public class IntroView extends BasicGameState implements KeyListener{
 		
 		tetrixLogo.draw(0, 200);
 		pressAnyKey.draw(Util.WINDOW_WIDTH/2 - pressAnyKey.getWidth()/2, 310);
-		
-
 	}
 
 	@Override
@@ -95,13 +75,12 @@ public class IntroView extends BasicGameState implements KeyListener{
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 		
-		if (isKeyPressed){
-			Sound fx = new Sound("sound/button.wav");
-			fx.play();
+		if (isKeyPressed) {
+			leave(gc, sbg);
 			sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 		}
 		
-		pixelRain.move(rate);
+		pixelRain.movePixel(rate);
 	}
 
 	@Override
@@ -127,5 +106,21 @@ public class IntroView extends BasicGameState implements KeyListener{
 	public void keyPressed(int key, char c){
 		isKeyPressed = true;
 	}
+	
+	public void repeatBlink() {
+	    new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					blink();
+					Thread.sleep(1000);
+					repeatBlink();
+	            } catch (SlickException e) {
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
 }
-
