@@ -68,24 +68,37 @@ public class TetrominoFactory {
 
 
 
-	public void createBrokenTetromino(BlockBox bB, int newSqr, Position pos, int x) {	
+	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr, Position pos, int x) {	
 		System.out.println("Creating broken tetromino" + newSqr + "    x: " + pos.getX() + "    y: " + pos.getY());
 
-		t = new I(x, bB);
+		if(t.toString().equals("I")){
+			t = new I(x, bB);
+		}else if(t.toString().equals("J")){
+			t = new J(x, bB);
+		}else if(t.toString().equals("L")){
+			t = new L(x, bB);
+		}else if(t.toString().equals("O")){
+			t = new O(x, bB);
+		}else if(t.toString().equals("T")){
+			t = new T(x, bB);
+		}else if(t.toString().equals("S")){
+			t = new S(x, bB);
+		}else if(t.toString().equals("Z")){
+			t = new Z(x, bB);
+		}
+		
 		Square[] s = t.getSquares();
+		s[0].destroy();
+		s[0].use();
 		s[1].destroy();
 		s[1].use();
 		s[2].destroy();
 		s[2].use(); 
-		if(newSqr == 0){
-			s[0].setY(pos.getY());
-			s[3].destroy();
-			s[3].use();
-		} else if(newSqr == 3){
-			s[3].setY(pos.getY()+Util.SQUARE_SIZE);
-			s[0].destroy();
-			s[0].use();
-		}
+		s[3].destroy();
+		s[3].use();
+		s[newSqr].setY(pos.getY()); 
+		s[newSqr].unDestroy();
+		s[newSqr].unUse();
 
 		bB.addMino(t);
 	}

@@ -32,6 +32,7 @@ public class BlockBox {
 	private TetrominoFactory tF;
 	private int level;
 	private Player player;
+	private boolean gameOver;
 
 	public BlockBox(Player player) throws SlickException {
 		this(10, 20, player);
@@ -46,6 +47,7 @@ public class BlockBox {
 		tF = new TetrominoFactory();
 		level = 0;
 		this.player = player;
+		gameOver = false;
 		clearBoard();
 	}
 
@@ -157,10 +159,10 @@ public class BlockBox {
 	 * @param pos represents where the block should start
 	 * @throws SlickException
 	 */
-	public void newBrokenBlock(int sqrDestroyed, Position pos, int x) throws SlickException{
+	public void newBrokenBlock(int sqrDestroyed, Tetromino t, Position pos, int x) throws SlickException{
 		isInUse = true;
 
-		tF.createBrokenTetromino(this, sqrDestroyed, pos, x);
+		tF.createBrokenTetromino(this, t, sqrDestroyed, pos, x);
 	}
 
 	public void addMino(Tetromino t){
@@ -171,8 +173,8 @@ public class BlockBox {
 		Position[][] pos = new Position[minoes.size()][4];
 
 		int h = 0;
-		for(Tetromino t : minoes){
-			pos[h] = t.getPos();
+		for(int i = 0; i < minoes.size(); i++){
+			pos[h] = minoes.get(i).getPos();
 			h++;
 		}
 
@@ -195,16 +197,20 @@ public class BlockBox {
 		return rowFilled;
 	}
 
-	/**
-	 * There are 2 levels at the moment, level 0 and level 1, 0 represents easy-mode and 1 represents hard-mode.
-	 * @param i sets which level that is supposed to be played
-	 */
 	public void setLevel(int i){
 		level = i;
 	}
 
 	public int level(){
 		return level;
+	}
+	
+	public void gameIsOver(){
+		gameOver = true;
+	}
+	
+	public boolean gameOver(){
+		return gameOver;
 	}
 
 }

@@ -115,7 +115,6 @@ public abstract class Tetromino implements ActionListener{
 				if((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i].getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
 					square[i].stop();
 				}
-				System.out.println("Square number: " + square[i].getNbr() + " moving: " + square[i].isMoving());
 
 			}
 
@@ -170,6 +169,12 @@ public abstract class Tetromino implements ActionListener{
 
 			timer.stop();
 		}
+		
+		for(int i = 0; i < 4; i++){
+			if(!square[i].isMoving() && square[i].getY() == Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE){
+				bBox.gameIsOver();
+			}
+		}
 	}
 
 
@@ -179,11 +184,11 @@ public abstract class Tetromino implements ActionListener{
 			if(s.destroyed()){
 				if(s.getNbr() == 1){
 					sq2[0].destroy();
-					bBox.newBrokenBlock(1, sq2[0].getPos(), getX());
+					bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
 				}
 				else if(s.getNbr() == 2){
 					sq2[3].destroy();
-					bBox.newBrokenBlock(2, sq2[3].getPos(), getX());
+					bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
 				}
 			}
 		}
@@ -201,7 +206,6 @@ public abstract class Tetromino implements ActionListener{
 		}
 		else
 			newBlock = true;
-
 	}
 
 	public int getX(){
