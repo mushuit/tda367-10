@@ -36,11 +36,6 @@ public class Z extends Tetromino{
 		}
 	}
 
-	@Override
-	public void notWhole() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String toString() {
