@@ -152,7 +152,6 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
-		
 		if (input.isKeyPressed(Input.KEY_DOWN)){
 			hoverValue = (hoverValue + 1) % 4;
 			fx.play();
@@ -203,6 +202,7 @@ public class SettingsView extends BasicGameState {
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
 		}
+		
 		 
 		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));
 		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
@@ -240,3 +240,24 @@ public class SettingsView extends BasicGameState {
 	}
 
 }
+//if(input.isKeyPressed(Input.KEY_UP)) {
+//	if(input.isKeyPressed(Input.KEY_UP)){
+//		if(input.isKeyPressed(Input.KEY_DOWN)) {
+//			if(input.isKeyPressed(Input.KEY_DOWN)) {
+//				if(input.isKeyPressed(Input.KEY_LEFT)) {
+//					if(input.isKeyPressed(Input.KEY_RIGHT)){
+//						if(input.isKeyPressed(Input.KEY_LEFT)) {
+//							if(input.isKeyPressed(Input.KEY_RIGHT)) {
+//								if(input.isKeyPressed(Input.KEY_B)) {
+//									if(input.isKeyPressed(Input.KEY_A)) {
+//										System.out.println("KONAMIIIII!");
+//									}
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
