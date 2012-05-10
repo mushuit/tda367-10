@@ -124,9 +124,9 @@ public class HighscoreView extends BasicGameState {
 		int yPos = 200;
 		int index = 1;
 		for(Player p : highScore.getList()) {
-			numberOnHighScoreDisplay.drawString(100, yPos, index + ". ");
-			nameOnHighScoreDisplay.drawString(125, yPos,"   " +  p.getName() + "  ");
-			pointsOnHighScoreDisplay.drawString(240, yPos, "  " + p.getScore());
+			numberOnHighScoreDisplay.drawString(90, yPos, index + ". ");
+			nameOnHighScoreDisplay.drawString(115, yPos,"   " +  p.getName() + "  ");
+			pointsOnHighScoreDisplay.drawString(260, yPos, "  " + p.getScore());
 			index++;
 			yPos += 20;
 		}
