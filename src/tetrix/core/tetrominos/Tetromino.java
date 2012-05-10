@@ -207,7 +207,7 @@ public abstract class Tetromino implements ActionListener{
 	public int getX(){
 		return startX;
 	}
-	
+
 	public abstract String toString();
 }
 

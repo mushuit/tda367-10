@@ -68,26 +68,23 @@ public class TetrominoFactory {
 
 
 
-	public void createBrokenTetromino(BlockBox bB, int sqrDestroyed, Position pos, int x) {	
-		System.out.println("Creating broken tetromino" + sqrDestroyed + "    x: " + pos.getX() + "    y: " + pos.getY());
+	public void createBrokenTetromino(BlockBox bB, int newSqr, Position pos, int x) {	
+		System.out.println("Creating broken tetromino" + newSqr + "    x: " + pos.getX() + "    y: " + pos.getY());
 
-
-		if(true){
-			t = new I(x, bB);
-			Square[] s = t.getSquares();
-			s[1].destroy();
-			s[1].use();
-			s[2].destroy();
-			s[2].use();
-			if(sqrDestroyed == 1){
-				s[0].setY(pos.getY());
-				s[3].destroy();
-				s[3].use();
-			} else if(sqrDestroyed == 2){
-				s[3].setY(pos.getY()+Util.SQUARE_SIZE);
-				s[0].destroy();
-				s[0].use();
-			}
+		t = new I(x, bB);
+		Square[] s = t.getSquares();
+		s[1].destroy();
+		s[1].use();
+		s[2].destroy();
+		s[2].use(); 
+		if(newSqr == 0){
+			s[0].setY(pos.getY());
+			s[3].destroy();
+			s[3].use();
+		} else if(newSqr == 3){
+			s[3].setY(pos.getY()+Util.SQUARE_SIZE);
+			s[0].destroy();
+			s[0].use();
 		}
 
 		bB.addMino(t);

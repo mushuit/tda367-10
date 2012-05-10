@@ -23,6 +23,7 @@ import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
 import tetrix.core.Player;
 import tetrix.core.Position;
+import tetrix.core.tetrominos.Square;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 
@@ -112,7 +113,7 @@ public class GameplayView extends BasicGameState {
 
 			blockBox.update();
 			putImage();
-			
+
 			for(Position[] p : blockBox.getPos()){
 				for(Position pe : p){
 					blocks.get(i).draw(pe.getX(), pe.getY());
@@ -195,7 +196,6 @@ public class GameplayView extends BasicGameState {
 				try {
 					if(!isPaused){
 						blockBox.newBlock((int)(Math.random()*7+0.5));
-						putImage();
 					}
 					Thread.sleep(timerInterval);
 					startTimer();
@@ -228,8 +228,10 @@ public class GameplayView extends BasicGameState {
 				block = zBlock;
 			}
 
-			for(int h = 0; h < 4; h++){
-				blocks.add(block);
+			for(Square s : blockBox.getTetroList().get(i).getSquares()){
+				if(!s.destroyed())
+					blocks.add(block);
+
 			}
 		}
 	}
@@ -247,6 +249,7 @@ public class GameplayView extends BasicGameState {
 	 * Resets the values
 	 */
 	public void newGame() {
+		player.resetScore();
 		timerInterval = 2000;
 		blockBox.clearBoard();
 		blocks.clear();
