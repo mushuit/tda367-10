@@ -83,6 +83,7 @@ public class GameplayView extends BasicGameState {
 		sBlock = ThemeHandler.get(ThemeHandler.RED_BLOCK_IMG);
 		zBlock = ThemeHandler.get(ThemeHandler.TURQUOISE_BLOCK_IMG);
 		lockedBlock = ThemeHandler.get(ThemeHandler.LOCKED_BLOCK_IMG);
+
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
@@ -115,13 +116,14 @@ public class GameplayView extends BasicGameState {
 		if(blockBox.isInUse()){
 			int i = 0;
 
-
 			blockBox.update();
 			putImage();
-
-			for(Position[] p : blockBox.getPos()){
-				for(Position pe : p){
-					blocks.get(i).draw(pe.getX(), pe.getY());
+			
+			Position[][] p = blockBox.getPos();
+			for(int j = 0; j < p.length; j++){
+				Position[] pe = p[j];
+				for(int h = 0; h < pe.length; h++){
+					blocks.get(i).draw(pe[h].getX(), pe[h].getY());
 					i++;
 				}
 			}
@@ -220,7 +222,6 @@ public class GameplayView extends BasicGameState {
 				if(!s.isMoving()){
 					block = lockedBlock;
 				} else{
-
 
 					if(t.toString().equals("I")){
 						block = iBlock;
