@@ -131,9 +131,10 @@ public class GameplayView extends BasicGameState {
 
 			blockBox.update();
 			putImage();
-			
+
 			Position[][] p = blockBox.getPos();
-			for(int j = 0; j < p.length; j++){
+			int length = blockBox.getTetroList().size();
+			for(int j = 0; j < length; j++){
 				Position[] pe = p[j];
 				for(int h = 0; h < pe.length; h++){
 					blocks.get(i).draw(pe[h].getX(), pe[h].getY());
@@ -145,7 +146,6 @@ public class GameplayView extends BasicGameState {
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
-
 		}
 
 		if(isPaused) {
