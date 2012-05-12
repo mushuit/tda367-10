@@ -40,7 +40,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {		
 		System.out.println(whichBlock);
-		switch(whichBlock) {
+		switch(3) {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
@@ -70,6 +70,7 @@ public class TetrominoFactory {
 
 	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr, Position pos, int x) {	
 		System.out.println("Creating broken tetromino" + newSqr + "    x: " + pos.getX() + "    y: " + pos.getY());
+		boolean extraHeight = false;
 		t = te;
 		if(t.toString().equals("I")){
 			t = new I(x, bB);
@@ -79,6 +80,7 @@ public class TetrominoFactory {
 			t = new L(x, bB);
 		}else if(t.toString().equals("O")){
 			t = new O(x, bB);
+			extraHeight = true;
 		}else if(t.toString().equals("T")){
 			t = new T(x, bB);
 		}else if(t.toString().equals("S")){
@@ -95,10 +97,10 @@ public class TetrominoFactory {
 		s[2].destroy();
 		s[2].use(); 
 		s[3].destroy();
-		s[3].use();
-		s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE); 
-		if(newSqr > 1 || !t.toString().equals("O"))
-			s[newSqr].setY(pos.getY()); 
+		s[3].use(); 
+		s[newSqr].setY(pos.getY()); 
+		if(newSqr == 2 && extraHeight)
+			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		s[newSqr].unDestroy();
 		s[newSqr].unUse();
 
