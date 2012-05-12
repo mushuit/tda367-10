@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- * @Javadoc
+ * 
  * A High Score class with a list of maximum 10 players. It compares the score of the
  * current player with the score in the list to see if the player should be added in the 
  * high score or not.  
