@@ -70,7 +70,7 @@ public class TetrominoFactory {
 
 	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr, Position pos, int x) {	
 		System.out.println("Creating broken tetromino" + newSqr + "    x: " + pos.getX() + "    y: " + pos.getY());
-
+		t = te;
 		if(t.toString().equals("I")){
 			t = new I(x, bB);
 		}else if(t.toString().equals("J")){
@@ -86,7 +86,7 @@ public class TetrominoFactory {
 		}else if(t.toString().equals("Z")){
 			t = new Z(x, bB);
 		}
-		
+
 		Square[] s = t.getSquares();
 		s[0].destroy();
 		s[0].use();
@@ -96,7 +96,9 @@ public class TetrominoFactory {
 		s[2].use(); 
 		s[3].destroy();
 		s[3].use();
-		s[newSqr].setY(pos.getY()); 
+		s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE); 
+		if(newSqr > 1 || !t.toString().equals("O"))
+			s[newSqr].setY(pos.getY()); 
 		s[newSqr].unDestroy();
 		s[newSqr].unUse();
 
