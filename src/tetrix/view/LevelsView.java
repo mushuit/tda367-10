@@ -97,6 +97,7 @@ public class LevelsView extends BasicGameState{
 			
 			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
+			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setCannonImage(ThemeHandler.getCannon());
 		}
 	}
 		

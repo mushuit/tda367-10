@@ -35,20 +35,21 @@ public class ThemeHandler {
 	public static final String SOUND_IMG = "sound.png";
 	public static final String START_GAME_IMG = "start_game.png";
 	public static final String TETRIX_LOGO_IMG = "tetrix_logo.png";
-	public static final String LOCKED_BLOCK_IMG = "block/locked.png";
-	public static final String BLUE_BLOCK_IMG = "block/blue.png";
-	public static final String GREEN_BLOCK_IMG = "block/green.png";
-	public static final String ORANGE_BLOCK_IMG = "block/orange.png";
-	public static final String PINK_BLOCK_IMG = "block/pink.png";
-	public static final String PURPLE_BLOCK_IMG = "block/purple.png";
-	public static final String RED_BLOCK_IMG = "block/red.png";
-	public static final String TURQUOISE_BLOCK_IMG = "block/turquoise.png";
-	public static final String YELLOW_BLOCK_IMG = "block/yellow.png";
+	public static final String LOCKED_BLOCK_IMG = "locked.png";
+	public static final String BLUE_BLOCK_IMG = "blue.png";
+	public static final String GREEN_BLOCK_IMG = "green.png";
+	public static final String ORANGE_BLOCK_IMG = "orange.png";
+	public static final String PINK_BLOCK_IMG = "pink.png";
+	public static final String PURPLE_BLOCK_IMG = "purple.png";
+	public static final String RED_BLOCK_IMG = "red.png";
+	public static final String TURQUOISE_BLOCK_IMG = "turquoise.png";
+	public static final String YELLOW_BLOCK_IMG = "yellow.png";
+	private static int cannon = 0;
 
 	
 	
-	public void setCannon(int c){
-		;
+	public static void setCannon(int c){
+		cannon = c;
 	}
 	
 	public static void setUnderworldTheme(){
@@ -62,6 +63,25 @@ public class ThemeHandler {
 	public static Image get(String img) throws SlickException{
 		return new Image(theme + img);
 	}
+	public static Image getBlockOrCannon(String img) throws SlickException{
+		return new Image("img/cannonsblocks/" + img);
+	}
 	
+	public static Image getCannon() throws SlickException{
+		if (cannon == 0){
+			System.out.println("block byttes inte!");
+			return new Image("img/cannonsblocks/cannon.png");
+		} else if(cannon == 1){
+			return new Image("img/cannonsblocks/cannon2.png");
+		} else if(cannon == 2){
+			return new Image("img/cannonsblocks/cannon3.png");
+		} else if(cannon == 3){
+			return new Image("img/cannonsblocks/cannon4.png");
+		} else if(cannon == 4){
+			return new Image("img/cannonsblocks/cannon5.png");
+		} else {
+			return new Image("img/cannonsblocks/cannon.png");
+		}
+	}
 	
 }

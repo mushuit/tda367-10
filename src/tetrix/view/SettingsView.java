@@ -1,6 +1,9 @@
 package tetrix.view;
 //TODO
 //NYA BILDER
+//Mellanslag i menyer
+//Hover värde 0 varje gång
+//övergångarna
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -123,11 +126,11 @@ public class SettingsView extends BasicGameState {
 		
 		cannonXPos = musicSliderXPos;
 		cannonYPos = 390;																		//change
-		cannon = ThemeHandler.get(ThemeHandler.CANNON_IMG);
-		cannon2 = ThemeHandler.get(ThemeHandler.CANNON2_IMG);
-		cannon3 = ThemeHandler.get(ThemeHandler.CANNON3_IMG);
-		cannon4 = ThemeHandler.get(ThemeHandler.CANNON4_IMG);
-		cannon5 = ThemeHandler.get(ThemeHandler.CANNON5_IMG);
+		cannon = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON_IMG);
+		cannon2 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON2_IMG);
+		cannon3 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON3_IMG);
+		cannon4 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON4_IMG);
+		cannon5 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON5_IMG);
 		cannonValue = 0;
 		
 		fx = new Sound("sound/button.wav");
@@ -249,6 +252,7 @@ public class SettingsView extends BasicGameState {
 		}
 		else if(hoverValue == 4) {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
+				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
 		}
@@ -261,26 +265,6 @@ public class SettingsView extends BasicGameState {
 				Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
 	}
 	
-
-//	public void changeCannon() {
-//		switch(hoverValue) {
-//		case 0:
-//			hoverYPos = effectsYPos;
-//			break;
-//		case 1:
-//			hoverYPos = musicYPos;
-//			break;
-//		case 2:
-//			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
-//			break;
-//		case 3:
-//			hoverYPos = playerYPos;
-//			break;
-//		case 4:
-//			hoverYPos = backYPos;
-//			break;
-//		}
-//	}
 	public void moveMenuFocus() {
 		switch(hoverValue) {
 		case 0:

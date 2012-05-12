@@ -62,8 +62,6 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
-	
-	//private SettingsView sV;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -75,29 +73,17 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.GAME_BACKGROUND_IMG);
 		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
-		cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
+		cannonImage = new Image(50,50);
 
-		iBlock = ThemeHandler.get(ThemeHandler.PURPLE_BLOCK_IMG);
-		jBlock = ThemeHandler.get(ThemeHandler.BLUE_BLOCK_IMG);
-		lBlock = ThemeHandler.get(ThemeHandler.ORANGE_BLOCK_IMG);
-		oBlock = ThemeHandler.get(ThemeHandler.YELLOW_BLOCK_IMG);
-		tBlock = ThemeHandler.get(ThemeHandler.GREEN_BLOCK_IMG);
-		sBlock = ThemeHandler.get(ThemeHandler.RED_BLOCK_IMG);
-		zBlock = ThemeHandler.get(ThemeHandler.TURQUOISE_BLOCK_IMG);
-		lockedBlock = ThemeHandler.get(ThemeHandler.LOCKED_BLOCK_IMG);
+		iBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.PURPLE_BLOCK_IMG);
+		jBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.BLUE_BLOCK_IMG);
+		lBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.ORANGE_BLOCK_IMG);
+		oBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.YELLOW_BLOCK_IMG);
+		tBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.GREEN_BLOCK_IMG);
+		sBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.RED_BLOCK_IMG);
+		zBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.TURQUOISE_BLOCK_IMG);
+		lockedBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.LOCKED_BLOCK_IMG);
 
-//		if(sV.getCannon() == 0) {
-//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
-//		} else if(sV.getCannon() == 1) {
-//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON2_IMG);
-//		} else if(sV.getCannon() == 2) {
-//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON3_IMG);
-//		} else if(sV.getCannon() == 3) {
-//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON4_IMG);
-//		} else if(sV.getCannon() == 4) {
-//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON5_IMG);
-//		}
-//		
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
@@ -173,7 +159,6 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-		//System.out.println(""+sV.getCannon());
 	}
 
 	public void checkInput(Input input, StateBasedGame sbg) {
@@ -226,6 +211,10 @@ public class GameplayView extends BasicGameState {
 				}
 			}
 		}).start();
+	}
+	
+	public void setCannonImage(Image image) {
+		this.cannonImage = image;
 	}
 
 	public void putImage() throws SlickException{
