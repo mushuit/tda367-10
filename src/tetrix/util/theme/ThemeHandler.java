@@ -9,6 +9,10 @@ public class ThemeHandler {
 	public static final String BACKGROUND_IMG = "background.png";
 	public static final String BACK_IMG = "back.png";
 	public static final String CANNON_IMG = "cannon.png";
+	public static final String CANNON2_IMG = "cannon2.png";
+	public static final String CANNON3_IMG = "cannon3.png";
+	public static final String CANNON4_IMG = "cannon4.png";
+	public static final String CANNON5_IMG = "cannon5.png";
 	public static final String EASY_IMG = "easy.png";
 	public static final String EFFECTS_IMG = "effects.png";
 	public static final String EXIT_IMG = "exit.png";

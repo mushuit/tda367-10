@@ -41,6 +41,11 @@ public class SettingsView extends BasicGameState {
 	private Image musicSliderPinHover;
 	
 	private Image menuHover;
+	
+	private Image cannon2;
+	private Image cannon3;
+	private Image cannon4;
+	private Image cannon5;
 
 	private int backXPos;
 	private int backYPos;
@@ -70,6 +75,7 @@ public class SettingsView extends BasicGameState {
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
+	private int playerYPos;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -115,12 +121,19 @@ public class SettingsView extends BasicGameState {
 		musicSliderPinYPos = musicYPos-3;
 		
 		cannonYPos = 390;
+		cannon2 = ThemeHandler.get(ThemeHandler.CANNON2_IMG);
+		cannon3 = ThemeHandler.get(ThemeHandler.CANNON3_IMG);
+		cannon4 = ThemeHandler.get(ThemeHandler.CANNON4_IMG);
+		cannon5 = ThemeHandler.get(ThemeHandler.CANNON5_IMG);
 		
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
 		hoverYPos = effectsYPos;
 		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		menuXPos = /*(Util.WINDOW_WIDTH/2) - (effects.getWidth()/2)*/ backXPos;					//Change
+		playerYPos = 420;
+		
+
 	}
 
 	@Override
@@ -160,13 +173,13 @@ public class SettingsView extends BasicGameState {
 //			ThemeHandler.setOverworldTheme();
 //		}
 		if (input.isKeyPressed(Input.KEY_DOWN)){
-			hoverValue = (hoverValue + 1) % 4;
+			hoverValue = (hoverValue + 1) % 5;
 			fx.play();
 		}
 		else if(input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if(hoverValue < 0) {
-				hoverValue = 3;
+				hoverValue = 4;
 			}
 			fx.play();
 		}
@@ -205,6 +218,14 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		else if(hoverValue == 3) {
+			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change player's name, different controls perhaps
+				
+			}
+			if(input.isKeyPressed(Input.KEY_LEFT)) {
+				
+			}
+		}
+		else if(hoverValue == 4) {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
@@ -228,6 +249,9 @@ public class SettingsView extends BasicGameState {
 			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
 			break;
 		case 3:
+			hoverYPos = playerYPos;
+			break;
+		case 4:
 			hoverYPos = backYPos;
 			break;
 		}
