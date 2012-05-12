@@ -47,9 +47,9 @@ public class ThemeHandler {
 
 	
 	
-//	public void setTheme(String theme){
-//		this.theme = theme;
-//	}
+	public void setCannon(int c){
+		;
+	}
 	
 	public static void setUnderworldTheme(){
 		theme = "img/underworld/";

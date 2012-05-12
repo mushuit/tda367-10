@@ -49,7 +49,7 @@ public class GameplayView extends BasicGameState {
 	private Image zBlock;
 	private Image lockedBlock;
 	private Image screenCapture;
-
+	
 	private Cannon cannon;
 	private Player player;
 	private Bullet bullet; 
@@ -62,18 +62,20 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
+	
+	//private SettingsView sV;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.GAME_BACKGROUND_IMG);
-		cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
 		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
+		cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
 
 		iBlock = ThemeHandler.get(ThemeHandler.PURPLE_BLOCK_IMG);
 		jBlock = ThemeHandler.get(ThemeHandler.BLUE_BLOCK_IMG);
@@ -83,6 +85,19 @@ public class GameplayView extends BasicGameState {
 		sBlock = ThemeHandler.get(ThemeHandler.RED_BLOCK_IMG);
 		zBlock = ThemeHandler.get(ThemeHandler.TURQUOISE_BLOCK_IMG);
 		lockedBlock = ThemeHandler.get(ThemeHandler.LOCKED_BLOCK_IMG);
+
+//		if(sV.getCannon() == 0) {
+//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
+//		} else if(sV.getCannon() == 1) {
+//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON2_IMG);
+//		} else if(sV.getCannon() == 2) {
+//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON3_IMG);
+//		} else if(sV.getCannon() == 3) {
+//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON4_IMG);
+//		} else if(sV.getCannon() == 4) {
+//			cannonImage = ThemeHandler.get(ThemeHandler.CANNON5_IMG);
+//		}
+//		
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
@@ -115,13 +130,15 @@ public class GameplayView extends BasicGameState {
 		if(blockBox.isInUse()){
 			int i = 0;
 
-
 			blockBox.update();
 			putImage();
 
-			for(Position[] p : blockBox.getPos()){
-				for(Position pe : p){
-					blocks.get(i).draw(pe.getX(), pe.getY());
+			Position[][] p = blockBox.getPos();
+			int length = blockBox.getTetroList().size();
+			for(int j = 0; j < length; j++){
+				Position[] pe = p[j];
+				for(int h = 0; h < pe.length; h++){
+					blocks.get(i).draw(pe[h].getX(), pe[h].getY());
 					i++;
 				}
 			}
@@ -130,7 +147,6 @@ public class GameplayView extends BasicGameState {
 		g.setColor(Color.black);
 		for(int i = 0; i < bulletList.size(); i++){
 			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
-
 		}
 
 		if(isPaused) {
@@ -157,7 +173,7 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-
+		//System.out.println(""+sV.getCannon());
 	}
 
 	public void checkInput(Input input, StateBasedGame sbg) {
@@ -220,7 +236,6 @@ public class GameplayView extends BasicGameState {
 				if(!s.isMoving()){
 					block = lockedBlock;
 				} else{
-
 
 					if(t.toString().equals("I")){
 						block = iBlock;
