@@ -30,6 +30,7 @@ public class SettingsView extends BasicGameState {
 	private Image sound;
 	private Image effects;
 	private Image music;
+
 	
 	private Image fxSlider;
 	private Image fxSliderPin;
@@ -40,6 +41,12 @@ public class SettingsView extends BasicGameState {
 	private Image musicSliderPinHover;
 	
 	private Image menuHover;
+	
+	private Image cannon;
+	private Image cannon2;
+	private Image cannon3;
+	private Image cannon4;
+	private Image cannon5;
 
 	private int backXPos;
 	private int backYPos;
@@ -63,12 +70,15 @@ public class SettingsView extends BasicGameState {
 	private double fxVolume;						
 	private double musicVolume;
 	
-	private int themeYPos;
+	private int cannonXPos;
+	private int cannonYPos;
+	private int cannonValue;
 	
 	private Sound fx;
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
+	private int playerYPos;
 	
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -79,21 +89,19 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
-		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
-		backXPos = 200-(back.getWidth()/2);
-		backYPos = 460;												//längst ner
+		
 		
 		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
 		soundXPos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
-		soundYPos = 200;											//uppe
+		soundYPos = 200;																		//Change
 		
 		effects = ThemeHandler.get(ThemeHandler.EFFECTS_IMG);
 		effectsXPos = 240-(effects.getWidth());
-		effectsYPos = 250;											//Mitten
+		effectsYPos = 250;																		//Change
 		
 		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
-		musicYPos = 320;											//nere
+		musicYPos = 320;											 							//Change
 		
 		fxSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		fxSliderXPos = 250;
@@ -101,8 +109,8 @@ public class SettingsView extends BasicGameState {
 		
 		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		fxSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		fxSliderPinXPos = fxSliderXPos;
-		fxSliderPinYPos = effectsYPos;
+		fxSliderPinXPos = fxSliderXPos + fxSlider.getWidth() - fxSliderPin.getWidth()-1;
+		fxSliderPinYPos = effectsYPos-3;
 		
 		musicSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		musicSliderXPos = 250;
@@ -110,16 +118,29 @@ public class SettingsView extends BasicGameState {
 		
 		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		musicSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		musicSliderPinXPos = musicSliderXPos;
-		musicSliderPinYPos = musicYPos;
+		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth()-1;
+		musicSliderPinYPos = musicYPos-3;
 		
-		themeYPos = 390;
+		cannonXPos = musicSliderXPos;
+		cannonYPos = 390;																		//change
+		cannon = ThemeHandler.get(ThemeHandler.CANNON_IMG);
+		cannon2 = ThemeHandler.get(ThemeHandler.CANNON2_IMG);
+		cannon3 = ThemeHandler.get(ThemeHandler.CANNON3_IMG);
+		cannon4 = ThemeHandler.get(ThemeHandler.CANNON4_IMG);
+		cannon5 = ThemeHandler.get(ThemeHandler.CANNON5_IMG);
+		cannonValue = 0;
 		
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
 		hoverYPos = effectsYPos;
 		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
-		menuXPos = /*(Util.WINDOW_WIDTH/2) - (effects.getWidth()/2)*/ backXPos;					//Change
+		menuXPos = (Util.WINDOW_WIDTH/2) - (menuHover.getWidth()/2);							//Change hoverpic
+		playerYPos = 420;																		//change
+		
+		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
+		backXPos = 200-(back.getWidth()/2);
+		backYPos = 460;																			//Change
+
 	}
 
 	@Override
@@ -136,7 +157,17 @@ public class SettingsView extends BasicGameState {
 		musicSlider.draw(musicSliderXPos, musicSliderYPos);
 		fxSliderPin.draw(fxSliderPinXPos, fxSliderPinYPos);
 		musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
-		
+		if(cannonValue == 0) {
+			cannon.draw(cannonXPos, cannonYPos);
+		} else if(cannonValue == 1) {
+			cannon2.draw(cannonXPos, cannonYPos);
+		} else if(cannonValue == 2) {
+			cannon3.draw(cannonXPos, cannonYPos);
+		} else if(cannonValue == 3) {
+			cannon4.draw(cannonXPos, cannonYPos);
+		} else if(cannonValue == 4) {
+			cannon5.draw(cannonXPos, cannonYPos);
+		}
 		back.draw(backXPos, backYPos);
 		if(hoverValue == 0) {
 			fxSliderPinHover.draw(fxSliderPinXPos, fxSliderPinYPos);
@@ -159,13 +190,13 @@ public class SettingsView extends BasicGameState {
 //			ThemeHandler.setOverworldTheme();
 //		}
 		if (input.isKeyPressed(Input.KEY_DOWN)){
-			hoverValue = (hoverValue + 1) % 4;
+			hoverValue = (hoverValue + 1) % 5;
 			fx.play();
 		}
 		else if(input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if(hoverValue < 0) {
-				hoverValue = 3;
+				hoverValue = 4;
 			}
 			fx.play();
 		}
@@ -196,25 +227,60 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		else if(hoverValue == 2) {
-			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change theme
+			if (input.isKeyPressed(Input.KEY_RIGHT)){
+				cannonValue = (cannonValue + 1) % 5;
+				fx.play();
+			}
+			else if(input.isKeyPressed(Input.KEY_LEFT)) {
+				cannonValue--;
+				if(cannonValue < 0) {
+					cannonValue = 4;
+				}
+				fx.play();
+			}
+		}
+		else if(hoverValue == 3) {
+			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change player's name, different controls perhaps
 				
 			}
 			if(input.isKeyPressed(Input.KEY_LEFT)) {
 				
 			}
 		}
-		else if(hoverValue == 3) {
+		else if(hoverValue == 4) {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				sbg.enterState(States.MAINMENUVIEW.getID());
 			}
 		}
 		
 		 
-		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));
-		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
+		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/
+				Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));		
+		
+		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/
+				Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
 	}
 	
-	
+
+//	public void changeCannon() {
+//		switch(hoverValue) {
+//		case 0:
+//			hoverYPos = effectsYPos;
+//			break;
+//		case 1:
+//			hoverYPos = musicYPos;
+//			break;
+//		case 2:
+//			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
+//			break;
+//		case 3:
+//			hoverYPos = playerYPos;
+//			break;
+//		case 4:
+//			hoverYPos = backYPos;
+//			break;
+//		}
+//	}
 	public void moveMenuFocus() {
 		switch(hoverValue) {
 		case 0:
@@ -224,18 +290,35 @@ public class SettingsView extends BasicGameState {
 			hoverYPos = musicYPos;
 			break;
 		case 2:
-			hoverYPos = themeYPos;      //THEME, still needs to be fixed
+			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
 			break;
 		case 3:
+			hoverYPos = playerYPos;
+			break;
+		case 4:
 			hoverYPos = backYPos;
 			break;
 		}
 	}
-	//these getters return a value between 0 and 1
+	/**
+	 * A method that returns a number from 0 to 5
+	 * @return which cannon is chosen
+	 */
+	public int getCannon(){
+		return cannonValue;
+	}
+	/**
+	 * A getter for the fx volume
+	 * @return a value between 0 and 1
+	 */
 	public double getFxVolume(){
 		return fxVolume;
 	}
 	
+	/**
+	 * A getter for the music volume
+	 * @return a value between 0 and 1
+	 */
 	public double getMusicVolume(){
 		return musicVolume;
 	}

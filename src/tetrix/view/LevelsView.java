@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -34,6 +35,8 @@ public class LevelsView extends BasicGameState{
 	private int hoverYPos;
 	
 	private int hoverValue;
+
+	private Sound fx;
 	
 	public LevelsView(int stateID) {
 		this.stateID = stateID;
@@ -52,6 +55,7 @@ public class LevelsView extends BasicGameState{
 		hardYPos = 330;
 		hoverYPos = easyYPos;
 		xPos = Util.WINDOW_WIDTH/2 - hover.getWidth()/2;
+		fx = new Sound("sound/button.wav");
 	}
 
 	@Override
@@ -70,9 +74,11 @@ public class LevelsView extends BasicGameState{
 		Input input = gc.getInput();
 		
 		if(input.isKeyPressed(Input.KEY_DOWN)) {
+			fx.play();
 			hoverValue = (hoverValue + 1) % 2;
 		} 
 		else if(input.isKeyPressed(Input.KEY_UP)) {
+			fx.play();
 			hoverValue--;
 			if(hoverValue < 0) {
 				hoverValue = 1;

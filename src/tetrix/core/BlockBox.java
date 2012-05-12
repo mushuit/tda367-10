@@ -79,15 +79,8 @@ public class BlockBox {
 		}).start();
 	}
 
+	private void search4FullRows(){		
 
-	public void update() throws SlickException{
-		for(Tetromino t : minoes){
-			if(t.isMoving())
-				t.update();
-
-		}
-
-		//kollar efter hela rader
 		for(int y = Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT; y+=Util.SQUARE_SIZE){
 			int amountFilled = 0;
 			for(int x = Util.B4_BOX_WIDTH; x < Util.WINDOW_WIDTH-Util.B4_BOX_WIDTH; x+=Util.SQUARE_SIZE){
@@ -97,7 +90,16 @@ public class BlockBox {
 			}
 			if(amountFilled == 10){
 				clearRow(y);
+			}
+		}
+	}
 
+
+	public void update() throws SlickException{
+		search4FullRows();
+		for(int i = minoes.size(); i > 0; i--){
+			if(minoes.get(i-1).isMoving()){
+				minoes.get(i-1).update();
 			}
 		}
 	}
@@ -119,7 +121,8 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(int x, int y) {
-		for(int i = 0; i < minoes.size(); i++){
+		int size = minoes.size();
+		for(int i = 0; i < size; i++){
 			Square[] s = minoes.get(i).getSquares();
 			for(int h = 3; h > -1; h--){
 				if(!s[h].destroyed()){
@@ -173,7 +176,8 @@ public class BlockBox {
 		Position[][] pos = new Position[minoes.size()][4];
 
 		int h = 0;
-		for(int i = 0; i < minoes.size(); i++){
+		int size = minoes.size();
+		for(int i = 0; i < size; i++){
 			pos[h] = minoes.get(i).getPos();
 			h++;
 		}
@@ -204,11 +208,11 @@ public class BlockBox {
 	public int level(){
 		return level;
 	}
-	
+
 	public void gameIsOver(){
 		gameOver = true;
 	}
-	
+
 	public boolean gameOver(){
 		return gameOver;
 	}

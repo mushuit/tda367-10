@@ -148,15 +148,10 @@ public abstract class Tetromino implements ActionListener{
 					i++;
 				}
 
-				if(square[j].destroyed() && !newBlock()){
-					if(!this.toString().equals("O")){
-						usedBlock();
-					}else if(!this.toString().equals("O") && anInt == j){
-						
-					}
-					if(this.toString().equals("O")){
-						anInt = j;
-					}
+				if(square[j].destroyed() && newBlock()){
+					usedBlock();
+
+
 					try {
 						System.out.println("notWhole() anropas");
 						notWhole();

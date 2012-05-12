@@ -1,7 +1,7 @@
 package tetrix.core;
 
 /**
- * @Javadoc
+ * 
  * This class makes an Entry of the player name and the players points. 
  * @author Andreas Karlberg
  *

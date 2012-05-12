@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * @Javadoc
+ *
  * The File reader reads and writes strings to the specific highscore file.
  * @author Andreas Karlberg
  *
