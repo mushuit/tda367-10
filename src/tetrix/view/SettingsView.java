@@ -109,7 +109,7 @@ public class SettingsView extends BasicGameState {
 		
 		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		fxSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		fxSliderPinXPos = fxSliderXPos + fxSlider.getWidth() - fxSliderPin.getWidth()-1;
+		fxSliderPinXPos = fxSliderXPos + fxSlider.getWidth() - fxSliderPin.getWidth();
 		fxSliderPinYPos = effectsYPos-3;
 		
 		musicSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
@@ -118,7 +118,7 @@ public class SettingsView extends BasicGameState {
 		
 		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		musicSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth()-1;
+		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth();
 		musicSliderPinYPos = musicYPos-3;
 		
 		cannonXPos = musicSliderXPos;
