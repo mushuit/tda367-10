@@ -25,6 +25,7 @@ import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
@@ -62,8 +63,6 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
-	
-	//private SettingsView sV;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -85,7 +84,7 @@ public class GameplayView extends BasicGameState {
 		sBlock = ThemeHandler.get(ThemeHandler.RED_BLOCK_IMG);
 		zBlock = ThemeHandler.get(ThemeHandler.TURQUOISE_BLOCK_IMG);
 		lockedBlock = ThemeHandler.get(ThemeHandler.LOCKED_BLOCK_IMG);
-
+ 
 //		if(sV.getCannon() == 0) {
 //			cannonImage = ThemeHandler.get(ThemeHandler.CANNON_IMG);
 //		} else if(sV.getCannon() == 1) {
@@ -176,7 +175,7 @@ public class GameplayView extends BasicGameState {
 		//System.out.println(""+sV.getCannon());
 	}
 
-	public void checkInput(Input input, StateBasedGame sbg) {
+	public void checkInput(Input input, StateBasedGame sbg) throws SlickException {
 		int updateSpeed = 500/Util.FPS;
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
@@ -196,6 +195,7 @@ public class GameplayView extends BasicGameState {
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
+			SoundEffects.instance().shot();
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}

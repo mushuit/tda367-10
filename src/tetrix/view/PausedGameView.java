@@ -116,8 +116,8 @@ public class PausedGameView extends BasicGameState {
 			}
 			else if(hoverValue == 2) {
 				input.clearKeyPressedRecord();
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.getState(States.MAINMENUVIEW.getID()).leave(gc, sbg);
+				sbg.getState(States.MAINMENUVIEW.getID()).init(gc, sbg);
 				sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 3) {

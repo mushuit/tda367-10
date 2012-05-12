@@ -20,25 +20,25 @@ public class SoundEffects {
 	private static Sound sfxRowCleared;
 	private static Sound sfxExplode;
 	
-	public SoundEffects() throws SlickException {
-		sfxShot = new Sound("sound/shot.wav");		// Sound of the bullet when you shoot
-		sfxBlowUp = new Sound("sound/hit.wav");	// Sound of a block blown up
-		sfxMenuClick = new Sound("sound/button.wav");	// Sound of a menu click
-		sfxHighScore = new Sound("sound/powerup.wav");	// Sound when you break a new High Score
-		sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when it is Game Over
-		sfxExplode = new Sound("sound/explode.wav");		// Sound when the game pauses
+	private static SoundEffects instance = null;
+	
+	private SoundEffects(){}
+	
+	public static synchronized SoundEffects instance() throws SlickException {
+		if(instance == null) {
+			sfxShot = new Sound("sound/shot.wav");		// Sound of the bullet when you shoot
+			sfxBlowUp = new Sound("sound/hit.wav");	// Sound of a block blown up
+			sfxMenuClick = new Sound("sound/button.wav");	// Sound of a menu click
+			sfxHighScore = new Sound("sound/powerup.wav");	// Sound when you break a new High Score
+			sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when it is Game Over
+			sfxExplode = new Sound("sound/explosion.wav");		// Sound when the game pauses
+		}
+		
+		return instance;
 	}
 
-	public static void shotPlay(){
+	public static void shot(){
 		sfxShot.play();
-	}
-
-	public static void shotLoop(){
-		sfxShot.loop();
-	}
-
-	public static void shotStop(){
-		sfxShot.stop();
 	}
 
 	public static void blowUpPlay(){
