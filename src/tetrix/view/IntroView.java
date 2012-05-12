@@ -2,7 +2,7 @@ package tetrix.view;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Random;
+import java.util.NoSuchElementException;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -22,8 +22,8 @@ import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
 
 /**
- * Class responsible for the intro sequence where the user is expected to
- * "press start".
+ * Class responsible for the intro sequence where the user is expected to press
+ * a key (or enter a secret code).
  * 
  * @author Linus Karlsson
  * 
@@ -37,9 +37,10 @@ public class IntroView extends BasicGameState implements KeyListener {
 	private Image tetrixLogo;
 
 	private int alphaValue;
-	private Random rand;
 	private boolean isKeyPressed;
 	private PixelRain pixelRain;
+	private Color pixelColor;
+	private boolean isKonamiEntered;
 
 	private LinkedList<Integer> konamiCode;
 
@@ -54,12 +55,14 @@ public class IntroView extends BasicGameState implements KeyListener {
 		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
 		pressAnyKey = ThemeHandler.get(ThemeHandler.PRESS_ANY_KEY_IMG);
 		alphaValue = 100;
-		rand = new Random();
 		isKeyPressed = false;
+		pixelColor = Color.white;
 		pixelRain = new PixelRain();
+		isKonamiEntered = false;
 		repeatBlink();
-		
-		// The konami code as integers (Up, Up, Down, Down, Left, Right, Left, Right, B, A).
+
+		// The konami code as integers (Up, Up, Down, Down, Left, Right, Left,
+		// Right, B, A).
 		konamiCode = new LinkedList<Integer>(Arrays.asList(200, 200, 208, 208,
 				203, 205, 203, 205, 48, 30));
 	}
@@ -69,7 +72,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 			throws SlickException {
 		background.draw(0, 0);
 
-		g.setColor(Color.white);
+		g.setColor(pixelColor);
 		for (int i = 0; i < pixelRain.getList().size(); i++) {
 			g.fill(pixelRain.getList().get(i));
 		}
@@ -88,9 +91,14 @@ public class IntroView extends BasicGameState implements KeyListener {
 		input.clearKeyPressedRecord();
 
 		if (isKeyPressed) {
-			leave(gc, sbg);
+			StateHandler.addStates(sbg);
+			StateHandler.initStates(gc, sbg);
 			sbg.enterState(States.MAINMENUVIEW.getID(),
 					new FadeOutTransition(), new FadeInTransition());
+		} else if (isKonamiEntered) {
+			ThemeHandler.setOverworldTheme();
+			sbg.getCurrentState().init(gc, sbg);
+			setPixelColor(Color.black);
 		}
 
 		pixelRain.movePixel(rate);
@@ -111,11 +119,6 @@ public class IntroView extends BasicGameState implements KeyListener {
 		}
 	}
 
-	public Color randomColor() {
-		return new Color(rand.nextInt(256), rand.nextInt(256),
-				rand.nextInt(256));
-	}
-
 	@Override
 	public void keyPressed(int key, char c) {
 		checkKonami(key);
@@ -126,13 +129,19 @@ public class IntroView extends BasicGameState implements KeyListener {
 	 * presses. If the keypresses are correct, a hidden theme will show up
 	 */
 	public void checkKonami(int key) {
-		if (key != konamiCode.removeFirst()) {
-			isKeyPressed = true;
-		}
+		try {
+			if (key != konamiCode.removeFirst()) {
+				isKeyPressed = true;
+			}
+		} catch (NoSuchElementException e) {}
 
 		if (konamiCode.isEmpty()) {
-			System.out.print("Success!");
+			isKonamiEntered = true;
 		}
+	}
+	
+	public void setPixelColor(Color color) {
+		pixelColor = color;
 	}
 
 	public void repeatBlink() {
