@@ -32,7 +32,7 @@ public class CollisionHandler {
 							&& bullet.getPos().getY() <= s.getY() + 22) {
 						if (bullet.getPos().getX() >= s.getX()
 								&& bullet.getPos().getX() <= s.getX() + 22) {
-							if (!s.destroyed()) {
+							if (!s.destroyed() && s.isMoving()) {
 								s.destroy();
 								return true;
 							}

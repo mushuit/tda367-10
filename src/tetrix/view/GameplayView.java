@@ -108,6 +108,7 @@ public class GameplayView extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0,0);
+		cannonImage.setRotation(cannon.getRotation());
 		cannonImage.draw(cannon.getX(), cannon.getY());
 		scoreDisplay.drawString(5, 0, player.getScore() + "");
 
@@ -157,7 +158,6 @@ public class GameplayView extends BasicGameState {
 			}
 		}
 
-		cannonImage.setRotation(cannon.getRotation());
 	}
 
 	public void checkInput(Input input, StateBasedGame sbg) {
@@ -238,23 +238,6 @@ public class GameplayView extends BasicGameState {
 						block = zBlock;
 					}
 				}
-
-				//		for(int i = 0; i < blockBox.getTetroList().size(); i++){
-				//			if(blockBox.getTetroList().get(i).toString().equals("I")){
-				//				block = iBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("J")){
-				//				block = jBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("L")){
-				//				block = lBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("O")){
-				//				block = oBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("T")){
-				//				block = tBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("S")){
-				//				block = sBlock;
-				//			}else if(blockBox.getTetroList().get(i).toString().equals("Z")){
-				//				block = zBlock;
-				//			}
 
 				if(!s.destroyed()){
 					blocks.add(block);

@@ -52,7 +52,7 @@ public abstract class Tetromino implements ActionListener{
 		newBlock = true;
 		stop = false;
 		l = 0;
-		anInt = 0;
+		anInt = 10;
 		build();
 	}
 
@@ -149,7 +149,14 @@ public abstract class Tetromino implements ActionListener{
 				}
 
 				if(square[j].destroyed() && !newBlock()){
-					usedBlock();
+					if(!this.toString().equals("O")){
+						usedBlock();
+					}else if(!this.toString().equals("O") && anInt == j){
+						
+					}
+					if(this.toString().equals("O")){
+						anInt = j;
+					}
 					try {
 						System.out.println("notWhole() anropas");
 						notWhole();
@@ -169,7 +176,7 @@ public abstract class Tetromino implements ActionListener{
 
 			timer.stop();
 		}
-		
+
 		for(int i = 0; i < 4; i++){
 			if(!square[i].isMoving() && square[i].getY() == Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE){
 				bBox.gameIsOver();
@@ -178,21 +185,7 @@ public abstract class Tetromino implements ActionListener{
 	}
 
 
-	public void notWhole() throws SlickException{
-		Square[] sq2 = getSquares();
-		for(Square s : getSquares()){
-			if(s.destroyed()){
-				if(s.getNbr() == 1){
-					sq2[0].destroy();
-					bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
-				}
-				else if(s.getNbr() == 2){
-					sq2[3].destroy();
-					bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
-				}
-			}
-		}
-	}
+	public abstract void notWhole() throws SlickException;
 
 	public boolean newBlock(){
 		return newBlock;
