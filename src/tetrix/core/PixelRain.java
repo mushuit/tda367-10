@@ -3,6 +3,7 @@ package tetrix.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -12,7 +13,7 @@ import org.newdawn.slick.geom.Shape;
  *
  */
 public class PixelRain {
-	
+
 	private List<Shape> pixelList;
 	private Random rand;
 	private int pixelSize;
