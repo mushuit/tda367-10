@@ -30,6 +30,7 @@ public class SettingsView extends BasicGameState {
 	private Image sound;
 	private Image effects;
 	private Image music;
+
 	
 	private Image fxSlider;
 	private Image fxSliderPin;
