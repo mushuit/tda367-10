@@ -25,6 +25,7 @@ import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
@@ -161,7 +162,7 @@ public class GameplayView extends BasicGameState {
 		}
 	}
 
-	public void checkInput(Input input, StateBasedGame sbg) {
+	public void checkInput(Input input, StateBasedGame sbg) throws SlickException {
 		int updateSpeed = 500/Util.FPS;
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
@@ -181,6 +182,7 @@ public class GameplayView extends BasicGameState {
 		}
 
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
+			SoundEffects.instance().shot();
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}

@@ -58,4 +58,8 @@ public class PixelRain {
 	public List<Shape> getList() {
 		return pixelList;
 	}
+	
+	public void setSize(int size) {
+		pixelSize = size;
+	}
 }

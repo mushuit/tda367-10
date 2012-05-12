@@ -17,6 +17,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.PixelRain;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
@@ -96,7 +97,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 			sbg.enterState(States.MAINMENUVIEW.getID(),
 					new FadeOutTransition(), new FadeInTransition());
 		} else if (isKonamiEntered) {
-			ThemeHandler.setOverworldTheme();
+			ThemeHandler.setUnderworldTheme();
 			sbg.getCurrentState().init(gc, sbg);
 			setPixelColor(Color.black);
 		}
@@ -121,18 +122,24 @@ public class IntroView extends BasicGameState implements KeyListener {
 
 	@Override
 	public void keyPressed(int key, char c) {
-		checkKonami(key);
+		try {
+			checkKonami(key);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Konami Code is a "cheat" where the user has to enter a combination of key
 	 * presses. If the keypresses are correct, a hidden theme will show up
+	 * @throws SlickException 
 	 */
-	public void checkKonami(int key) {
+	public void checkKonami(int key) throws SlickException {
 		try {
 			if (key != konamiCode.removeFirst()) {
 				isKeyPressed = true;
 			}
+			SoundEffects.instance().shot();
 		} catch (NoSuchElementException e) {}
 
 		if (konamiCode.isEmpty()) {

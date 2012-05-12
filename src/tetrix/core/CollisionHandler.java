@@ -20,11 +20,13 @@ public class CollisionHandler {
 
 	public boolean checkCollision(Bullet bullet) {
 		if (bullet.getPos().getY() < 0
-				|| bullet.getPos().getY() > Util.WINDOW_HEIGHT)
+				|| bullet.getPos().getY() > Util.WINDOW_HEIGHT) {
 			return true;
+		}
 		else if (bullet.getPos().getX() < 0
-				|| bullet.getPos().getX() > Util.WINDOW_WIDTH)
+				|| bullet.getPos().getX() > Util.WINDOW_WIDTH) {
 			return true;
+		}
 		for (Tetromino t : bB.getTetroList()) {
 			if (t.isMoving())
 				for (Square s : t.getSquares()) {
