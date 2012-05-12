@@ -40,7 +40,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {		
 		System.out.println(whichBlock);
-		switch(3) {
+		switch(1) {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
@@ -69,7 +69,7 @@ public class TetrominoFactory {
 
 
 	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr, Position pos, int x) {	
-		System.out.println("Creating broken tetromino" + newSqr + "    x: " + pos.getX() + "    y: " + pos.getY());
+		System.out.println("Creating broken tetromino: " + te.toString());
 		boolean extraHeight = false;
 		t = te;
 		if(t.toString().equals("I")){

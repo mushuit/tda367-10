@@ -39,7 +39,7 @@ public class TestTextInput extends BasicGame {
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		g.setColor(Color.blue);
-		g.fill(messageDialog);
+		//g.fill(messageDialog);
 		inputDescFont.drawString((windowWidth/2 - dialogWidth/2) + 10, (windowHeight/2 - dialogHeight/2) + 10, "Congratz! Enter your name", Color.green);
 		textField.render(gc, g);
 		textField.setFocus(true);
@@ -52,9 +52,9 @@ public class TestTextInput extends BasicGame {
 		inputFont = new TrueTypeFont(font, true);
 		inputDescFont = new TrueTypeFont(descriptionFont, true);
 		
-		messageDialog = new Rectangle(windowWidth / 2
-				- dialogWidth / 2, windowHeight / 2 - dialogHeight / 2,
-				dialogWidth, dialogHeight);
+		//messageDialog = new Rectangle(windowWidth / 2
+			//	- dialogWidth / 2, windowHeight / 2 - dialogHeight / 2,
+				//dialogWidth, dialogHeight);
 		
 		int textFieldWidth = 200;
 		int textFieldHeight = 30;
