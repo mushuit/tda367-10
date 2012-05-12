@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class ThemeHandler {
 
-	private static String theme = "img/underworld/";		//default theme
+	private static String theme = "img/overworld/";		//default theme
 	public static final String BACKGROUND_IMG = "background.png";
 	public static final String BACK_IMG = "back.png";
 	public static final String CANNON_IMG = "cannon.png";

@@ -63,7 +63,7 @@ public class SettingsView extends BasicGameState {
 	private double fxVolume;						
 	private double musicVolume;
 	
-	private int themeYPos;
+	private int cannonYPos;
 	
 	private Sound fx;
 	private int hoverValue;
@@ -101,8 +101,8 @@ public class SettingsView extends BasicGameState {
 		
 		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		fxSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		fxSliderPinXPos = fxSliderXPos;
-		fxSliderPinYPos = effectsYPos;
+		fxSliderPinXPos = fxSliderXPos + fxSlider.getWidth() - fxSliderPin.getWidth()-1;
+		fxSliderPinYPos = effectsYPos-3;
 		
 		musicSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		musicSliderXPos = 250;
@@ -110,10 +110,10 @@ public class SettingsView extends BasicGameState {
 		
 		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		musicSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		musicSliderPinXPos = musicSliderXPos;
-		musicSliderPinYPos = musicYPos;
+		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth()-1;
+		musicSliderPinYPos = musicYPos-3;
 		
-		themeYPos = 390;
+		cannonYPos = 390;
 		
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
@@ -196,7 +196,7 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		else if(hoverValue == 2) {
-			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change theme
+			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change cannon
 				
 			}
 			if(input.isKeyPressed(Input.KEY_LEFT)) {
@@ -224,7 +224,7 @@ public class SettingsView extends BasicGameState {
 			hoverYPos = musicYPos;
 			break;
 		case 2:
-			hoverYPos = themeYPos;      //THEME, still needs to be fixed
+			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
 			break;
 		case 3:
 			hoverYPos = backYPos;
