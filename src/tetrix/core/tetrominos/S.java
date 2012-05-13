@@ -44,16 +44,37 @@ public class S extends Tetromino{
 	}
 
 	public void notWhole() throws SlickException{
+		System.out.println("1:" + SqrDstr + "  2:" + SqrDstr2 + "  3:" + SqrDstr3 + "  4:" + SqrDstr4);
 		Square[] sq2 = getSquares();
 		for(Square s : getSquares()){
 			if(s.destroyed()){
-				if(s.getNbr() == 0){
-					sq2[1].destroy();
-					bBox.newBrokenBlock(1, this, sq2[1].getPos(), getX());
-				}
-				else if(s.getNbr() == 3){
-					sq2[2].destroy();
-					bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
+				if(!s.used()){
+					if(s.getNbr() == 0){
+						if(!used && !SqrDstr2){
+							sq2[1].destroy();
+							sq2[1].use();
+							bBox.newBrokenBlock(1, this, sq2[1].getPos(), getX());
+							System.out.println("clonad()");
+							used = true;
+						}
+						SqrDstr = true;
+					}
+					else if(s.getNbr() == 1){
+						SqrDstr2 = true;
+					}
+					else if(s.getNbr() == 2){
+						SqrDstr3 = true;
+					}
+					else if(s.getNbr() == 3){
+						if(!used && !SqrDstr3){
+							sq2[2].destroy();
+							sq2[2].use();
+							bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
+							System.out.println("clonad()");
+							used = true;
+						} 
+						SqrDstr4 = true;
+					}
 				}
 			}
 		}

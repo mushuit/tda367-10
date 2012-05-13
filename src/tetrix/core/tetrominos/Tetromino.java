@@ -28,6 +28,11 @@ public abstract class Tetromino implements ActionListener{
 	private int l;
 	private boolean stop;
 	private int anInt;
+	protected boolean SqrDstr;
+	protected boolean SqrDstr2;
+	protected boolean SqrDstr3;
+	protected boolean SqrDstr4;
+	protected boolean used;
 
 
 
@@ -53,6 +58,11 @@ public abstract class Tetromino implements ActionListener{
 		stop = false;
 		l = 0;
 		anInt = 10;
+		SqrDstr = false;
+		SqrDstr2 = false;
+		SqrDstr3 = false;
+		SqrDstr4 = false; 
+		used = false;
 		build();
 	}
 
@@ -148,7 +158,7 @@ public abstract class Tetromino implements ActionListener{
 					i++;
 				}
 
-				if(square[j].destroyed() && newBlock()){
+				if(newBlock()){
 					usedBlock();
 
 
