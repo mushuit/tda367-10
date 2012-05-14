@@ -146,7 +146,6 @@ public abstract class Tetromino implements ActionListener{
 		//harder level has bigger int
 		if(bBox.level() == 1){
 
-			int i = 0;
 			for(int j = 3; j > -1; j--){
 				if(bBox.isPainted(this)){
 					stop = true;
@@ -154,13 +153,10 @@ public abstract class Tetromino implements ActionListener{
 
 				if(isMoving()){
 					square[j].falling();
-				}else{
-					i++;
 				}
 
 				if(newBlock()){
 					usedBlock();
-
 
 					try {
 						notWhole();
@@ -171,10 +167,7 @@ public abstract class Tetromino implements ActionListener{
 				}
 
 			}
-			if(stop)
-				stop();
-
-			if(i == 4){
+			if(stop){
 				stop();
 			}
 
@@ -198,7 +191,6 @@ public abstract class Tetromino implements ActionListener{
 	public void usedBlock(){
 		if(l == 0){
 			newBlock = false;
-			System.out.println("used");
 			l++;
 		}
 		else

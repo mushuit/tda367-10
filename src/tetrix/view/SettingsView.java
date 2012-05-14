@@ -6,6 +6,10 @@ package tetrix.view;
 //övergångarna
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -20,6 +24,7 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import tetrix.core.FileReader;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
@@ -51,7 +56,7 @@ public class SettingsView extends BasicGameState {
 
 	private Image menuHover;
 
-	
+
 	private Image cannon;
 
 	private Image cannon2;
@@ -83,10 +88,10 @@ public class SettingsView extends BasicGameState {
 
 	private int cannonYPos;
 
-	
+
 	private int cannonXPos;
 	private int cannonValue;
-	
+
 	private Sound fx;
 	private int hoverValue;
 	private int hoverYPos;
@@ -128,20 +133,20 @@ public class SettingsView extends BasicGameState {
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
 		musicYPos = 320;											//nere
 
-		
-		
+
+
 		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
 		soundXPos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
 		soundYPos = 200;																		//Change
-		
+
 		effects = ThemeHandler.get(ThemeHandler.EFFECTS_IMG);
 		effectsXPos = 240-(effects.getWidth());
 		effectsYPos = 250;																		//Change
-		
+
 		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
 		musicYPos = 320;											 							//Change
-		
+
 
 		fxSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		fxSliderXPos = 250;
@@ -162,7 +167,7 @@ public class SettingsView extends BasicGameState {
 		musicSliderPinYPos = musicYPos-3;
 
 		cannonYPos = 390;
-		
+
 		cannonXPos = musicSliderXPos;
 		cannonYPos = 390;																		//change
 
@@ -173,7 +178,7 @@ public class SettingsView extends BasicGameState {
 		cannon5 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON5_IMG);
 
 		cannonValue = 0;
-		
+
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
 		hoverYPos = effectsYPos;
@@ -182,7 +187,7 @@ public class SettingsView extends BasicGameState {
 		playerYPos = 420;
 		menuXPos = (Util.WINDOW_WIDTH/2) - (menuHover.getWidth()/2);							//Change hoverpic
 		playerYPos = 420;																		//change
-		
+
 		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backXPos = 200-(back.getWidth()/2);
 		backYPos = 460;																			//Change
@@ -303,21 +308,30 @@ public class SettingsView extends BasicGameState {
 				if(cannonValue < 0) {
 					cannonValue = 4;
 				}
-				fx.play();
 			}
-		}
-		else if(hoverValue == 3) {
-			if(input.isKeyPressed(Input.KEY_ENTER)) {
-				//Change player's name, different controls perhaps
-				message = nameField.getText();
-				System.out.println(message);
+		
+		} else if(hoverValue == 3) {
+				if(input.isKeyPressed(Input.KEY_ENTER)) {		//Change player's name, different controls perhaps
+					message = nameField.getText();
+					System.out.println(message);	
+					FileReader p;
+					try {
+						p = new FileReader("highscore/playername.dat");
+						List<String> ps = new ArrayList<String>();
+						ps.add(message);
+						p.writePName(ps);
 
-			}
-			if(input.isKeyPressed(Input.KEY_LEFT)) {
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
-			}
-		}
-		else if(hoverValue == 4) {
+
+		} else if(hoverValue == 4) {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
@@ -327,12 +341,12 @@ public class SettingsView extends BasicGameState {
 		 
 		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/
 				Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));		
-		
+
 		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/
 				Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
 		
 	}
-	
+
 	public void moveMenuFocus() {
 		switch(hoverValue) {
 		case 0:

@@ -16,6 +16,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
@@ -63,6 +64,7 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
+	private int speedVariable;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -92,7 +94,7 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 
-		timerInterval = 2000;
+		timerInterval = 1000;
 		Font font = new Font("Verdana", Font.PLAIN,55);
 
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -104,6 +106,8 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
+		
+		speedVariable = 100;
 	}
 
 	@Override
@@ -159,6 +163,17 @@ public class GameplayView extends BasicGameState {
 				bulletList.remove(i);
 				size--;
 			}
+		}
+		
+		/*
+		if(timerInterval >= 500
+			&& (player.getScore() % speedVariable) == 0) {
+				increaseSpeed(100);
+		}*/
+		
+		if(blockBox.gameOver()) {
+			newGame();
+			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
 		}
 	}
 

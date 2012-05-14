@@ -7,6 +7,11 @@ public class ThemeHandler {
 
 	private static String theme = "img/overworld/";		//default theme
 	public static final String BACKGROUND_IMG = "background.png";
+	public static final String GAMEOVER_HOVER = "gameover_hover.png";
+	public static final String GAMEOVER_BACKGROUND = "gameover_background.png";
+	public static final String GAMEOVER_LOGO = "game_over.png";
+	public static final String NEW_GAME_BIG = "new_game_big.png";
+	public static final String MAIN_MENU_BIG = "main_menu_big.png";
 	public static final String BACK_IMG = "back.png";
 	public static final String CANNON_IMG = "cannon.png";
 	public static final String CANNON2_IMG = "cannon2.png";

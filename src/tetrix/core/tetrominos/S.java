@@ -53,7 +53,6 @@ public class S extends Tetromino{
 							sq2[1].destroy();
 							sq2[1].use();
 							bBox.newBrokenBlock(1, this, sq2[1].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						}
 						SqrDstr = true;
@@ -69,7 +68,6 @@ public class S extends Tetromino{
 							sq2[2].destroy();
 							sq2[2].use();
 							bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr4 = true;

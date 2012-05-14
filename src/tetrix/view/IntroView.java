@@ -42,7 +42,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 	private PixelRain pixelRain;
 	private Color pixelColor;
 	private boolean isKonamiEntered;
-
+	
 	private LinkedList<Integer> konamiCode;
 
 	public IntroView(int stateID) {
@@ -132,7 +132,8 @@ public class IntroView extends BasicGameState implements KeyListener {
 	/**
 	 * Konami Code is a "cheat" where the user has to enter a combination of key
 	 * presses. If the keypresses are correct, a hidden theme will show up
-	 * @throws SlickException 
+	 * 
+	 * @throws SlickException
 	 */
 	public void checkKonami(int key) throws SlickException {
 		try {
@@ -140,13 +141,14 @@ public class IntroView extends BasicGameState implements KeyListener {
 				isKeyPressed = true;
 			}
 			SoundEffects.instance().shot();
-		} catch (NoSuchElementException e) {}
+		} catch (NoSuchElementException e) {
+		}
 
 		if (konamiCode.isEmpty()) {
 			isKonamiEntered = true;
 		}
 	}
-	
+
 	public void setPixelColor(Color color) {
 		pixelColor = color;
 	}
