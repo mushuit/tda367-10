@@ -105,18 +105,24 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(Tetromino t){ 
-		for(Square s : t.getSquares()){
-			if(s.getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !s.destroyed()){
+		Square[] s = t.getSquares();
+		for(int i = 3; i > -1; i--){
+			if(s[i].getY() >= Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE && !s[i].destroyed()){
 				return true;
 			}
-
-			if(isPainted(s.getX(), s.getY())){
-				System.out.println(isPainted(s.getX(), s.getY()) + "   tetromino: " + t.toString());
-				if(!s.destroyed())
+			if(i == 0){
+				if(isPainted(s[0].getX(), s[0].getY()+Util.SQUARE_SIZE)){
+					if(!s[i].destroyed())
+						return true;
+				}
+				
+			}
+			
+			if(isPainted(s[i].getX(), s[i].getY())){
+				if(!s[i].destroyed())
 					return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -211,6 +217,7 @@ public class BlockBox {
 
 	public void gameIsOver(){
 		gameOver = true;
+		System.out.println("gameOver");
 	}
 
 	public boolean gameOver(){

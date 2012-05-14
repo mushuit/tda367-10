@@ -44,7 +44,6 @@ public class S extends Tetromino{
 	}
 
 	public void notWhole() throws SlickException{
-		System.out.println("1:" + SqrDstr + "  2:" + SqrDstr2 + "  3:" + SqrDstr3 + "  4:" + SqrDstr4);
 		Square[] sq2 = getSquares();
 		for(Square s : getSquares()){
 			if(s.destroyed()){
@@ -54,7 +53,6 @@ public class S extends Tetromino{
 							sq2[1].destroy();
 							sq2[1].use();
 							bBox.newBrokenBlock(1, this, sq2[1].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						}
 						SqrDstr = true;
@@ -70,7 +68,6 @@ public class S extends Tetromino{
 							sq2[2].destroy();
 							sq2[2].use();
 							bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr4 = true;

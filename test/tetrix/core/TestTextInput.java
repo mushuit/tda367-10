@@ -1,6 +1,10 @@
 package tetrix.core;
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -72,7 +76,20 @@ public class TestTextInput extends BasicGame {
 		
 		if(input.isKeyPressed(Input.KEY_ENTER)) {
 			message = textField.getText();
-			System.out.println(message);
+			FileReader p;
+			try {
+				p = new FileReader("highscore/playername.dat");
+				List<String> ps = new ArrayList<String>();
+				ps.add(message);
+				p.writePName(ps);
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

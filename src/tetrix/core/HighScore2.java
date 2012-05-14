@@ -27,7 +27,9 @@ public class HighScore2 implements IHighScore {
 	@Override
 	public List<Entry> getHighScore() throws FileNotFoundException{
 		FileReader f = new FileReader("highscore/highscore.dat");
+		FileReader p = new FileReader("highscore/playername.dat");
 		List<String> rows = f.getRows();
+		List<String> prows = p.getRows();
 
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows){
