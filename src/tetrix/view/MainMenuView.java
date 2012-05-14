@@ -89,7 +89,11 @@ public class MainMenuView extends BasicGameState{
 		highscore.draw(menuXPos, highscoreYPos);
 		exit.draw(menuXPos, exitYPos);
 	}
-
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = 0;
+	}
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
@@ -122,6 +126,7 @@ public class MainMenuView extends BasicGameState{
 			else if(hoverValue == 3) {
 				gc.exit();
 			}
+			hoverValue = 0;
 		}
 	}
 	
