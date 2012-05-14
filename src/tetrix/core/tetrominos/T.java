@@ -58,21 +58,18 @@ public class T extends Tetromino{
 							sq2[3].destroy();
 							sq2[3].use();
 							bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						else if(!used && SqrDstr3 && !SqrDstr4){
 							sq2[3].destroy();
 							sq2[3].use();
 							bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						else if(!used && !SqrDstr3 && SqrDstr4){
 							sq2[2].destroy();
 							sq2[2].use();
 							bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr2 = true;

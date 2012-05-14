@@ -55,7 +55,6 @@ public class J extends Tetromino{
 							sq2[0].destroy();
 							sq2[0].use();
 							bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr2 = true;
@@ -65,7 +64,6 @@ public class J extends Tetromino{
 							sq2[3].destroy();
 							sq2[3].use();
 							bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						}
 						SqrDstr3 = true;

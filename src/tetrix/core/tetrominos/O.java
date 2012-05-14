@@ -62,7 +62,6 @@ public class O extends Tetromino{
 							sq2[1].destroy();
 							sq2[1].use();
 							bBox.newBrokenBlock(1, this, sq2[1].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr = true;
@@ -72,7 +71,6 @@ public class O extends Tetromino{
 							sq2[0].destroy();
 							sq2[0].use();
 							bBox.newBrokenBlock(0, this, sq2[0].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr2 = true;
@@ -82,7 +80,6 @@ public class O extends Tetromino{
 							sq2[3].destroy();
 							sq2[3].use();
 							bBox.newBrokenBlock(3, this, sq2[3].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						}
 						SqrDstr3 = true;
@@ -92,7 +89,6 @@ public class O extends Tetromino{
 							sq2[2].destroy();
 							sq2[2].use();
 							bBox.newBrokenBlock(2, this, sq2[2].getPos(), getX());
-							System.out.println("clonad()");
 							used = true;
 						} 
 						SqrDstr4 = true;

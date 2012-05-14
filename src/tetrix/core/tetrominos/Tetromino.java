@@ -191,7 +191,6 @@ public abstract class Tetromino implements ActionListener{
 	public void usedBlock(){
 		if(l == 0){
 			newBlock = false;
-			System.out.println("used");
 			l++;
 		}
 		else
