@@ -40,7 +40,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {		
 		System.out.println(whichBlock);
-		switch(whichBlock) {
+		switch(2) {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
@@ -98,6 +98,7 @@ public class TetrominoFactory {
 		s[3].use(); 
 
 		s[newSqr].setY(pos.getY()); 
+		s[newSqr].setX(pos.getX()); 
 		if((newSqr == 0 || newSqr == 1) && t.toString().equals("O")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
