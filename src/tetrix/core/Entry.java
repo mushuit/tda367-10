@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import tetrix.view.GameplayView;
+
 /**
  * 
  * This class makes an Entry of the player name and the players points. 
@@ -17,7 +19,7 @@ public class Entry implements Comparable<Entry> {
 	}
 
 	public String getName() {
-		return name;
+		return "name";
 	}
 
 	public int getPoints() {
