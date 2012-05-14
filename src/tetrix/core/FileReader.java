@@ -32,6 +32,18 @@ public class FileReader {
 		return l;
 
 	}
+	public void writePName(List<String> prows) throws IOException {
+		Writer output = new BufferedWriter(new FileWriter("highscore/playername.dat"));
+		try {
+			for(String s:prows){
+				output.write( s +"\n" );
+			}
+		}
+
+		finally {
+			output.close();
+		}
+	}
 
 	public void writeRows(List<String> rows) throws IOException {
 		Writer output = new BufferedWriter(new FileWriter("highscore/highscore.dat"));
