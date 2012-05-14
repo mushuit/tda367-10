@@ -31,8 +31,16 @@ public class I extends Tetromino{
 
 	public void build() {	
 		Square[] s = super.getSquares();
-		for(int i = 0; i < 4; i++){
-			s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80), this, i);
+		int rand = (int) (Math.random()*10);
+		if(rand < 6){
+			for(int i = 0; i < 4; i++){
+				s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX())+i*Util.SQUARE_SIZE, 80), this, i);
+			}
+		}
+		else{
+			for(int i = 0; i < 4; i++){
+				s[i] = new Square(new Position(super.getLeftIn(0)+(Util.SQUARE_SIZE*super.getStartX()), 80+i*Util.SQUARE_SIZE), this, i);
+			}
 		}
 	}
 
@@ -40,7 +48,7 @@ public class I extends Tetromino{
 	public String toString() {
 		return "I";
 	}
-	
+
 	public void notWhole() throws SlickException{
 		Square[] sq2 = getSquares();
 		for(Square s : getSquares()){
