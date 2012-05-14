@@ -45,7 +45,6 @@ public class Z extends Tetromino{
 	}
 	
 	public void notWhole() throws SlickException{
-		System.out.println("1:" + SqrDstr + "  2:" + SqrDstr2 + "  3:" + SqrDstr3 + "  4:" + SqrDstr4);
 		Square[] sq2 = getSquares();
 		for(Square s : getSquares()){
 			if(s.destroyed()){

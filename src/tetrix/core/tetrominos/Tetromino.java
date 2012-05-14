@@ -163,7 +163,6 @@ public abstract class Tetromino implements ActionListener{
 
 
 					try {
-						System.out.println("notWhole() anropas");
 						notWhole();
 					} catch (SlickException e1) {
 						System.out.println("Exception in Tetromino");

@@ -40,7 +40,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {		
 		System.out.println(whichBlock);
-		switch(whichBlock) {
+		switch(6) {
 		case 0:
 			bB.addMino(new I((int)(Math.random()*7), bB));
 			break;
@@ -69,27 +69,20 @@ public class TetrominoFactory {
 
 
 	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr, Position p, int x) {	
-		System.out.println("Creating broken tetromino: " + te.toString() + "  square: " + newSqr);
 		Position pos = new Position(p);
-		boolean extraHeight = false;
 		t = te;
 		if(t.toString().equals("I")){
 			t = new I(x, bB);
 		}else if(t.toString().equals("J")){
 			t = new J(x, bB);
-			extraHeight = true;
 		}else if(t.toString().equals("L")){
 			t = new L(x, bB);
-			extraHeight = true;
 		}else if(t.toString().equals("O")){
 			t = new O(x, bB);
-			extraHeight = true;
 		}else if(t.toString().equals("T")){
 			t = new T(x, bB);
-			extraHeight = true;
 		}else if(t.toString().equals("S")){
 			t = new S(x, bB);
-			extraHeight = true;
 		}else if(t.toString().equals("Z")){
 			t = new Z(x, bB);
 		}
@@ -105,22 +98,25 @@ public class TetrominoFactory {
 		s[3].use(); 
 
 		s[newSqr].setY(pos.getY()); 
-		if(extraHeight && newSqr == 2 && t.toString().equals("O")){
+		if((newSqr == 0 || newSqr == 1) && t.toString().equals("O")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
-		else if(extraHeight && t.toString().equals("J")){
+		else if( newSqr == 0 && t.toString().equals("J")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
-		else if(extraHeight && newSqr == 2 && t.toString().equals("L")){
+		else if( newSqr == 2 && t.toString().equals("L")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
-		else if(extraHeight && t.toString().equals("S")){
+		else if( t.toString().equals("S")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
-		else if(extraHeight && newSqr == 2 && t.toString().equals("T")){
+		else if( newSqr == 2 && t.toString().equals("T")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
-		else if(extraHeight && newSqr == 3 && t.toString().equals("Z")){
+		else if( newSqr == 0 && t.toString().equals("Z")){
+			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
+		}
+		else if( newSqr == 0 && t.toString().equals("I")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
 		

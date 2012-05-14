@@ -111,7 +111,6 @@ public class BlockBox {
 			}
 
 			if(isPainted(s.getX(), s.getY())){
-				System.out.println(isPainted(s.getX(), s.getY()) + "   tetromino: " + t.toString());
 				if(!s.destroyed())
 					return true;
 			}
