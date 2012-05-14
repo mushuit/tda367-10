@@ -14,8 +14,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class StateHandler extends StateBasedGame {
 
 	public enum States {
-		INTROVIEW(1), MAINMENUVIEW(2), LEVELSVIEW(3), GAMEPLAYVIEW(4), SETTINGSVIEW(
-				5), HIGHSCOREVIEW(6), PAUSEDGAMEVIEW(7);
+		INTROVIEW(1),
+		MAINMENUVIEW(2), 
+		LEVELSVIEW(3), 
+		GAMEPLAYVIEW(4), 
+		SETTINGSVIEW(5), 
+		HIGHSCOREVIEW(6), 
+		PAUSEDGAMEVIEW(7),
+		GAMEOVERVIEW(8);
 
 		private final int stateID;
 
@@ -50,6 +56,7 @@ public class StateHandler extends StateBasedGame {
 		sbg.addState(new SettingsView(States.SETTINGSVIEW.getID()));
 		sbg.addState(new HighscoreView(States.HIGHSCOREVIEW.getID()));
 		sbg.addState(new PausedGameView(States.PAUSEDGAMEVIEW.getID()));
+		sbg.addState(new GameOverView(States.GAMEOVERVIEW.getID()));
 	}
 	
 	public static void initStates(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -59,5 +66,6 @@ public class StateHandler extends StateBasedGame {
 		sbg.getState(States.SETTINGSVIEW.getID()).init(gc, sbg);
 		sbg.getState(States.HIGHSCOREVIEW.getID()).init(gc, sbg);
 		sbg.getState(States.PAUSEDGAMEVIEW.getID()).init(gc, sbg);
+		sbg.getState(States.GAMEOVERVIEW.getID()).init(gc, sbg);
 	}
 }
