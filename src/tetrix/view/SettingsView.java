@@ -252,11 +252,8 @@ public class SettingsView extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
 		Input input = gc.getInput();
-		//		if (input.isKeyPressed(Input.KEY_T)){
-		//			ThemeHandler.setOverworldTheme();
-		//		}
+
 		if (input.isKeyPressed(Input.KEY_DOWN)){
 			hoverValue = (hoverValue + 1) % 5;
 			fx.play();
@@ -268,6 +265,7 @@ public class SettingsView extends BasicGameState {
 			}
 			fx.play();
 		}
+		
 		moveMenuFocus();
 
 		if(hoverValue == 0) {
@@ -295,13 +293,7 @@ public class SettingsView extends BasicGameState {
 			}
 		}
 		else if(hoverValue == 2) {
-
-			if(input.isKeyPressed(Input.KEY_RIGHT)) {			//Change cannon
-
-			}
-			if(input.isKeyPressed(Input.KEY_LEFT)) {
-
-
+			
 			if (input.isKeyPressed(Input.KEY_RIGHT)){
 				cannonValue = (cannonValue + 1) % 5;
 				fx.play();
@@ -329,24 +321,16 @@ public class SettingsView extends BasicGameState {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
+				hoverValue = 0;
 			}
 		}
-
-
-
-		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));
-		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
-	}
-
-
-
-		
 		 
 		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos - fxSliderXPos))/
 				Double.parseDouble(Integer.toString(fxSlider.getWidth() - fxSliderPin.getWidth()));		
 		
 		musicVolume =Double.parseDouble(Integer.toString(musicSliderPinXPos - musicSliderXPos))/
 				Double.parseDouble(Integer.toString(musicSlider.getWidth() - musicSliderPin.getWidth()));
+		
 	}
 	
 	public void moveMenuFocus() {

@@ -123,6 +123,7 @@ public class PausedGameView extends BasicGameState {
 			else if(hoverValue == 3) {
 				gc.exit();
 			}
+			hoverValue = 0;
 		}
 		
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {

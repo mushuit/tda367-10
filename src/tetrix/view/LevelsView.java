@@ -93,6 +93,7 @@ public class LevelsView extends BasicGameState{
 			}
 			else if(hoverValue == 1) {
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_HARD);
+				hoverValue = 0;
 			}
 			
 			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
