@@ -31,6 +31,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 	private int newGameYPos;
 	private int mainMenuYPos;
 	private int highscoreYPos;
+	private Player player;
 
 	private int hoverValue;
 
