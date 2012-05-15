@@ -98,6 +98,7 @@ public class TetrominoFactory {
 		s[3].use(); 
 
 		s[newSqr].setY(pos.getY()); 
+		s[newSqr].setX(pos.getX()); 
 		if((newSqr == 0 || newSqr == 1) && t.toString().equals("O")){
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}

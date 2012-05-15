@@ -12,8 +12,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for the main menu view.
@@ -89,7 +89,11 @@ public class MainMenuView extends BasicGameState{
 		highscore.draw(menuXPos, highscoreYPos);
 		exit.draw(menuXPos, exitYPos);
 	}
-
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = 0;
+	}
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
@@ -122,6 +126,7 @@ public class MainMenuView extends BasicGameState{
 			else if(hoverValue == 3) {
 				gc.exit();
 			}
+			hoverValue = 0;
 		}
 	}
 	

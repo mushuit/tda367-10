@@ -19,8 +19,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import tetrix.core.PixelRain;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for the intro sequence where the user is expected to press
