@@ -28,8 +28,8 @@ import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for updating and rendering of the gameplay view.

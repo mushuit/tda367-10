@@ -11,8 +11,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * A class responsible for showing the pause menu. The background image is a copy of the GameplayView

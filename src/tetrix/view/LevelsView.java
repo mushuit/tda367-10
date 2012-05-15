@@ -12,8 +12,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for the view before the game starts where the user has to choose a level.
