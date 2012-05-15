@@ -11,8 +11,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * A class responsible for showing the pause menu. The background image is a copy of the GameplayView
@@ -116,8 +116,7 @@ public class PausedGameView extends BasicGameState {
 			}
 			else if(hoverValue == 2) {
 				input.clearKeyPressedRecord();
-				sbg.getState(States.MAINMENUVIEW.getID()).leave(gc, sbg);
-				sbg.getState(States.MAINMENUVIEW.getID()).init(gc, sbg);
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.enterState(States.MAINMENUVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}
 			else if(hoverValue == 3) {

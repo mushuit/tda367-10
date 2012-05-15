@@ -28,8 +28,8 @@ import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for updating and rendering of the gameplay view.
@@ -64,7 +64,6 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
-	private int speedVariable;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -93,10 +92,9 @@ public class GameplayView extends BasicGameState {
 		player = new Player();
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
-
 		timerInterval = 1000;
+		
 		Font font = new Font("Verdana", Font.PLAIN,55);
-
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
 		scoreDisplay.addAsciiGlyphs();
 		scoreDisplay.addGlyphs(400, 600);
@@ -106,8 +104,6 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-		
-		speedVariable = 100;
 	}
 
 	@Override
@@ -172,7 +168,7 @@ public class GameplayView extends BasicGameState {
 		}*/
 		
 		if(blockBox.gameOver()) {
-			newGame();
+			isPaused = true;
 			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
 		}
 	}

@@ -35,8 +35,6 @@ public abstract class Tetromino implements ActionListener{
 	protected boolean used;
 
 
-
-
 	public Tetromino(int startX, BlockBox bBox){
 		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, bBox);
 	}

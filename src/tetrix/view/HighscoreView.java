@@ -19,8 +19,8 @@ import tetrix.core.Entry;
 import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for viewing the high scores.
