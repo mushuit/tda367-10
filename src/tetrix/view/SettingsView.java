@@ -2,8 +2,9 @@ package tetrix.view;
 //TODO
 //NYA BILDER
 //Mellanslag i menyer
-//Hover värde 0 varje gång
+//Hover värde 0 varje gång - done
 //övergångarna
+//att de andra alternativen inte ska lyssna på piltangenternas inmatning
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
@@ -45,7 +46,6 @@ public class SettingsView extends BasicGameState {
 	private Image effects;
 	private Image music;
 
-
 	private Image fxSlider;
 	private Image fxSliderPin;
 	private Image musicSlider;
@@ -55,8 +55,7 @@ public class SettingsView extends BasicGameState {
 	private Image musicSliderPinHover;
 
 	private Image menuHover;
-
-
+	
 	private Image cannon;
 
 	private Image cannon2;
@@ -87,7 +86,6 @@ public class SettingsView extends BasicGameState {
 	private double musicVolume;
 
 	private int cannonYPos;
-
 
 	private int cannonXPos;
 	private int cannonValue;
@@ -133,8 +131,6 @@ public class SettingsView extends BasicGameState {
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
 		musicYPos = 320;											//nere
 
-
-
 		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
 		soundXPos = 200-(sound.getWidth()/2);	//var högersidan ska sitta
 		soundYPos = 200;																		//Change
@@ -146,7 +142,6 @@ public class SettingsView extends BasicGameState {
 		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
 		musicXPos = 240-(music.getWidth());		//var högersidan ska sitta
 		musicYPos = 320;											 							//Change
-
 
 		fxSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
 		fxSliderXPos = 250;
@@ -165,8 +160,6 @@ public class SettingsView extends BasicGameState {
 		musicSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
 		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth();
 		musicSliderPinYPos = musicYPos-3;
-
-		cannonYPos = 390;
 
 		cannonXPos = musicSliderXPos;
 		cannonYPos = 390;																		//change
@@ -191,8 +184,6 @@ public class SettingsView extends BasicGameState {
 		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backXPos = 200-(back.getWidth()/2);
 		backYPos = 460;																			//Change
-
-
 
 		Font font = new Font("Verdana", Font.BOLD, 20);
 		Font descriptionFont = new Font("Verdana", Font.BOLD, 12);
