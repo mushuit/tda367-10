@@ -20,6 +20,8 @@ import java.util.List;
 public class HighScore2 implements IHighScore {
 	private static int maxPlayers = 10;
 
+	private Player player;
+
 	public HighScore2() throws FileNotFoundException {
 
 	}
@@ -52,10 +54,9 @@ public class HighScore2 implements IHighScore {
 			ls.add(new Entry(playerName, score));
 		}
 		Collections.sort(ls);
-
 		List<String> ss = new ArrayList<String>();
 		for(Entry e1:ls){
-			String row = e1.getName() + ":" + e1.getPoints();
+			String row = e1.getName() + ":" + player.getScore(); //e1.getPoints();
 			ss.add(row);
 			for (int i=0; i<maxPlayers; i++){
 				if(ss.size() > maxPlayers){

@@ -1,5 +1,7 @@
 package tetrix.core;
 
+import tetrix.view.GameplayView;
+
 /**
  * 
  * This class makes an Entry of the player name and the players points. 

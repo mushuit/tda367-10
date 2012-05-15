@@ -32,7 +32,7 @@ import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing different settings for the user to control.
- * @author Linus Karlsson & Jonathan Kara
+ * @author Linus Karlsson & Jonathan Kara & Andreas Karlberg
  *
  */
 public class SettingsView extends BasicGameState {
@@ -99,7 +99,7 @@ public class SettingsView extends BasicGameState {
 	private TextField nameField;
 	private TrueTypeFont inputFont;
 	private TrueTypeFont inputDescFont;
-	private String message;
+	private String playerName;
 	private static final int windowHeight = 600;
 	private static final int windowWidth = 400;
 
@@ -303,13 +303,13 @@ public class SettingsView extends BasicGameState {
 		
 		} else if(hoverValue == 3) {
 				if(input.isKeyPressed(Input.KEY_ENTER)) {		//Change player's name, different controls perhaps
-					message = nameField.getText();
-					System.out.println(message);	
+					playerName = nameField.getText();
+					System.out.println(playerName);	
 					FileReader p;
 					try {
 						p = new FileReader("highscore/playername.dat");
 						List<String> ps = new ArrayList<String>();
-						ps.add(message);
+						ps.add(playerName);
 						p.writePName(ps);
 
 					} catch (FileNotFoundException e) {
