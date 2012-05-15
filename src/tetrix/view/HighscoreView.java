@@ -2,6 +2,7 @@ package tetrix.view;
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -16,7 +17,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.Entry;
 import tetrix.core.HighScore;
-import tetrix.core.HighScore2;
 import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
@@ -50,7 +50,12 @@ public class HighscoreView extends BasicGameState {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		backButton = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
-		highScore = HighScore.instance();
+		try {
+			highScore = HighScore.instance();
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 
 		Font font = new Font("Verdana", Font.BOLD, 0);
 		highScoreDisplay = new UnicodeFont(font);
@@ -63,21 +68,19 @@ public class HighscoreView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		numberOnHighScoreDisplay = highScoreDisplay;
 		nameOnHighScoreDisplay = highScoreDisplay;
 		pointsOnHighScoreDisplay = highScoreDisplay;
-		
-		HighScore2 h;
+
 		List<Entry> es = null;
 		try {
-			h = new HighScore2();
-			es = h.getHighScore();
+			es = highScore.getHighScore();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Entry first = es.get(0);
 		Entry second = es.get(1);
 		Entry third = es.get(2);
@@ -88,7 +91,7 @@ public class HighscoreView extends BasicGameState {
 		Entry eight = es.get(7);
 		Entry ninth = es.get(8);
 		Entry tenth = es.get(9);
-		
+
 		Player p1 = new Player(first.getPoints(), first.getName());
 		Player p2 = new Player(second.getPoints(), second.getName());
 		Player p3 = new Player(third.getPoints(), third.getName());
@@ -99,17 +102,22 @@ public class HighscoreView extends BasicGameState {
 		Player p8 = new Player(eight.getPoints(), eight.getName());
 		Player p9 = new Player(ninth.getPoints(), ninth.getName());
 		Player p10 = new Player(tenth.getPoints(), tenth.getName());
-		
-		highScore.addToHighScore(p1);
-		highScore.addToHighScore(p2);
-		highScore.addToHighScore(p3);
-		highScore.addToHighScore(p4);
-		highScore.addToHighScore(p5);
-		highScore.addToHighScore(p6);
-		highScore.addToHighScore(p7);
-		highScore.addToHighScore(p8);
-		highScore.addToHighScore(p9);
-		highScore.addToHighScore(p10);
+
+		try {
+			highScore.addToHighScore(p1);
+			highScore.addToHighScore(p2);
+			highScore.addToHighScore(p3);
+			highScore.addToHighScore(p4);
+			highScore.addToHighScore(p5);
+			highScore.addToHighScore(p6);
+			highScore.addToHighScore(p7);
+			highScore.addToHighScore(p8);
+			highScore.addToHighScore(p9);
+			highScore.addToHighScore(p10);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
