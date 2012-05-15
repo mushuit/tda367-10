@@ -49,6 +49,10 @@ public class ThemeHandler {
 	public static final String RED_BLOCK_IMG = "red.png";
 	public static final String TURQUOISE_BLOCK_IMG = "turquoise.png";
 	public static final String YELLOW_BLOCK_IMG = "yellow.png";
+	public static final String RIGHT_ARROW_IMG = "arrow_right.png";
+	public static final String RIGHT_ARROW_HOVER_IMG = "arrow_right_hover.png";
+	public static final String LEFT_ARROW_IMG = "arrow_left.png";
+	public static final String LEFT_ARROW_HOVER_IMG = "arrow_left_hover.png";
 	private static int cannon = 0;
 
 	

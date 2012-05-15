@@ -32,7 +32,7 @@ import tetrix.view.StateHandler.States;
 
 /**
  * Class responsible for viewing different settings for the user to control.
- * @author Linus Karlsson & Jonathan Kara & Andreas Karlberg
+ * @author Jonathan Kara & Andreas Karlberg
  *
  */
 public class SettingsView extends BasicGameState {
@@ -57,12 +57,16 @@ public class SettingsView extends BasicGameState {
 	private Image menuHover;
 	
 	private Image cannon;
-
 	private Image cannon2;
 	private Image cannon3;
 	private Image cannon4;
 	private Image cannon5;
-
+	
+	private Image rightArrow;
+	private Image rightArrowHover;
+	private Image leftArrow;
+	private Image leftArrowHover;
+	
 	private int backXPos;
 	private int backYPos;
 	private int soundXPos;
@@ -89,6 +93,9 @@ public class SettingsView extends BasicGameState {
 
 	private int cannonXPos;
 	private int cannonValue;
+	
+	private int rightArrowXpos;
+	private int leftArrowXpos;
 
 	private Sound fx;
 	private int hoverValue;
@@ -105,6 +112,9 @@ public class SettingsView extends BasicGameState {
 
 	private int dialogWidth = 210;
 	private int dialogHeight = 100;
+	
+	private boolean rightKeyIsDown;
+	private boolean leftKeyIsDown;
 
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -161,7 +171,7 @@ public class SettingsView extends BasicGameState {
 		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth() - musicSliderPin.getWidth();
 		musicSliderPinYPos = musicYPos-3;
 
-		cannonXPos = musicSliderXPos;
+		cannonXPos = musicSliderXPos;															//temporary value
 		cannonYPos = 390;																		//change
 
 		cannon = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON_IMG);
@@ -171,6 +181,14 @@ public class SettingsView extends BasicGameState {
 		cannon5 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON5_IMG);
 
 		cannonValue = 0;
+		
+		rightArrow = ThemeHandler.get(ThemeHandler.RIGHT_ARROW_IMG);
+		rightArrowHover = ThemeHandler.get(ThemeHandler.RIGHT_ARROW_HOVER_IMG);
+		leftArrow = ThemeHandler.get(ThemeHandler.LEFT_ARROW_IMG);
+		leftArrowHover = ThemeHandler.get(ThemeHandler.LEFT_ARROW_HOVER_IMG);
+		
+		rightArrowXpos = cannonXPos + cannon.getWidth() + 5;
+		leftArrowXpos = cannonXPos - leftArrow.getWidth() - 5;
 
 		fx = new Sound("sound/button.wav");
 		hoverValue = 0;
@@ -198,6 +216,9 @@ public class SettingsView extends BasicGameState {
 		nameField.setBackgroundColor(Color.white);
 		nameField.setBorderColor(Color.pink);
 		nameField.setTextColor(Color.black);
+		
+		rightKeyIsDown = false;
+		leftKeyIsDown = false;
 	}
 
 	@Override
@@ -236,6 +257,17 @@ public class SettingsView extends BasicGameState {
 			musicSliderPinHover.draw(musicSliderPinXPos, musicSliderPinYPos);
 		} else{
 			musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
+		}
+		
+		if (rightKeyIsDown){
+			rightArrowHover.draw(rightArrowXpos, cannonYPos);
+		} else if (!rightKeyIsDown){
+			rightArrow.draw(rightArrowXpos, cannonYPos);
+		}
+		if (leftKeyIsDown){
+			leftArrowHover.draw(leftArrowXpos, cannonYPos);
+		} else if (!leftKeyIsDown){
+			leftArrow.draw(leftArrowXpos, cannonYPos);
 		}
 
 		arg2.setColor(Color.lightGray);
@@ -299,6 +331,18 @@ public class SettingsView extends BasicGameState {
 				if(cannonValue < 0) {
 					cannonValue = 4;
 				}
+				fx.play();
+			}
+			if (input.isKeyDown(Input.KEY_RIGHT)){
+				rightKeyIsDown = true;
+			} else {
+				rightKeyIsDown = false;
+			}
+			
+			if(input.isKeyDown(Input.KEY_LEFT)) {
+				leftKeyIsDown = true;
+			} else {
+				leftKeyIsDown = false;
 			}
 		
 		} else if(hoverValue == 3) {
@@ -320,7 +364,6 @@ public class SettingsView extends BasicGameState {
 						e.printStackTrace();
 					}
 				}
-
 
 		} else if(hoverValue == 4) {
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
@@ -347,7 +390,7 @@ public class SettingsView extends BasicGameState {
 			hoverYPos = musicYPos;
 			break;
 		case 2:
-			hoverYPos = cannonYPos;      //THEME, still needs to be fixed
+			hoverYPos = cannonYPos;
 			break;
 		case 3:
 			hoverYPos = playerYPos;
