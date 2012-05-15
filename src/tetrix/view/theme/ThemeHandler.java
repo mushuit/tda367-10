@@ -1,4 +1,4 @@
-package tetrix.util.theme;
+package tetrix.view.theme;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

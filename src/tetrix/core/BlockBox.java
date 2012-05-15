@@ -115,9 +115,9 @@ public class BlockBox {
 					if(!s[i].destroyed())
 						return true;
 				}
-				
+
 			}
-			
+
 			if(isPainted(s[i].getX(), s[i].getY())){
 				if(!s[i].destroyed())
 					return true;
@@ -221,7 +221,11 @@ public class BlockBox {
 	}
 
 	public boolean gameOver(){
-		return gameOver;
+		if(gameOver){
+			gameOver = false;
+			return true;
+		}
+		return false;
 	}
 
 }

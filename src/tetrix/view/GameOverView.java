@@ -10,9 +10,10 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import tetrix.core.Player;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 public class GameOverView extends BasicGameState implements IMultipleChoices {
 
@@ -86,6 +87,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			if (hoverValue == 0) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == 1) {

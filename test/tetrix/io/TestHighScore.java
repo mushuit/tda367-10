@@ -9,13 +9,13 @@ import java.util.List;
 import org.junit.Test;
 
 import tetrix.core.Entry;
-import tetrix.core.HighScore2;
+import tetrix.core.HighScore;
 
 public class TestHighScore {
 
 	@Test
 	public void test() throws FileNotFoundException {
-		HighScore2 h = new HighScore2();
+		HighScore h = new HighScore();
 		List<Entry> es = h.getHighScore();
 		Entry first = es.get(0);
 		Entry second = es.get(1);
@@ -40,7 +40,7 @@ public class TestHighScore {
 	}
 	@Test
 	public void testUpdate() throws IOException{
-		HighScore2 h = new HighScore2();
+		HighScore h = new HighScore();
 		h.setHighScore("God", 14);
 		List<Entry> es = h.getHighScore();
 		Entry first = es.get(0);

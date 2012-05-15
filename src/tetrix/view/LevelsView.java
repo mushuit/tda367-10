@@ -12,8 +12,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for the view before the game starts where the user has to choose a level.
@@ -35,6 +35,7 @@ public class LevelsView extends BasicGameState{
 	private int hoverYPos;
 	
 	private int hoverValue;
+	private boolean hasAlreadyEntered;
 
 	private Sound fx;
 	
@@ -56,6 +57,8 @@ public class LevelsView extends BasicGameState{
 		hoverYPos = easyYPos;
 		xPos = Util.WINDOW_WIDTH/2 - hover.getWidth()/2;
 		fx = new Sound("sound/button.wav");
+		
+		hasAlreadyEntered = false;
 	}
 
 	@Override
@@ -96,9 +99,13 @@ public class LevelsView extends BasicGameState{
 				hoverValue = 0;
 			}
 			
-			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
 			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setCannonImage(ThemeHandler.getCannon());
+			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
+			
+			if(!hasAlreadyEntered) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
+				hasAlreadyEntered = true;
+			}
 		}
 	}
 		

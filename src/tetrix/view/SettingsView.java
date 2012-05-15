@@ -27,8 +27,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
 import tetrix.util.Util;
-import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
+import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for viewing different settings for the user to control.
