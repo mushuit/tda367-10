@@ -24,7 +24,7 @@ public class HighScore implements IHighScore {
 	private static List<Player> players;
 	private static HighScore instance;
 
-	private HighScore() throws FileNotFoundException {
+	public HighScore() throws FileNotFoundException {
 	}
 
 	public static synchronized HighScore instance() throws FileNotFoundException {
@@ -75,7 +75,7 @@ public class HighScore implements IHighScore {
 		Collections.sort(ls);
 		List<String> ss = new ArrayList<String>();
 		for(Entry e1:ls){
-			String row = e1.getName() + ":" + player.getScore(); 
+			String row = e1.getName() + ":" + e1.getPoints(); 
 			ss.add(row);
 			for (int i=0; i<maxPlayers; i++){
 				if(ss.size() > maxPlayers){

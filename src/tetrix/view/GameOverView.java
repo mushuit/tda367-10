@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.util.theme.ThemeHandler;
 import tetrix.view.StateHandler.States;
