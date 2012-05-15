@@ -35,6 +35,7 @@ public class LevelsView extends BasicGameState{
 	private int hoverYPos;
 	
 	private int hoverValue;
+	private boolean hasAlreadyEntered;
 
 	private Sound fx;
 	
@@ -56,6 +57,8 @@ public class LevelsView extends BasicGameState{
 		hoverYPos = easyYPos;
 		xPos = Util.WINDOW_WIDTH/2 - hover.getWidth()/2;
 		fx = new Sound("sound/button.wav");
+		
+		hasAlreadyEntered = false;
 	}
 
 	@Override
@@ -95,9 +98,13 @@ public class LevelsView extends BasicGameState{
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_HARD);
 			}
 			
-			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
 			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setCannonImage(ThemeHandler.getCannon());
+			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
+			
+			if(!hasAlreadyEntered) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
+				hasAlreadyEntered = true;
+			}
 		}
 	}
 		
