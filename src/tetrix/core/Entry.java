@@ -19,7 +19,7 @@ public class Entry implements Comparable<Entry> {
 	}
 
 	public String getName() {
-		return "name";
+		return name;
 	}
 
 	public int getPoints() {
