@@ -42,7 +42,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 	private PixelRain pixelRain;
 	private Color pixelColor;
 	private boolean isKonamiEntered;
-	
+
 	private LinkedList<Integer> konamiCode;
 
 	public IntroView(int stateID) {
@@ -55,6 +55,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
 		pressAnyKey = ThemeHandler.get(ThemeHandler.PRESS_ANY_KEY_IMG);
+
 		alphaValue = 100;
 		isKeyPressed = false;
 		pixelColor = Color.white;

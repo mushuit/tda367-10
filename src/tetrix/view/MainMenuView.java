@@ -5,7 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -39,8 +38,6 @@ public class MainMenuView extends BasicGameState{
 	private int menuXPos;
 	private int hoverYPos;
 	
-	private Sound fx;
-	
 	/**
 	 * Value between 0 and 3 to keep track of the user's choices.
 	 * 
@@ -66,8 +63,6 @@ public class MainMenuView extends BasicGameState{
 		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		
-		fx = new Sound("sound/button.wav");
-		
 		hoverValue = 0;
 		startGameYPos = 250;
 		settingsYPos = 320;
@@ -90,10 +85,6 @@ public class MainMenuView extends BasicGameState{
 		exit.draw(menuXPos, exitYPos);
 	}
 	
-	public void enter(GameContainer gc, StateBasedGame sbg) {
-		hoverValue = 0;
-	}
-	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
@@ -101,14 +92,12 @@ public class MainMenuView extends BasicGameState{
 		
 		if(input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % 4;
-			fx.play();
 		} 
 		else if(input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if(hoverValue < 0) {
 				hoverValue = 3;
 			}
-			fx.play();
 		}
 		
 		moveMenuFocus();
@@ -126,6 +115,7 @@ public class MainMenuView extends BasicGameState{
 			else if(hoverValue == 3) {
 				gc.exit();
 			}
+			
 			hoverValue = 0;
 		}
 	}
