@@ -104,7 +104,7 @@ public class PausedGameView extends BasicGameState {
 		
 		moveMenuFocus();
 		
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
+		if(input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 			if(hoverValue == 0) {
 				input.clearKeyPressedRecord();
 				sbg.enterState(States.GAMEPLAYVIEW.getID());

@@ -90,7 +90,7 @@ public class LevelsView extends BasicGameState{
 		
 		moveMenuFocus();
 		
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
+		if(input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 			if(hoverValue == 0) {
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_EASY);
 			}

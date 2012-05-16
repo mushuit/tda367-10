@@ -3,9 +3,9 @@ package tetrix.view;
 //TODO
 //NYA BILDER och positioner
 //Mellanslag i menyer
-//Hover värde 0 varje gång - done
 //övergångarna
-//att de andra alternativen inte ska lyssna på piltangenternas inmatning
+//Ljud i andra klasser i denna kopplade till fxVolume
+//musicVolume
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
@@ -88,8 +88,8 @@ public class SettingsView extends BasicGameState {
 	private int musicSliderPinXPos;
 	private int musicSliderPinYPos;
 
-	private double fxVolume;
-	private double musicVolume;
+	private float fxVolume;
+	private float musicVolume;
 
 	private int cannonYPos;
 
@@ -290,16 +290,17 @@ public class SettingsView extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
+		
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % 5;
-			fx.play();
+			fx.play(1, fxVolume);
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = 4;
 			}
-			fx.play();
+			fx.play(1, fxVolume);
 		}
 
 		moveMenuFocus();
@@ -332,13 +333,13 @@ public class SettingsView extends BasicGameState {
 
 			if (input.isKeyPressed(Input.KEY_RIGHT)) {
 				cannonValue = (cannonValue + 1) % 5;
-				fx.play();
+				fx.play(1, fxVolume);
 			} else if (input.isKeyPressed(Input.KEY_LEFT)) {
 				cannonValue--;
 				if (cannonValue < 0) {
 					cannonValue = 4;
 				}
-				fx.play();
+				fx.play(1, fxVolume);
 			}
 			if (input.isKeyDown(Input.KEY_RIGHT)) {
 				rightKeyIsDown = true;
@@ -375,22 +376,18 @@ public class SettingsView extends BasicGameState {
 			}
 
 		} else if (hoverValue == 4) {
-			if (input.isKeyPressed(Input.KEY_ENTER)) {
+			if (input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
 				hoverValue = 0;
 			}
 		}
 
-		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos
-				- fxSliderXPos))
-				/ Double.parseDouble(Integer.toString(fxSlider.getWidth()
-						- fxSliderPin.getWidth()));
+		fxVolume = (float)(fxSliderPinXPos - fxSliderXPos) / (fxSlider.getWidth() - fxSliderPin.getWidth());
 
-		musicVolume = Double.parseDouble(Integer.toString(musicSliderPinXPos
-				- musicSliderXPos))
-				/ Double.parseDouble(Integer.toString(musicSlider.getWidth()
-						- musicSliderPin.getWidth()));
+		musicVolume = (float)(musicSliderPinXPos - musicSliderXPos) / (musicSlider.getWidth() - musicSliderPin.getWidth());
+		
+		input.clearKeyPressedRecord();
 
 	}
 

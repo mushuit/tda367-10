@@ -86,7 +86,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 		moveMenuFocus();
 
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
+		if (input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 			if (hoverValue == 0) {
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
