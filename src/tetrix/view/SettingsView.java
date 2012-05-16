@@ -384,7 +384,7 @@ public class SettingsView extends BasicGameState {
 					e.printStackTrace();
 				}
 			}
-
+			
 		} else if (hoverValue == 4) {
 			if (input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 				ThemeHandler.setCannon(cannonValue);
@@ -392,22 +392,14 @@ public class SettingsView extends BasicGameState {
 				hoverValue = 0;
 			}
 		}
-<<<<<<< HEAD
-
-		fxVolume = (float)(fxSliderPinXPos - fxSliderXPos) / (fxSlider.getWidth() - fxSliderPin.getWidth());
-=======
 		
 		if(hoverValue == 3){
 			nameField.inputStarted();
 		} else{
 			nameField.inputEnded();
 		}
-		
-		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos
-				- fxSliderXPos))
-				/ Double.parseDouble(Integer.toString(fxSlider.getWidth()
-						- fxSliderPin.getWidth()));
->>>>>>> 1888ca1b97a66dd4797fa4479d6691a18d67d733
+
+		fxVolume = (float)(fxSliderPinXPos - fxSliderXPos) / (fxSlider.getWidth() - fxSliderPin.getWidth());
 
 		musicVolume = (float)(musicSliderPinXPos - musicSliderXPos) / (musicSlider.getWidth() - musicSliderPin.getWidth());
 		
