@@ -32,6 +32,12 @@ public class FileReader {
 		return l;
 
 	}
+	
+	public String getRow() throws FileNotFoundException{
+		Scanner scanner = new Scanner(new FileInputStream("highscore/playername.dat"));
+		return scanner.next();
+	}
+	
 	public void writePName(List<String> prows) throws IOException {
 		Writer output = new BufferedWriter(new FileWriter("highscore/playername.dat"));
 		try {

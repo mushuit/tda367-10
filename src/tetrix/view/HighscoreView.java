@@ -72,52 +72,6 @@ public class HighscoreView extends BasicGameState {
 		numberOnHighScoreDisplay = highScoreDisplay;
 		nameOnHighScoreDisplay = highScoreDisplay;
 		pointsOnHighScoreDisplay = highScoreDisplay;
-
-		List<Entry> es = null;
-		try {
-			es = highScore.getHighScore();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Entry first = es.get(0);
-		Entry second = es.get(1);
-		Entry third = es.get(2);
-		Entry fourth = es.get(3);
-		Entry fifth = es.get(4);
-		Entry sixth = es.get(5);
-		Entry seventh = es.get(6);
-		Entry eight = es.get(7);
-		Entry ninth = es.get(8);
-		Entry tenth = es.get(9);
-
-		Player p1 = new Player(first.getPoints(), first.getName());
-		Player p2 = new Player(second.getPoints(), second.getName());
-		Player p3 = new Player(third.getPoints(), third.getName());
-		Player p4 = new Player(fourth.getPoints(), fourth.getName());
-		Player p5 = new Player(fifth.getPoints(), fifth.getName());
-		Player p6 = new Player(sixth.getPoints(), sixth.getName());
-		Player p7 = new Player(seventh.getPoints(), seventh.getName());
-		Player p8 = new Player(eight.getPoints(), eight.getName());
-		Player p9 = new Player(ninth.getPoints(), ninth.getName());
-		Player p10 = new Player(tenth.getPoints(), tenth.getName());
-
-		try {
-			highScore.addToHighScore(p1);
-			highScore.addToHighScore(p2);
-			highScore.addToHighScore(p3);
-			highScore.addToHighScore(p4);
-			highScore.addToHighScore(p5);
-			highScore.addToHighScore(p6);
-			highScore.addToHighScore(p7);
-			highScore.addToHighScore(p8);
-			highScore.addToHighScore(p9);
-			highScore.addToHighScore(p10);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -131,12 +85,17 @@ public class HighscoreView extends BasicGameState {
 
 		int yPos = 200;
 		int index = 1;
-		for(Player p : highScore.getList()) {
-			numberOnHighScoreDisplay.drawString(90, yPos, index + ". ");
-			nameOnHighScoreDisplay.drawString(115, yPos,"   " +  p.getName() + "  ");
-			pointsOnHighScoreDisplay.drawString(260, yPos, "  " + p.getScore());
-			index++;
-			yPos += 20;
+		try {
+			for(Entry Entry : highScore.getHighScore()) {
+				numberOnHighScoreDisplay.drawString(90, yPos, index + ". ");
+				nameOnHighScoreDisplay.drawString(115, yPos,"   " +  Entry.getName() + "  ");
+				pointsOnHighScoreDisplay.drawString(260, yPos, "  " + Entry.getPoints());
+				index++;
+				yPos += 20;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		if(input.isKeyPressed(Input.KEY_ENTER)) {

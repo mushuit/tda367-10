@@ -19,9 +19,6 @@ import java.util.List;
 
 public class HighScore implements IHighScore {
 	private static int maxPlayers;
-
-	private static Player player;
-	private static List<Player> players;
 	private static HighScore instance;
 
 	public HighScore() throws FileNotFoundException {
@@ -31,26 +28,14 @@ public class HighScore implements IHighScore {
 		if(instance == null) {
 			instance = new HighScore();
 			maxPlayers = 10;
-			players = new ArrayList<Player>();
-			player = new Player();
 		}
 		return instance;
-	}
-	
-	public void addToHighScore(Player player) throws IOException {
-		players.add(player);
-		setHighScore(player.getName(), player.getScore());
-		if(players.size() > maxPlayers) {
-			players.remove(maxPlayers);
-		}
 	}
 	
 	@Override
 	public List<Entry> getHighScore() throws FileNotFoundException{
 		FileReader f = new FileReader("highscore/highscore.dat");
-		FileReader p = new FileReader("highscore/playername.dat");
 		List<String> rows = f.getRows();
-		List<String> prows = p.getRows();
 
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows){
@@ -83,11 +68,9 @@ public class HighScore implements IHighScore {
 				}
 			}
 		}
+		
 		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
-	}
-	public List<Player> getList() {
-		return players;
 	}
 
 }
