@@ -14,7 +14,7 @@ import javax.swing.Timer;
 import tetrix.core.Position;
 import tetrix.util.Util;
 
-public class Square implements ActionListener{
+public class Square implements ActionListener {
 	private Position pos;
 	private boolean destroyed;
 	private boolean isMoving;
@@ -47,23 +47,23 @@ public class Square implements ActionListener{
 		used = false;
 	}
 
-	public Position getPos(){
+	public Position getPos() {
 		return new Position(pos);
 	}
 
-	public void setPos(Position pos){
+	public void setPos(Position pos) {
 		this.pos = pos;
 	}
 
-	public void setY(int f){
+	public void setY(int f) {
 		pos.setY(f);
 	}
 
-	public void setX(int f){
+	public void setX(int f) {
 		pos.setX(f);
 	}
 
-	public int getY(){
+	public int getY() {
 		return pos.getY();
 	}
 
@@ -71,56 +71,60 @@ public class Square implements ActionListener{
 		return pos.getX();
 	}
 
-	public boolean destroyed(){
+	public boolean destroyed() {
 		return destroyed;
 	}
 
-	public void destroy(){
-			t.usedBlock();
+	public void destroy() {
+		t.usedBlock();
 		destroyed = true;
 
 	}
-	public void unDestroy(){
+
+	public void unDestroy() {
 		destroyed = false;
 
 	}
 
-	public void use(){
+	public void use() {
 		used = true;
 	}
-	
-	public void unUse(){
+
+	public void unUse() {
 		used = false;
 	}
 
-	public boolean used(){
+	public boolean used() {
 		return used;
 	}
 
-	public void stop(){
+	public void stop() {
 		isMoving = false;
 	}
 
-	public boolean isMoving(){
+	public boolean isMoving() {
 		return isMoving;
 	}
 
-	public void startMoving(){
+	public void startMoving() {
 		isMoving = true;
 	}
 
-	public void update(){
+	public void update() {
 		timer.start();
 	}
 
-	public void falling(){
-		if(isMoving() && this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE)
-			setY(pos.getY()+Util.SQUARE_SIZE);
+	public void falling() {
+		if (isMoving()
+				&& this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
+						- Util.SQUARE_SIZE)
+			setY(pos.getY() + Util.SQUARE_SIZE);
 	}
-	
-	public void rowFall(){
-		if(this.getY() < Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE)
-			setY(pos.getY()+Util.SQUARE_SIZE);
+
+	public void rowFall() {
+		if (this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
+				- Util.SQUARE_SIZE)
+			setY(pos.getY() + Util.SQUARE_SIZE);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -128,7 +132,7 @@ public class Square implements ActionListener{
 		timer.stop();
 	}
 
-	public int getNbr(){
+	public int getNbr() {
 		return whichSqr;
 	}
 }

@@ -13,10 +13,10 @@ import tetrix.util.Util;
 /**
  * 
  * @author magnus huttu junghard
- *
+ * 
  */
 
-public abstract class Tetromino implements ActionListener{
+public abstract class Tetromino implements ActionListener {
 	private Square[] square;
 	private int startX;
 	private int fallspeed;
@@ -34,12 +34,11 @@ public abstract class Tetromino implements ActionListener{
 	protected boolean SqrDstr4;
 	protected boolean used;
 
-
-	public Tetromino(int startX, BlockBox bBox){
-		this(startX, (Util.WINDOW_WIDTH-Util.BOX_WIDTH)/2, bBox);
+	public Tetromino(int startX, BlockBox bBox) {
+		this(startX, (Util.WINDOW_WIDTH - Util.BOX_WIDTH) / 2, bBox);
 	}
 
-	public Tetromino(int startX, int leftIn, BlockBox bBox){
+	public Tetromino(int startX, int leftIn, BlockBox bBox) {
 		this(startX, leftIn, Util.SQUARE_SIZE, bBox);
 	}
 
@@ -59,27 +58,27 @@ public abstract class Tetromino implements ActionListener{
 		SqrDstr = false;
 		SqrDstr2 = false;
 		SqrDstr3 = false;
-		SqrDstr4 = false; 
+		SqrDstr4 = false;
 		used = false;
 		build();
 	}
 
 	public abstract void build();
 
-	public void update(){
+	public void update() {
 		timer.start();
 	}
 
-	public Position[] getPos(){
+	public Position[] getPos() {
 		int o = 0;
-		for(Square s : square){
-			if(!s.destroyed())
+		for (Square s : square) {
+			if (!s.destroyed())
 				o++;
 		}
 		Position[] pos = new Position[o];
 		int i = 0;
-		for(Square s : square){
-			if(!s.destroyed()){
+		for (Square s : square) {
+			if (!s.destroyed()) {
 				pos[i] = s.getPos();
 				i++;
 			}
@@ -88,72 +87,72 @@ public abstract class Tetromino implements ActionListener{
 		return pos.clone();
 	}
 
-
-	public Square[] getSquares(){
+	public Square[] getSquares() {
 		return square;
 	}
 
-	public void stop(){
+	public void stop() {
 		isMoving = false;
-		for(Square s : this.getSquares()){
+		for (Square s : this.getSquares()) {
 			s.stop();
 		}
 	}
 
-	public boolean isMoving(){
+	public boolean isMoving() {
 		return isMoving;
 	}
 
-	public void startMoving(){
+	public void startMoving() {
 		isMoving = true;
 	}
 
-	public int getStartX(){
+	public int getStartX() {
 		return startX;
 	}
 
-	public int getLeftIn(int xValue){
+	public int getLeftIn(int xValue) {
 		return (leftIn + xValue);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		//easy level has the int 0
-		if(bBox.level() == 0){
-			for(int i = 3; i > -1; i--){
-				if((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i].getY() > Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-(Util.SQUARE_SIZE*2))){
+		// easy level has the int 0
+		if (bBox.level() == 0) {
+			for (int i = 3; i > -1; i--) {
+				if ((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i]
+						.getY() > Util.WINDOW_HEIGHT - Util.B4_BOX_HEIGHT
+						- (Util.SQUARE_SIZE * 2))) {
 					square[i].stop();
 				}
 
 			}
 
 			int o = 0;
-			for(int i = 3; i > -1; i--){
-				if(square[i].isMoving()){
+			for (int i = 3; i > -1; i--) {
+				if (square[i].isMoving()) {
 					square[i].falling();
-				}
-				else{
+				} else {
 					o++;
 				}
 			}
-			if(o == 4){
+			if (o == 4) {
 				stop();
 			}
 			timer.stop();
 		}
 
-		//harder level has bigger int
-		if(bBox.level() == 1){
+		// harder level has bigger int
+		if (bBox.level() == 1) {
 
-			for(int j = 3; j > -1; j--){
-				if(bBox.isPainted(this)){
+			for (int j = 3; j > -1; j--) {
+				if (bBox.isPainted(this)) {
 					stop = true;
 				}
 
-				if(isMoving()){
+				if (isMoving()) {
 					square[j].falling();
 				}
 
-				if(newBlock()){
+				if (newBlock()) {
 					usedBlock();
 
 					try {
@@ -165,40 +164,39 @@ public abstract class Tetromino implements ActionListener{
 				}
 
 			}
-			if(stop){
+			if (stop) {
 				stop();
 			}
 
 			timer.stop();
 		}
 
-		for(int i = 0; i < 4; i++){
-			if(!square[i].isMoving() && square[i].getY() == Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE){
+		for (int i = 0; i < 4; i++) {
+			if (!square[i].isMoving()
+					&& square[i].getY() == Util.B4_BOX_HEIGHT
+							+ Util.SQUARE_SIZE) {
 				bBox.gameIsOver();
 			}
 		}
 	}
 
-
 	public abstract void notWhole() throws SlickException;
 
-	public boolean newBlock(){
+	public boolean newBlock() {
 		return newBlock;
 	}
 
-	public void usedBlock(){
-		if(l == 0){
+	public void usedBlock() {
+		if (l == 0) {
 			newBlock = false;
 			l++;
-		}
-		else
+		} else
 			newBlock = true;
 	}
 
-	public int getX(){
+	public int getX() {
 		return startX;
 	}
 
 	public abstract String toString();
 }
-
