@@ -20,6 +20,7 @@ import java.util.List;
 public class HighScore implements IHighScore {
 	private static int maxPlayers;
 	private static HighScore instance;
+	private static boolean reachedHighscore;
 
 	public HighScore() throws FileNotFoundException {
 	}
@@ -28,6 +29,7 @@ public class HighScore implements IHighScore {
 		if(instance == null) {
 			instance = new HighScore();
 			maxPlayers = 10;
+			reachedHighscore = false;
 		}
 		return instance;
 	}
@@ -56,7 +58,11 @@ public class HighScore implements IHighScore {
 		if (e.getPoints()< score){
 			ls.remove(e);
 			ls.add(new Entry(playerName, score));
+			reachedHighscore = true;
+		} else {
+			reachedHighscore = false;
 		}
+		
 		Collections.sort(ls);
 		List<String> ss = new ArrayList<String>();
 		for(Entry e1:ls){
@@ -71,6 +77,10 @@ public class HighScore implements IHighScore {
 		
 		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
+	}
+	
+	public static boolean writtenToHighscore() {
+		return reachedHighscore;
 	}
 
 }

@@ -1,20 +1,31 @@
 package tetrix.view;
 
+import java.awt.Font;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
 
+/**
+ * The game over view that is displayed when the tetrominoes has reached the top of the window.
+ * @author Linus Karlsson
+ *
+ */
 public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 	private int stateID;
@@ -25,13 +36,14 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 	private Image newGame;
 	private Image mainMenu;
 	private Image highscore;
+	private UnicodeFont resultText; 
+	private UnicodeFont highscoreText; 
 
 	private int xPos;
 	private int hoverYPos;
 	private int newGameYPos;
 	private int mainMenuYPos;
 	private int highscoreYPos;
-	private Player player;
 
 	private int hoverValue;
 
@@ -50,12 +62,18 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 
 		xPos = Util.WINDOW_WIDTH / 2 - newGame.getWidth() / 2;
-		newGameYPos = 280;
-		mainMenuYPos = 350;
-		highscoreYPos = 420;
+		newGameYPos = 290;
+		mainMenuYPos = 360;
+		highscoreYPos = 430;
 		hoverYPos = newGameYPos;
 
 		hoverValue = 0;
+		
+		Font font = new Font("Verdana", Font.BOLD, 0);
+		resultText = new UnicodeFont(font , 20, true, false);
+		highscoreText = new UnicodeFont(font , 16, true, false);
+		initText(resultText);
+		initText(highscoreText);
 	}
 
 	@Override
@@ -68,6 +86,14 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		newGame.draw(xPos, newGameYPos);
 		mainMenu.draw(xPos, mainMenuYPos);
 		highscore.draw(xPos, highscoreYPos);
+		
+		resultText.drawString(110, 180, "You got " + Player.getScore() + " points");
+		
+		if(HighScore.writtenToHighscore()) {
+			highscoreText.drawString(50, 210, "You made it to the highscore list!", Color.green);
+		} else {
+			highscoreText.drawString(40, 210, "You did not reach the highscore list", Color.red);
+		}
 	}
 
 	@Override
@@ -92,12 +118,24 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == 1) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
 				sbg.enterState(States.MAINMENUVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == 2) {
 				sbg.enterState(States.HIGHSCOREVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			}
+		}
+	}
+	
+	public void initText(UnicodeFont font) {
+		font.addAsciiGlyphs();
+		font.addGlyphs(400, 600);
+		font.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+		try {
+			font.loadGlyphs();
+		} catch (SlickException e1) {
+			e1.printStackTrace();
 		}
 	}
 

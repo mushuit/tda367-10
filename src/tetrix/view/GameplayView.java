@@ -68,6 +68,7 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
+	private int levelUpInterval;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -96,12 +97,12 @@ public class GameplayView extends BasicGameState {
 		try {
 			player = new Player(FileReader.getRow().toString());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
-		timerInterval = 1000;
+		timerInterval = 2000;
+		levelUpInterval = 100;
 		
 		Font font = new Font("Verdana", Font.PLAIN,55);
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -169,22 +170,20 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-		
+			
 		/*
-		if(timerInterval >= 500
-			&& (player.getScore() % speedVariable) == 0) {
+		if(player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(100);
-		}*/
+		}
+		*/
 		
 		if(blockBox.gameOver()) {
 			isPaused = true;
 			try {
 				HighScore.instance().setHighScore(player.getName(), player.getScore());
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
