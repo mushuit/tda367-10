@@ -37,20 +37,13 @@ public class HighScore implements IHighScore {
 		return instance;
 	}
 	
-	public void addToHighScore(Player player) throws IOException {
-		players.add(player);
-		setHighScore(player.getName(), player.getScore());
-		if(players.size() > maxPlayers) {
-			players.remove(maxPlayers);
-		}
-	}
-	
+
 	@Override
 	public List<Entry> getHighScore() throws FileNotFoundException{
 		FileReader f = new FileReader("highscore/highscore.dat");
 		FileReader p = new FileReader("highscore/playername.dat");
 		List<String> rows = f.getRows();
-		List<String> prows = p.getRows();
+		String prow = p.getRow();
 
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows){
@@ -83,11 +76,9 @@ public class HighScore implements IHighScore {
 				}
 			}
 		}
+		
 		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
-	}
-	public List<Player> getList() {
-		return players;
 	}
 
 }
