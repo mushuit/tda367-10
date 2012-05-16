@@ -1,6 +1,8 @@
 package tetrix.view;
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
+import tetrix.core.FileReader;
+import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
@@ -89,7 +93,12 @@ public class GameplayView extends BasicGameState {
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
-		player = new Player();
+		try {
+			player = new Player(FileReader.getRow().toString());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 		timerInterval = 1000;
@@ -169,6 +178,15 @@ public class GameplayView extends BasicGameState {
 		
 		if(blockBox.gameOver()) {
 			isPaused = true;
+			try {
+				HighScore.instance().setHighScore(player.getName(), player.getScore());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
 		}
 	}

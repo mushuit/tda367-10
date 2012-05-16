@@ -33,7 +33,7 @@ public class FileReader {
 
 	}
 	
-	public String getRow() throws FileNotFoundException{
+	public static String getRow() throws FileNotFoundException{
 		Scanner scanner = new Scanner(new FileInputStream("highscore/playername.dat"));
 		return scanner.next();
 	}

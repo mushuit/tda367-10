@@ -72,5 +72,10 @@ public class HighScore implements IHighScore {
 		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
 	}
+	
+	public String getPlayerName() throws FileNotFoundException{
+		FileReader p = new FileReader("highscore/playerName.dat");
+		return p.getRow();
+	}
 
 }
