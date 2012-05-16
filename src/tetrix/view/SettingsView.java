@@ -247,6 +247,7 @@ public class SettingsView extends BasicGameState {
 		} else if(cannonValue == 4) {
 			cannon5.draw(cannonXPos, cannonYPos);
 		}
+		
 		back.draw(backXPos, backYPos);
 		if(hoverValue == 0) {
 			fxSliderPinHover.draw(fxSliderPinXPos, fxSliderPinYPos);
