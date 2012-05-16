@@ -102,7 +102,7 @@ public class MainMenuView extends BasicGameState{
 		
 		moveMenuFocus();
 		
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
+		if(input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
 			if(hoverValue == 0) {
 				sbg.enterState(States.LEVELSVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
 			}

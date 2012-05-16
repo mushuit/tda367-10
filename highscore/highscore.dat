@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 Mushu:115400
 Mushu:900
 Mushu:300
+=======
+Haja:900
+Haja:900
+>>>>>>> 51a1006a32823250887395bfe442c2b01b1e5aef
 Mushu:300
 Player1:10
 Player2:9
@@ -8,3 +13,7 @@ Player3:8
 Player4:7
 Player5:6
 Player6:5
+<<<<<<< HEAD
+=======
+Player7:4
+>>>>>>> 51a1006a32823250887395bfe442c2b01b1e5aef
