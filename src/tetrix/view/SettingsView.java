@@ -27,6 +27,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
+import tetrix.core.HighScore;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -202,7 +203,7 @@ public class SettingsView extends BasicGameState {
 		menuXPos = /* (Util.WINDOW_WIDTH/2) - (effects.getWidth()/2) */backXPos; // Change
 		playerYPos = 420;
 		menuXPos = (Util.WINDOW_WIDTH / 2) - (menuHover.getWidth() / 2); // Change
-																			// hoverpic
+		// hoverpic
 		playerYPos = 420; // change
 
 		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
@@ -225,6 +226,13 @@ public class SettingsView extends BasicGameState {
 
 		rightKeyIsDown = false;
 		leftKeyIsDown = false;
+		
+		try {
+			nameField.setText(HighScore.instance().getPlayerName());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -254,7 +262,7 @@ public class SettingsView extends BasicGameState {
 		} else if (cannonValue == 4) {
 			cannon5.draw(cannonXPos, cannonYPos);
 		}
-		
+
 		back.draw(backXPos, backYPos);
 		if (hoverValue == 0) {
 			fxSliderPinHover.draw(fxSliderPinXPos, fxSliderPinYPos);
@@ -278,11 +286,13 @@ public class SettingsView extends BasicGameState {
 			leftArrow.draw(leftArrowXpos, cannonYPos);
 		}
 
+
 		arg2.setColor(Color.lightGray);
 		inputDescFont.drawString((windowWidth / 2 - dialogWidth / 2) + 50,
 				(playerYPos), "Enter your name", Color.green);
 		nameField.render(gc, arg2);
 		nameField.setFocus(true);
+
 
 	}
 
@@ -354,8 +364,8 @@ public class SettingsView extends BasicGameState {
 
 		} else if (hoverValue == 3) {
 			if (input.isKeyPressed(Input.KEY_ENTER)) { // Change player's name,
-														// different controls
-														// perhaps
+				// different controls
+				// perhaps
 				playerName = nameField.getText();
 				System.out.println(playerName);
 				FileReader p;
@@ -381,7 +391,13 @@ public class SettingsView extends BasicGameState {
 				hoverValue = 0;
 			}
 		}
-
+		
+		if(hoverValue == 3){
+			nameField.inputStarted();
+		} else{
+			nameField.inputEnded();
+		}
+		
 		fxVolume = Double.parseDouble(Integer.toString(fxSliderPinXPos
 				- fxSliderXPos))
 				/ Double.parseDouble(Integer.toString(fxSlider.getWidth()
