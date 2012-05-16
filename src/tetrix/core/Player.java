@@ -8,6 +8,11 @@ public class Player{
 		score = 0;
 	}
 	
+	public Player(String name) {
+		this.score = 0;
+		this.name = name;
+	}
+	
 	public Player(int score, String name) {
 		this.score = score;
 		this.name = name;
