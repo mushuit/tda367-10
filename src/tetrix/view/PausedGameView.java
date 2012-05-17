@@ -21,7 +21,7 @@ import tetrix.view.theme.ThemeHandler;
  * @author Linus Karlsson
  * 
  */
-public class PausedGameView extends BasicGameState {
+public class PausedGameView extends BasicGameState implements IMultipleChoices {
 
 	private int stateID;
 
@@ -34,18 +34,28 @@ public class PausedGameView extends BasicGameState {
 	private Image hover;
 
 	private int pauseBoxXPos;
-	private int resumeYPos;
-	private int newGameYPos;
-	private int mainMenuYPos;
-	private int quitYPos;
 	private int hoverYPos;
-
-	/**
-	 * Value between 0 and 3 to keep track of the user's choices.
-	 * 
-	 * 0. Resume 1. New Game 2. Main Menu 3. Quit
-	 */
 	private int hoverValue;
+
+	private enum Choices {
+		RESUME(0, 205), NEWGAME(1, 255), MAINMENU(2, 305), QUIT(3, 355);
+
+		private final int id;
+		private final int yPos;
+
+		Choices(int id, int yPos) {
+			this.id = id;
+			this.yPos = yPos;
+		}
+
+		private int id() {
+			return id;
+		}
+
+		private int yPos() {
+			return yPos;
+		}
+	}
 
 	public PausedGameView(int stateID) {
 		this.stateID = stateID;
@@ -63,13 +73,12 @@ public class PausedGameView extends BasicGameState {
 		mainMenu = ThemeHandler.get(ThemeHandler.MAIN_MENU_IMG);
 		quit = ThemeHandler.get(ThemeHandler.QUIT_IMG);
 
-		resumeYPos = 205;
-		newGameYPos = 255;
-		mainMenuYPos = 305;
-		quitYPos = 355;
-		hoverYPos = resumeYPos;
 		pauseBoxXPos = (Util.WINDOW_WIDTH / 2 - pauseBox.getWidth() / 2);
 		hoverValue = 0;
+	}
+
+	public void enter(GameContainer gc, StateBasedGame sgb) {
+		hoverValue = Choices.RESUME.id();
 	}
 
 	@Override
@@ -81,10 +90,10 @@ public class PausedGameView extends BasicGameState {
 		pauseBox.draw(pauseBoxXPos,
 				(Util.WINDOW_HEIGHT / 2 - pauseBox.getHeight() / 2));
 		hover.draw(pauseBoxXPos, hoverYPos);
-		resume.draw(pauseBoxXPos, resumeYPos);
-		newGame.draw(pauseBoxXPos, newGameYPos);
-		mainMenu.draw(pauseBoxXPos, mainMenuYPos);
-		quit.draw(pauseBoxXPos, quitYPos);
+		resume.draw(pauseBoxXPos, Choices.RESUME.yPos());
+		newGame.draw(pauseBoxXPos, Choices.NEWGAME.yPos());
+		mainMenu.draw(pauseBoxXPos, Choices.MAINMENU.yPos());
+		quit.draw(pauseBoxXPos, Choices.QUIT.yPos());
 
 	}
 
@@ -94,37 +103,35 @@ public class PausedGameView extends BasicGameState {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % 4;
+			hoverValue = (hoverValue + 1) % Choices.values().length;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = 3;
+				hoverValue = Choices.values().length - 1;
 			}
 		}
 
 		moveMenuFocus();
 
-		if (input.isKeyPressed(Input.KEY_ENTER)
-				|| input.isKeyPressed(Input.KEY_SPACE)) {
-			if (hoverValue == 0) {
+		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			if (hoverValue == Choices.RESUME.id()) {
 				input.clearKeyPressedRecord();
 				sbg.enterState(States.GAMEPLAYVIEW.getID());
-			} else if (hoverValue == 1) {
+			} else if (hoverValue == Choices.NEWGAME.id()) {
 				input.clearKeyPressedRecord();
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
 						.newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
-			} else if (hoverValue == 2) {
+			} else if (hoverValue == Choices.MAINMENU.id()) {
 				input.clearKeyPressedRecord();
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
 						.newGame();
 				sbg.enterState(States.MAINMENUVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
-			} else if (hoverValue == 3) {
+			} else if (hoverValue == Choices.QUIT.id()) {
 				gc.exit();
 			}
-			hoverValue = 0;
 		}
 
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
@@ -133,20 +140,12 @@ public class PausedGameView extends BasicGameState {
 		}
 	}
 
+	@Override
 	public void moveMenuFocus() {
-		switch (hoverValue) {
-		case 0:
-			hoverYPos = resumeYPos;
-			break;
-		case 1:
-			hoverYPos = newGameYPos;
-			break;
-		case 2:
-			hoverYPos = mainMenuYPos;
-			break;
-		case 3:
-			hoverYPos = quitYPos;
-			break;
+		for (Choices c : Choices.values()) {
+			if (c.id() == hoverValue) {
+				hoverYPos = c.yPos();
+			}
 		}
 	}
 

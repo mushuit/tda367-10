@@ -54,7 +54,6 @@ public class ThemeHandler {
 	public static final String LEFT_ARROW_IMG = "arrow_left.png";
 	public static final String LEFT_ARROW_HOVER_IMG = "arrow_left_hover.png";
 	private static int cannon = 0;
-
 	
 	
 	public static void setCannon(int c){
@@ -78,7 +77,6 @@ public class ThemeHandler {
 	
 	public static Image getCannon() throws SlickException{
 		if (cannon == 0){
-			System.out.println("block byttes inte!");
 			return new Image("img/cannonsblocks/cannon.png");
 		} else if(cannon == 1){
 			return new Image("img/cannonsblocks/cannon2.png");
@@ -92,5 +90,6 @@ public class ThemeHandler {
 			return new Image("img/cannonsblocks/cannon.png");
 		}
 	}
+
 	
 }

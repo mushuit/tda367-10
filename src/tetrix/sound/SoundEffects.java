@@ -23,6 +23,8 @@ public class SoundEffects {
 	private static SoundEffects instance = null;
 	
 	private SoundEffects(){}
+
+	private static float fxVolume = 1;
 	
 	public static synchronized SoundEffects instance() throws SlickException {
 		if(instance == null) {
@@ -99,6 +101,14 @@ public class SoundEffects {
 
 	public static void explodeStop(){
 		sfxExplode.stop();
+	}
+
+	public static void setFxVolume(float fx) {
+		fxVolume = fx;
+	}
+	
+	public static float getFxVolume() {
+		return fxVolume;
 	}
 
 

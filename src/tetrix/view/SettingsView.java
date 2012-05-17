@@ -28,6 +28,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
 import tetrix.core.HighScore;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -301,13 +302,13 @@ public class SettingsView extends BasicGameState {
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % 5;
-			fx.play(1, fxVolume);
+			fx.play(1, SoundEffects.getFxVolume());
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = 4;
 			}
-			fx.play(1, fxVolume);
+			fx.play(1, SoundEffects.getFxVolume());
 		}
 
 		moveMenuFocus();
@@ -324,6 +325,7 @@ public class SettingsView extends BasicGameState {
 					fxSliderPinXPos = fxSliderPinXPos + 1;
 				}
 			}
+			SoundEffects.setFxVolume(fxVolume);
 		} else if (hoverValue == 1) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
 				if (musicSliderPinXPos > musicSliderXPos) {
@@ -340,13 +342,13 @@ public class SettingsView extends BasicGameState {
 
 			if (input.isKeyPressed(Input.KEY_RIGHT)) {
 				cannonValue = (cannonValue + 1) % 5;
-				fx.play(1, fxVolume);
+				fx.play(1, SoundEffects.getFxVolume());
 			} else if (input.isKeyPressed(Input.KEY_LEFT)) {
 				cannonValue--;
 				if (cannonValue < 0) {
 					cannonValue = 4;
 				}
-				fx.play(1, fxVolume);
+				fx.play(1, SoundEffects.getFxVolume());
 			}
 			if (input.isKeyDown(Input.KEY_RIGHT)) {
 				rightKeyIsDown = true;
@@ -441,7 +443,7 @@ public class SettingsView extends BasicGameState {
 	 * 
 	 * @return a value between 0 and 1
 	 */
-	public double getFxVolume() {
+	public float getFxValue() {
 		return fxVolume;
 	}
 
