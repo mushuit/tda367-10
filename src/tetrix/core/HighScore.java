@@ -79,6 +79,10 @@ public class HighScore implements IHighScore {
 		f.writeRows(ss);
 	}
 	
+<<<<<<< HEAD
+	public static boolean writtenToHighscore() {
+		return reachedHighscore;
+=======
 
 	public static boolean writtenToHighscore() {
 		return reachedHighscore;
@@ -89,5 +93,7 @@ public class HighScore implements IHighScore {
 		return p.getRow();
 
 	}
+>>>>>>> 5ce2e2907545218579a8469f91c9f78d7d4f600d
 
+	}
 }

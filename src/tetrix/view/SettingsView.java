@@ -227,9 +227,9 @@ public class SettingsView extends BasicGameState {
 
 		rightKeyIsDown = false;
 		leftKeyIsDown = false;
-		
+
 		try {
-			nameField.setText(HighScore.instance().getPlayerName());
+			nameField.setText(FileReader.getRow());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -287,13 +287,11 @@ public class SettingsView extends BasicGameState {
 			leftArrow.draw(leftArrowXpos, cannonYPos);
 		}
 
-
 		arg2.setColor(Color.lightGray);
 		inputDescFont.drawString((windowWidth / 2 - dialogWidth / 2) + 50,
 				(playerYPos), "Enter your name", Color.green);
 		nameField.render(gc, arg2);
 		nameField.setFocus(true);
-
 
 	}
 
@@ -301,7 +299,6 @@ public class SettingsView extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
 			throws SlickException {
 		Input input = gc.getInput();
-		
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % 5;
@@ -386,25 +383,28 @@ public class SettingsView extends BasicGameState {
 					e.printStackTrace();
 				}
 			}
-			
+
 		} else if (hoverValue == 4) {
-			if (input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
+			if (input.isKeyPressed(Input.KEY_ENTER)
+					|| input.isKeyPressed(Input.KEY_SPACE)) {
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
 				hoverValue = 0;
 			}
 		}
-		
-		if(hoverValue == 3){
+
+		if (hoverValue == 3) {
 			nameField.inputStarted();
-		} else{
+		} else {
 			nameField.inputEnded();
 		}
 
-		fxVolume = (float)(fxSliderPinXPos - fxSliderXPos) / (fxSlider.getWidth() - fxSliderPin.getWidth());
+		fxVolume = (float) (fxSliderPinXPos - fxSliderXPos)
+				/ (fxSlider.getWidth() - fxSliderPin.getWidth());
 
-		musicVolume = (float)(musicSliderPinXPos - musicSliderXPos) / (musicSlider.getWidth() - musicSliderPin.getWidth());
-		
+		musicVolume = (float) (musicSliderPinXPos - musicSliderXPos)
+				/ (musicSlider.getWidth() - musicSliderPin.getWidth());
+
 		input.clearKeyPressedRecord();
 
 	}

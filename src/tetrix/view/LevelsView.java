@@ -5,7 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -17,65 +16,82 @@ import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
 
 /**
- * Class responsible for the view before the game starts where the user has to choose a level.
+ * Class responsible for the view before the game starts where the user has to
+ * choose a level.
+ * 
  * @author Linus Karlsson
- *
+ * 
  */
-public class LevelsView extends BasicGameState{
+public class LevelsView extends BasicGameState implements IMultipleChoices {
 
 	private int stateID;
-	
+
 	private Image background;
 	private Image hover;
 	private Image easyButton;
 	private Image hardButton;
-	
+
 	private int xPos;
-	private int easyYPos;
-	private int hardYPos;
 	private int hoverYPos;
-	
 	private int hoverValue;
+	private int nbrOfChoices;
 	private boolean hasAlreadyEntered;
 
-	private Sound fx;
-	
+	private enum Choices {
+		EASY(0, 230), HARD(1, 330);
+
+		private final int id;
+		private final int yPos;
+
+		Choices(int id, int yPos) {
+			this.id = id;
+			this.yPos = yPos;
+		}
+
+		private int id() {
+			return id;
+		}
+
+		private int yPos() {
+			return yPos;
+		}
+	}
+
 	public LevelsView(int stateID) {
 		this.stateID = stateID;
 	}
-	
+
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1)
+	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);		
-		hover = ThemeHandler.get(ThemeHandler.HOVER_IMG);	
-		easyButton = ThemeHandler.get(ThemeHandler.EASY_IMG);	
-		hardButton = ThemeHandler.get(ThemeHandler.HARD_IMG);	
-		
-		hoverValue = 0;
-		easyYPos = 230;
-		hardYPos = 330;
-		hoverYPos = easyYPos;
-		xPos = Util.WINDOW_WIDTH/2 - hover.getWidth()/2;
-		fx = new Sound("sound/button.wav");
-		
+		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
+		hover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
+		easyButton = ThemeHandler.get(ThemeHandler.EASY_IMG);
+		hardButton = ThemeHandler.get(ThemeHandler.HARD_IMG);
+
+		xPos = Util.WINDOW_WIDTH / 2 - hover.getWidth() / 2;
+		nbrOfChoices = Choices.values().length;
 		hasAlreadyEntered = false;
 	}
-
-	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
-			throws SlickException {
-		background.draw(0,0);
-		
-		hover.draw(xPos, hoverYPos);
-		easyButton.draw(xPos, easyYPos);
-		hardButton.draw(xPos, hardYPos);
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = Choices.EASY.id();
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int arg2)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
+			throws SlickException {
+		background.draw(0, 0);
+		hover.draw(xPos, hoverYPos);
+		easyButton.draw(xPos, Choices.EASY.yPos());
+		hardButton.draw(xPos, Choices.HARD.yPos());
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int value)
 			throws SlickException {
 		Input input = gc.getInput();
+<<<<<<< HEAD
 		
 		if(input.isKeyPressed(Input.KEY_DOWN)) {
 			fx.play(1, SoundEffects.getFxVolume());
@@ -83,48 +99,54 @@ public class LevelsView extends BasicGameState{
 		} 
 		else if(input.isKeyPressed(Input.KEY_UP)) {
 			fx.play(1, SoundEffects.getFxVolume());
+=======
+
+		if (input.isKeyPressed(Input.KEY_DOWN)) {
+			hoverValue = (hoverValue + 1) % nbrOfChoices;
+		} else if (input.isKeyPressed(Input.KEY_UP)) {
+>>>>>>> d462e586d869da46ffaf8d6eae5fd8d41f4b894c
 			hoverValue--;
-			if(hoverValue < 0) {
-				hoverValue = 1;
+			if (hoverValue < 0) {
+				hoverValue = nbrOfChoices - 1;
 			}
 		}
-		
+
 		moveMenuFocus();
-		
-		if(input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
-			if(hoverValue == 0) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_EASY);
+
+		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			if (hoverValue == Choices.EASY.id()) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+						.setLevel(Util.LEVEL_EASY);
+			} else if (hoverValue == Choices.HARD.id()) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+						.setLevel(Util.LEVEL_HARD);
 			}
-			else if(hoverValue == 1) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setLevel(Util.LEVEL_HARD);
-				hoverValue = 0;
-			}
-			
-			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).setCannonImage(ThemeHandler.getCannon());
-			sbg.enterState(States.GAMEPLAYVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			
-			if(!hasAlreadyEntered) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).startTimer(); 
+
+			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+					.setCannonImage(ThemeHandler.getCannon());
+			sbg.enterState(States.GAMEPLAYVIEW.getID(),
+					new FadeOutTransition(), new FadeInTransition());
+
+			if (!hasAlreadyEntered) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+						.startTimer();
 				hasAlreadyEntered = true;
 			}
 		}
 	}
-		
-	public void moveMenuFocus() {
-		switch(hoverValue) {
-		case 0:
-			hoverYPos = easyYPos;
-			break;
-		case 1:
-			hoverYPos = hardYPos;
-			break;
-		}
-	}
-
 
 	@Override
 	public int getID() {
 		return stateID;
+	}
+
+	@Override
+	public void moveMenuFocus() {
+		for (Choices c : Choices.values()) {
+			if (c.id() == hoverValue) {
+				hoverYPos = c.yPos();
+			}
+		}
 	}
 
 }

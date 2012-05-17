@@ -84,7 +84,6 @@ public class HighscoreView extends BasicGameState {
 				yPos += 20;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
