@@ -91,20 +91,10 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 	public void update(GameContainer gc, StateBasedGame sbg, int value)
 			throws SlickException {
 		Input input = gc.getInput();
-<<<<<<< HEAD
-		
-		if(input.isKeyPressed(Input.KEY_DOWN)) {
-			fx.play(1, SoundEffects.getFxVolume());
-			hoverValue = (hoverValue + 1) % 2;
-		} 
-		else if(input.isKeyPressed(Input.KEY_UP)) {
-			fx.play(1, SoundEffects.getFxVolume());
-=======
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % nbrOfChoices;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
->>>>>>> d462e586d869da46ffaf8d6eae5fd8d41f4b894c
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = nbrOfChoices - 1;
