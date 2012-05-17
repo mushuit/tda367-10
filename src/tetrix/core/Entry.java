@@ -3,7 +3,7 @@ package tetrix.core;
 /**
  * 
  * This class makes an Entry of the player name and the players points.
- * Hello
+ * 
  * @author Andreas Karlberg
  *
  */

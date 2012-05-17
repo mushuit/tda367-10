@@ -73,7 +73,7 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 		nbrOfChoices = Choices.values().length;
 		hasAlreadyEntered = false;
 	}
-	
+
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		hoverValue = Choices.EASY.id();
 	}
@@ -92,41 +92,42 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 			throws SlickException {
 		Input input = gc.getInput();
 
-<<<<<<< HEAD
 		if(input.isKeyPressed(Input.KEY_DOWN)) {
-=======
-		if (input.isKeyPressed(Input.KEY_DOWN)) {
->>>>>>> ef43d2829a19f1994d43dee07097325065327092
-			hoverValue = (hoverValue + 1) % nbrOfChoices;
-		} else if (input.isKeyPressed(Input.KEY_UP)) {
-			hoverValue--;
-			if (hoverValue < 0) {
-				hoverValue = nbrOfChoices - 1;
+
+			if (input.isKeyPressed(Input.KEY_DOWN)) {
+
+				hoverValue = (hoverValue + 1) % nbrOfChoices;
+			} else if (input.isKeyPressed(Input.KEY_UP)) {
+				hoverValue--;
+				if (hoverValue < 0) {
+					hoverValue = nbrOfChoices - 1;
+				}
+			}
+
+			moveMenuFocus();
+
+			if (input.isKeyPressed(Input.KEY_ENTER)) {
+				if (hoverValue == Choices.EASY.id()) {
+					((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+					.setLevel(Util.LEVEL_EASY);
+				} else if (hoverValue == Choices.HARD.id()) {
+					((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+					.setLevel(Util.LEVEL_HARD);
+				}
+
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+				.setCannonImage(ThemeHandler.getCannon());
+				sbg.enterState(States.GAMEPLAYVIEW.getID(),
+						new FadeOutTransition(), new FadeInTransition());
+
+				if (!hasAlreadyEntered) {
+					((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+					.startTimer();
+					hasAlreadyEntered = true;
+				}
 			}
 		}
 
-		moveMenuFocus();
-
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			if (hoverValue == Choices.EASY.id()) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-						.setLevel(Util.LEVEL_EASY);
-			} else if (hoverValue == Choices.HARD.id()) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-						.setLevel(Util.LEVEL_HARD);
-			}
-
-			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-					.setCannonImage(ThemeHandler.getCannon());
-			sbg.enterState(States.GAMEPLAYVIEW.getID(),
-					new FadeOutTransition(), new FadeInTransition());
-
-			if (!hasAlreadyEntered) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-						.startTimer();
-				hasAlreadyEntered = true;
-			}
-		}
 	}
 
 	@Override
