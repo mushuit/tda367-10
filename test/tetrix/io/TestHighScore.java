@@ -11,6 +11,15 @@ import org.junit.Test;
 import tetrix.core.Entry;
 import tetrix.core.HighScore;
 
+/**
+ * A test class to see if the high score class 
+ * can read the high score list and if it updates when a new player is added.
+ * The values in the player name and points must be the same as in the high score file.
+ * 
+ * @author Andreas Karlberg
+ *
+ */
+
 public class TestHighScore {
 
 	@Test
