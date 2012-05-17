@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-
 /**
  * 
  * A High Score class with a list of maximum 10 players. It compares the score of the
@@ -19,10 +18,8 @@ import java.util.List;
 
 public class HighScore implements IHighScore {
 	private static int maxPlayers;
-
-	private static Player player;
-	private static List<Player> players;
 	private static HighScore instance;
+	private static boolean reachedHighscore;
 
 	public HighScore() throws FileNotFoundException {
 	}
@@ -31,19 +28,15 @@ public class HighScore implements IHighScore {
 		if(instance == null) {
 			instance = new HighScore();
 			maxPlayers = 10;
-			players = new ArrayList<Player>();
-			player = new Player();
+			reachedHighscore = false;
 		}
 		return instance;
 	}
 	
-
 	@Override
 	public List<Entry> getHighScore() throws FileNotFoundException{
 		FileReader f = new FileReader("highscore/highscore.dat");
-		FileReader p = new FileReader("highscore/playername.dat");
 		List<String> rows = f.getRows();
-		String prow = p.getRow();
 
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows){
@@ -64,7 +57,11 @@ public class HighScore implements IHighScore {
 		if (e.getPoints()< score){
 			ls.remove(e);
 			ls.add(new Entry(playerName, score));
+			reachedHighscore = true;
+		} else {
+			reachedHighscore = false;
 		}
+		
 		Collections.sort(ls);
 		List<String> ss = new ArrayList<String>();
 		for(Entry e1:ls){
@@ -81,4 +78,13 @@ public class HighScore implements IHighScore {
 		f.writeRows(ss);
 	}
 
+	public static boolean writtenToHighscore() {
+		return reachedHighscore;
+	}
+
+	public String getPlayerName() throws FileNotFoundException{
+		FileReader p = new FileReader("highscore/playerName.dat");
+		return p.getRow();
+
+	}
 }

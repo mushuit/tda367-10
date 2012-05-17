@@ -2,8 +2,6 @@ package tetrix.view;
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -17,7 +15,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.Entry;
 import tetrix.core.HighScore;
-import tetrix.core.Player;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -31,7 +28,6 @@ public class HighscoreView extends BasicGameState {
 
 	private int stateID;
 
-	private HighScore highScore;
 	private UnicodeFont highScoreDisplay;
 	private UnicodeFont numberOnHighScoreDisplay;
 	private UnicodeFont nameOnHighScoreDisplay; 
@@ -50,12 +46,6 @@ public class HighscoreView extends BasicGameState {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		backButton = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
-		try {
-			highScore = HighScore.instance();
-		} catch (FileNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
 
 		Font font = new Font("Verdana", Font.BOLD, 0);
 		highScoreDisplay = new UnicodeFont(font);
@@ -72,24 +62,6 @@ public class HighscoreView extends BasicGameState {
 		numberOnHighScoreDisplay = highScoreDisplay;
 		nameOnHighScoreDisplay = highScoreDisplay;
 		pointsOnHighScoreDisplay = highScoreDisplay;
-
-		List<Entry> es = null;
-		try {
-			es = highScore.getHighScore();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			for(int i = 0; i < 10; i++){
-				highScore.setHighScore(es.get(i).getName(), es.get(i).getPoints());
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -104,7 +76,7 @@ public class HighscoreView extends BasicGameState {
 		int yPos = 200;
 		int index = 1;
 		try {
-			for(Entry Entry : highScore.getHighScore()) {
+			for(Entry Entry : HighScore.instance().getHighScore()) {
 				numberOnHighScoreDisplay.drawString(90, yPos, index + ". ");
 				nameOnHighScoreDisplay.drawString(115, yPos,"   " +  Entry.getName() + "  ");
 				pointsOnHighScoreDisplay.drawString(260, yPos, "  " + Entry.getPoints());
@@ -112,7 +84,6 @@ public class HighscoreView extends BasicGameState {
 				yPos += 20;
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

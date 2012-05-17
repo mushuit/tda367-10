@@ -1,11 +1,16 @@
 package tetrix.core;
 
 public class Player{
-	private int score;
+	private static int score;
 	private String name;
 	
 	public Player() {
 		score = 0;
+	}
+	
+	public Player(String name) {
+		this.score = 0;
+		this.name = name;
 	}
 	
 	public Player(int score, String name) {
@@ -13,7 +18,7 @@ public class Player{
 		this.name = name;
 	}
 	
-	public int getScore() {
+	public static int getScore() {
 		return score;
 	}
 	

@@ -17,7 +17,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.PixelRain;
-import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -141,7 +140,6 @@ public class IntroView extends BasicGameState implements KeyListener {
 			if (key != konamiCode.removeFirst()) {
 				isKeyPressed = true;
 			}
-			SoundEffects.instance().shot();
 		} catch (NoSuchElementException e) {
 		}
 

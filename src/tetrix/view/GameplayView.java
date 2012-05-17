@@ -1,6 +1,8 @@
-package tetrix.view;
+ package tetrix.view;
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
 import tetrix.core.Cannon;
 import tetrix.core.CollisionHandler;
+import tetrix.core.FileReader;
+import tetrix.core.HighScore;
 import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
@@ -64,6 +68,7 @@ public class GameplayView extends BasicGameState {
 	private UnicodeFont scoreDisplay;
 	private boolean isPaused;
 	private long timerInterval;
+	private int levelUpInterval;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -89,10 +94,15 @@ public class GameplayView extends BasicGameState {
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
-		player = new Player();
+		try {
+			player = new Player(FileReader.getRow().toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
-		timerInterval = 1000;
+		timerInterval = 2000;
+		levelUpInterval = 100;
 		
 		Font font = new Font("Verdana", Font.PLAIN,55);
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -160,15 +170,22 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-		
+			
 		/*
-		if(timerInterval >= 500
-			&& (player.getScore() % speedVariable) == 0) {
+		if(player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(100);
-		}*/
+		}
+		*/
 		
 		if(blockBox.gameOver()) {
 			isPaused = true;
+			try {
+				HighScore.instance().setHighScore(player.getName(), player.getScore());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
 		}
 	}

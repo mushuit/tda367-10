@@ -16,13 +16,14 @@ import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for the main menu view.
+ * 
  * @author Linus Karlsson
- *
+ * 
  */
-public class MainMenuView extends BasicGameState{
+public class MainMenuView extends BasicGameState implements IMultipleChoices {
 
 	private int stateID;
-	
+
 	private Image background;
 	private Image tetrixLogo;
 	private Image startGame;
@@ -30,28 +31,36 @@ public class MainMenuView extends BasicGameState{
 	private Image settings;
 	private Image highscore;
 	private Image menuHover;
-	
-	private int startGameYPos;
-	private int exitYPos;
-	private int settingsYPos;
-	private int highscoreYPos;
+
 	private int menuXPos;
 	private int hoverYPos;
-	
-	/**
-	 * Value between 0 and 3 to keep track of the user's choices.
-	 * 
-	 * 0. Start Game
-	 * 1. Settings
-	 * 2. Highscore
-	 * 3. Exit
-	 */
 	private int hoverValue;
-	
+	private int nbrOfChoices;
+
+	private enum Choices {
+		STARTGAME(0, 250), SETTINGS(1, 320), HIGHSCORE(2, 390), EXIT(3, 460);
+
+		private final int id;
+		private final int yPos;
+
+		Choices(int id, int yPos) {
+			this.id = id;
+			this.yPos = yPos;
+		}
+
+		private int id() {
+			return id;
+		}
+
+		private int yPos() {
+			return yPos;
+		}
+	}
+
 	public MainMenuView(int stateID) {
-        this.stateID = stateID;
-    }
-	
+		this.stateID = stateID;
+	}
+
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -62,78 +71,57 @@ public class MainMenuView extends BasicGameState{
 		exit = ThemeHandler.get(ThemeHandler.EXIT_IMG);
 		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
-		
-		hoverValue = 0;
-		startGameYPos = 250;
-		settingsYPos = 320;
-		highscoreYPos = 390;
-		exitYPos = 460;
-		menuXPos = (Util.WINDOW_WIDTH/2) - (startGame.getWidth()/2);
-		hoverYPos = startGameYPos;
+
+		menuXPos = (Util.WINDOW_WIDTH / 2) - (startGame.getWidth() / 2);
+		nbrOfChoices = Choices.values().length;
+	}
+
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = Choices.STARTGAME.id();
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		background.draw(0,0);
-		
+		background.draw(0, 0);
 		menuHover.draw(menuXPos, hoverYPos);
-		tetrixLogo.draw(Util.WINDOW_WIDTH/2-(tetrixLogo.getWidth()/2), 100);
-		startGame.draw(menuXPos, startGameYPos);
-		settings.draw(menuXPos, settingsYPos);
-		highscore.draw(menuXPos, highscoreYPos);
-		exit.draw(menuXPos, exitYPos);
+		tetrixLogo.draw(Util.WINDOW_WIDTH / 2 - (tetrixLogo.getWidth() / 2),
+				100);
+		startGame.draw(menuXPos, Choices.STARTGAME.yPos());
+		settings.draw(menuXPos, Choices.SETTINGS.yPos());
+		highscore.draw(menuXPos, Choices.HIGHSCORE.yPos());
+		exit.draw(menuXPos, Choices.EXIT.yPos());
 	}
-	
+
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
 		Input input = gc.getInput();
-		
-		if(input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % 4;
-		} 
-		else if(input.isKeyPressed(Input.KEY_UP)) {
+
+		if (input.isKeyPressed(Input.KEY_DOWN)) {
+			hoverValue = (hoverValue + 1) % nbrOfChoices;
+		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
-			if(hoverValue < 0) {
-				hoverValue = 3;
+			if (hoverValue < 0) {
+				hoverValue = nbrOfChoices - 1;
 			}
 		}
-		
+
 		moveMenuFocus();
-		
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			if(hoverValue == 0) {
-				sbg.enterState(States.LEVELSVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			}
-			else if(hoverValue == 1) {
-				sbg.enterState(States.SETTINGSVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			}
-			else if(hoverValue == 2) {
-				sbg.enterState(States.HIGHSCOREVIEW.getID(), new FadeOutTransition(), new FadeInTransition());
-			}
-			else if(hoverValue == 3) {
+
+		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			if (hoverValue == Choices.STARTGAME.id()) {
+				sbg.enterState(States.LEVELSVIEW.getID(),
+						new FadeOutTransition(), new FadeInTransition());
+			} else if (hoverValue == Choices.SETTINGS.id()) {
+				sbg.enterState(States.SETTINGSVIEW.getID(),
+						new FadeOutTransition(), new FadeInTransition());
+			} else if (hoverValue == Choices.HIGHSCORE.id()) {
+				sbg.enterState(States.HIGHSCOREVIEW.getID(),
+						new FadeOutTransition(), new FadeInTransition());
+			} else if (hoverValue == Choices.EXIT.id()) {
 				gc.exit();
 			}
-			
-			hoverValue = 0;
-		}
-	}
-	
-	public void moveMenuFocus() {
-		switch(hoverValue) {
-		case 0:
-			hoverYPos = startGameYPos;
-			break;
-		case 1:
-			hoverYPos = settingsYPos;
-			break;
-		case 2:
-			hoverYPos = highscoreYPos;
-			break;
-		case 3:
-			hoverYPos = exitYPos;
-			break;
 		}
 	}
 
@@ -142,4 +130,12 @@ public class MainMenuView extends BasicGameState{
 		return stateID;
 	}
 
+	@Override
+	public void moveMenuFocus() {
+		for (Choices c : Choices.values()) {
+			if (c.id() == hoverValue) {
+				hoverYPos = c.yPos();
+			}
+		}
+	}
 }
