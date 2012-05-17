@@ -22,9 +22,11 @@ import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
 
 /**
- * The game over view that is displayed when the tetrominoes has reached the top of the window.
+ * The game over view that is displayed when the tetrominoes has reached the top
+ * of the window.
+ * 
  * @author Linus Karlsson
- *
+ * 
  */
 public class GameOverView extends BasicGameState implements IMultipleChoices {
 
@@ -36,16 +38,33 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 	private Image newGame;
 	private Image mainMenu;
 	private Image highscore;
-	private UnicodeFont resultText; 
-	private UnicodeFont highscoreText; 
+	private UnicodeFont resultText;
+	private UnicodeFont highscoreText;
 
 	private int xPos;
 	private int hoverYPos;
-	private int newGameYPos;
-	private int mainMenuYPos;
-	private int highscoreYPos;
-
 	private int hoverValue;
+	private int nbrOfChoices;
+
+	private enum Choices {
+		NEWGAME(0, 290), MAINMENU(1, 360), HIGHSCORE(2, 430);
+
+		private final int id;
+		private final int yPos;
+
+		Choices(int id, int yPos) {
+			this.id = id;
+			this.yPos = yPos;
+		}
+
+		private int id() {
+			return id;
+		}
+
+		private int yPos() {
+			return yPos;
+		}
+	}
 
 	public GameOverView(int stateID) {
 		this.stateID = stateID;
@@ -62,18 +81,17 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 
 		xPos = Util.WINDOW_WIDTH / 2 - newGame.getWidth() / 2;
-		newGameYPos = 290;
-		mainMenuYPos = 360;
-		highscoreYPos = 430;
-		hoverYPos = newGameYPos;
+		nbrOfChoices = Choices.values().length;
 
-		hoverValue = 0;
-		
 		Font font = new Font("Verdana", Font.BOLD, 0);
-		resultText = new UnicodeFont(font , 20, true, false);
-		highscoreText = new UnicodeFont(font , 16, true, false);
+		resultText = new UnicodeFont(font, 20, true, false);
+		highscoreText = new UnicodeFont(font, 16, true, false);
 		initText(resultText);
 		initText(highscoreText);
+	}
+
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = Choices.NEWGAME.id();
 	}
 
 	@Override
@@ -83,16 +101,19 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		gameOver.draw(0, 100);
 
 		hover.draw(xPos, hoverYPos);
-		newGame.draw(xPos, newGameYPos);
-		mainMenu.draw(xPos, mainMenuYPos);
-		highscore.draw(xPos, highscoreYPos);
-		
-		resultText.drawString(110, 180, "You got " + Player.getScore() + " points");
-		
-		if(HighScore.writtenToHighscore()) {
-			highscoreText.drawString(50, 210, "You made it to the highscore list!", Color.green);
+		newGame.draw(xPos, Choices.NEWGAME.yPos());
+		mainMenu.draw(xPos, Choices.MAINMENU.yPos());
+		highscore.draw(xPos, Choices.HIGHSCORE.yPos());
+
+		resultText.drawString(100, 180, "You got " + Player.getScore()
+				+ " points");
+
+		if (HighScore.writtenToHighscore()) {
+			highscoreText.drawString(50, 210,
+					"You made it to the highscore list!", Color.green);
 		} else {
-			highscoreText.drawString(40, 210, "You did not reach the highscore list", Color.red);
+			highscoreText.drawString(40, 210,
+					"You did not reach the highscore list", Color.red);
 		}
 	}
 
@@ -102,32 +123,36 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % 3;
+			hoverValue = (hoverValue + 1) % nbrOfChoices;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = 2;
+				hoverValue = nbrOfChoices - 1;
 			}
 		}
 
 		moveMenuFocus();
 
-		if (input.isKeyPressed(Input.KEY_ENTER)||input.isKeyPressed(Input.KEY_SPACE)) {
-			if (hoverValue == 0) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
+		if (input.isKeyPressed(Input.KEY_ENTER)
+				|| input.isKeyPressed(Input.KEY_SPACE)) {
+			if (hoverValue == Choices.NEWGAME.id()) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+						.newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
-			} else if (hoverValue == 1) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID())).newGame();
+			} else if (hoverValue == Choices.MAINMENU.id()) {
+				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+						.newGame();
 				sbg.enterState(States.MAINMENUVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
-			} else if (hoverValue == 2) {
+			} else if (hoverValue == Choices.HIGHSCORE.id()) {
 				sbg.enterState(States.HIGHSCOREVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public void initText(UnicodeFont font) {
 		font.addAsciiGlyphs();
 		font.addGlyphs(400, 600);
@@ -146,16 +171,10 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 	@Override
 	public void moveMenuFocus() {
-		switch (hoverValue) {
-		case 0:
-			hoverYPos = newGameYPos;
-			break;
-		case 1:
-			hoverYPos = mainMenuYPos;
-			break;
-		case 2:
-			hoverYPos = highscoreYPos;
-			break;
+		for (Choices c : Choices.values()) {
+			if (c.id() == hoverValue) {
+				hoverYPos = c.yPos();
+			}
 		}
 	}
 
