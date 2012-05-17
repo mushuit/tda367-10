@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -77,11 +78,11 @@ public class LevelsView extends BasicGameState{
 		Input input = gc.getInput();
 		
 		if(input.isKeyPressed(Input.KEY_DOWN)) {
-			fx.play();
+			fx.play(1, SoundEffects.getFxVolume());
 			hoverValue = (hoverValue + 1) % 2;
 		} 
 		else if(input.isKeyPressed(Input.KEY_UP)) {
-			fx.play();
+			fx.play(1, SoundEffects.getFxVolume());
 			hoverValue--;
 			if(hoverValue < 0) {
 				hoverValue = 1;
