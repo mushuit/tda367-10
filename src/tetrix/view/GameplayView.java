@@ -1,4 +1,4 @@
-package tetrix.view;
+ package tetrix.view;
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
