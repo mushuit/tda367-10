@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-
 /**
  * 
  * A High Score class with a list of maximum 10 players. It compares the score of the
@@ -78,11 +77,6 @@ public class HighScore implements IHighScore {
 		FileReader f = new FileReader("highscore/highscore.dat");
 		f.writeRows(ss);
 	}
-	
-<<<<<<< HEAD
-	public static boolean writtenToHighscore() {
-		return reachedHighscore;
-=======
 
 	public static boolean writtenToHighscore() {
 		return reachedHighscore;
@@ -91,9 +85,6 @@ public class HighScore implements IHighScore {
 	public String getPlayerName() throws FileNotFoundException{
 		FileReader p = new FileReader("highscore/playerName.dat");
 		return p.getRow();
-
-	}
->>>>>>> 5ce2e2907545218579a8469f91c9f78d7d4f600d
 
 	}
 }
