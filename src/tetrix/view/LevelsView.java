@@ -70,7 +70,7 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 		xPos = Util.WINDOW_WIDTH / 2 - hover.getWidth() / 2;
 		hasAlreadyEntered = false;
 	}
-	
+
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		hoverValue = Choices.EASY.id();
 	}
