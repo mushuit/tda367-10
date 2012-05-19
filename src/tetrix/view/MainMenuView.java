@@ -35,7 +35,6 @@ public class MainMenuView extends BasicGameState implements IMultipleChoices {
 	private int menuXPos;
 	private int hoverYPos;
 	private int hoverValue;
-	private int nbrOfChoices;
 
 	private enum Choices {
 		STARTGAME(0, 250), SETTINGS(1, 320), HIGHSCORE(2, 390), EXIT(3, 460);
@@ -73,7 +72,6 @@ public class MainMenuView extends BasicGameState implements IMultipleChoices {
 		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 
 		menuXPos = (Util.WINDOW_WIDTH / 2) - (startGame.getWidth() / 2);
-		nbrOfChoices = Choices.values().length;
 	}
 
 	public void enter(GameContainer gc, StateBasedGame sbg) {
@@ -99,11 +97,11 @@ public class MainMenuView extends BasicGameState implements IMultipleChoices {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % nbrOfChoices;
+			hoverValue = (hoverValue + 1) % Choices.values().length;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = nbrOfChoices - 1;
+				hoverValue = Choices.values().length - 1;
 			}
 		}
 
