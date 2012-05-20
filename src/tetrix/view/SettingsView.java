@@ -239,11 +239,11 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 
 		if (hoverValue == Choices.FXVOLUME.id()) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
-				if (fxSliderPinXPos > effects.getWidth()/2+menuXPos) { // FIX
+				if (fxSliderPinXPos > effects.getWidth()/2+menuXPos) {
 					fxSliderPinXPos = fxSliderPinXPos - 1;
 				}
 			}
-			if (fxSliderPinXPos < menuXPos + (effects.getWidth()) // fix
+			if (fxSliderPinXPos < menuXPos + (effects.getWidth())
 					- (fxSliderPin.getWidth()*1.5)+2) {
 				if (input.isKeyDown(Input.KEY_RIGHT)) {
 					fxSliderPinXPos = fxSliderPinXPos + 1;
@@ -264,33 +264,8 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 			}
 			GameMusic.setGameMusicVolume(musicVolume);
 		} else if (hoverValue == Choices.CANNONCHANGER.id()) {
-			if (input.isKeyPressed(Input.KEY_RIGHT)) {
-				cannonValue = (cannonValue + 1) % 5;
-				SoundEffects.instance().menuClickPlay();
-			} else if (input.isKeyPressed(Input.KEY_LEFT)) {
-				cannonValue--;
-				if (cannonValue < 0) {
-					cannonValue = 4;
-				}
-				SoundEffects.instance().menuClickPlay();
-			}
-			if (input.isKeyDown(Input.KEY_RIGHT)) {
-				rightKeyIsDown = true;
-			} else {
-				rightKeyIsDown = false;
-			}
-
-			if (input.isKeyDown(Input.KEY_LEFT)) {
-				leftKeyIsDown = true;
-			} else {
-				leftKeyIsDown = false;
-			}
-
-		} else if (hoverValue == Choices.PLAYERNAME.id()) {
-			if (input.isKeyPressed(Input.KEY_ENTER)) { 
-				
-			}
-
+			cannonChanger(input);
+			
 		} else if (hoverValue == Choices.BACK.id()) {
 			if (input.isKeyPressed(Input.KEY_ENTER)) {
 				FileReader p;
@@ -358,6 +333,34 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 	public double getMusicVolume() {
 		return musicVolume;
 	}
+	
+	public void cannonChanger(Input input) throws SlickException{
+		if (input.isKeyPressed(Input.KEY_RIGHT)) {
+			cannonValue = (cannonValue + 1) % 5;
+			SoundEffects.instance().menuClickPlay();
+		} else if (input.isKeyPressed(Input.KEY_LEFT)) {
+			cannonValue--;
+			if (cannonValue < 0) {
+				cannonValue = 4;
+			}
+			SoundEffects.instance().menuClickPlay();
+		}
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
+			rightKeyIsDown = true;
+		} else {
+			rightKeyIsDown = false;
+		}
+
+		if (input.isKeyDown(Input.KEY_LEFT)) {
+			leftKeyIsDown = true;
+		} else {
+			leftKeyIsDown = false;
+		}
+	}
+	
+//	public void checkInput(Input input, StateBasedGame sbg){
+//		
+//	}
 
 	@Override
 	public int getID() {
