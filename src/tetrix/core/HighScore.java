@@ -21,7 +21,7 @@ public class HighScore implements IHighScore {
 	private static HighScore instance;
 	private static boolean reachedHighscore;
 
-	public HighScore() throws FileNotFoundException {
+	public HighScore() {
 	}
 
 	public static synchronized HighScore instance()
@@ -51,8 +51,7 @@ public class HighScore implements IHighScore {
 	}
 
 	@Override
-	public void setHighScore(String playerName, int score) 
-			throws IOException {
+	public void setHighScore(String playerName, int score) throws IOException {
 		List<Entry> ls = this.getHighScore();
 		Entry e = ls.get(ls.size() - 1);
 
@@ -80,7 +79,7 @@ public class HighScore implements IHighScore {
 		f.writeToHighScore(ss);
 	}
 
-	public static boolean writtenToHighscore() {
+	public static boolean reachedHighscore() {
 		return reachedHighscore;
 	}
 }

@@ -1,5 +1,7 @@
 package tetrix.view;
 
+import java.io.FileNotFoundException;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -11,6 +13,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.sound.SoundEffects;
+import tetrix.sound.GameMusic;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -131,6 +134,13 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 			} else if (hoverValue == Choices.QUIT.id()) {
 				gc.exit();
 			}
+			
+			try {
+				GameMusic.instance().gameMusicResume();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {

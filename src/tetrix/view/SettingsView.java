@@ -319,6 +319,11 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		musicVolume = (float) (musicSliderPinXPos - (music.getWidth()/2) - menuXPos)
 				/ (music.getWidth()/2 - musicSliderPin.getWidth());
 
+		try {
+			GameMusic.instance().setGameMusicVolume(musicVolume);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		input.clearKeyPressedRecord();
 		System.out.println(musicVolume + "    " +fxVolume);
 
