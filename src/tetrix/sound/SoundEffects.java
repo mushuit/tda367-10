@@ -40,15 +40,15 @@ public class SoundEffects {
 	}
 
 	public static void shot(){
-		sfxShot.play();
+		sfxShot.play(1, fxVolume);
 	}
 
 	public static void blowUpPlay(){
-		sfxBlowUp.play();
+		sfxBlowUp.play(1, fxVolume);
 	}
 
 	public static void blowUpLoop(){
-		sfxBlowUp.loop();
+		sfxBlowUp.loop(1, fxVolume);
 	}
 
 	public static void blowUpStop(){
@@ -56,11 +56,11 @@ public class SoundEffects {
 	}
 
 	public static void menuClickPlay(){
-		sfxMenuClick.play();
+		sfxMenuClick.play(1, fxVolume);
 	}
 
 	public static void menuClickLoop(){
-		sfxMenuClick.loop();
+		sfxMenuClick.loop(1, fxVolume);
 	}
 
 	public static void menuClickStop(){
@@ -68,11 +68,11 @@ public class SoundEffects {
 	}
 
 	public static void highScorePlay(){
-		sfxHighScore.play();
+		sfxHighScore.play(1, fxVolume);
 	}
 
 	public static void highScoreLoop(){
-		sfxHighScore.loop();
+		sfxHighScore.loop(1, fxVolume);
 	}
 
 	public static void highScoreStop(){
@@ -80,11 +80,11 @@ public class SoundEffects {
 	}
 
 	public static void rowClearedPlay(){
-		sfxRowCleared.play();
+		sfxRowCleared.play(1, fxVolume);
 	}
 
 	public static void rowClearedLoop(){
-		sfxRowCleared.loop();
+		sfxRowCleared.loop(1, fxVolume);
 	}
 
 	public static void rowClearedStop(){
@@ -92,11 +92,11 @@ public class SoundEffects {
 	}
 
 	public static void explodePlay(){
-		sfxExplode.play();
+		sfxExplode.play(1, fxVolume);
 	}
 	
 	public static void explodeLoop(){
-		sfxExplode.loop();
+		sfxExplode.loop(1, fxVolume);
 	}
 
 	public static void explodeStop(){
@@ -106,11 +106,5 @@ public class SoundEffects {
 	public static void setFxVolume(float fx) {
 		fxVolume = fx;
 	}
-	
-	public static float getFxVolume() {
-		return fxVolume;
-	}
-
-
 	
 }

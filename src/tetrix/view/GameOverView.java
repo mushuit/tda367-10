@@ -17,6 +17,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.HighScore;
 import tetrix.core.Player;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -121,11 +122,13 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % Choices.values().length;
+			SoundEffects.instance().menuClickPlay();
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = Choices.values().length - 1;
 			}
+			SoundEffects.instance().menuClickPlay();
 		}
 
 		moveMenuFocus();

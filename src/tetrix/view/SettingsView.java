@@ -20,6 +20,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
+import tetrix.sound.GameMusic;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -215,6 +216,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		nameField.render(gc, arg2);
 		nameField.setFocus(isAcceptingInput);
 
+		
 	}
 
 	@Override
@@ -224,13 +226,13 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % Choices.values().length;
-//			fx.play(1, SoundEffects.getFxVolume());
+			SoundEffects.instance().menuClickPlay();
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = Choices.values().length - 1;
 			}
-//			fx.play(1, SoundEffects.getFxVolume());
+			SoundEffects.instance().menuClickPlay();
 		}
 
 		moveMenuFocus();
@@ -260,16 +262,17 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 					musicSliderPinXPos = musicSliderPinXPos + 1;
 				}
 			}
+			GameMusic.setGameMusicVolume(musicVolume);
 		} else if (hoverValue == Choices.CANNONCHANGER.id()) {
 			if (input.isKeyPressed(Input.KEY_RIGHT)) {
 				cannonValue = (cannonValue + 1) % 5;
-//				fx.play(1, SoundEffects.getFxVolume());
+				SoundEffects.instance().menuClickPlay();
 			} else if (input.isKeyPressed(Input.KEY_LEFT)) {
 				cannonValue--;
 				if (cannonValue < 0) {
 					cannonValue = 4;
 				}
-//				fx.play(1, SoundEffects.getFxVolume());
+				SoundEffects.instance().menuClickPlay();
 			}
 			if (input.isKeyDown(Input.KEY_RIGHT)) {
 				rightKeyIsDown = true;
@@ -310,15 +313,18 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 			isAcceptingInput = false;
 		}
 		
-		fxVolume = (float) (fxSliderPinXPos - 435)
-				/ (effects.getWidth()/2 - fxSliderPin.getWidth());
+		fxVolume = (float) (fxSliderPinXPos - (effects.getWidth()/2) - menuXPos)
+				/ (menuXPos + effects.getWidth() - fxSliderPin.getWidth());
 
-		musicVolume = (float) (musicSliderPinXPos - 34 )
+		musicVolume = (float) (musicSliderPinXPos - (music.getWidth()/2) - menuXPos)
 				/ (music.getWidth()/2 - musicSliderPin.getWidth());
-		
 
 		input.clearKeyPressedRecord();
+		System.out.println(musicVolume + "    " +fxVolume);
 
+		System.out.println("menuXPos: " + menuXPos);
+		System.out.println("effects.getWidth(): " + effects.getWidth());
+		System.out.println("fxSliderPinXPos: " + fxSliderPinXPos);
 	}
 
 	@Override
@@ -340,16 +346,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 	}
 
 	/**
-	 * A getter for the fx volume
-	 * 
-	 * @return a value between 0 and 1
-	 */
-	public float getFXVolume() {
-		return fxVolume;
-	}
-
-	/**
-	 * A getter for the music volume
+	 * A getter for the music's volume
 	 * 
 	 * @return a value between 0 and 1
 	 */
