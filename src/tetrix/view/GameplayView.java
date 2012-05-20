@@ -38,6 +38,7 @@ import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for updating and rendering of the gameplay view.
+ * 
  * @author Magnus Huttu, Linus Karlsson
  *
  */
@@ -194,7 +195,7 @@ public class GameplayView extends BasicGameState {
 	}
 
 	public void checkInput(Input input, StateBasedGame sbg) throws SlickException {
-		int updateSpeed = 500/Util.FPS;
+		int updateSpeed = 300/Util.FPS;
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
