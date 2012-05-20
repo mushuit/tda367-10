@@ -11,6 +11,13 @@ import tetrix.core.tetrominos.Tetromino;
 import tetrix.core.tetrominos.Z;
 import tetrix.util.Util;
 
+/**
+ * Creates the different tetrominos
+ * 
+ * @author Magnus Huttu
+ *
+ */
+
 public class TetrominoFactory {
 	Tetromino t;
 

@@ -2,6 +2,13 @@ package tetrix.core;
 
 import java.util.Comparator;
 
+/**
+ * Arranges the objects (names) in alphabetic order
+ * 
+ * @author Linus Karlsson
+ *
+ */
+
 public class NameComparator implements Comparator<Entry> {
 
 	@Override

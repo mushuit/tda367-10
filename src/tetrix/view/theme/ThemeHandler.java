@@ -3,6 +3,13 @@ package tetrix.view.theme;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+/**
+ * The class that is responsible for all images
+ * 
+ * @author Jonathan Kara
+ *
+ */
+
 public class ThemeHandler {
 
 	private static String theme = "img/overworld/";		//default theme
