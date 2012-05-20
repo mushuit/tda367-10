@@ -125,11 +125,11 @@ public class GameplayView extends BasicGameState {
 		scoreDisplay.drawString(5, 0, player.getScore() + "");
 
 		if(blockBox.isInUse()){
-			int i = 0;
 
 			blockBox.update();
 			putImage();
 
+			int i = 0;
 			Position[][] p = blockBox.getPos();
 			int length = blockBox.getTetroList().size();
 			for(int j = 0; j < length; j++){
