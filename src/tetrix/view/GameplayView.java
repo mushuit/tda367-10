@@ -30,6 +30,7 @@ import tetrix.core.Player;
 import tetrix.core.Position;
 import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
+import tetrix.sound.GameMusic;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -217,6 +218,11 @@ public class GameplayView extends BasicGameState {
 
 		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			isPaused = true;
+			try {
+				GameMusic.instance().gameMusicPause();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
 		}
 	}

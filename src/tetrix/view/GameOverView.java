@@ -105,7 +105,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		resultText.drawString(100, 180, "You got " + Player.getScore()
 				+ " points");
 
-		if (HighScore.writtenToHighscore()) {
+		if (HighScore.reachedHighscore()) {
 			highscoreText.drawString(50, 210,
 					"You made it to the highscore list!", Color.green);
 		} else {
