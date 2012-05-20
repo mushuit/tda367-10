@@ -67,7 +67,6 @@ public class HighscoreView extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		Input input = gc.getInput();
 		background.draw(0, 0);
 		int buttonXPos = Util.WINDOW_WIDTH/2 - backButton.getWidth()/2;
 		backHover.draw(buttonXPos, 450);
@@ -86,16 +85,16 @@ public class HighscoreView extends BasicGameState {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		if(input.isKeyPressed(Input.KEY_ENTER)) {
-			sbg.enterState(States.MAINMENUVIEW.getID());
-		}
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int rate)
+	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {
-		// Nothing to do here
+		Input input = gc.getInput();
+		
+		if(input.isKeyPressed(Input.KEY_ENTER)) {
+			sbg.enterState(States.MAINMENUVIEW.getID());
+		}
 	}		 
 
 	@Override
