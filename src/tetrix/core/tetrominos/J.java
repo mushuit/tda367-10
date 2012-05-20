@@ -70,7 +70,7 @@ public class J extends Tetromino {
 				s[i] = new Square(new Position(
 						super.getLeftIn(Util.SQUARE_SIZE)
 						+ (Util.SQUARE_SIZE * super.getStartX()),
-						Util.B4_BOX_HEIGHT + i * Util.SQUARE_SIZE), this, i);
+						Util.B4_BOX_HEIGHT + (i-1) * Util.SQUARE_SIZE), this, i);
 				if (i < 1)
 					s[i] = new Square(new Position(
 							(super.getLeftIn(Util.SQUARE_SIZE * 2))
