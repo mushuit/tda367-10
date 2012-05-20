@@ -74,7 +74,6 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 		quit = ThemeHandler.get(ThemeHandler.QUIT_IMG);
 
 		pauseBoxXPos = (Util.WINDOW_WIDTH / 2 - pauseBox.getWidth() / 2);
-		hoverValue = 0;
 	}
 
 	public void enter(GameContainer gc, StateBasedGame sgb) {
@@ -85,8 +84,6 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0, 0);
-		background.setAlpha(50);
-
 		pauseBox.draw(pauseBoxXPos,
 				(Util.WINDOW_HEIGHT / 2 - pauseBox.getHeight() / 2));
 		hover.draw(pauseBoxXPos, hoverYPos);
@@ -94,7 +91,6 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 		newGame.draw(pauseBoxXPos, Choices.NEWGAME.yPos());
 		mainMenu.draw(pauseBoxXPos, Choices.MAINMENU.yPos());
 		quit.draw(pauseBoxXPos, Choices.QUIT.yPos());
-
 	}
 
 	@Override

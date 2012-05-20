@@ -11,19 +11,27 @@ import org.junit.Test;
 
 import tetrix.core.FileReader;
 
+/**
+ * A test class to see if the fileReader class is working and actually reads the
+ * specific file. It also tests to add and write rows to the specific file.
+ * 
+ * @author Andreas Karlberg
+ *
+ */
+
 public class TestFileReader {
 
-//	@Test
-//	public void test() throws FileNotFoundException {
-//		FileReader f = new FileReader("highscore/highscore.dat");
-//		List<String> s =f.getRows();
-//		assertTrue(s.size()==3);
+	@Test
+	public void test() throws FileNotFoundException {
+		FileReader f = new FileReader("highscore/highscore.dat");
+		List<String> s =f.getRows();
+		assertTrue(s.size()==10);
 
-	//}
+	}
 
 	@Test
 	public void testWrite() throws IOException{
-		FileReader f = new FileReader("highscore/playername.dat");
+		FileReader f = new FileReader("highscore/highscore.dat");
 		List<String> ls = new ArrayList<String>();
 		ls.add("xxx");
 		ls.add("yyy");

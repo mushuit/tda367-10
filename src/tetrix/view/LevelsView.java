@@ -10,7 +10,6 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
@@ -34,7 +33,6 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 	private int xPos;
 	private int hoverYPos;
 	private int hoverValue;
-	private int nbrOfChoices;
 	private boolean hasAlreadyEntered;
 
 	private enum Choices {
@@ -70,10 +68,9 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 		hardButton = ThemeHandler.get(ThemeHandler.HARD_IMG);
 
 		xPos = Util.WINDOW_WIDTH / 2 - hover.getWidth() / 2;
-		nbrOfChoices = Choices.values().length;
 		hasAlreadyEntered = false;
 	}
-	
+
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		hoverValue = Choices.EASY.id();
 	}
@@ -93,11 +90,11 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % nbrOfChoices;
+			hoverValue = (hoverValue + 1) % Choices.values().length;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = nbrOfChoices - 1;
+				hoverValue = Choices.values().length - 1;
 			}
 		}
 

@@ -1,12 +1,5 @@
 package tetrix.view;
 
-//TODO
-//NYA BILDER och positioner
-//Mellanslag i menyer
-//övergångarna
-//Ljud i andra klasser i denna kopplade till fxVolume
-//musicVolume
-
 import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +20,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
-import tetrix.core.HighScore;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -36,28 +28,21 @@ import tetrix.view.theme.ThemeHandler;
 /**
  * Class responsible for viewing different settings for the user to control.
  * 
- * @author Jonathan Kara & Andreas Karlberg
+ * @author Jonathan Kara, Andreas Karlberg, Linus Karlsson
  * 
  */
-public class SettingsView extends BasicGameState {
+public class SettingsView extends BasicGameState implements IMultipleChoices{
 
 	private int stateID;
 
 	private Image tetrixLogo;
 	private Image background;
 	private Image back;
-	private Image sound;
 	private Image effects;
 	private Image music;
 
-	private Image fxSlider;
 	private Image fxSliderPin;
-	private Image musicSlider;
 	private Image musicSliderPin;
-
-	private Image fxSliderPinHover;
-	private Image musicSliderPinHover;
-
 	private Image menuHover;
 
 	private Image cannon;
@@ -71,54 +56,52 @@ public class SettingsView extends BasicGameState {
 	private Image leftArrow;
 	private Image leftArrowHover;
 
-	private int backXPos;
-	private int backYPos;
-	private int soundXPos;
-	private int soundYPos;
-	private int effectsXPos;
-	private int effectsYPos;
-	private int musicXPos;
-	private int musicYPos;
-
-	private int fxSliderXPos;
-	private int fxSliderYPos;
 	private int fxSliderPinXPos;
-	private int fxSliderPinYPos;
-
-	private int musicSliderXPos;
-	private int musicSliderYPos;
 	private int musicSliderPinXPos;
-	private int musicSliderPinYPos;
-
 	private float fxVolume;
 	private float musicVolume;
 
 	private int cannonYPos;
-
 	private int cannonXPos;
 	private int cannonValue;
-
 	private int rightArrowXpos;
 	private int leftArrowXpos;
-
-	private Sound fx;
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
 	private int playerYPos;
 
-	private TextField nameField;
+	
+	@SuppressWarnings("deprecation")
 	private TrueTypeFont inputFont;
+	@SuppressWarnings("deprecation")
 	private TrueTypeFont inputDescFont;
-	private String playerName;
-	private static final int windowHeight = 600;
-	private static final int windowWidth = 400;
 
 	private int dialogWidth = 210;
-	private int dialogHeight = 100;
-
+	private TextField nameField;
 	private boolean rightKeyIsDown;
 	private boolean leftKeyIsDown;
+	private boolean isAcceptingInput;
+	
+	private enum Choices {
+		FXVOLUME(0, 200), MUSICVOLUME(1, 270), CANNONCHANGER(2, 340), PLAYERNAME(3, 410), BACK(4, 480);
+
+		private final int id;
+		private final int yPos;
+
+		Choices(int id, int yPos) {
+			this.id = id;
+			this.yPos = yPos;
+		}
+
+		private int id() {
+			return id;
+		}
+
+		private int yPos() {
+			return yPos;
+		}
+	}
 
 	public SettingsView(int stateID) {
 		this.stateID = stateID;
@@ -129,87 +112,35 @@ public class SettingsView extends BasicGameState {
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		tetrixLogo = ThemeHandler.get(ThemeHandler.TETRIX_LOGO_IMG);
+		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
 		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
-		backXPos = 200 - (back.getWidth() / 2);
-		backYPos = 460; // längst ner
-
-		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
-		soundXPos = 200 - (sound.getWidth() / 2); // var högersidan ska sitta
-		soundYPos = 200; // uppe
-
-		effects = ThemeHandler.get(ThemeHandler.EFFECTS_IMG);
-		effectsXPos = 240 - (effects.getWidth());
-		effectsYPos = 250; // Mitten
-
-		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
-		musicXPos = 240 - (music.getWidth()); // var högersidan ska sitta
-		musicYPos = 320; // nere
-
-		sound = ThemeHandler.get(ThemeHandler.SOUND_IMG);
-		soundXPos = 200 - (sound.getWidth() / 2); // var högersidan ska sitta
-		soundYPos = 200; // Change
-
-		effects = ThemeHandler.get(ThemeHandler.EFFECTS_IMG);
-		effectsXPos = 240 - (effects.getWidth());
-		effectsYPos = 250; // Change
-
-		music = ThemeHandler.get(ThemeHandler.MUSIC_IMG);
-		musicXPos = 240 - (music.getWidth()); // var högersidan ska sitta
-		musicYPos = 320; // Change
-
-		fxSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
-		fxSliderXPos = 250;
-		fxSliderYPos = effectsYPos;
-
-		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
-		fxSliderPinHover = ThemeHandler.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		fxSliderPinXPos = fxSliderXPos + fxSlider.getWidth()
-				- fxSliderPin.getWidth();
-		fxSliderPinYPos = effectsYPos - 3;
-
-		musicSlider = ThemeHandler.get(ThemeHandler.SLIDER_IMG);
-		musicSliderXPos = 250;
-		musicSliderYPos = musicYPos;
-
-		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
-		musicSliderPinHover = ThemeHandler
-				.get(ThemeHandler.SLIDE_PIN_HOVER_IMG);
-		musicSliderPinXPos = musicSliderXPos + musicSlider.getWidth()
-				- musicSliderPin.getWidth();
-		musicSliderPinYPos = musicYPos - 3;
-
-		cannonXPos = musicSliderXPos; // temporary value
-		cannonYPos = 390; // change
-
+		effects = ThemeHandler.get(ThemeHandler.FX_VOLUME_IMG);
+		music = ThemeHandler.get(ThemeHandler.MUSIC_VOLUME_IMG);
+		
 		cannon = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON_IMG);
 		cannon2 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON2_IMG);
 		cannon3 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON3_IMG);
 		cannon4 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON4_IMG);
 		cannon5 = ThemeHandler.getBlockOrCannon(ThemeHandler.CANNON5_IMG);
-
-		cannonValue = 0;
-
+		
+		musicSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
+		fxSliderPin = ThemeHandler.get(ThemeHandler.SLIDE_PIN_IMG);
 		rightArrow = ThemeHandler.get(ThemeHandler.RIGHT_ARROW_IMG);
 		rightArrowHover = ThemeHandler.get(ThemeHandler.RIGHT_ARROW_HOVER_IMG);
 		leftArrow = ThemeHandler.get(ThemeHandler.LEFT_ARROW_IMG);
 		leftArrowHover = ThemeHandler.get(ThemeHandler.LEFT_ARROW_HOVER_IMG);
+		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
+		
+		fxSliderPinXPos = menuXPos+effects.getWidth();
+		musicSliderPinXPos = menuXPos + music.getWidth();
+		cannonXPos = (Util.WINDOW_WIDTH / 2) - (cannon.getWidth() / 2);
+		cannonYPos = Choices.CANNONCHANGER.yPos();
+		cannonValue = 0;
 
 		rightArrowXpos = cannonXPos + cannon.getWidth() + 5;
 		leftArrowXpos = cannonXPos - leftArrow.getWidth() - 5;
-
-		fx = new Sound("sound/button.wav");
-		hoverValue = 0;
-		hoverYPos = effectsYPos;
-		menuHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
-		menuXPos = /* (Util.WINDOW_WIDTH/2) - (effects.getWidth()/2) */backXPos; // Change
-		playerYPos = 420;
-		menuXPos = (Util.WINDOW_WIDTH / 2) - (menuHover.getWidth() / 2); // Change
-		// hoverpic
-		playerYPos = 420; // change
-
-		back = ThemeHandler.get(ThemeHandler.BACK_IMG);
-		backXPos = 200 - (back.getWidth() / 2);
-		backYPos = 460; // Change
+		menuXPos = (Util.WINDOW_WIDTH / 2) - (menuHover.getWidth() / 2);
+		playerYPos = Choices.PLAYERNAME.yPos;
 
 		Font font = new Font("Verdana", Font.BOLD, 20);
 		Font descriptionFont = new Font("Verdana", Font.BOLD, 12);
@@ -218,7 +149,7 @@ public class SettingsView extends BasicGameState {
 
 		int textFieldWidth = 200;
 		int textFieldHeight = 30;
-		nameField = new TextField(gc, inputFont, windowWidth / 2
+		nameField = new TextField(gc, inputFont, Util.WINDOW_WIDTH / 2
 				- textFieldWidth / 2, (playerYPos + textFieldHeight / 2),
 				textFieldWidth, textFieldHeight);
 		nameField.setBackgroundColor(Color.white);
@@ -227,13 +158,17 @@ public class SettingsView extends BasicGameState {
 
 		rightKeyIsDown = false;
 		leftKeyIsDown = false;
+		isAcceptingInput = false;
 
 		try {
-			nameField.setText(FileReader.getRow());
+			nameField.setText(FileReader.getPlayerName());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		hoverValue = Choices.FXVOLUME.id();
 	}
 
 	@Override
@@ -243,14 +178,11 @@ public class SettingsView extends BasicGameState {
 		menuHover.draw(menuXPos, hoverYPos);
 		tetrixLogo.draw(Util.WINDOW_WIDTH / 2 - (tetrixLogo.getWidth() / 2),
 				100);
-		sound.draw(soundXPos, soundYPos);
-		effects.draw(effectsXPos, effectsYPos);
-		music.draw(musicXPos, musicYPos);
+		effects.draw(menuXPos, Choices.FXVOLUME.yPos());
+		music.draw(menuXPos, Choices.MUSICVOLUME.yPos());
 
-		fxSlider.draw(fxSliderXPos, fxSliderYPos);
-		musicSlider.draw(musicSliderXPos, musicSliderYPos);
-		fxSliderPin.draw(fxSliderPinXPos, fxSliderPinYPos);
-		musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
+		fxSliderPin.draw(fxSliderPinXPos, Choices.FXVOLUME.yPos()+6);
+		musicSliderPin.draw(musicSliderPinXPos, Choices.MUSICVOLUME.yPos()+6);
 
 		if (cannonValue == 0) {
 			cannon.draw(cannonXPos, cannonYPos);
@@ -264,18 +196,8 @@ public class SettingsView extends BasicGameState {
 			cannon5.draw(cannonXPos, cannonYPos);
 		}
 
-		back.draw(backXPos, backYPos);
-		if (hoverValue == 0) {
-			fxSliderPinHover.draw(fxSliderPinXPos, fxSliderPinYPos);
-		} else {
-			fxSliderPin.draw(fxSliderPinXPos, fxSliderPinYPos);
-		}
-		if (hoverValue == 1) {
-			musicSliderPinHover.draw(musicSliderPinXPos, musicSliderPinYPos);
-		} else {
-			musicSliderPin.draw(musicSliderPinXPos, musicSliderPinYPos);
-		}
-
+		back.draw(menuXPos, Choices.BACK.yPos());
+			
 		if (rightKeyIsDown) {
 			rightArrowHover.draw(rightArrowXpos, cannonYPos);
 		} else if (!rightKeyIsDown) {
@@ -288,10 +210,10 @@ public class SettingsView extends BasicGameState {
 		}
 
 		arg2.setColor(Color.lightGray);
-		inputDescFont.drawString((windowWidth / 2 - dialogWidth / 2) + 50,
+		inputDescFont.drawString((Util.WINDOW_WIDTH / 2 - dialogWidth / 2) + 50,
 				(playerYPos), "Enter your name", Color.green);
 		nameField.render(gc, arg2);
-		nameField.setFocus(true);
+		nameField.setFocus(isAcceptingInput);
 
 	}
 
@@ -301,54 +223,53 @@ public class SettingsView extends BasicGameState {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % 5;
-			fx.play(1, SoundEffects.getFxVolume());
+			hoverValue = (hoverValue + 1) % Choices.values().length;
+//			fx.play(1, SoundEffects.getFxVolume());
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = 4;
+				hoverValue = Choices.values().length - 1;
 			}
-			fx.play(1, SoundEffects.getFxVolume());
+//			fx.play(1, SoundEffects.getFxVolume());
 		}
 
 		moveMenuFocus();
 
-		if (hoverValue == 0) {
+		if (hoverValue == Choices.FXVOLUME.id()) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
-				if (fxSliderPinXPos > fxSliderXPos) {
+				if (fxSliderPinXPos > effects.getWidth()/2+menuXPos) { // FIX
 					fxSliderPinXPos = fxSliderPinXPos - 1;
 				}
 			}
-			if (fxSliderPinXPos < fxSliderXPos + fxSlider.getWidth()
-					- fxSliderPin.getWidth()) {
+			if (fxSliderPinXPos < menuXPos + (effects.getWidth()) // fix
+					- (fxSliderPin.getWidth()*1.5)+2) {
 				if (input.isKeyDown(Input.KEY_RIGHT)) {
 					fxSliderPinXPos = fxSliderPinXPos + 1;
 				}
 			}
 			SoundEffects.setFxVolume(fxVolume);
-		} else if (hoverValue == 1) {
+		} else if (hoverValue == Choices.MUSICVOLUME.id()) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
-				if (musicSliderPinXPos > musicSliderXPos) {
+				if (musicSliderPinXPos > music.getWidth()/2+menuXPos) {
 					musicSliderPinXPos = musicSliderPinXPos - 1;
 				}
 			}
-			if (musicSliderPinXPos < musicSliderXPos + musicSlider.getWidth()
-					- musicSliderPin.getWidth()) {
+			if (musicSliderPinXPos < menuXPos + (music.getWidth())
+					- (musicSliderPin.getWidth()*1.5)+2) {
 				if (input.isKeyDown(Input.KEY_RIGHT)) {
 					musicSliderPinXPos = musicSliderPinXPos + 1;
 				}
 			}
-		} else if (hoverValue == 2) {
-
+		} else if (hoverValue == Choices.CANNONCHANGER.id()) {
 			if (input.isKeyPressed(Input.KEY_RIGHT)) {
 				cannonValue = (cannonValue + 1) % 5;
-				fx.play(1, SoundEffects.getFxVolume());
+//				fx.play(1, SoundEffects.getFxVolume());
 			} else if (input.isKeyPressed(Input.KEY_LEFT)) {
 				cannonValue--;
 				if (cannonValue < 0) {
 					cannonValue = 4;
 				}
-				fx.play(1, SoundEffects.getFxVolume());
+//				fx.play(1, SoundEffects.getFxVolume());
 			}
 			if (input.isKeyDown(Input.KEY_RIGHT)) {
 				rightKeyIsDown = true;
@@ -362,70 +283,50 @@ public class SettingsView extends BasicGameState {
 				leftKeyIsDown = false;
 			}
 
-		} else if (hoverValue == 3) {
-			if (input.isKeyPressed(Input.KEY_ENTER)) { // Change player's name,
-				// different controls
-				// perhaps
-				playerName = nameField.getText();
-				System.out.println(playerName);
+		} else if (hoverValue == Choices.PLAYERNAME.id()) {
+			if (input.isKeyPressed(Input.KEY_ENTER)) { 
+				
+			}
+
+		} else if (hoverValue == Choices.BACK.id()) {
+			if (input.isKeyPressed(Input.KEY_ENTER)) {
 				FileReader p;
 				try {
 					p = new FileReader("highscore/playername.dat");
-					List<String> ps = new ArrayList<String>();
-					ps.add(playerName);
-					p.writePName(ps);
-
+					p.writePlayerName(nameField.getText());
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-
-		} else if (hoverValue == 4) {
-			if (input.isKeyPressed(Input.KEY_ENTER)
-					|| input.isKeyPressed(Input.KEY_SPACE)) {
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
-				hoverValue = 0;
 			}
 		}
 
-		if (hoverValue == 3) {
-			nameField.inputStarted();
+		if(hoverValue == Choices.PLAYERNAME.id()) {
+			isAcceptingInput = true;
 		} else {
-			nameField.inputEnded();
+			isAcceptingInput = false;
 		}
+		
+		fxVolume = (float) (fxSliderPinXPos - 435)
+				/ (effects.getWidth()/2 - fxSliderPin.getWidth());
 
-		fxVolume = (float) (fxSliderPinXPos - fxSliderXPos)
-				/ (fxSlider.getWidth() - fxSliderPin.getWidth());
-
-		musicVolume = (float) (musicSliderPinXPos - musicSliderXPos)
-				/ (musicSlider.getWidth() - musicSliderPin.getWidth());
+		musicVolume = (float) (musicSliderPinXPos - 34 )
+				/ (music.getWidth()/2 - musicSliderPin.getWidth());
+		
 
 		input.clearKeyPressedRecord();
 
 	}
 
+	@Override
 	public void moveMenuFocus() {
-		switch (hoverValue) {
-		case 0:
-			hoverYPos = effectsYPos;
-			break;
-		case 1:
-			hoverYPos = musicYPos;
-			break;
-		case 2:
-			hoverYPos = cannonYPos;
-			break;
-		case 3:
-			hoverYPos = playerYPos;
-			break;
-		case 4:
-			hoverYPos = backYPos;
-			break;
+		for (Choices c : Choices.values()) {
+			if (c.id() == hoverValue) {
+				hoverYPos = c.yPos();
+			}
 		}
 	}
 
@@ -443,7 +344,7 @@ public class SettingsView extends BasicGameState {
 	 * 
 	 * @return a value between 0 and 1
 	 */
-	public float getFxValue() {
+	public float getFXVolume() {
 		return fxVolume;
 	}
 
