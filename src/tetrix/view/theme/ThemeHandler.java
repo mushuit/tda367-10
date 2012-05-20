@@ -19,7 +19,7 @@ public class ThemeHandler {
 	public static final String CANNON4_IMG = "cannon4.png";
 	public static final String CANNON5_IMG = "cannon5.png";
 	public static final String EASY_IMG = "easy.png";
-	public static final String EFFECTS_IMG = "effects.png";
+	public static final String FX_VOLUME_IMG = "fx_volume.png";
 	public static final String EXIT_IMG = "exit.png";
 	public static final String GAME_BACKGROUND_IMG = "game_background.png";
 	public static final String HARD_IMG = "hard.png";
@@ -27,7 +27,7 @@ public class ThemeHandler {
 	public static final String HOVER_IMG = "menu_hover.png";
 	public static final String HOVER_SMALL_IMG = "hover_small.png";
 	public static final String MAIN_MENU_IMG = "main_menu.png";
-	public static final String MUSIC_IMG = "music.png";
+	public static final String MUSIC_VOLUME_IMG = "music_volume.png";
 	public static final String NEW_GAME_IMG = "new_game.png";
 	public static final String POPUP_IMG = "popup.png";
 	public static final String PRESS_ANY_KEY_IMG = "press_any_key.png";
@@ -35,8 +35,6 @@ public class ThemeHandler {
 	public static final String RESUME_IMG = "resume.png";
 	public static final String SETTINGS_IMG = "settings.png";
 	public static final String SLIDE_PIN_IMG = "slide_pin.png";
-	public static final String SLIDE_PIN_HOVER_IMG = "slide_pin_hover.png";
-	public static final String SLIDER_IMG = "slider.png";
 	public static final String SOUND_IMG = "sound.png";
 	public static final String START_GAME_IMG = "start_game.png";
 	public static final String TETRIX_LOGO_IMG = "tetrix_logo.png";
