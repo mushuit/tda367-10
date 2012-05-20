@@ -43,10 +43,10 @@ public class StateHandler extends StateBasedGame {
 			throws SlickException {
 		this.addState(new IntroView(States.INTROVIEW.getID()));
 		
-		/*
+		
 		Music music = new Music("Sound/background-music.wav");
 		music.loop();
-		*/
+		
 	}
 
 	public static void addStates(StateBasedGame sbg) {

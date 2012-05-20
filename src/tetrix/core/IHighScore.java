@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 
- * An interface of the high score. It gets and sets the high score.
+ * An interface of the high score.
  * @author Andreas Karlberg
  *
  */

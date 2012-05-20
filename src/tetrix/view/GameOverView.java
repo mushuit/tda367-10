@@ -44,7 +44,6 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 	private int xPos;
 	private int hoverYPos;
 	private int hoverValue;
-	private int nbrOfChoices;
 
 	private enum Choices {
 		NEWGAME(0, 290), MAINMENU(1, 360), HIGHSCORE(2, 430);
@@ -81,8 +80,6 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 
 		xPos = Util.WINDOW_WIDTH / 2 - newGame.getWidth() / 2;
-		nbrOfChoices = Choices.values().length;
-
 		Font font = new Font("Verdana", Font.BOLD, 0);
 		resultText = new UnicodeFont(font, 20, true, false);
 		highscoreText = new UnicodeFont(font, 16, true, false);
@@ -123,11 +120,11 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % nbrOfChoices;
+			hoverValue = (hoverValue + 1) % Choices.values().length;
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = nbrOfChoices - 1;
+				hoverValue = Choices.values().length - 1;
 			}
 		}
 

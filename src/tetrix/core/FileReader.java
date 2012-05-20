@@ -13,6 +13,7 @@ import java.util.Scanner;
 /**
  *
  * The File reader reads and writes strings to the specific highscore file.
+ * It also reads and writes the player name to the specific player name file.
  * @author Andreas Karlberg
  *
  */
