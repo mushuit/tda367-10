@@ -23,7 +23,7 @@ public class FileReader {
 
 	}
 
-	public List <String> getRows() throws FileNotFoundException{
+	public List <String> getFromHighScore() throws FileNotFoundException{
 		List <String> l = new ArrayList<String>();
 		Scanner scanner = new Scanner(new FileInputStream("highscore/highscore.dat"));
 		while (scanner.hasNext()){
@@ -34,25 +34,19 @@ public class FileReader {
 
 	}
 	
-	public static String getRow() throws FileNotFoundException{
+	public static String getPlayerName() throws FileNotFoundException{
 		Scanner scanner = new Scanner(new FileInputStream("highscore/playername.dat"));
 		return scanner.next();
 	}
 	
-	public void writePName(List<String> prows) throws IOException {
+	public void writePlayerName(String player) throws IOException {
 		Writer output = new BufferedWriter(new FileWriter("highscore/playername.dat"));
-		try {
-			for(String s:prows){
-				output.write( s +"\n" );
-			}
-		}
-
-		finally {
-			output.close();
-		}
+		output.write(player);
+		output.close();
+		
 	}
 
-	public void writeRows(List<String> rows) throws IOException {
+	public void writeToHighScore(List<String> rows) throws IOException {
 		Writer output = new BufferedWriter(new FileWriter("highscore/highscore.dat"));
 
 		try {

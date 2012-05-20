@@ -37,7 +37,7 @@ public class HighScore implements IHighScore {
 	@Override
 	public List<Entry> getHighScore() throws FileNotFoundException {
 		FileReader f = new FileReader("highscore/highscore.dat");
-		List<String> rows = f.getRows();
+		List<String> rows = f.getFromHighScore();
 
 		List<Entry> l = new ArrayList<Entry>();
 		for (String row : rows) {
@@ -77,16 +77,10 @@ public class HighScore implements IHighScore {
 		}
 
 		FileReader f = new FileReader("highscore/highscore.dat");
-		f.writeRows(ss);
+		f.writeToHighScore(ss);
 	}
 
 	public static boolean writtenToHighscore() {
 		return reachedHighscore;
-	}
-
-	public String getPlayerName() throws FileNotFoundException {
-		FileReader p = new FileReader("highscore/playerName.dat");
-		return p.getRow();
-
 	}
 }

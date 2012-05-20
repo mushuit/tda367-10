@@ -95,7 +95,7 @@ public class GameplayView extends BasicGameState {
 		bulletList = new ArrayList<Bullet>();
 		blocks = new ArrayList<Image>();
 		try {
-			player = new Player(FileReader.getRow().toString());
+			player = new Player(FileReader.getPlayerName().toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

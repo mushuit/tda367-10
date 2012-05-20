@@ -1,12 +1,5 @@
 package tetrix.view;
 
-//TODO
-//NYA BILDER och positioner
-//Mellanslag i menyer
-//övergångarna
-//Ljud i andra klasser i denna kopplade till fxVolume
-//musicVolume
-
 import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +20,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
-import tetrix.core.HighScore;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -36,7 +28,7 @@ import tetrix.view.theme.ThemeHandler;
 /**
  * Class responsible for viewing different settings for the user to control.
  * 
- * @author Jonathan Kara, Andreas Karlberg, Linus
+ * @author Jonathan Kara, Andreas Karlberg, Linus Karlsson
  * 
  */
 public class SettingsView extends BasicGameState implements IMultipleChoices{
@@ -72,29 +64,24 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 	private int cannonYPos;
 	private int cannonXPos;
 	private int cannonValue;
-
 	private int rightArrowXpos;
 	private int leftArrowXpos;
-
-	//private Sound fx;
 	private int hoverValue;
 	private int hoverYPos;
 	private int menuXPos;
 	private int playerYPos;
 
-	private TextField nameField;
 	
 	@SuppressWarnings("deprecation")
 	private TrueTypeFont inputFont;
 	@SuppressWarnings("deprecation")
 	private TrueTypeFont inputDescFont;
-	
-	private String playerName;
-	private int dialogWidth = 210;
-	private int dialogHeight = 100;
 
+	private int dialogWidth = 210;
+	private TextField nameField;
 	private boolean rightKeyIsDown;
 	private boolean leftKeyIsDown;
+	private boolean isAcceptingInput;
 	
 	private enum Choices {
 		FXVOLUME(0, 200), MUSICVOLUME(1, 270), CANNONCHANGER(2, 340), PLAYERNAME(3, 410), BACK(4, 480);
@@ -171,9 +158,10 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 
 		rightKeyIsDown = false;
 		leftKeyIsDown = false;
+		isAcceptingInput = false;
 
 		try {
-			nameField.setText(FileReader.getRow());
+			nameField.setText(FileReader.getPlayerName());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -225,7 +213,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		inputDescFont.drawString((Util.WINDOW_WIDTH / 2 - dialogWidth / 2) + 50,
 				(playerYPos), "Enter your name", Color.green);
 		nameField.render(gc, arg2);
-		nameField.setFocus(true);
+		nameField.setFocus(isAcceptingInput);
 
 	}
 
@@ -235,12 +223,12 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		Input input = gc.getInput();
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
-			hoverValue = (hoverValue + 1) % 5;
+			hoverValue = (hoverValue + 1) % Choices.values().length;
 //			fx.play(1, SoundEffects.getFxVolume());
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
-				hoverValue = 4;
+				hoverValue = Choices.values().length - 1;
 			}
 //			fx.play(1, SoundEffects.getFxVolume());
 		}
@@ -296,47 +284,38 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 			}
 
 		} else if (hoverValue == Choices.PLAYERNAME.id()) {
-			if (input.isKeyPressed(Input.KEY_ENTER)) { // Change player's name,
-				// different controls
-				// perhaps
-				playerName = nameField.getText();
-				System.out.println(playerName);
-				FileReader p;
-				try {
-					p = new FileReader("highscore/playername.dat");
-					List<String> ps = new ArrayList<String>();
-					ps.add(playerName);
-					p.writePName(ps);
-
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if (input.isKeyPressed(Input.KEY_ENTER)) { 
+				
 			}
 
 		} else if (hoverValue == Choices.BACK.id()) {
-			if (input.isKeyPressed(Input.KEY_ENTER)
-					|| input.isKeyPressed(Input.KEY_SPACE)) {
+			if (input.isKeyPressed(Input.KEY_ENTER)) {
+				FileReader p;
+				try {
+					p = new FileReader("highscore/playername.dat");
+					p.writePlayerName(nameField.getText());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				ThemeHandler.setCannon(cannonValue);
 				sbg.enterState(States.MAINMENUVIEW.getID());
-				hoverValue = 0;
 			}
 		}
 
-		if (hoverValue == Choices.PLAYERNAME.id()) {
-			nameField.inputStarted();
+		if(hoverValue == Choices.PLAYERNAME.id()) {
+			isAcceptingInput = true;
 		} else {
-			nameField.inputEnded();
+			isAcceptingInput = false;
 		}
-
+		
 		fxVolume = (float) (fxSliderPinXPos - 435)
 				/ (effects.getWidth()/2 - fxSliderPin.getWidth());
 
 		musicVolume = (float) (musicSliderPinXPos - 34 )
 				/ (music.getWidth()/2 - musicSliderPin.getWidth());
+		
 
 		input.clearKeyPressedRecord();
 
@@ -365,7 +344,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 	 * 
 	 * @return a value between 0 and 1
 	 */
-	public float getFxValue() {
+	public float getFXVolume() {
 		return fxVolume;
 	}
 
