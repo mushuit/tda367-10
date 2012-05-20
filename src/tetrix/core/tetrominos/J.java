@@ -47,7 +47,7 @@ public class J extends Tetromino {
 				s[i] = new Square(new Position(
 						super.getLeftIn(Util.SQUARE_SIZE)
 						+ (Util.SQUARE_SIZE * super.getStartX()),
-						Util.B4_BOX_HEIGHT + i * Util.SQUARE_SIZE), this, i);
+						Util.B4_BOX_HEIGHT + (i+1) * Util.SQUARE_SIZE), this, i);
 				if (i > 2)
 					s[i] = new Square(new Position((super.getLeftIn(0))
 							+ (Util.SQUARE_SIZE * super.getStartX()),
@@ -62,8 +62,7 @@ public class J extends Tetromino {
 					s[i] = new Square(new Position(
 							(super.getLeftIn(-Util.SQUARE_SIZE))
 							+ (Util.SQUARE_SIZE * super.getStartX())
-							+ i * Util.SQUARE_SIZE, Util.B4_BOX_HEIGHT
-							+ Util.SQUARE_SIZE), this, i);
+							+ i * Util.SQUARE_SIZE, Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE), this, i);
 			}
 		} else if (rand < 40 && rand >= 30) {
 			for (int i = 3; i > -1; i--) {
