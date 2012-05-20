@@ -28,15 +28,29 @@ public class Z extends Tetromino {
 
 	public void build() {
 		Square[] s = super.getSquares();
-		for (int i = 0; i < 4; i++) {
-			s[i] = new Square(new Position(super.getLeftIn(0)
-					+ (Util.SQUARE_SIZE * super.getStartX()) + i
-					* Util.SQUARE_SIZE, 80), this, i);
-			if (i > 1)
-				s[i] = new Square(new Position(
-						super.getLeftIn(-Util.SQUARE_SIZE)
-								+ (Util.SQUARE_SIZE * super.getStartX()) + i
-								* Util.SQUARE_SIZE, 102), this, i);
+		int rand = (int) (Math.random()*10);
+		if(rand < 6){
+			for (int i = 0; i < 4; i++) {
+				s[i] = new Square(new Position(super.getLeftIn(0)
+						+ (Util.SQUARE_SIZE * super.getStartX()) + i
+						* Util.SQUARE_SIZE, Util.B4_BOX_HEIGHT), this, i);
+				if (i > 1)
+					s[i] = new Square(new Position(
+							super.getLeftIn(-Util.SQUARE_SIZE)
+							+ (Util.SQUARE_SIZE * super.getStartX()) + i
+							* Util.SQUARE_SIZE, Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE), this, i);
+			}
+		}else{
+			for (int i = 0; i < 4; i++) {
+				s[i] = new Square(new Position(super.getLeftIn(Util.SQUARE_SIZE)
+						+ (Util.SQUARE_SIZE * super.getStartX()), Util.B4_BOX_HEIGHT + i
+						* Util.SQUARE_SIZE), this, i);
+				if (i > 1)
+					s[i] = new Square(new Position(
+							super.getLeftIn(0)
+							+ (Util.SQUARE_SIZE * super.getStartX()), (Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE) + i
+							* Util.SQUARE_SIZE), this, i);
+			}
 		}
 	}
 

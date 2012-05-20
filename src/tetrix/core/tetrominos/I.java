@@ -33,12 +33,12 @@ public class I extends Tetromino {
 			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(super.getLeftIn(0)
 						+ (Util.SQUARE_SIZE * super.getStartX()) + i
-						* Util.SQUARE_SIZE, 80), this, i);
+						* Util.SQUARE_SIZE, Util.B4_BOX_HEIGHT), this, i);
 			}
 		} else {
 			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(super.getLeftIn(0)
-						+ (Util.SQUARE_SIZE * super.getStartX()), 80 + i
+						+ (Util.SQUARE_SIZE * super.getStartX()), Util.B4_BOX_HEIGHT + i
 						* Util.SQUARE_SIZE), this, i);
 			}
 		}

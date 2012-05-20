@@ -13,22 +13,8 @@ import tetrix.util.Util;
 
 public class TetrominoFactory {
 	Tetromino t;
-	Tetromino I;
-	Tetromino J;
-	Tetromino L;
-	Tetromino O;
-	Tetromino T;
-	Tetromino S;
-	Tetromino Z;
 
 	public TetrominoFactory() {
-		Tetromino I = new I(0, null);
-		Tetromino J = new J(0, null);
-		Tetromino L = new L(0, null);
-		Tetromino O = new O(0, null);
-		Tetromino T = new T(0, null);
-		Tetromino S = new S(0, null);
-		Tetromino Z = new Z(0, null);
 	}
 
 	public void createRandomTetromino(BlockBox bB) {
@@ -38,7 +24,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {
 		System.out.println(whichBlock);
-		switch (2) {
+		switch (whichBlock) {
 		case 0:
 			bB.addMino(new I((int) (Math.random() * 7), bB));
 			break;
