@@ -20,6 +20,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import tetrix.core.FileReader;
+import tetrix.sound.GameMusic;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -316,7 +317,11 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		musicVolume = (float) (musicSliderPinXPos - 34 )
 				/ (music.getWidth()/2 - musicSliderPin.getWidth());
 		
-
+		try {
+			GameMusic.instance().setGameMusicVolume(musicVolume);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		input.clearKeyPressedRecord();
 
 	}
