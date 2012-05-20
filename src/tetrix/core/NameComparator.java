@@ -2,11 +2,11 @@ package tetrix.core;
 
 import java.util.Comparator;
 
-public class NameComparator implements Comparator<Player> {
+public class NameComparator implements Comparator<Entry> {
 
 	@Override
-	public int compare(Player p1, Player p2) {
-		return p1.getName().compareTo(p2.getName());
+	public int compare(Entry e1, Entry e2) {
+		return e1.getName().compareTo(e2.getName());
 	}
 
 }
