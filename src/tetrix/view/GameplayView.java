@@ -103,7 +103,6 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 		timerInterval = 2000;
-		levelUpInterval = 100;
 		
 		Font font = new Font("Verdana", Font.PLAIN,55);
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -115,6 +114,8 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
+		
+		levelUpInterval = 100;
 	}
 
 	@Override
@@ -171,12 +172,13 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-			
-		/*
-		if(player.getScore() % levelUpInterval == 0) {
-				increaseSpeed(100);
+		
+		if(timerInterval >= 500 && player.getScore() !=  0) {
+			if(player.getScore() % levelUpInterval == 0) {
+				increaseSpeed(200);
+				levelUpInterval += levelUpInterval*2;
+			}
 		}
-		*/
 		
 		if(blockBox.gameOver()) {
 			isPaused = true;

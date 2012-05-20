@@ -12,9 +12,9 @@ import tetrix.util.Util;
  */
 public class Bullet extends Image {
 	private Position pos;
-	private int position = 0;
-	private boolean going = false;
-	private int value;
+	private int bulletPosition = 0;
+	private boolean moving = false;
+	private int positionValue;
 	private boolean stop;
 
 	public Bullet(int xPos, int yPos) {
@@ -25,18 +25,18 @@ public class Bullet extends Image {
 		stop = false;
 	}
 
-	public Bullet(Position pos, int value) {
-		this.value = value;
+	public Bullet(Position pos, int positionValue) {
+		this.positionValue = positionValue;
 		this.pos = new Position(pos.getX(), pos.getY());
 		shoot();
 		setRotation(-90);
 		stop = false;
 	}
 
-	public Bullet(Position pos, Image img, float rotation, int value) {
+	public Bullet(Position pos, Image img, float rotation, int positionValue) {
 		super(img);
 		rotate(rotation);
-		this.value = value;
+		this.positionValue = positionValue;
 		this.pos = new Position(pos.getX(), pos.getY());
 		shoot();
 		setRotation(-90);
@@ -47,29 +47,29 @@ public class Bullet extends Image {
 
 		System.out.println(pos.getX() + "    " + pos.getY());
 
-		if (value >= 300 && value <= 800) {
-			position = 1;
+		if (positionValue >= 300 && positionValue <= 800) {
+			bulletPosition = 1;
 			pos.setY(pos.getY() + 22.5);
 		}
 
-		else if (value >= 0 && value <= 300) {
-			position = 2;
+		else if (positionValue >= 0 && positionValue <= 300) {
+			bulletPosition = 2;
 			pos.setX(pos.getX() + 22.5);
 		}
 
-		else if (value >= 800 && value <= 1100) {
-			position = 3;
+		else if (positionValue >= 800 && positionValue <= 1100) {
+			bulletPosition = 3;
 			pos.setX((int) (pos.getX() + 22.5));
 			pos.setY(pos.getY() + 50);
 		}
 
-		else if (value >= 1100 && value <= 1600) {
-			position = 4;
+		else if (positionValue >= 1100 && positionValue <= 1600) {
+			bulletPosition = 4;
 			pos.setY((int) (pos.getY() + 22.5));
 			pos.setX(pos.getX() + 50);
 		}
 
-		going = true;
+		moving = true;
 	}
 
 	public void stop() {
@@ -88,8 +88,8 @@ public class Bullet extends Image {
 		return (int) pos.getY();
 	}
 
-	public boolean getGoing() {
-		return going;
+	public boolean getMoving() {
+		return moving;
 	}
 
 	public boolean isMoving() {
@@ -97,32 +97,32 @@ public class Bullet extends Image {
 	}
 
 	public void update() {
-		if (going) {
+		if (moving) {
 
-			switch (position) {
+			switch (bulletPosition) {
 
 			case 1:
 				pos.setX(pos.getX() - 10);
 				if (pos.getX() < 0)
-					going = false;
+					moving = false;
 				break;
 
 			case 2:
 				pos.setY(pos.getY() - 10);
 				if (pos.getY() < 0)
-					going = false;
+					moving = false;
 				break;
 
 			case 3:
 				pos.setY(pos.getY() + 10);
 				if (pos.getY() > Util.WINDOW_HEIGHT)
-					going = false;
+					moving = false;
 				break;
 
 			case 4:
 				pos.setX(pos.getX() + 10);
 				if (pos.getX() > Util.WINDOW_WIDTH)
-					going = false;
+					moving = false;
 				break;
 
 			default:
