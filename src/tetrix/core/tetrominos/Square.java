@@ -138,7 +138,7 @@ public class Square implements ActionListener {
 	}
 
 	public void rowFallUp() {
-		if (this.getY() >= Util.B4_BOX_HEIGHT)
+		if (this.getY() > Util.B4_BOX_HEIGHT)
 			setY(pos.getY() - Util.SQUARE_SIZE);
 	}
 

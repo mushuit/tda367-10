@@ -116,10 +116,24 @@ public class BlockBox {
 	public boolean isPainted(Tetromino t) {
 		Square[] s = t.getSquares();
 		for (int i = 3; i > -1; i--) {
-			if (s[i].getY() >= Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
-					- Util.SQUARE_SIZE
-					&& !s[i].destroyed()) {
-				return true;
+			if(!isKonami){
+				if (s[i].getY() >= Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
+						- Util.SQUARE_SIZE
+						&& !s[i].destroyed()) {
+					return true;
+				}
+			} 
+			else if(isKonami){
+				if (s[i].getY() <= Util.B4_BOX_HEIGHT
+						&& !s[i].destroyed()) {
+					return true;
+				}
+				if (i == 0) {
+					if (isPainted(s[0].getX(), s[0].getY() - Util.SQUARE_SIZE)) {
+						if (!s[0].destroyed())
+							return true;
+					}
+				}
 			}
 			if (i == 0) {
 				if (isPainted(s[0].getX(), s[0].getY() + Util.SQUARE_SIZE)) {

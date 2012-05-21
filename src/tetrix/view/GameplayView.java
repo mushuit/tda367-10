@@ -132,6 +132,8 @@ public class GameplayView extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+//		g.setColor(Color.white);
+//		g.fillRect(0, 0, Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
 		background.draw(0,0);
 		cannonImage.setRotation(cannon.getRotation());
 		cannonImage.draw(cannon.getX(), cannon.getY());

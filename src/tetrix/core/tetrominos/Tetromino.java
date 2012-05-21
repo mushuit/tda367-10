@@ -117,12 +117,12 @@ public abstract class Tetromino implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// easy level has the int 0
 		if (bBox.level() == 0) {
-			if(!bBox.isKonami()){
+			if (!bBox.isKonami()) {
 				for (int i = 3; i > -1; i--) {
-					if(i == 0){
+					if (i == 0) {
 						if ((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i]
-								.getY() > Util.WINDOW_HEIGHT - Util.B4_BOX_HEIGHT
-								- (Util.SQUARE_SIZE * 2))) {
+								.getY() > Util.WINDOW_HEIGHT
+								- Util.B4_BOX_HEIGHT - (Util.SQUARE_SIZE * 2))) {
 							square[i].stop();
 						}
 					}
@@ -133,13 +133,18 @@ public abstract class Tetromino implements ActionListener {
 					}
 
 				}
-			}
-			else{
-				for(int i = 0; i < 4; i++){
+			} else {
+				for (int i = 0; i < 4; i++) {
+					if (i == 0) {
+						if ((bBox.isPainted(square[i].getX(), square[i].getY()) || square[i]
+								.getY() < Util.B4_BOX_HEIGHT)) {
+							square[i].stop();
+						}
+					}
 					if ((bBox.isPainted(square[i].getX(), square[i].getY()))) {
 						square[i].stop();
 					}
-					if (square[i].getY() <= Util.B4_BOX_HEIGHT){
+					if (square[i].getY() <= Util.B4_BOX_HEIGHT) {
 						square[i].stop();
 					}
 				}
@@ -189,21 +194,22 @@ public abstract class Tetromino implements ActionListener {
 
 			timer.stop();
 		}
-		if(!bBox.isKonami()){
+		if (!bBox.isKonami()) {
 			for (int i = 0; i < 4; i++) {
 				if (!square[i].isMoving()
-						&& square[i].getY() == Util.B4_BOX_HEIGHT+Util.SQUARE_SIZE) {
+						&& square[i].getY() == Util.B4_BOX_HEIGHT
+						+ Util.SQUARE_SIZE) {
 					bBox.gameIsOver();
 				}
 			}
-		}
-		else{
+		} else {
 			for (int i = 0; i < 4; i++) {
 				if (!square[i].isMoving()
-						&& square[i].getY() == Util.WINDOW_HEIGHT-Util.B4_BOX_HEIGHT-Util.SQUARE_SIZE) {
+						&& square[i].getY() == Util.WINDOW_HEIGHT
+						- Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE * 3) {
 					bBox.gameIsOver();
 				}
-			}	
+			}
 		}
 	}
 

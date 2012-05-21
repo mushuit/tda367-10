@@ -28,15 +28,22 @@ public class T extends Tetromino {
 
 	public void build() {
 		Square[] s = super.getSquares();
+		
+		int startY = Util.B4_BOX_HEIGHT;
+		
+		if(bBox.isKonami()){
+			startY = Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE*3;
+		}
+		
 		for (int i = 0; i < 4; i++) {
 			s[i] = new Square(new Position(super.getLeftIn(0)
 					+ (Util.SQUARE_SIZE * super.getStartX()) + i
-					* Util.SQUARE_SIZE, 80), this, i);
+					* Util.SQUARE_SIZE, startY), this, i);
 			if (i > 2)
 				s[i] = new Square(new Position(
 						super.getLeftIn(-Util.SQUARE_SIZE * 2)
 								+ (Util.SQUARE_SIZE * super.getStartX()) + i
-								* Util.SQUARE_SIZE, 102), this, i);
+								* Util.SQUARE_SIZE, startY + Util.SQUARE_SIZE), this, i);
 		}
 	}
 
