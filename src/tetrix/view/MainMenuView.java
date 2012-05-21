@@ -112,14 +112,11 @@ public class MainMenuView extends BasicGameState implements IMultipleChoices {
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			if (hoverValue == Choices.STARTGAME.id()) {
-				sbg.enterState(States.LEVELSVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.LEVELSVIEW.getID());
 			} else if (hoverValue == Choices.SETTINGS.id()) {
-				sbg.enterState(States.SETTINGSVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.SETTINGSVIEW.getID());
 			} else if (hoverValue == Choices.HIGHSCORE.id()) {
-				sbg.enterState(States.HIGHSCOREVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.HIGHSCOREVIEW.getID());
 			} else if (hoverValue == Choices.EXIT.id()) {
 				gc.exit();
 			}

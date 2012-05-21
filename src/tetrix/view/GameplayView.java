@@ -196,7 +196,7 @@ public class GameplayView extends BasicGameState {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
+			sbg.enterState(States.GAMEOVERVIEW.getID());	
 			SoundEffects.instance().explodePlay();
 		}
 	}
@@ -233,7 +233,7 @@ public class GameplayView extends BasicGameState {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
+			sbg.enterState(States.PAUSEDGAMEVIEW.getID() );
 		}
 	}
 
