@@ -71,6 +71,8 @@ public class GameplayView extends BasicGameState {
 	private boolean isPaused;
 	private long timerInterval;
 	private int levelUpInterval;
+	
+	private UnicodeFont levelUpText;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -117,6 +119,9 @@ public class GameplayView extends BasicGameState {
 		}
 		
 		levelUpInterval = 100;
+		Font font2 = new Font("Verdana", Font.BOLD, 0);
+		levelUpText = new UnicodeFont(font, 16, true, false);
+		initText(levelUpText);
 	}
 
 	@Override
@@ -163,8 +168,6 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		checkInput(input, sbg);
-		
-		player.increaseScore();
 
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){
@@ -179,7 +182,7 @@ public class GameplayView extends BasicGameState {
 		if(timerInterval >= 500 && player.getScore() !=  0) {
 			if(player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(200);
-				levelUpInterval =  levelUpInterval+100;
+				levelUpInterval = levelUpInterval+100;
 				SoundEffects.instance().speedUpPlay();
 			}
 		}
@@ -193,7 +196,8 @@ public class GameplayView extends BasicGameState {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.GAMEOVERVIEW.getID(), new FadeOutTransition(), new FadeInTransition());	
+			sbg.enterState(States.GAMEOVERVIEW.getID());	
+			SoundEffects.instance().explodePlay();
 		}
 	}
 
@@ -229,7 +233,7 @@ public class GameplayView extends BasicGameState {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.PAUSEDGAMEVIEW.getID(), new EmptyTransition(), new FadeInTransition());
+			sbg.enterState(States.PAUSEDGAMEVIEW.getID() );
 		}
 	}
 
@@ -254,6 +258,24 @@ public class GameplayView extends BasicGameState {
 			}
 		}).start();
 	}
+	
+	/**
+	 * Repeatedly create a new block at a given speed
+	 */
+//	public void levelUpTimer(){
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				//gfhjghgjgujj
+//				try {
+//					Thread.
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}).start();
+//	}
 	
 	public void setCannonImage(Image image) {
 		this.cannonImage = image;
@@ -312,6 +334,18 @@ public class GameplayView extends BasicGameState {
 		blockBox.backToGame();
 		bulletList.clear();
 		cannon.reset();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void initText(UnicodeFont font) {
+		font.addAsciiGlyphs();
+		font.addGlyphs(400, 600);
+		font.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+		try {
+			font.loadGlyphs();
+		} catch (SlickException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	public void increaseSpeed(int value) {

@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  *
- * The File reader reads and writes strings to the specific highscore file.
+ * The File reader reads and writes strings to the specific high score file.
  * It also reads and writes the player name to the specific player name file.
  * @author Andreas Karlberg
  *
@@ -25,7 +25,8 @@ public class FileReader {
 
 	public List <String> getFromHighScore() throws FileNotFoundException{
 		List <String> l = new ArrayList<String>();
-		Scanner scanner = new Scanner(new FileInputStream("highscore/highscore.dat"));
+		Scanner scanner = new Scanner(new FileInputStream
+				("highscore/highscore.dat"));
 		while (scanner.hasNext()){
 			String row = scanner.next();
 			l.add(row);
@@ -35,19 +36,22 @@ public class FileReader {
 	}
 	
 	public static String getPlayerName() throws FileNotFoundException{
-		Scanner scanner = new Scanner(new FileInputStream("highscore/playername.dat"));
+		Scanner scanner = new Scanner(new FileInputStream
+				("highscore/playername.dat"));
 		return scanner.next();
 	}
 	
 	public void writePlayerName(String player) throws IOException {
-		Writer output = new BufferedWriter(new FileWriter("highscore/playername.dat"));
+		Writer output = new BufferedWriter(new FileWriter
+				("highscore/playername.dat"));
 		output.write(player);
 		output.close();
 		
 	}
 
 	public void writeToHighScore(List<String> rows) throws IOException {
-		Writer output = new BufferedWriter(new FileWriter("highscore/highscore.dat"));
+		Writer output = new BufferedWriter(new FileWriter
+				("highscore/highscore.dat"));
 
 		try {
 			for(String s:rows){

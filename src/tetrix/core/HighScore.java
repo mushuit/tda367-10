@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * A High Score class with a list of maximum 10 players. It compares the score
  * of the current player with the score in the list to see if the player should
- * be added in the high score or not.
+ * be added in the high score or not. It implements the High Score interface.
  * 
  * @author Andreas Karlberg
  * 
@@ -51,7 +51,7 @@ public class HighScore implements IHighScore {
 	}
 
 	@Override
-	public void setHighScore(String playerName, int score) throws IOException {
+	public void setHighScore(String playerName, int score)throws IOException {
 		List<Entry> ls = this.getHighScore();
 		Entry e = ls.get(ls.size() - 1);
 
