@@ -61,48 +61,43 @@ public class ThemeHandler {
 	public static final String LEFT_ARROW_HOVER_IMG = "arrow_left_hover.png";
 	private static int cannon = 0;
 	private static boolean isKonami = false;
-	
+
 	public static String music = "sound/background-music.wav";
-	
-	
+
+
 	public static void setCannon(int c){
 		cannon = c;
 	}
-	
+
 	public static void setUnderworldTheme(){
 		theme = "img/underworld/";
-<<<<<<< HEAD
 		music = "sound/background-music_underworld.wav";
-=======
 		isKonami = true;
->>>>>>> Up 'n' down konami OH YEAH
 	}
-	
+
 	public static void setOverworldTheme(){
 		theme = "img/overworld/";
 		music = "sound/background-music.wav";
 	}
-	
+
 	public static Image get(String img) throws SlickException{
 		return new Image(theme + img);
 	}
 	public static Image getBlockOrCannon(String img) throws SlickException{
 		return new Image("img/cannonsblocks/" + img);
 	}
-	
-<<<<<<< HEAD
+
 	public static Music getMusic() throws SlickException {
 		return new Music(music);
-=======
+	}
 
 	public static boolean isKonami(){
 		if(isKonami){
 			return true;
 		}
 		return false;
->>>>>>> Up 'n' down konami OH YEAH
 	}
-	
+
 	/**
 	 * Depending on which cannon is chosen in settings, 
 	 * the method will return the chosen cannon
@@ -123,5 +118,5 @@ public class ThemeHandler {
 		}
 	}
 
-	
+
 }
