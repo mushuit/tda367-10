@@ -72,13 +72,13 @@ public class L extends Tetromino {
 				s[i] = new Square(new Position(
 						super.getLeftIn(0)
 						+ (Util.SQUARE_SIZE * super.getStartX()),
-						(Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE) + (2-i)
+						(Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE) + (3-i)
 						* Util.SQUARE_SIZE), this, i);
 				if (i > 2)
 					s[i] = new Square(new Position(
 							(super.getLeftIn(Util.SQUARE_SIZE))
 							+ (Util.SQUARE_SIZE * super.getStartX()),
-							Util.B4_BOX_HEIGHT + Util.SQUARE_SIZE), this, i);
+							Util.B4_BOX_HEIGHT + 2 * Util.SQUARE_SIZE), this, i);
 			}
 		}
 	}
