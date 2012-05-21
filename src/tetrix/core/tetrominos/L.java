@@ -68,13 +68,13 @@ public class L extends Tetromino {
 
 			}
 		} else if (rand < 40 && rand >= 30) {
-			for (int i = 3; i > -1; i--) {
+			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(
 						super.getLeftIn(0)
 						+ (Util.SQUARE_SIZE * super.getStartX()),
-						(Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE) + i
+						(Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE) + (3-i)
 						* Util.SQUARE_SIZE), this, i);
-				if (i < 1)
+				if (i > 2)
 					s[i] = new Square(new Position(
 							(super.getLeftIn(Util.SQUARE_SIZE))
 							+ (Util.SQUARE_SIZE * super.getStartX()),

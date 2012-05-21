@@ -96,7 +96,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-		
+
 		} else {
 			highscoreText.drawString(40, 210,
 					"You did not reach the highscore list", Color.red);
@@ -146,16 +146,14 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-			.newGame();
+					.newGame();
 			if (hoverValue == Choices.NEWGAME.id()) {
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == Choices.MAINMENU.id()) {
-				sbg.enterState(States.MAINMENUVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.MAINMENUVIEW.getID());
 			} else if (hoverValue == Choices.HIGHSCORE.id()) {
-				sbg.enterState(States.HIGHSCOREVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.HIGHSCOREVIEW.getID());
 			}
 		}
 	}

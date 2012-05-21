@@ -13,6 +13,7 @@ import javax.swing.Timer;
 
 import tetrix.core.Position;
 import tetrix.util.Util;
+import tetrix.view.theme.ThemeHandler;
 
 public class Square implements ActionListener {
 	private Position pos;
@@ -21,8 +22,8 @@ public class Square implements ActionListener {
 	private Timer timer;
 	private Tetromino t;
 	private int whichSqr;
-	private boolean isSplit;
 	private boolean used;
+	private boolean isKonami;
 
 	public Square(Position pos) {
 		this.pos = pos;
@@ -43,8 +44,8 @@ public class Square implements ActionListener {
 		timer = new Timer(250, this);
 		this.t = t;
 		this.whichSqr = whichSqr;
-		isSplit = false;
 		used = false;
+		isKonami = ThemeHandler.isKonami();
 	}
 
 	public Position getPos() {
@@ -115,16 +116,30 @@ public class Square implements ActionListener {
 	}
 
 	public void falling() {
-		if (isMoving()
-				&& this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
-						- Util.SQUARE_SIZE)
-			setY(pos.getY() + Util.SQUARE_SIZE);
+		if (!isKonami) {
+			if (isMoving()
+					&& this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
+							- Util.SQUARE_SIZE) {
+				setY(pos.getY() + Util.SQUARE_SIZE);
+			}
+		} else {
+			fallingUp();
+		}
 	}
 
 	public void rowFall() {
-		if (this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
-				- Util.SQUARE_SIZE)
-			setY(pos.getY() + Util.SQUARE_SIZE);
+		if (!isKonami) {
+			if (this.getY() < Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT
+					- Util.SQUARE_SIZE)
+				setY(pos.getY() + Util.SQUARE_SIZE);
+		} else {
+			rowFallUp();
+		}
+	}
+
+	public void rowFallUp() {
+		if (this.getY() >= Util.B4_BOX_HEIGHT)
+			setY(pos.getY() - Util.SQUARE_SIZE);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -135,4 +150,10 @@ public class Square implements ActionListener {
 	public int getNbr() {
 		return whichSqr;
 	}
+
+	public void fallingUp() {
+		if (isMoving() && this.getY() > Util.B4_BOX_HEIGHT)
+			setY(pos.getY() - Util.SQUARE_SIZE);
+	}
+
 }

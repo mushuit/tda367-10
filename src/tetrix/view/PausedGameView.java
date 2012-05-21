@@ -129,8 +129,7 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 				input.clearKeyPressedRecord();
 				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
 						.newGame();
-				sbg.enterState(States.MAINMENUVIEW.getID(),
-						new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(States.MAINMENUVIEW.getID());
 			} else if (hoverValue == Choices.QUIT.id()) {
 				gc.exit();
 			}

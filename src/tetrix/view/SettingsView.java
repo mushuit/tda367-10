@@ -215,8 +215,6 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 				(playerYPos), "Enter your name", Color.green);
 		nameField.render(gc, arg2);
 		nameField.setFocus(isAcceptingInput);
-
-		
 	}
 
 	@Override
@@ -357,6 +355,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 			leftKeyIsDown = false;
 		}
 	}
+	
 	
 
 	@Override
