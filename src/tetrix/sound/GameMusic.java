@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
-import tetrix.core.HighScore;
 
 /**
  * A class that provides game music

@@ -73,13 +73,11 @@ public class TestTextInput extends BasicGame {
 			message = textField.getText();
 			FileReader p;
 			try {
-<<<<<<< HEAD
+
 				new FileReader("highscore/playername.dat").writePlayerName("Input");
-=======
 				p = new FileReader("highscore/playername.dat");
 				p.writePlayerName(message);
 			
->>>>>>> Minor changes
 
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
