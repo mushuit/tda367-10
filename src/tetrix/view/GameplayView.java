@@ -189,7 +189,7 @@ public class GameplayView extends BasicGameState {
 				increaseSpeed(200);
 				levelUpInterval = levelUpInterval+100;
 				SoundEffects.instance().speedUpPlay();
-				levelUpNotifier(textDuration);
+//				levelUpNotifier(textDuration);
 			}
 		}
 		
@@ -265,16 +265,16 @@ public class GameplayView extends BasicGameState {
 		}).start();
 	}
 	
-	public void levelUpNotifier(int duration) {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-        	public void run() {
-        		levelUpText.drawString(50, 210,
-        					"Level up!", Color.green);
-        		System.out.println("LEVEL UP");
-        	}
-        }, duration*1000);
-	}
+//	public void levelUpNotifier(int duration) {
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//        	public void run() {
+//        		levelUpText.drawString(50, 210,
+//        					"Level up!", Color.green);
+//        		System.out.println("LEVEL UP");
+//        	}
+//        }, duration*1000);
+//	}
 	
 	/**
 	 * Repeatedly create a new block at a given speed
