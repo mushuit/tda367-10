@@ -34,18 +34,21 @@ public class HighscoreView extends BasicGameState {
 	private UnicodeFont pointsOnHighScoreDisplay;
 	private Image background;
 	private Image backButton;
-	private Image backHover;
+	private Image backHover; 
+	private Image highscore;
 
 	public HighscoreView(int stateID) {
 		this.stateID = stateID;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.BACKGROUND_IMG);
 		backButton = ThemeHandler.get(ThemeHandler.BACK_IMG);
 		backHover = ThemeHandler.get(ThemeHandler.HOVER_IMG);
+		highscore = ThemeHandler.get(ThemeHandler.HIGHSCORE_IMG);
 
 		Font font = new Font("Verdana", Font.BOLD, 0);
 		highScoreDisplay = new UnicodeFont(font);
@@ -68,6 +71,7 @@ public class HighscoreView extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		background.draw(0, 0);
+		highscore.draw(Util.WINDOW_WIDTH/2 - highscore.getWidth()/2, 100);
 		int buttonXPos = Util.WINDOW_WIDTH/2 - backButton.getWidth()/2;
 		backHover.draw(buttonXPos, 450);
 		backButton.draw(buttonXPos, 450);

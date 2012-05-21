@@ -28,7 +28,6 @@ public class S extends Tetromino {
 
 	public void build() {
 		Square[] s = super.getSquares();
-		int rand = (int) (Math.random() * 10);
 		
 		int startY = Util.B4_BOX_HEIGHT;
 		

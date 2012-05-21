@@ -62,10 +62,6 @@ public class PixelRain {
 		}
 	}
 
-	public void upsideDown() {
-
-	}
-
 	public List<Shape> getList() {
 		return pixelList;
 	}

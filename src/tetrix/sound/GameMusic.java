@@ -45,7 +45,7 @@ public class GameMusic {
 	}
 
 	public void gameMusicLoop() {
-		gameMusic.loop();
+		gameMusic.loop(1, (float)0.37);
 	}
 
 	public void gameMusicStop() {

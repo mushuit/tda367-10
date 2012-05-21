@@ -85,6 +85,7 @@ public class LevelsView extends BasicGameState implements IMultipleChoices {
 		hardButton.draw(xPos, Choices.HARD.yPos());
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int value)
 			throws SlickException {

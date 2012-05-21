@@ -19,7 +19,6 @@ import tetrix.util.Util;
 public abstract class Tetromino implements ActionListener {
 	private Square[] square;
 	private int startX;
-	private int fallspeed;
 	private boolean isMoving;
 	private int leftIn;
 	private Timer timer;
@@ -27,7 +26,6 @@ public abstract class Tetromino implements ActionListener {
 	protected BlockBox bBox;
 	private int l;
 	private boolean stop;
-	private int anInt;
 	protected boolean SqrDstr;
 	protected boolean SqrDstr2;
 	protected boolean SqrDstr3;
@@ -45,7 +43,6 @@ public abstract class Tetromino implements ActionListener {
 	public Tetromino(int startX, int leftIn, int fallspeed, BlockBox bBox) {
 		newBlock = false;
 		this.startX = startX;
-		this.fallspeed = fallspeed;
 		square = new Square[4];
 		this.leftIn = leftIn;
 		isMoving = true;
@@ -54,7 +51,6 @@ public abstract class Tetromino implements ActionListener {
 		newBlock = true;
 		stop = false;
 		l = 0;
-		anInt = 10;
 		SqrDstr = false;
 		SqrDstr2 = false;
 		SqrDstr3 = false;

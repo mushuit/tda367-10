@@ -3,7 +3,6 @@ package tetrix.view;
 import java.io.FileNotFoundException;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -47,6 +46,7 @@ public class StateHandler extends StateBasedGame {
 			throws SlickException {
 		this.addState(new IntroView(States.INTROVIEW.getID()));
 		
+		// Start music
 		try {
 			GameMusic.instance().gameMusicLoop();
 		} catch (FileNotFoundException e) {
