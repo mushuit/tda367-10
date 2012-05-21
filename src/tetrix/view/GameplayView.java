@@ -35,6 +35,8 @@ import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
 import tetrix.view.theme.ThemeHandler;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Class responsible for updating and rendering of the gameplay view.
@@ -73,6 +75,8 @@ public class GameplayView extends BasicGameState {
 	private int levelUpInterval;
 	
 	private UnicodeFont levelUpText;
+	private Timer timer;
+	private int textDuration;
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -122,6 +126,7 @@ public class GameplayView extends BasicGameState {
 		Font font2 = new Font("Verdana", Font.BOLD, 0);
 		levelUpText = new UnicodeFont(font, 16, true, false);
 		initText(levelUpText);
+		textDuration = 5;	//how many seconds the levelUpText will last
 	}
 
 	@Override
@@ -184,6 +189,7 @@ public class GameplayView extends BasicGameState {
 				increaseSpeed(200);
 				levelUpInterval = levelUpInterval+100;
 				SoundEffects.instance().speedUpPlay();
+				levelUpNotifier(textDuration);
 			}
 		}
 		
@@ -259,24 +265,21 @@ public class GameplayView extends BasicGameState {
 		}).start();
 	}
 	
+	public void levelUpNotifier(int duration) {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+        	public void run() {
+        		levelUpText.drawString(50, 210,
+        					"Level up!", Color.green);
+        		System.out.println("LEVEL UP");
+        	}
+        }, duration*1000);
+	}
+	
 	/**
 	 * Repeatedly create a new block at a given speed
+	 * @return 
 	 */
-//	public void levelUpTimer(){
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				//gfhjghgjgujj
-//				try {
-//					Thread.
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}).start();
-//	}
-	
 	public void setCannonImage(Image image) {
 		this.cannonImage = image;
 	}
