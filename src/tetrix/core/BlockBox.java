@@ -19,6 +19,7 @@ import tetrix.core.tetrominos.S;
 import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
 import tetrix.core.tetrominos.Z;
+import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 
 public class BlockBox {
@@ -78,7 +79,7 @@ public class BlockBox {
 		}).start();
 	}
 
-	private void search4FullRows() {
+	private void search4FullRows() throws SlickException {
 
 		for (int y = Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT
 				- Util.B4_BOX_HEIGHT; y += Util.SQUARE_SIZE) {
@@ -91,6 +92,7 @@ public class BlockBox {
 			}
 			if (amountFilled == 10) {
 				clearRow(y);
+				SoundEffects.instance().rowClearedPlay();
 			}
 		}
 	}

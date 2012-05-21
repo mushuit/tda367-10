@@ -109,9 +109,11 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		if (HighScore.reachedHighscore()) {
 			highscoreText.drawString(50, 210,
 					"You made it to the highscore list!", Color.green);
+			SoundEffects.instance().highScorePlay();
 		} else {
 			highscoreText.drawString(40, 210,
 					"You did not reach the highscore list", Color.red);
+			SoundEffects.instance().explodePlay();
 		}
 	}
 

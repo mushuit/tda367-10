@@ -177,7 +177,8 @@ public class GameplayView extends BasicGameState {
 		if(timerInterval >= 500 && player.getScore() !=  0) {
 			if(player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(200);
-				levelUpInterval += levelUpInterval*2;
+				levelUpInterval =  levelUpInterval+100;
+				SoundEffects.instance().speedUpPlay();
 			}
 		}
 		
