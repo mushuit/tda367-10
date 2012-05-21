@@ -90,6 +90,17 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		hoverValue = Choices.NEWGAME.id();
+		if (HighScore.reachedHighscore()) {
+			try {
+				SoundEffects.instance().speedUpPlay();
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+		
+		} else {
+			highscoreText.drawString(40, 210,
+					"You did not reach the highscore list", Color.red);
+		}
 	}
 
 	@Override
