@@ -80,10 +80,14 @@ public class ThemeHandler {
 		return new Image("img/cannonsblocks/" + img);
 	}
 	
+	/**
+	 * Depending on which cannon is chosen in settings, 
+	 * the method will return the chosen cannon
+	 * @return 
+	 * @throws SlickException
+	 */
 	public static Image getCannon() throws SlickException{
-		if (cannon == 0){
-			return new Image("img/cannonsblocks/cannon.png");
-		} else if(cannon == 1){
+		if(cannon == 1){
 			return new Image("img/cannonsblocks/cannon2.png");
 		} else if(cannon == 2){
 			return new Image("img/cannonsblocks/cannon3.png");
