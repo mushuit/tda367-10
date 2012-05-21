@@ -163,8 +163,6 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		checkInput(input, sbg);
-		
-		player.increaseScore();
 
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){
@@ -179,7 +177,7 @@ public class GameplayView extends BasicGameState {
 		if(timerInterval >= 500 && player.getScore() !=  0) {
 			if(player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(200);
-				levelUpInterval =  levelUpInterval+100;
+				levelUpInterval = levelUpInterval+100;
 				SoundEffects.instance().speedUpPlay();
 			}
 		}
