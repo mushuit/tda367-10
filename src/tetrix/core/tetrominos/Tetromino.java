@@ -173,8 +173,7 @@ public abstract class Tetromino implements ActionListener {
 
 		for (int i = 0; i < 4; i++) {
 			if (!square[i].isMoving()
-					&& square[i].getY() == Util.B4_BOX_HEIGHT
-							+ Util.SQUARE_SIZE*3) {
+					&& square[i].getY() == Util.B4_BOX_HEIGHT) {
 				bBox.gameIsOver();
 			}
 		}

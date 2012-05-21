@@ -19,6 +19,7 @@ public class SoundEffects {
 	private static Sound sfxHighScore;
 	private static Sound sfxRowCleared;
 	private static Sound sfxExplode;
+	private static Sound sfxSpeedUp;
 	
 	private static SoundEffects instance = null;
 	
@@ -29,26 +30,27 @@ public class SoundEffects {
 	public static synchronized SoundEffects instance() throws SlickException {
 		if(instance == null) {
 			sfxShot = new Sound("sound/shot.wav");		// Sound of the bullet when you shoot
-			sfxBlowUp = new Sound("sound/hit.wav");	// Sound of a block blown up
+			sfxBlowUp = new Sound("sound/hit.wav");		// Sound of a block blown up
 			sfxMenuClick = new Sound("sound/button.wav");	// Sound of a menu click
-			sfxHighScore = new Sound("sound/powerup.wav");	// Sound when you break a new High Score
-			sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when it is Game Over
-			sfxExplode = new Sound("sound/explosion.wav");		// Sound when the game pauses
+			sfxHighScore = new Sound("sound/speedup.wav");	// Sound when you break a new High Score
+			sfxRowCleared = new Sound("sound/rowcleared.wav");		// Sound when a row is cleared
+			sfxExplode = new Sound("sound/explosion.wav");		// Sound when the game pauses and when it is Game Over
+			sfxSpeedUp = new Sound("sound/speedup.wav");		// Sound when the game is speeded up
 		}
 		
 		return instance;
 	}
 
 	public static void shot(){
-		sfxShot.play();
+		sfxShot.play(1, fxVolume);
 	}
 
 	public static void blowUpPlay(){
-		sfxBlowUp.play();
+		sfxBlowUp.play(1, fxVolume);
 	}
 
 	public static void blowUpLoop(){
-		sfxBlowUp.loop();
+		sfxBlowUp.loop(1, fxVolume);
 	}
 
 	public static void blowUpStop(){
@@ -56,11 +58,11 @@ public class SoundEffects {
 	}
 
 	public static void menuClickPlay(){
-		sfxMenuClick.play();
+		sfxMenuClick.play(1, fxVolume);
 	}
 
 	public static void menuClickLoop(){
-		sfxMenuClick.loop();
+		sfxMenuClick.loop(1, fxVolume);
 	}
 
 	public static void menuClickStop(){
@@ -68,11 +70,11 @@ public class SoundEffects {
 	}
 
 	public static void highScorePlay(){
-		sfxHighScore.play();
+		sfxHighScore.play(1, fxVolume);
 	}
 
 	public static void highScoreLoop(){
-		sfxHighScore.loop();
+		sfxHighScore.loop(1, fxVolume);
 	}
 
 	public static void highScoreStop(){
@@ -80,23 +82,35 @@ public class SoundEffects {
 	}
 
 	public static void rowClearedPlay(){
-		sfxRowCleared.play();
+		sfxRowCleared.play(1, fxVolume);
 	}
 
 	public static void rowClearedLoop(){
-		sfxRowCleared.loop();
+		sfxRowCleared.loop(1, fxVolume);
 	}
 
 	public static void rowClearedStop(){
 		sfxRowCleared.stop();
 	}
+	
+	public static void speedUpPlay(){
+		sfxSpeedUp.play(1, fxVolume);
+	}
+
+	public static void speedUpLoop(){
+		sfxSpeedUp.loop(1, fxVolume);
+	}
+
+	public static void speedUpStop(){
+		sfxSpeedUp.stop();
+	}
 
 	public static void explodePlay(){
-		sfxExplode.play();
+		sfxExplode.play(1, fxVolume);
 	}
 	
 	public static void explodeLoop(){
-		sfxExplode.loop();
+		sfxExplode.loop(1, fxVolume);
 	}
 
 	public static void explodeStop(){
@@ -106,11 +120,5 @@ public class SoundEffects {
 	public static void setFxVolume(float fx) {
 		fxVolume = fx;
 	}
-	
-	public static float getFxVolume() {
-		return fxVolume;
-	}
-
-
 	
 }

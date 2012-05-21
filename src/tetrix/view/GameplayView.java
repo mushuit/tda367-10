@@ -38,6 +38,7 @@ import tetrix.view.theme.ThemeHandler;
 
 /**
  * Class responsible for updating and rendering of the gameplay view.
+ * 
  * @author Magnus Huttu, Linus Karlsson
  *
  */
@@ -103,7 +104,6 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 		timerInterval = 2000;
-		levelUpInterval = 100;
 		
 		Font font = new Font("Verdana", Font.PLAIN,55);
 		scoreDisplay = new UnicodeFont(font , 15, true, false);
@@ -115,6 +115,8 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
+		
+		levelUpInterval = 100;
 	}
 
 	@Override
@@ -171,12 +173,14 @@ public class GameplayView extends BasicGameState {
 				size--;
 			}
 		}
-			
-		/*
-		if(player.getScore() % levelUpInterval == 0) {
-				increaseSpeed(100);
+		
+		if(timerInterval >= 500 && player.getScore() !=  0) {
+			if(player.getScore() % levelUpInterval == 0) {
+				increaseSpeed(200);
+				levelUpInterval =  levelUpInterval+100;
+				SoundEffects.instance().speedUpPlay();
+			}
 		}
-		*/
 		
 		if(blockBox.gameOver()) {
 			isPaused = true;
@@ -192,7 +196,7 @@ public class GameplayView extends BasicGameState {
 	}
 
 	public void checkInput(Input input, StateBasedGame sbg) throws SlickException {
-		int updateSpeed = 500/Util.FPS;
+		int updateSpeed = 300/Util.FPS;
 
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);

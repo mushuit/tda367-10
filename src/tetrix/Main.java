@@ -9,6 +9,7 @@ import tetrix.view.StateHandler;
  * Tetrix, a game in which you control a cannon moving around a typical Tetris gameboard.
  * Instead of moving the actual tetrominos, the player's mission is to shoot and form them
  * in a way so that they are aligned at the bottom - resulting in points.
+ * 
  * @author Andreas Karlberg, Jonathan Kara, Linus Karlsson, Magnus Huttu
  *
  */

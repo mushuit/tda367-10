@@ -1,5 +1,12 @@
 package tetrix.core;
 
+/**
+ * A class that keeps track of the player's name and score
+ * 
+ * @author Linus Karlsson
+ *
+ */
+
 public class Player{
 	private static int score;
 	private String name;

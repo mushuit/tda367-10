@@ -54,7 +54,7 @@ public class GameMusic {
 		gameMusic.getVolume();
 	}
 
-	public void setGameMusicVolume(float value) {
+	public static void setGameMusicVolume(float value){
 		gameMusic.setVolume(value);
 	}
 }

@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import tetrix.sound.SoundEffects;
 import tetrix.sound.GameMusic;
 import tetrix.util.Util;
 import tetrix.view.StateHandler.States;
@@ -28,16 +29,16 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 
 	private int stateID;
 
-	private Image background;
-	private Image pauseBox;
-	private Image resume;
-	private Image newGame;
-	private Image mainMenu;
-	private Image quit;
-	private Image hover;
+	private Image backgroundImage;
+	private Image pauseFrame;
+	private Image resumeButton;
+	private Image newGameButton;
+	private Image mainMenuButton;
+	private Image quitButton;
+	private Image menuHover;
 
-	private int pauseBoxXPos;
-	private int hoverYPos;
+	private int pauseFrameXPos;
+	private int menuHoverYPos;
 	private int hoverValue;
 
 	private enum Choices {
@@ -67,16 +68,16 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		background = ((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+		backgroundImage = ((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
 				.getPausedScreen();
-		hover = ThemeHandler.get(ThemeHandler.HOVER_SMALL_IMG);
-		pauseBox = ThemeHandler.get(ThemeHandler.POPUP_IMG);
-		resume = ThemeHandler.get(ThemeHandler.RESUME_IMG);
-		newGame = ThemeHandler.get(ThemeHandler.NEW_GAME_IMG);
-		mainMenu = ThemeHandler.get(ThemeHandler.MAIN_MENU_IMG);
-		quit = ThemeHandler.get(ThemeHandler.QUIT_IMG);
+		menuHover = ThemeHandler.get(ThemeHandler.HOVER_SMALL_IMG);
+		pauseFrame = ThemeHandler.get(ThemeHandler.POPUP_IMG);
+		resumeButton = ThemeHandler.get(ThemeHandler.RESUME_IMG);
+		newGameButton = ThemeHandler.get(ThemeHandler.NEW_GAME_IMG);
+		mainMenuButton = ThemeHandler.get(ThemeHandler.MAIN_MENU_IMG);
+		quitButton = ThemeHandler.get(ThemeHandler.QUIT_IMG);
 
-		pauseBoxXPos = (Util.WINDOW_WIDTH / 2 - pauseBox.getWidth() / 2);
+		pauseFrameXPos = (Util.WINDOW_WIDTH / 2 - pauseFrame.getWidth() / 2);
 	}
 
 	public void enter(GameContainer gc, StateBasedGame sgb) {
@@ -86,14 +87,14 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		background.draw(0, 0);
-		pauseBox.draw(pauseBoxXPos,
-				(Util.WINDOW_HEIGHT / 2 - pauseBox.getHeight() / 2));
-		hover.draw(pauseBoxXPos, hoverYPos);
-		resume.draw(pauseBoxXPos, Choices.RESUME.yPos());
-		newGame.draw(pauseBoxXPos, Choices.NEWGAME.yPos());
-		mainMenu.draw(pauseBoxXPos, Choices.MAINMENU.yPos());
-		quit.draw(pauseBoxXPos, Choices.QUIT.yPos());
+		backgroundImage.draw(0, 0);
+		pauseFrame.draw(pauseFrameXPos,
+				(Util.WINDOW_HEIGHT / 2 - pauseFrame.getHeight() / 2));
+		menuHover.draw(pauseFrameXPos, menuHoverYPos);
+		resumeButton.draw(pauseFrameXPos, Choices.RESUME.yPos());
+		newGameButton.draw(pauseFrameXPos, Choices.NEWGAME.yPos());
+		mainMenuButton.draw(pauseFrameXPos, Choices.MAINMENU.yPos());
+		quitButton.draw(pauseFrameXPos, Choices.QUIT.yPos());
 	}
 
 	@Override
@@ -103,11 +104,13 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			hoverValue = (hoverValue + 1) % Choices.values().length;
+			SoundEffects.instance().menuClickPlay();
 		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			hoverValue--;
 			if (hoverValue < 0) {
 				hoverValue = Choices.values().length - 1;
 			}
+			SoundEffects.instance().menuClickPlay();
 		}
 
 		moveMenuFocus();
@@ -150,7 +153,7 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 	public void moveMenuFocus() {
 		for (Choices c : Choices.values()) {
 			if (c.id() == hoverValue) {
-				hoverYPos = c.yPos();
+				menuHoverYPos = c.yPos();
 			}
 		}
 	}
