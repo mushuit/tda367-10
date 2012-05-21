@@ -356,6 +356,7 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		}
 	}
 	
+	
 
 	@Override
 	public int getID() {

@@ -15,6 +15,7 @@ import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
+import tetrix.view.theme.ThemeHandler;
 
 public class BlockBox {
 
@@ -27,6 +28,7 @@ public class BlockBox {
 	private int level;
 	private Player player;
 	private boolean gameOver;
+	private boolean isKonami;
 
 	public BlockBox(Player player) throws SlickException {
 		this(10, 20, player);
@@ -44,6 +46,8 @@ public class BlockBox {
 		this.player = player;
 		gameOver = false;
 		clearBoard();
+
+		isKonami = ThemeHandler.isKonami();
 	}
 
 	public void clearBoard() {
@@ -57,11 +61,20 @@ public class BlockBox {
 				try {
 					for (Tetromino t : minoes) {
 						for (Square s : t.getSquares()) {
-							if (s.getY() == y + Util.SQUARE_SIZE) {
-								s.destroy();
+							if(!isKonami){
+								if (s.getY() == y + Util.SQUARE_SIZE) {
+									s.destroy();
+								}
+								if (!s.destroyed() && !s.isMoving())
+									s.rowFall();
 							}
-							if (!s.destroyed() && !s.isMoving())
-								s.rowFall();
+							else{
+								if (s.getY() == y - Util.SQUARE_SIZE) {
+									s.destroy();
+								}
+								if (!s.destroyed() && !s.isMoving())
+									s.rowFall();
+							}
 						}
 					}
 					player.increaseScore();
@@ -125,15 +138,32 @@ public class BlockBox {
 	}
 
 	public boolean isPainted(int x, int y) {
-		int size = minoes.size();
-		for (int i = 0; i < size; i++) {
-			Square[] s = minoes.get(i).getSquares();
-			for (int h = 3; h > -1; h--) {
-				if (!s[h].destroyed()) {
-					if (s[h].getX() == x) {
-						if (s[h].getY() == y + Util.SQUARE_SIZE) {
-							if (!s[h].isMoving())
-								return true;
+		if(!isKonami){
+			int size = minoes.size();
+			for (int i = 0; i < size; i++) {
+				Square[] s = minoes.get(i).getSquares();
+				for (int h = 3; h > -1; h--) {
+					if (!s[h].destroyed()) {
+						if (s[h].getX() == x) {
+							if (s[h].getY() == y + Util.SQUARE_SIZE) {
+								if (!s[h].isMoving())
+									return true;
+							}
+						}
+					}
+				}
+			}
+		}		if(isKonami){
+			int size = minoes.size();
+			for (int i = 0; i < size; i++) {
+				Square[] s = minoes.get(i).getSquares();
+				for (int h = 3; h > -1; h--) {
+					if (!s[h].destroyed()) {
+						if (s[h].getX() == x) {
+							if (s[h].getY() == y - Util.SQUARE_SIZE) {
+								if (!s[h].isMoving())
+									return true;
+							}
 						}
 					}
 				}
@@ -223,9 +253,13 @@ public class BlockBox {
 	public boolean gameOver() {
 		return gameOver;
 	}
-	
+
 	public void backToGame() {
 		gameOver = false;
+	}
+
+	public boolean isKonami(){
+		return isKonami;
 	}
 
 }
