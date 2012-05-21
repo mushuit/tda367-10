@@ -134,14 +134,12 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		moveMenuFocus();
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
+			.newGame();
 			if (hoverValue == Choices.NEWGAME.id()) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-						.newGame();
 				sbg.enterState(States.GAMEPLAYVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == Choices.MAINMENU.id()) {
-				((GameplayView) sbg.getState(States.GAMEPLAYVIEW.getID()))
-						.newGame();
 				sbg.enterState(States.MAINMENUVIEW.getID(),
 						new FadeOutTransition(), new FadeInTransition());
 			} else if (hoverValue == Choices.HIGHSCORE.id()) {

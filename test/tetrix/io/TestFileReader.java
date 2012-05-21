@@ -24,7 +24,7 @@ public class TestFileReader {
 	@Test
 	public void test() throws FileNotFoundException {
 		FileReader f = new FileReader("highscore/highscore.dat");
-		List<String> s =f.getRows();
+		List<String> s =f.getFromHighScore();
 		assertTrue(s.size()==10);
 
 	}
@@ -36,7 +36,7 @@ public class TestFileReader {
 		ls.add("xxx");
 		ls.add("yyy");
 		ls.add("zzz");
-		f.writeRows(ls);
+		f.writeToHighScore(ls);
 	}
 
 }

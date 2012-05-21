@@ -78,10 +78,7 @@ public class TestTextInput extends BasicGame {
 			message = textField.getText();
 			FileReader p;
 			try {
-				p = new FileReader("highscore/playername.dat");
-				List<String> ps = new ArrayList<String>();
-				ps.add(message);
-				p.writePName(ps);
+				new FileReader("highscore/playername.dat").writePlayerName("Input");
 
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

@@ -227,11 +227,11 @@ public class BlockBox {
 	}
 
 	public boolean gameOver() {
-		if (gameOver) {
-			gameOver = false;
-			return true;
-		}
-		return false;
+		return gameOver;
+	}
+	
+	public void backToGame() {
+		gameOver = false;
 	}
 
 }

@@ -17,7 +17,6 @@ public class TestBullets implements Game{
 	private Bullet bullet;
 	private List bulletin;
 	private Iterator<Bullet> itBullets;
-	private PowerBullet pBullet;
 	private Position pos;
 	private boolean power;
 	private boolean shot;
@@ -83,7 +82,7 @@ public class TestBullets implements Game{
 		}
 
 		for(int i = 0; i < bullets; i++){
-			if(!(((Bullet) bulletin.iterator().next()).getGoing())){
+			if(!(((Bullet) bulletin.iterator().next()).getMoving())){
 				bulletin.remove(i);
 				bullets--;
 			}
@@ -103,8 +102,6 @@ public class TestBullets implements Game{
 			cannon.move(-1);
 		}
 
-		if(shot && power)
-			pBullet.update();
 		for(int i = 0; i < bullets; i++)
 			if(shot && !power)
 				((Bullet) bulletin.get(i)).update();
@@ -128,8 +125,6 @@ public class TestBullets implements Game{
 
 
 		g.setColor(Color.blue);
-		if(power && shot)
-			g.fillRect(pBullet.getPos().getX(), pBullet.getPos().getY(), 10, 10);
 		
 		cannonImage.draw(cannon.getX(), cannon.getY());
 	}

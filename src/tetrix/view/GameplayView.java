@@ -163,6 +163,8 @@ public class GameplayView extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		checkInput(input, sbg);
+		
+		player.increaseScore();
 
 		int size = bulletList.size();
 		for(int i = 0; i < size; i++){
@@ -307,6 +309,7 @@ public class GameplayView extends BasicGameState {
 		timerInterval = 2000;
 		blockBox.clearBoard();
 		blocks.clear();
+		blockBox.backToGame();
 		bulletList.clear();
 		cannon.reset();
 	}
