@@ -41,7 +41,7 @@ public class L extends Tetromino {
 			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(
 						super.getLeftIn(Util.SQUARE_SIZE * 2)
-								+ (Util.SQUARE_SIZE * super.getStartX()) - i
+								+ (Util.SQUARE_SIZE * super.getStartX()) - (2-i)
 								* Util.SQUARE_SIZE, startY + Util.SQUARE_SIZE),
 						this, i);
 				if (i > 2)
