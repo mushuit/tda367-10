@@ -11,14 +11,8 @@ import java.util.List;
 
 import org.newdawn.slick.SlickException;
 
-import tetrix.core.tetrominos.I;
-import tetrix.core.tetrominos.J;
-import tetrix.core.tetrominos.L;
-import tetrix.core.tetrominos.O;
-import tetrix.core.tetrominos.S;
 import tetrix.core.tetrominos.Square;
 import tetrix.core.tetrominos.Tetromino;
-import tetrix.core.tetrominos.Z;
 import tetrix.sound.SoundEffects;
 import tetrix.util.Util;
 
