@@ -358,9 +358,6 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 		}
 	}
 	
-//	public void checkInput(Input input, StateBasedGame sbg){
-//		
-//	}
 
 	@Override
 	public int getID() {
