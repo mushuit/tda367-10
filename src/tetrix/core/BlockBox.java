@@ -168,7 +168,8 @@ public class BlockBox {
 					}
 				}
 			}
-		}		if(isKonami){
+		}		
+		else if(isKonami){
 			int size = minoes.size();
 			for (int i = 0; i < size; i++) {
 				Square[] s = minoes.get(i).getSquares();
