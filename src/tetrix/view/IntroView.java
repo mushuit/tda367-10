@@ -100,6 +100,11 @@ public class IntroView extends BasicGameState implements KeyListener {
 					new FadeOutTransition(), new FadeInTransition());
 		} else if (isKonamiEntered) {
 			ThemeHandler.setUnderworldTheme();
+			try {
+				GameMusic.instance().changeSong();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			sbg.getCurrentState().init(gc, sbg);
 			setPixelColor(Color.black);
 		}

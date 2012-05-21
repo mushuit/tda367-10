@@ -1,6 +1,7 @@
 package tetrix.view.theme;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -60,6 +61,8 @@ public class ThemeHandler {
 	public static final String LEFT_ARROW_HOVER_IMG = "arrow_left_hover.png";
 	private static int cannon = 0;
 	
+	public static String music = "sound/background-music.wav";
+	
 	
 	public static void setCannon(int c){
 		cannon = c;
@@ -67,10 +70,12 @@ public class ThemeHandler {
 	
 	public static void setUnderworldTheme(){
 		theme = "img/underworld/";
+		music = "sound/background-music_underworld.wav";
 	}
 	
 	public static void setOverworldTheme(){
 		theme = "img/overworld/";
+		music = "sound/background-music.wav";
 	}
 	
 	public static Image get(String img) throws SlickException{
@@ -78,6 +83,10 @@ public class ThemeHandler {
 	}
 	public static Image getBlockOrCannon(String img) throws SlickException{
 		return new Image("img/cannonsblocks/" + img);
+	}
+	
+	public static Music getMusic() throws SlickException {
+		return new Music(music);
 	}
 	
 	/**
