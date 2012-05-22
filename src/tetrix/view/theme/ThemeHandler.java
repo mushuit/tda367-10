@@ -50,7 +50,6 @@ public class ThemeHandler {
 	public static final String BLUE_BLOCK_IMG = "blue.png";
 	public static final String GREEN_BLOCK_IMG = "green.png";
 	public static final String ORANGE_BLOCK_IMG = "orange.png";
-	public static final String PINK_BLOCK_IMG = "pink.png";
 	public static final String PURPLE_BLOCK_IMG = "purple.png";
 	public static final String RED_BLOCK_IMG = "red.png";
 	public static final String TURQUOISE_BLOCK_IMG = "turquoise.png";

@@ -106,7 +106,7 @@ public class IntroView extends BasicGameState implements KeyListener {
 				e.printStackTrace();
 			}
 			sbg.getCurrentState().init(gc, sbg);
-			setPixelColor(Color.black);
+			setPixelColor(Color.green);
 		}
 
 		pixelRain.movePixel(rate);

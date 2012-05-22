@@ -86,11 +86,14 @@ public class TetrominoFactory {
 		s[2].use();
 		s[3].destroy();
 		s[3].use();
+		s[newSqr].unDestroy();
+		s[newSqr].unUse();
 
 		for(int i = 0; i < 4; i++){
-		s[i].setY(pos.getY());
-		s[i].setX(pos.getX());
+			s[i].setY(pos.getX());
+			s[i].setX(pos.getY());
 		}
+
 		if ((newSqr == 0 || newSqr == 1) && t.toString().equals("O")) {
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		} else if (newSqr == 0 && t.toString().equals("J")) {
@@ -107,8 +110,6 @@ public class TetrominoFactory {
 			s[newSqr].setY(pos.getY() + Util.SQUARE_SIZE);
 		}
 
-		s[newSqr].unDestroy();
-		s[newSqr].unUse();
 
 		bB.addMino(t);
 	}
