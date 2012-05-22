@@ -290,18 +290,14 @@ public class SettingsView extends BasicGameState implements IMultipleChoices{
 				/ (effects.getWidth()/2 - fxSliderPin.getWidth());
 
 		musicVolume = (float) (musicSliderPinXPos - (music.getWidth()/2) - menuXPos)
-				/ (music.getWidth()/2 - musicSliderPin.getWidth());  				//Still not fully completed
+				/ (menuXPos + music.getWidth() - musicSliderPin.getWidth());
+
 		try {
 			GameMusic.instance().setGameMusicVolume(musicVolume);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		input.clearKeyPressedRecord();
-//		System.out.println(musicVolume + "    " +fxVolume);
-//
-//		System.out.println("menuXPos: " + menuXPos);
-//		System.out.println("effects.getWidth(): " + effects.getWidth());
-//		System.out.println("fxSliderPinXPos: " + fxSliderPinXPos);
 	}
 
 	@Override

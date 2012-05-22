@@ -25,7 +25,7 @@ public class SoundEffects {
 	
 	private SoundEffects(){}
 
-	private static float fxVolume = 1;
+	private static float fxVolume = (float) 0.87;
 	
 	public static synchronized SoundEffects instance() throws SlickException {
 		if(instance == null) {
