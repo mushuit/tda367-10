@@ -61,15 +61,15 @@ public class IntroView extends BasicGameState implements KeyListener {
 		isKeyPressed = false;
 		pixelColor = Color.white;
 		pixelRain = new PixelRain();
-		isKonamiEntered = false;
 		repeatBlink();
-
+		isKonamiEntered = false;
+		
 		// The konami code as integers (Up, Up, Down, Down, Left, Right, Left,
 		// Right, B, A).
 		konamiCode = new LinkedList<Integer>(Arrays.asList(200, 200, 208, 208,
 				203, 205, 203, 205, 48, 30));
 	}
-
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
@@ -106,7 +106,6 @@ public class IntroView extends BasicGameState implements KeyListener {
 				e.printStackTrace();
 			}
 			sbg.getCurrentState().init(gc, sbg);
-			pixelRain.upsideDown();
 			setPixelColor(Color.black);
 		}
 
@@ -131,7 +130,10 @@ public class IntroView extends BasicGameState implements KeyListener {
 	@Override
 	public void keyPressed(int key, char c) {
 		try {
-			checkKonami(key);
+			if(!ThemeHandler.isKonami())
+				checkKonami(key);
+			else
+				isKeyPressed = true;
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

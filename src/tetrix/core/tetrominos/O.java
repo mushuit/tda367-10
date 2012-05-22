@@ -6,8 +6,6 @@ package tetrix.core.tetrominos;
  *
  */
 
-import java.awt.event.ActionEvent;
-
 import org.newdawn.slick.SlickException;
 
 import tetrix.core.BlockBox;

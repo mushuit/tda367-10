@@ -29,61 +29,59 @@ public class L extends Tetromino {
 	public void build() {
 		Square[] s = super.getSquares();
 		int rand = (int) (Math.random() * 40);
-		
+
 		int startY = Util.B4_BOX_HEIGHT;
-		
-		if(bBox.isKonami()){
-			startY = Util.B4_BOX_HEIGHT+Util.BOX_HEIGHT-Util.SQUARE_SIZE*3;
+
+		if (bBox.isKonami()) {
+			startY = Util.B4_BOX_HEIGHT + Util.BOX_HEIGHT - Util.SQUARE_SIZE
+					* 3;
 		}
 
 		if (rand < 10) {
 			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(
-						super.getLeftIn(Util.SQUARE_SIZE * 3)
-						+ (Util.SQUARE_SIZE * super.getStartX()) - i
-						* Util.SQUARE_SIZE, startY
-						+ Util.SQUARE_SIZE), this, i);
-				if (i < 1)
+						super.getLeftIn(Util.SQUARE_SIZE * 2)
+								+ (Util.SQUARE_SIZE * super.getStartX()) - (2-i)
+								* Util.SQUARE_SIZE, startY + Util.SQUARE_SIZE),
+						this, i);
+				if (i > 2)
 					s[i] = new Square(new Position(
 							(super.getLeftIn(Util.SQUARE_SIZE * 2))
-							+ (Util.SQUARE_SIZE * super.getStartX()),
+									+ (Util.SQUARE_SIZE * super.getStartX()),
 							startY), this, i);
 			}
 		} else if (rand < 20 && rand >= 10) {
 			for (int i = 0; i < 4; i++) {
 				s[i] = new Square(new Position(super.getLeftIn(0)
 						+ (Util.SQUARE_SIZE * super.getStartX() + i
-								* Util.SQUARE_SIZE), startY), this,
-								i);
+								* Util.SQUARE_SIZE), startY), this, i);
 				if (i > 2)
 					s[i] = new Square(new Position((super.getLeftIn(0))
-							+ (Util.SQUARE_SIZE * super.getStartX()),
-							startY + Util.SQUARE_SIZE), this, i);
+							+ (Util.SQUARE_SIZE * super.getStartX()), startY
+							+ Util.SQUARE_SIZE), this, i);
 			}
 		} else if (rand < 30 && rand >= 20) {
 			for (int i = 3; i > -1; i--) {
 				s[i] = new Square(new Position(
 						super.getLeftIn(Util.SQUARE_SIZE)
-						+ (Util.SQUARE_SIZE * super.getStartX()),
-						(startY) + i * Util.SQUARE_SIZE), this,
-						i);
+								+ (Util.SQUARE_SIZE * super.getStartX()),
+						(startY) + i * Util.SQUARE_SIZE), this, i);
 				if (i > 2)
 					s[i] = new Square(new Position((super.getLeftIn(0))
-							+ (Util.SQUARE_SIZE * super.getStartX()),
-							startY), this, i);
+							+ (Util.SQUARE_SIZE * super.getStartX()), startY),
+							this, i);
 
 			}
 		} else if (rand < 40 && rand >= 30) {
 			for (int i = 0; i < 4; i++) {
-				s[i] = new Square(new Position(
-						super.getLeftIn(0)
+				s[i] = new Square(new Position(super.getLeftIn(0)
 						+ (Util.SQUARE_SIZE * super.getStartX()),
-						(startY - Util.SQUARE_SIZE) + (3-i)
-						* Util.SQUARE_SIZE), this, i);
+						(startY - Util.SQUARE_SIZE) + (3 - i)
+								* Util.SQUARE_SIZE), this, i);
 				if (i > 2)
 					s[i] = new Square(new Position(
 							(super.getLeftIn(Util.SQUARE_SIZE))
-							+ (Util.SQUARE_SIZE * super.getStartX()),
+									+ (Util.SQUARE_SIZE * super.getStartX()),
 							startY + 2 * Util.SQUARE_SIZE), this, i);
 			}
 		}

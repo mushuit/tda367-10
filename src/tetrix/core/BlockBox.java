@@ -86,6 +86,7 @@ public class BlockBox {
 		}).start();
 	}
 
+	@SuppressWarnings("static-access")
 	private void search4FullRows() throws SlickException {
 
 		for (int y = Util.B4_BOX_HEIGHT - Util.SQUARE_SIZE; y < Util.WINDOW_HEIGHT
@@ -167,7 +168,8 @@ public class BlockBox {
 					}
 				}
 			}
-		}		if(isKonami){
+		}		
+		else if(isKonami){
 			int size = minoes.size();
 			for (int i = 0; i < size; i++) {
 				Square[] s = minoes.get(i).getSquares();

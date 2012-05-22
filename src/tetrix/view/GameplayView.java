@@ -1,4 +1,4 @@
- package tetrix.view;
+package tetrix.view;
 
 import java.awt.Font;
 import java.io.FileNotFoundException;
@@ -16,9 +16,6 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.EmptyTransition;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import tetrix.core.BlockBox;
 import tetrix.core.Bullet;
@@ -41,7 +38,7 @@ import tetrix.view.theme.ThemeHandler;
  * Class responsible for updating and rendering of the gameplay view.
  * 
  * @author Magnus Huttu, Linus Karlsson
- *
+ * 
  */
 public class GameplayView extends BasicGameState {
 
@@ -58,10 +55,10 @@ public class GameplayView extends BasicGameState {
 	private Image zBlock;
 	private Image lockedBlock;
 	private Image screenCapture;
-	
+
 	private Cannon cannon;
 	private Player player;
-	private Bullet bullet; 
+	private Bullet bullet;
 	private BlockBox blockBox;
 	private CollisionHandler ch;
 
@@ -72,21 +69,21 @@ public class GameplayView extends BasicGameState {
 	private boolean isPaused;
 	private long timerInterval;
 	private int levelUpInterval;
-	
+
 	private UnicodeFont levelUpText;
 
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background = ThemeHandler.get(ThemeHandler.GAME_BACKGROUND_IMG);
 		screenCapture = new Image(Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
-		cannonImage = new Image(50,50);
+		cannonImage = new Image(50, 50);
 
 		iBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.PURPLE_BLOCK_IMG);
 		jBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.BLUE_BLOCK_IMG);
@@ -94,8 +91,10 @@ public class GameplayView extends BasicGameState {
 		oBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.YELLOW_BLOCK_IMG);
 		tBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.GREEN_BLOCK_IMG);
 		sBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.RED_BLOCK_IMG);
-		zBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.TURQUOISE_BLOCK_IMG);
-		lockedBlock = ThemeHandler.getBlockOrCannon(ThemeHandler.LOCKED_BLOCK_IMG);
+		zBlock = ThemeHandler
+				.getBlockOrCannon(ThemeHandler.TURQUOISE_BLOCK_IMG);
+		lockedBlock = ThemeHandler
+				.getBlockOrCannon(ThemeHandler.LOCKED_BLOCK_IMG);
 
 		cannon = new Cannon();
 		bulletList = new ArrayList<Bullet>();
@@ -108,9 +107,9 @@ public class GameplayView extends BasicGameState {
 		blockBox = new BlockBox(player);
 		ch = new CollisionHandler(blockBox);
 		timerInterval = 2000;
-		
-		Font font = new Font("Verdana", Font.PLAIN,55);
-		scoreDisplay = new UnicodeFont(font , 15, true, false);
+
+		Font font = new Font("Verdana", Font.PLAIN, 55);
+		scoreDisplay = new UnicodeFont(font, 15, true, false);
 		scoreDisplay.addAsciiGlyphs();
 		scoreDisplay.addGlyphs(400, 600);
 		scoreDisplay.getEffects().add(new ColorEffect(java.awt.Color.YELLOW));
@@ -119,24 +118,26 @@ public class GameplayView extends BasicGameState {
 		} catch (SlickException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		levelUpInterval = 100;
 		Font font2 = new Font("Verdana", Font.BOLD, 0);
 		levelUpText = new UnicodeFont(font, 16, true, false);
 		initText(levelUpText);
+<<<<<<< HEAD
+=======
+		textDuration = 5; // how many seconds the levelUpText will last
+>>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-//		g.setColor(Color.white);
-//		g.fillRect(0, 0, Util.WINDOW_WIDTH, Util.WINDOW_HEIGHT);
-		background.draw(0,0);
+		background.draw(0, 0);
 		cannonImage.setRotation(cannon.getRotation());
 		cannonImage.draw(cannon.getX(), cannon.getY());
 		scoreDisplay.drawString(5, 0, player.getScore() + "");
 
-		if(blockBox.isInUse()){
+		if (blockBox.isInUse()) {
 
 			blockBox.update();
 			putImage();
@@ -144,9 +145,9 @@ public class GameplayView extends BasicGameState {
 			int i = 0;
 			Position[][] p = blockBox.getPos();
 			int length = blockBox.getTetroList().size();
-			for(int j = 0; j < length; j++){
+			for (int j = 0; j < length; j++) {
 				Position[] pe = p[j];
-				for(int h = 0; h < pe.length; h++){
+				for (int h = 0; h < pe.length; h++) {
 					blocks.get(i).draw(pe[h].getX(), pe[h].getY());
 					i++;
 				}
@@ -154,11 +155,12 @@ public class GameplayView extends BasicGameState {
 		}
 
 		g.setColor(Color.black);
-		for(int i = 0; i < bulletList.size(); i++){
-			g.fillRect(((Bullet) bulletList.get(i)).getX(), ((Bullet) bulletList.get(i)).getY(), 5, 5);
+		for (int i = 0; i < bulletList.size(); i++) {
+			g.fillRect(((Bullet) bulletList.get(i)).getX(),
+					((Bullet) bulletList.get(i)).getY(), 5, 5);
 		}
 
-		if(isPaused) {
+		if (isPaused) {
 			g.copyArea(screenCapture, 0, 0);
 		}
 	}
@@ -167,6 +169,7 @@ public class GameplayView extends BasicGameState {
 		isPaused = false;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
@@ -174,83 +177,90 @@ public class GameplayView extends BasicGameState {
 		checkInput(input, sbg);
 
 		int size = bulletList.size();
-		for(int i = 0; i < size; i++){
-			if(!ch.checkCollision(bulletList.get(i))){
+		for (int i = 0; i < size; i++) {
+			if (!ch.checkCollision(bulletList.get(i))) {
 				bulletList.get(i).update();
-			} else{
+			} else {
 				bulletList.remove(i);
 				size--;
 			}
 		}
-		
-		if(timerInterval >= 500 && player.getScore() !=  0) {
-			if(player.getScore() % levelUpInterval == 0) {
+
+		if (timerInterval >= 500 && player.getScore() != 0) {
+			if (player.getScore() % levelUpInterval == 0) {
 				increaseSpeed(200);
-				levelUpInterval = levelUpInterval+100;
+				levelUpInterval = levelUpInterval + 100;
 				SoundEffects.instance().speedUpPlay();
+<<<<<<< HEAD
+=======
+				// levelUpNotifier(textDuration);
+>>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 			}
 		}
-		
-		if(blockBox.gameOver()) {
+
+		if (blockBox.gameOver()) {
 			isPaused = true;
 			try {
-				HighScore.instance().setHighScore(player.getName(), player.getScore());
+				HighScore.instance().setHighScore(player.getName(),
+						player.getScore());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.GAMEOVERVIEW.getID());	
+			sbg.enterState(States.GAMEOVERVIEW.getID());
 			SoundEffects.instance().explodePlay();
 		}
 	}
 
-	public void checkInput(Input input, StateBasedGame sbg) throws SlickException {
-		int updateSpeed = 300/Util.FPS;
+	public void checkInput(Input input, StateBasedGame sbg)
+			throws SlickException {
+		int updateSpeed = 300 / Util.FPS;
 
-		if(input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			cannon.move(updateSpeed);
 		}
 
-		if(input.isKeyDown(Input.KEY_LEFT)) {
+		if (input.isKeyDown(Input.KEY_LEFT)) {
 			cannon.move(-updateSpeed);
 		}
 
-		if(input.isKeyDown(Input.KEY_D)) {
+		if (input.isKeyDown(Input.KEY_D)) {
 			cannon.move(updateSpeed);
 		}
 
-		if(input.isKeyDown(Input.KEY_A)) {
+		if (input.isKeyDown(Input.KEY_A)) {
 			cannon.move(-updateSpeed);
 		}
 
-		if(input.isKeyPressed(Input.KEY_SPACE)) {
+		if (input.isKeyPressed(Input.KEY_SPACE)) {
 			SoundEffects.instance().shot();
 			bullet = new Bullet(cannon.getPosition(), cannon.getValue());
 			bulletList.add(bullet);
 		}
 
-		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (input.isKeyPressed(Input.KEY_ENTER)
+				|| input.isKeyPressed(Input.KEY_ESCAPE)) {
 			isPaused = true;
 			try {
 				GameMusic.instance().gameMusicPause();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			sbg.enterState(States.PAUSEDGAMEVIEW.getID() );
+			sbg.enterState(States.PAUSEDGAMEVIEW.getID());
 		}
 	}
 
 	/**
 	 * Repeatedly create a new block at a given speed
 	 */
-	public void startTimer(){
+	public void startTimer() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					if(!isPaused){
-						blockBox.newBlock((int)(Math.random()*7+0.5));
+					if (!isPaused) {
+						blockBox.newBlock((int) (Math.random() * 7 + 0.5));
 					}
 					Thread.sleep(timerInterval);
 					startTimer();
@@ -262,48 +272,62 @@ public class GameplayView extends BasicGameState {
 			}
 		}).start();
 	}
+<<<<<<< HEAD
 	
+=======
+
+	public void levelUpNotifier(int duration) {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				levelUpText.drawString(50, 210, "Level up!", Color.green);
+				System.out.println("LEVEL UP");
+			}
+		}, duration * 1000);
+	}
+
+>>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 	/**
 	 * Repeatedly create a new block at a given speed
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public void setCannonImage(Image image) {
 		this.cannonImage = image;
 	}
 
-	public void putImage() throws SlickException{
+	public void putImage() throws SlickException {
 		Image block = null;
 		blocks.clear();
-		for(Tetromino t : blockBox.getTetroList()){
-			for(Square s : t.getSquares()){
-				if(!s.isMoving()){
+		for (Tetromino t : blockBox.getTetroList()) {
+			for (Square s : t.getSquares()) {
+				if (!s.isMoving()) {
 					block = lockedBlock;
-				} else{
+				} else {
 
-					if(t.toString().equals("I")){
+					if (t.toString().equals("I")) {
 						block = iBlock;
-					}else if(t.toString().equals("J")){
+					} else if (t.toString().equals("J")) {
 						block = jBlock;
-					}else if(t.toString().equals("L")){
+					} else if (t.toString().equals("L")) {
 						block = lBlock;
-					}else if(t.toString().equals("O")){
+					} else if (t.toString().equals("O")) {
 						block = oBlock;
-					}else if(t.toString().equals("T")){
+					} else if (t.toString().equals("T")) {
 						block = tBlock;
-					}else if(t.toString().equals("S")){
+					} else if (t.toString().equals("S")) {
 						block = sBlock;
-					}else if(t.toString().equals("Z")){
+					} else if (t.toString().equals("Z")) {
 						block = zBlock;
 					}
 				}
 
-				if(!s.destroyed()){
+				if (!s.destroyed()) {
 					blocks.add(block);
 				}
 			}
 		}
 	}
-
 
 	public Image getPausedScreen() {
 		return screenCapture;
@@ -325,7 +349,7 @@ public class GameplayView extends BasicGameState {
 		bulletList.clear();
 		cannon.reset();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void initText(UnicodeFont font) {
 		font.addAsciiGlyphs();
@@ -339,10 +363,10 @@ public class GameplayView extends BasicGameState {
 	}
 
 	public void increaseSpeed(int value) {
-		timerInterval -= value; 
+		timerInterval -= value;
 	}
 
-	public void setLevel(int i){
+	public void setLevel(int i) {
 		blockBox.setLevel(i);
 	}
 

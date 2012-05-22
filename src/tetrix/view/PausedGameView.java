@@ -97,6 +97,7 @@ public class PausedGameView extends BasicGameState implements IMultipleChoices {
 		quitButton.draw(pauseFrameXPos, Choices.QUIT.yPos());
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int rate)
 			throws SlickException {

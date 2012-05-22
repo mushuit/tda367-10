@@ -32,7 +32,7 @@ public class TetrominoFactory {
 
 	public void createTetromino(BlockBox bB, int whichBlock) {
 		System.out.println(whichBlock);
-		switch (whichBlock) {
+		switch (2) {
 		case 0:
 			bB.addMino(new I((int) (Math.random() * 7), bB));
 			break;
@@ -55,7 +55,6 @@ public class TetrominoFactory {
 			bB.addMino(new Z((int) (Math.random() * 8), bB));
 			break;
 		}
-
 	}
 
 	public void createBrokenTetromino(BlockBox bB, Tetromino te, int newSqr,

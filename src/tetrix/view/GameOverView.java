@@ -88,6 +88,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		initText(highscoreText);
 	}
 
+	@SuppressWarnings("static-access")
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		hoverValue = Choices.NEWGAME.id();
 		if (HighScore.reachedHighscore()) {
@@ -126,6 +127,7 @@ public class GameOverView extends BasicGameState implements IMultipleChoices {
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int value)
 			throws SlickException {
