@@ -70,8 +70,6 @@ public class GameplayView extends BasicGameState {
 	private long timerInterval;
 	private int levelUpInterval;
 
-	private UnicodeFont levelUpText;
-
 
 	public GameplayView(int stateID) {
 		this.stateID = stateID;
@@ -120,13 +118,6 @@ public class GameplayView extends BasicGameState {
 		}
 
 		levelUpInterval = 100;
-		Font font2 = new Font("Verdana", Font.BOLD, 0);
-		levelUpText = new UnicodeFont(font, 16, true, false);
-		initText(levelUpText);
-<<<<<<< HEAD
-=======
-		textDuration = 5; // how many seconds the levelUpText will last
->>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 	}
 
 	@Override
@@ -191,10 +182,6 @@ public class GameplayView extends BasicGameState {
 				increaseSpeed(200);
 				levelUpInterval = levelUpInterval + 100;
 				SoundEffects.instance().speedUpPlay();
-<<<<<<< HEAD
-=======
-				// levelUpNotifier(textDuration);
->>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 			}
 		}
 
@@ -272,21 +259,7 @@ public class GameplayView extends BasicGameState {
 			}
 		}).start();
 	}
-<<<<<<< HEAD
-	
-=======
 
-	public void levelUpNotifier(int duration) {
-		timer = new Timer();
-		timer.schedule(new TimerTask() {
-			public void run() {
-				levelUpText.drawString(50, 210, "Level up!", Color.green);
-				System.out.println("LEVEL UP");
-			}
-		}, duration * 1000);
-	}
-
->>>>>>> 56d200bef0baadf7e6884d02883e26939b68db35
 	/**
 	 * Repeatedly create a new block at a given speed
 	 * 
